@@ -1,15 +1,14 @@
-const Ajax = require("./lib/Ajax");
-const downloader = require("./lib/Downloader");
-const HTMLparser = require("./lib/HTMLParser");
-const XMLParser = require("./lib/XMLParser");
+import Ajax from "./lib/Ajax.js";
+import downloader from "./lib/Downloader.js";
+import HTMLparser from "./lib/HTMLParser.js";
+import XMLParser from "./lib/XMLParser.js";
 
 class JSpider extends Ajax {
     constructor(options) {
         super(options);
+        this.download = downloader;
+        this.HTMLparser = HTMLparser;
+        this.XMLParser = XMLParser;
     }
-    download = downloader;
-    HTMLparser = HTMLparser;
-    XMLParser = XMLParser;
-    webProxy = webProxy;
 }
-console.log(new JSpider({}));
+export default JSpider;
