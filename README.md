@@ -28,6 +28,7 @@ JSpider 分为
 - 分析模块
   - 监视器函数
     - hook
+    - Observer
   - Search 模块
     - searchWindow
     - searchObj
@@ -40,16 +41,17 @@ JSpider 分为
 - 专用模块
   - m3u3Downloader
   - Copy
+  - Cookies
 <br>
 
 :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray:
 
 <br>
 
-####  :dove:  鸽子工程 
+####  :dove:  鸽子工程 :dove: :dove: :dove: :dove: :dove:
  下面的类型为继承关系 
  例如：后面的类型包含前面的类型的内容
-
+前面的表示已经实现 可以通过extend函数引入
 <br>
 
 ##### JSpider-core.js 核心类型
@@ -68,7 +70,6 @@ JSpider 分为
 ##### JSpider-nor.js 常用类型
 - [x] :heavy_check_mark: XML解析: XML (String) ==> Object 
 
-- [x] :heavy_check_mark: Cookies 函数 
 
 - [x] :heavy_check_mark: Globals 函数：归属于Search 模块 
 
@@ -77,6 +78,7 @@ JSpider 分为
 <br>
 
 ##### JSpider-pro.js 强化类型
+
 - [x] :alembic: hook 函数: 用于代理函数 
 
 - [ ] :alembic: Observer : 对象监听函数
@@ -89,6 +91,8 @@ JSpider 分为
 
 - [ ] :alembic: Copy : 与剪贴板有关的函数
 
+- [x] :heavy_check_mark: Cookies 函数 
+
 <br>
 
 :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray:
@@ -97,7 +101,7 @@ JSpider 分为
 
 #### 快速开始
 
-JsDelivr cdn 载入  
+##### JsDelivr cdn 载入  
 链接解析
 https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-pro.js
 [https://cdn.jsdelivr.net/npm/js-spider@ **版本号** /JSpider- **类型** .js]()
@@ -106,6 +110,9 @@ https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-pro.js
 //动态载入
 import('https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-core.js').then(res=>window.JSpider = res.default)
 
+```
+##### 快速爬取
+```js
 //加载完成之后
 //初始化需要
 let spider = new JSpider()
@@ -131,6 +138,14 @@ spider.ajax({
 })
 //请求完成之后就会在 spider.result 中有结果
 ```
+
+##### 引入额外的模块
+```js
+let spider =new JSpider()
+spider.extend('Search')
+spider.extend(['Hook','Cookies'])
+```
+
 #### [完整教程]()
 
 

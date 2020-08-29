@@ -5,7 +5,6 @@ import Script from "./lib/Script.js";
 import extend from "./lib/extend.js";
 
 import XMLParser from "./lib/XMLParser.js";
-import Cookies from "./lib/Cookies.js";
 import Search from "./lib/Search.js";
 
 import Hook from "./lib/hook.js";
@@ -21,7 +20,6 @@ class JSpider extends Ajax {
         this.HTMLparser = HTMLparser;
 
         this.XMLParser = XMLParser;
-        this.Cookies = Cookies;
 
         this.hook = Hook;
         this.Search = Search;
