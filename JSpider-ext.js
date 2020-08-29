@@ -7,7 +7,7 @@ import extend from "./lib/extend.js";
 import { Globals } from "./lib/Search.js";
 
 class JSpider extends Ajax {
-    constructor(config) {
+    constructor(config = {}) {
         super(config);
         this.verson = "ext";
         this.extend = extend;

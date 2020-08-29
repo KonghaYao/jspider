@@ -21,7 +21,8 @@ JSpider 分为
 - 批量下载模块
   - Downloader
 - 分析模块
-  - hook 函数
+  - 监视器函数
+    - hook
   - Search 模块
     - searchWindow
     - searchObj
@@ -77,7 +78,29 @@ JsDelivr cdn 载入
 //动态载入
 import('https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-core.js').then(res=>window.JSpider = res.default)
 
-
+//加载完成之后
+//初始化需要
+let spider = new JSpider()
+//然后就可以使用各种函数了
+spider.ajax({
+  urls:[
+      'https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-pro.js',
+    {
+      url:'https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-core.js',
+      options:(opt)=>{
+        //这里可以修改原来的options
+        return opt
+      }
+    }
+    ],
+  options:{
+    method:'GET'
+  },//默认的options
+  limits = 3, 
+  time = 200, 
+  type = "sync"//可以填 sync async time
+})
+//请求完成之后就会在 spider.result 中有结果
 ```
 
 链接解析
@@ -86,6 +109,6 @@ https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-pro.js
 
 :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray:
 
-#### 使用说明
+#### [完整教程]()
 
 

@@ -4,7 +4,7 @@ import HTMLparser from "./lib/HTMLParser.js";
 import extend from "./lib/extend.js";
 
 class JSpider extends Ajax {
-    constructor(config) {
+    constructor(config = {}) {
         super(config);
         this.version = "core";
         this.download = downloader;
