@@ -104,8 +104,11 @@ JSpider 分为
 #### 快速开始
 
 ##### JsDelivr cdn 载入  
+
 链接解析
+
 https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-pro.js
+
 [https://cdn.jsdelivr.net/npm/js-spider@ **版本号** /JSpider- **类型** .js]()
 ```js
 // js文件遵循 es6 的 import 方式，所以要用下面的方式导入
