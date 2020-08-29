@@ -6,14 +6,14 @@ import extend from "./lib/extend.js";
 
 import XMLParser from "./lib/XMLParser.js";
 import Cookies from "./lib/Cookies.js";
+import Search from "./lib/Search.js";
 
 import Hook from "./lib/hook.js";
-import Search from "./lib/Search.js";
 
 class JSpider extends Ajax {
     constructor(config = {}) {
         super(config);
-        this.verson = "pro";
+        this.version = "pro";
 
         this.extend = extend;
         this.downloader = downloader;

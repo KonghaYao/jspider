@@ -4,6 +4,8 @@
 这是一个在浏览器端使用 JS 快速爬取文件的框架。我写的第一个爬虫脚本是基于 Python 的，但是学到分析 JS 脚本之后，发现完全可以由浏览器的 JS 来发送请求并获取数据。对于少量的数据来说，右键检查并写几行代码就爬取成功，比开新的 python 脚本要轻松得多。
 所以我写了这个 JSpider 类来替代那些繁琐的 JS 代码。
 
+<br>
+
 :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray:
 
 <br>
@@ -13,13 +15,16 @@ JSpider 分为
 
 - 请求模块
   - Ajax
+
 - 解析模块
   - HTML文本解析模块
     - HTMLParser
   - XML文本解析模块
     - XMLParser
+
 - 批量下载模块
   - Downloader
+
 - 分析模块
   - 监视器函数
     - hook
@@ -27,9 +32,16 @@ JSpider 分为
     - searchWindow
     - searchObj
     - Globals
+
 - 扩展模块
   -extend
   -Script
+
+- 专用模块
+  - m3u3Downloader
+  - Copy
+<br>
+
 :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray:
 
 <br>
@@ -41,31 +53,41 @@ JSpider 分为
 <br>
 
 ##### JSpider-core.js 核心类型
-- [x] 并发请求 :heavy_check_mark: (已经将队列请求包括了) 
+- [x] :heavy_check_mark: 并发请求  (已经将队列请求包括了) 
 
-- [x] 定时请求 :heavy_check_mark:
+- [x] :heavy_check_mark: 定时请求 
 
-- [x] 批量下载并使用zip打包(JSZip) :heavy_check_mark:
+- [x] :heavy_check_mark: 批量下载并使用zip打包(JSZip) 
 
-- [x] 当爬取到数据之后将 HTML 文本解析 :heavy_check_mark:
+- [x] :heavy_check_mark: 当爬取到数据之后将 HTML 文本解析 
 
-- [x] 可以载入外部的css或js文件 :heavy_check_mark:
+- [x] :heavy_check_mark: 可以载入外部的css或js文件 
 
 <br>
 
-##### JSpider-ext.js 扩展类型
-- [x] XML解析: XML (String) ==> Object :heavy_check_mark:
+##### JSpider-nor.js 常用类型
+- [x] :heavy_check_mark: XML解析: XML (String) ==> Object 
 
-- [x] Cookies 函数 :heavy_check_mark:
+- [x] :heavy_check_mark: Cookies 函数 
 
-- [x] Globals 函数：归属于Search 模块 :heavy_check_mark:
+- [x] :heavy_check_mark: Globals 函数：归属于Search 模块 
+
+- [x] :heavy_check_mark: Search模块: 用正则表达式搜索对象内容 
 
 <br>
 
 ##### JSpider-pro.js 强化类型
-- [x] hook 函数: 用于代理函数 :alembic:
+- [x] :alembic: hook 函数: 用于代理函数 
 
-- [x] Search模块: 用正则表达式搜索对象内容 :heavy_check_mark:
+- [ ] :alembic: Observer : 对象监听函数
+
+<br>
+
+##### Extentions 扩展函数
+
+- [ ] :alembic: m3u8Downloader: m3u8文件的下载器
+
+- [ ] :alembic: Copy : 与剪贴板有关的函数
 
 <br>
 
