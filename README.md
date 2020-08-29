@@ -30,4 +30,4 @@ JSpider 分为
 [x] 批量下载并使用zip打包(JSZip)
 [x] 当爬取到数据之后将 HTML 文本解析
 [x] XML解析(beta)
-[ ] 
+[x] cookie 操作
