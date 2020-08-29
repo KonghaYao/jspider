@@ -34,8 +34,8 @@ JSpider 分为
     - Globals
 
 - 扩展模块
-  -extend
-  -Script
+  - extend
+  - Script
 
 - 专用模块
   - m3u3Downloader
