@@ -4,7 +4,7 @@
 这是一个在浏览器端使用 JS 快速爬取文件的框架。我写的第一个爬虫脚本是基于Python的，但是学到分析 JS 脚本之后，发现完全可以由浏览器的 JS 来发送请求并获取数据。对于少量的数据来说，右键检查并写几行代码就爬取成功，比开 python 脚本要轻松得多。
 所以我写了这个 JSpider 类来替代那些繁琐的 JS 代码。
 
-:pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray:
+:pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray:
 
 #### 软件架构
 JSpider 分为 
@@ -25,7 +25,7 @@ JSpider 分为
     - searchObj
     - Globals
 
-:pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray:
+:pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray:
 
 #### :dove: 鸽子工程 
  下面的版本为继承关系 
@@ -55,11 +55,11 @@ JSpider 分为
 - [x] Search模块: 用正则表达式搜索对象内容 :heavy_check_mark:
 
 
-:pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray:
+:pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray:
 
 #### 快速开始
 
-:pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray::pray:
+:pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray:
 
 #### 使用说明
 
