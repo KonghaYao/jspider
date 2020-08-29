@@ -27,7 +27,9 @@ JSpider 分为
     - searchWindow
     - searchObj
     - Globals
-
+- 扩展模块
+  -extend
+  -Script
 :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray:
 
 <br>
@@ -46,6 +48,8 @@ JSpider 分为
 - [x] 批量下载并使用zip打包(JSZip) :heavy_check_mark:
 
 - [x] 当爬取到数据之后将 HTML 文本解析 :heavy_check_mark:
+
+- [x] 可以载入外部的css或js文件 :heavy_check_mark:
 
 <br>
 
