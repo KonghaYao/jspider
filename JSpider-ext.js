@@ -5,8 +5,9 @@ import XMLParser from "./lib/XMLParser.js";
 import Cookies from "./lib/Cookies.js";
 
 class JSpider extends Ajax {
-    constructor(options) {
-        super(options);
+    constructor(config) {
+        super(config);
+        this.verson = "ext";
         this.download = downloader;
         this.HTMLparser = HTMLparser;
         this.XMLParser = XMLParser;
