@@ -72,7 +72,9 @@ JSpider 分为
 #### 快速开始
 
 JsDelivr cdn 载入  
-
+链接解析
+https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-pro.js
+[https://cdn.jsdelivr.net/npm/js-spider@ **版本号** /JSpider- **类型** .js]()
 ```js
 // js文件遵循 es6 的 import 方式，所以要用下面的方式导入
 //动态载入
@@ -84,7 +86,8 @@ let spider = new JSpider()
 //然后就可以使用各种函数了
 spider.ajax({
   urls:[
-      'https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-pro.js',
+    //数组内可以是url字符串或者是下面的对象
+    'https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-pro.js',
     {
       url:'https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-core.js',
       options:(opt)=>{
@@ -102,13 +105,6 @@ spider.ajax({
 })
 //请求完成之后就会在 spider.result 中有结果
 ```
-
-链接解析
-https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-pro.js
-[https://cdn.jsdelivr.net/npm/js-spider@ **版本号** /JSpider- **类型** .js]()
-
-:pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray:
-
 #### [完整教程]()
 
 
