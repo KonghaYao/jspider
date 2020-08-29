@@ -75,6 +75,8 @@ JSpider 分为
 
 - [x] :heavy_check_mark: Search模块: 用正则表达式搜索对象内容 
 
+- [x] :heavy_check_mark: Cookies 函数 
+
 <br>
 
 ##### JSpider-pro.js 强化类型
@@ -91,7 +93,7 @@ JSpider 分为
 
 - [ ] :alembic: Copy : 与剪贴板有关的函数
 
-- [x] :heavy_check_mark: Cookies 函数 
+
 
 <br>
 
