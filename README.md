@@ -21,16 +21,16 @@
 https://cdn.jsdelivr.net/npm/js-spider@1.3.0/JSpider-pro.js
 
 [https://cdn.jsdelivr.net/npm/js-spider@ **版本号** /JSpider- **类型** .js]()
+
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 //动态载入
 import('https://cdn.jsdelivr.net/npm/js-spider@1.3.0/JSpider-core.js').then(res=>window.JSpider = res.default)
-
 ```
+
 #### 快速爬取
 ```js
-//加载完成之后
-//初始化需要
+//加载js模块完成之后
 let spider = new JSpider()
 //然后就可以使用各种函数了
 spider.ajax({
