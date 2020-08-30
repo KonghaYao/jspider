@@ -53,7 +53,7 @@ JSpider 分为
 #### 如何导入
 各个模块可以通过 `extend(['Ajax','Hook'])` 来导入。
 若只想在文件中使用一个模块可以 
-`import Hook from "https://cdn.jsdelivr.net/npm/js-spider@1.1.0/lib/Hook.js"`
+`import Hook from "https://cdn.jsdelivr.net/npm/js-spider@1.3.0/lib/Hook.js"`
 所有的模块都放置在 lib 文件夹下，而且模块名首字母大写。
 
 #### Ajax 模块
@@ -142,13 +142,13 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 链接解析
 
-https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-pro.js
+https://cdn.jsdelivr.net/npm/js-spider@1.3.0/JSpider-pro.js
 
 [https://cdn.jsdelivr.net/npm/js-spider@ **版本号** /JSpider- **类型** .js]()
 ```js
 // js文件遵循 es6 的 import 方式，所以要用下面的方式导入
 //动态载入
-import('https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-core.js').then(res=>window.JSpider = res.default)
+import('https://cdn.jsdelivr.net/npm/js-spider@1.3.0/JSpider-core.js').then(res=>window.JSpider = res.default)
 
 ```
 #### 快速爬取
@@ -160,9 +160,9 @@ let spider = new JSpider()
 spider.ajax({
   urls:[
     //数组内可以是url字符串或者是下面的对象
-    'https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-pro.js',
+    'https://cdn.jsdelivr.net/npm/js-spider@1.3.0/JSpider-pro.js',
     {
-      url:'https://cdn.jsdelivr.net/npm/js-spider@1.1.0/JSpider-core.js',
+      url:'https://cdn.jsdelivr.net/npm/js-spider@1.3.0/JSpider-core.js',
       options:(opt)=>{
         //这里可以修改原来的options
         return opt
