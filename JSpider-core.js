@@ -10,7 +10,7 @@ class JSpider extends Ajax {
         this.version = "core";
         this.Script = Script;
         this.download = downloader;
-        this.HTMLparser = HTMLparser;
+        this.HTMLParser = HTMLparser;
         this.extend = extend;
     }
 }

@@ -16,7 +16,7 @@ class JSpider extends Ajax {
         this.extend = extend;
         this.Script = Script;
         this.download = downloader;
-        this.HTMLparser = HTMLparser;
+        this.HTMLParser = HTMLparser;
 
         this.XMLParser = XMLParser;
         this.Cookies = Cookies;
