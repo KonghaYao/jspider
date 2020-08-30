@@ -61,6 +61,7 @@ let spider =new JSpider()
 spider.extend('Search')
 spider.extend(['Hook','Cookies'])
 ```
+**:alembic: [完整教程]()**
 
 <br>
 
