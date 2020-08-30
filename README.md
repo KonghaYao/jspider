@@ -6,7 +6,7 @@
 
 <br>
 
-:pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray:
+:pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: 
 
 <br>
 
@@ -26,7 +26,7 @@ JSpider 分为
   - Downloader
 <br>
 - 分析模块
-  - 监视器函数
+  - Observer 模块
     - Hook
     - Observer
   - Search 模块
@@ -44,10 +44,12 @@ JSpider 分为
   - Cookies
 <br>
 
-:pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray:
+:pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: 
 
 <br>
+
 ### 各个模块解析
+
 #### 如何导入
 各个模块可以通过 `extend(['Ajax','Hook'])` 来导入。
 若只想在文件中使用一个模块可以 
@@ -55,19 +57,29 @@ JSpider 分为
 所有的模块都放置在 lib 文件夹下，而且模块名首字母大写。
 
 #### Ajax 模块
+
 Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络请求。
 #### HTMLParser 和 XMLParser
 对于 HTML ，XML 文本的解析函数。
+
 #### Downloader 模块
 用于下载文件，可以下载文本和 Blob 数据。
+
 #### Hook 模块
 Hook 模块用于控制函数，当函数被触发时会先执行我们的函数。
+
 #### Search 模块
 这个模块包含了三个函数，能够对 window 对象进行全面的搜索。
+
 #### Script 模块
 通过 URL 导入其他的 JS 或 CSS 文件。
+
 #### Cookies 模块
-这个模块用于处理 cookie 字符串
+这个模块用于处理 cookie 字符串。
+
+#### Observer 模块
+这个模块通过代理函数和对象来实现监控操作。
+
 <br>
 ###  :dove:  鸽子工程 :dove: :dove: :dove: :dove: :dove:
  下面的类型为包含关系 
@@ -106,7 +118,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 - [x] :alembic: hook 函数: 用于代理函数 
 
-- [ ] :alembic: Observer : 对象监听函数
+- [x] :alembic: Watch : 对象监听函数
 
 <br>
 
@@ -120,7 +132,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 <br>
 
-:pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray:
+:pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: 
 
 <br>
 
