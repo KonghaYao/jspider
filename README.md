@@ -213,3 +213,5 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 基本上所有的模块都可以脱离 JSpider 使用,
 引入方式为 使用 [JsDeliver](http://www.jsdelivr.com/) 提供的方式 来导入你的浏览器
 
+#### 如何支持 ES5 ?
+可以使用 webpack 打包 JSpider 文件，然后再引入就可以了。
