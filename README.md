@@ -12,6 +12,7 @@
 :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: 
 
 <br>
+
 ### 快速开始
 
 #### JsDelivr cdn 载入  
@@ -215,3 +216,9 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 #### 如何支持 ES5 ?
 可以使用 webpack 打包 JSpider 文件，然后再引入就可以了。
+
+
+## 相关依赖
+[BootCDN](https://www.bootcdn.cn/): 提供动态载入下面的库
+[JSZip](https://github.com/Stuk/jszip): 一个前端压缩数据的库
+[fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser): XML => JSON 的库 
