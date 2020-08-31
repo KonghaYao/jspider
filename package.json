@@ -9,7 +9,10 @@
   "keywords": [
     "spider",
     "javascript",
-    "web"
+    "web",
+    "crawl",
+    "brower",
+    "front-end"
   ],
   "scripts": {
     "dev": "webpack --mode development --watch",

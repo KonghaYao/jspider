@@ -178,9 +178,9 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 #### JSpider-pro.js 强化类型
 
-- [x] :alembic: hook 函数: 用于代理函数 
+- [x] :heavy_check_mark: hook 函数: 用于代理函数 
 
-- [x] :alembic: Watch : 对象监听函数
+- [x] :alembic: Watch 函数: 对象监听函数
 
 <br>
 
@@ -204,8 +204,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 ## 开发者使用说明
 
 #### 如何测试 JSpider
-这个项目中的 test.html 打开，然后进控制台就有了，
-默认是 pro 类型
+这个项目中的 test.html 打开，然后进控制台就已经导入了 JSpider 了，默认是 pro 类型。
 
 #### 如何找到模块的源文件
 在根目录下是 JSpider 的入口文件，
