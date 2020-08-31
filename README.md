@@ -185,6 +185,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 <br>
 
 #### Extentions 扩展函数
+> 这些模块将不会被上面的类型包含，但是可以通过 extend 导入。
 
 - [ ] :alembic: m3u8Downloader: m3u8文件的下载器
 
