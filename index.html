@@ -39,6 +39,7 @@
     const md = document.getElementById('md')
     const root = './doc'
     window.now = root
+    URl = 'https://cdn.jsdelivr.net/npm/js-spider'
     window.onload = function () {
         init('/JSpider.md')
     }
@@ -50,7 +51,7 @@
     async function init(path) {
         path = root + path
         console.log(path)
-        return await fetch(path).then(res => {
+        return await fetch(path.replace('./', 'https://cdn.jsdelivr.net/npm/js-spider/')).then(res => {
             if (res.ok) {
                 return res.text()
             }
