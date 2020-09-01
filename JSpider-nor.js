@@ -12,7 +12,6 @@ class JSpider extends Ajax {
     constructor(config = {}) {
         super(config);
         this.version = "ext";
-
         this.extend = extend;
         this.Script = Script;
         this.download = downloader;
