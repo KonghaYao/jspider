@@ -45,12 +45,12 @@
 
     function toWhere(path) {
         let url = new URL(path)
-        init(url.pathname.replace('/jspider', '').replace('//', '/'))
+        init(url.pathname.replace('/jspider', ''))
     }
     async function init(path) {
         path = root + path
         console.log(path)
-        return await fetch(path.replace('./', 'https://cdn.jsdelivr.net/npm/js-spider/')).then(res => {
+        return await fetch(path.replace('./', 'https://cdn.jsdelivr.net/npm/js-spider/').replace('//', '/')).then(res => {
             if (res.ok) {
                 return res.text()
             }
