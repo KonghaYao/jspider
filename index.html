@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="./css/default.min.css">
+    <link rel="stylesheet" href="./css/github-gist.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+
+</head>
+
+<body>
+    <div id='md'></div>
+</body>
+<script type='module'>
+    import JSpider from "./JSpider-pro.js"
+    window.JSpider = JSpider
+
+
+</script>
+<script>
+
+    hljs.initHighlightingOnLoad();
+    const marked = new showdown.Converter({
+        tables: true,
+        parseImgDimensions: true,
+        strikethrough: true,
+        tasklists: true,
+        literalMidWordUnderscores: true,
+        metadata: true,
+        noHeaderId: true,
+        emoji: true,
+    });
+    const md = document.getElementById('md')
+    const root = './doc'
+    window.now = root
+    window.onload = function () {
+        init('/JSpider.md')
+    }
+
+    function toWhere(path) {
+        let url = new URL(path)
+        init(url.pathname)
+    }
+    async function init(path) {
+        path = root + path
+        console.log(path)
+        return await fetch(path).then(res => {
+            if (res.ok) {
+                return res.text()
+            }
+        }).then(res => {
+            if (res) redirect(res);
+            now = path
+        })
+    }
+    function redirect(res) {
+        md.innerHTML = marked.makeHtml(res)
+        document.querySelectorAll('#md > pre').forEach(i => {
+            hljs.highlightBlock(i)
+        })
+
+        document.querySelectorAll('a').forEach(i => {
+            i.onclick = (e) => {
+                e.preventDefault();
+                toWhere(e.target.href)
+            }
+        })
+        scrollTo(0, 0)
+
+    }
+
+</script>
+
+</html>

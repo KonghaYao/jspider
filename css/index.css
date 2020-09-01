@@ -1,0 +1,432 @@
+
+  pre {
+    white-space: break-spaces !important;
+  }
+  
+  #md{
+    margin:0 auto;
+  }
+  body {
+    --lightShadow: #fafafa;
+    --darkShadow: #d1d9e6;
+    --mainColor: #fff;
+    --textColor: #333333;
+    --titleUnderLine: #eee;
+    --codeText: #777777;
+  }
+  html {
+    font-size: 16px;
+  }
+  #YAML {
+    height: 60vh;
+    min-width: 137px;
+    max-width: 100%;
+  }
+  div#md > *:focus {
+    border-bottom-color: #000;
+  }
+  body {
+
+
+    user-select: none;
+    display: flex;
+    font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--textColor);
+    line-height: 1.6;
+  }
+  body #article {
+    min-width: 63vw;
+    height: 95vh;
+    overflow: scroll;
+  }
+  body details {
+    padding: 0 5px;
+    white-space: nowrap;
+  }
+  body main {
+    display: grid!important;
+    grid-template-columns: 1fr;
+  }
+  body main header {
+    display: flex!important;
+    height: 44px;
+    font-size: 12px;
+    border-bottom: 1px solid #00000024;
+  }
+  body footer {
+    border-top: 1px solid #00000024;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+    background-color: white;
+    font-size: 12px;
+  }
+  ::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width: 0px;
+    /*高宽分别对应横竖滚动条的尺寸*/
+    height: 0px;
+    scrollbar-arrow-color: red;
+  }
+  #md {
+    padding: 20px 0px 20px 50px;
+    overflow: scroll!important;
+  }
+  #md code span {
+    margin: 0 0.2em;
+  }
+  #md code::before {
+    color: var(--codeText);
+  }
+  #md code.javascript::before {
+    content: "JS";
+  }
+  #md code.html::before {
+    content: 'HTML' !important;
+  }
+  #md code.css::before {
+    content: 'css';
+  }
+  #md code.c::before {
+    content: 'C';
+  }
+  #md code.bash::before {
+    content: 'Bash';
+  }
+  #md code.markdown::before {
+    content: 'Markdown';
+  }
+  #md code.go::before {
+    content: 'Go';
+  }
+  #md code.http::before {
+    content: 'HTTP';
+  }
+  #md code.java::before {
+    content: 'Java';
+  }
+  #md code.json::before {
+    content: 'JSON';
+  }
+  #md code.kotlin::before {
+    content: 'Kotlin';
+  }
+  #md code.less::before {
+    content: 'Less' !important;
+  }
+  #md code.lua::before {
+    content: 'Lua';
+  }
+  #md code.object-c::before {
+    content: 'Objective-C';
+  }
+  #md code.php::before {
+    content: 'php';
+  }
+  #md code.python::before {
+    content: 'Python';
+  }
+  #md code.scss::before {
+    content: 'SCSS' !important;
+  }
+  #md code.sql::before {
+    content: 'SQL';
+  }
+  #md code.swift::before {
+    content: 'Swift';
+  }
+  #md code.yaml::before {
+    content: 'yaml';
+  }
+  #md code.typescript::before {
+    content: 'TS';
+  }
+  #md code.xml::before {
+    content: 'XML';
+  }
+  /* main class下为Markdown格式 */
+  #md {
+    font-size: 16px !important;
+    max-width: 760px;
+  }
+  #md * {
+    outline: none!important;
+  }
+  #md p {
+    text-indent: 2em;
+    line-height: 1.5em;
+    margin: 0.8em 0;
+  }
+  #md blockquote {
+    margin: 0.8em 0;
+    border-left: 6px solid #dfe2e5;
+    background-color: #fdfdfd;
+    padding: 0 15px;
+    color: var(--codeText);
+  }
+  #md blockquote table {
+    padding: 0;
+    word-break: initial;
+  }
+  #md blockquote blockquote {
+    padding-right: 0;
+  }
+  #md blockquote::before {
+    display: grid;
+    content: "“";
+    font-family: cursive;
+    line-height: 0px;
+    height: 0px;
+    font-weight: 600;
+    z-index: 99;
+    font-size: xxx-large;
+    opacity: 0.2;
+    position: relative;
+    top: 35px;
+    left: -29px;
+  }
+  #md blockquote::after {
+    display: grid;
+    content: "”";
+    font-family: cursive;
+    line-height: 0px;
+    height: 0px;
+    font-weight: 600;
+    z-index: 99;
+    font-size: xxx-large;
+    opacity: 0.2;
+    position: relative;
+    right: -90vh;
+  }
+  #md pre {
+    margin: 30px 31px;
+    border: 0;
+    padding: 20px 36px 20px 35px;
+    line-height: 1.9em;
+    background-color: white;
+    border-radius: 34px;
+    font-family: unset;
+    box-shadow: 1px 1px 15px var(--darkShadow), -1px -1px 15px var(--lightShadow);
+  }
+  #md pre code {
+    color: var(--codeText);
+    background: 0;
+    border: 0;
+    font-size: 18px;
+    box-shadow: none;
+    position: relative!important;
+  }
+  #md pre code::before {
+    font-family: unset;
+    color: var(--textColor);
+    position: absolute;
+    text-align: right;
+    font-size: 1.2em;
+    line-height: 15px;
+    height: 15px;
+    font-weight: 600;
+    z-index: 99;
+    right: 0;
+    top: 0;
+  }
+  #md a {
+    text-decoration: none;
+    color: #4183c4;
+    transition: color 0.2s;
+  }
+  #md a:hover {
+    color: #d63200;
+  }
+  #md h1 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    cursor: text;
+    padding-top: 0.3em;
+    padding-bottom: 0.2em;
+    font-size: 2.6em;
+    line-height: 1.2;
+    border-bottom: 2px solid var(--titleUnderLine);
+  }
+  #md h1:focus:before {
+    content: 'h1';
+    position: absolute;
+    top: 25px;
+    left: -46px;
+    border: 2px solid;
+    border-radius: 5px;
+    font-size: 21px;
+    color: var(--darkShadow);
+    padding: 0 5px;
+  }
+  #md h2 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    cursor: text;
+    padding-bottom: 0.2em;
+    font-size: 2em;
+    line-height: 1.225;
+    border-bottom: 2px solid var(--titleUnderLine);
+  }
+  #md h2:focus:before {
+    content: 'h2';
+    position: absolute;
+    top: 7px;
+    left: -46px;
+    border: 2px solid;
+    border-radius: 5px;
+    font-size: 21px;
+    color: var(--darkShadow);
+    padding: 0 5px;
+  }
+  #md h3 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+    cursor: text;
+    font-size: 1.61em;
+    line-height: 1.43;
+  }
+  #md h3:focus:before {
+    content: 'h3';
+    position: absolute;
+    top: 6px;
+    left: -40px;
+    border: 2px solid;
+    border-radius: 5px;
+    font-size: 16px;
+    color: var(--darkShadow);
+    padding: 0 4px;
+  }
+  #md h4 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    cursor: text;
+    font-size: 1.35em;
+  }
+  #md h4:focus:before {
+    content: 'h4';
+    position: absolute;
+    top: 4px;
+    left: -40px;
+    border: 2px solid;
+    border-radius: 5px;
+    font-size: 15px;
+    color: var(--darkShadow);
+    padding: 0 4px;
+  }
+  #md h5 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    cursor: text;
+    font-size: 1em;
+  }
+  #md h5:focus:before {
+    content: 'h5';
+    position: absolute;
+    top: 0px;
+    left: -40px;
+    border: 2px solid;
+    border-radius: 5px;
+    font-size: 14px;
+    color: var(--darkShadow);
+    padding: 0 2px;
+  }
+  #md h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    cursor: text;
+    font-size: 1em;
+    color: #777;
+  }
+  #md h6:focus:before {
+    content: 'h6';
+    position: absolute;
+    top: 0px;
+    left: -40px;
+    border: 2px solid;
+    border-radius: 5px;
+    font-size: 14px;
+    color: var(--darkShadow);
+    padding: 0 2px;
+  }
+  #md hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+  }
+  #md li ol,
+  #md li ul {
+    margin: 0 0;
+  }
+  #md li p.first {
+    display: inline-block;
+  }
+  #md ul,
+  #md ol {
+    padding-left: 30px;
+  }
+  #md ul:first-child,
+  #md ol:first-child {
+    margin-top: 0;
+  }
+  #md ullast-child,
+  #md ollast-child {
+    margin-bottom: 0;
+  }
+  #md code {
+    color: #d63200;
+    margin: 0 10px;
+    padding: 1px 7px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 15px var(--darkShadow), -1px -1px 15px var(--lightShadow);
+    font-family: unset;
+    font-size: 0.9em;
+  }
+  #md table {
+    box-shadow: 1px 1px 15px var(--darkShadow), -1px -1px 15px var(--lightShadow);
+    padding: 12px;
+    margin: 40px 10px;
+  }
+  #md table tr {
+    margin: 0;
+    padding: 0;
+  }
+  #md table tr:nth-child(2n) {
+    background-color: #fafafa;
+  }
+  #md table tr td {
+    margin: 0;
+    padding: 6px 13px;
+  }
+  #md table tr td:first-child {
+    margin-top: 0;
+  }
+  #md table tr th {
+    background-color: #dddddd;
+    font-weight: bold;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+  }
+  #md table tr th:first-child {
+    margin-top: 0;
+  }
+  #md thead {
+    background-color: #f8f8f8;
+  }
