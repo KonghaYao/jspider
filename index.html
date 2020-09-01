@@ -45,7 +45,7 @@
 
     function toWhere(path) {
         let url = new URL(path)
-        init(url.pathname.replace('/jspider', ''))
+        init(url.pathname.replace('/jspider', '').replace('//', '/'))
     }
     async function init(path) {
         path = root + path
