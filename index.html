@@ -37,11 +37,10 @@
         emoji: true,
     });
     const md = document.getElementById('md')
-    const root = './doc'
-    window.now = root
+    const root = './doc/'
     URl = 'https://cdn.jsdelivr.net/npm/js-spider'
     window.onload = function () {
-        init('/JSpider.md')
+        init('JSpider.md')
     }
 
     function toWhere(path) {
@@ -57,7 +56,6 @@
             }
         }).then(res => {
             if (res) redirect(res);
-            now = path
         })
     }
     function redirect(res) {
