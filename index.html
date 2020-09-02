@@ -90,7 +90,7 @@
     async function init(path) {
         path = root + path
         console.log(path)
-        return await fetch(path.replace('./', URl + '/')).then(res => {
+        return await fetch(URl + path).then(res => {
             if (res.ok) {
                 return res.text()
             }
