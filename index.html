@@ -50,7 +50,7 @@
     async function init(path) {
         path = root + path
         console.log(path)
-        return await fetch(path.replace('./', 'https://cdn.jsdelivr.net/npm/js-spider/').replace('//', '/')).then(res => {
+        return await fetch(path.replace('./', URl + '/').replace('//', '/')).then(res => {
             if (res.ok) {
                 return res.text()
             }
