@@ -32,6 +32,7 @@ import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js').then(res=>windo
 ```
 
 #### 快速爬取
+
 ```js
 //加载js模块完成之后
 let spider = new JSpider()
@@ -59,11 +60,13 @@ spider.ajax({
 ```
 
 #### 引入额外的模块
+
 ```js
 let spider =new JSpider()
 spider.extend('Search')
 spider.extend(['Hook','Cookies'])
 ```
+
 **:alembic: [完整教程]()**
 
 <br>
@@ -76,34 +79,29 @@ spider.extend(['Hook','Cookies'])
 JSpider 分为 
 
 - 请求模块
-  -  Ajax 
-<br>
+    -  Ajax 
 - 解析模块
-  - HTML文本解析模块
-    - HTMLParser
-  - XML文本解析模块
-    - XMLParser
-<br>
+    - HTML文本解析模块
+        - HTMLParser
+    - XML文本解析模块
+        - XMLParser
 - 批量下载模块
-  - Downloader
-<br>
+    - Downloader
 - 分析模块
-  - Observer 模块
-    - Hook
-    - Observer
-  - Search 模块
-    - searchWindow
-    - searchObj
-    - Globals
-<br>
+    - Observer 模块
+        - Hook
+        - Observer
+    - Search 模块
+        - searchWindow
+        - searchObj
+        - Globals
 - 扩展模块
-  - extend
-  - Script
-<br>
+    - extend
+    - Script
 - 专用模块
-  - m3u3Downloader
-  - Copy
-  - Cookies
+    - m3u3Downloader
+    - Copy
+    - Cookies
 <br>
 
 :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: 
@@ -115,12 +113,15 @@ JSpider 分为
 #### 如何导入
 各个模块可以通过 `extend(['Ajax','Hook'])` 来导入。
 若只想在文件中使用一个模块可以 
+
 `import Hook from "https://cdn.jsdelivr.net/npm/js-spider/lib/Hook.js"`
+
 所有的模块都放置在 lib 文件夹下，而且模块名首字母大写。
 
 #### Ajax 模块
 
 Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络请求。
+
 #### HTMLParser 和 XMLParser
 对于 HTML ，XML 文本的解析函数。
 
@@ -146,11 +147,13 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 ###  :dove:  鸽子工程 :dove: :dove: :dove: :dove: :dove:
  下面的类型为包含关系 
  例如：后面的类型包含前面的类型的内容
+
 - [x] 表示已经实现 功能可以通过extend函数引入
 
 :heavy_check_mark: 表示使用正常
 
 :alembic: 表示实验性函数
+
 <br>
 
 #### JSpider-core.js 核心类型
@@ -185,6 +188,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 <br>
 
 #### Extentions 扩展函数
+
 > 这些模块将不会被上面的类型包含，但是可以通过 extend 导入。
 
 - [ ] :alembic: m3u8Downloader: m3u8文件的下载器
@@ -221,6 +225,9 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 
 ## 相关依赖
+
 [BootCDN](https://www.bootcdn.cn/): 提供动态载入下面的库
+
 [JSZip](https://github.com/Stuk/jszip): 一个前端压缩数据的库
+
 [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser): XML => JSON 的库 
