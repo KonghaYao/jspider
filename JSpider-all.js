@@ -27,3 +27,4 @@ class JSpider extends Ajax {
         this.Search = Search;
     }
 }
+export default JSpider;
