@@ -2,8 +2,9 @@
 title: JSpider
 date: 2020/8/30
 author: KonhaYao
-tags:
-  -Jspider
+NPM: https://www.npmjs.com/package/js-spider
+GitHub: https://github.com/KonghaYao/jspider
+Gitee: https://gitee.com/dongzhongzhidong/jspider
 ---
 
 # :closed_book: JSpider 教程

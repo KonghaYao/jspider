@@ -8,13 +8,36 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/js-spider/css/default.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/js-spider/css/github-gist.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/js-spider/css/index.css">
+    <link rel="stylesheet" href="./css/index.css">
 
 </head>
 
 <body>
+    <header>
+        <div id="title">KonghaYao</div>
+        <ul id="link">
+            <li>
+                <a href="" id='Gitee'>
+                    <img src="https://gitee.com/assets/favicon_message.ico" />
+                </a>
+            </li>
+            <li>
+                <a href="" id='NPM'>
+                    <img
+                        src="https://cdn.jsdelivr.net/www.jsdelivr.com/1460460532416742d94c2a4bbc2893bdd1081bdd/img/landing/npm.png" />
+                </a>
+            </li>
+            <li>
+                <a href="" id='Github'>
+                    <img src="https://github.githubassets.com/favicons/favicon.png" />
+                </a>
+            </li>
+        </ul>
+    </header>
     <div id='md'></div>
 </body>
+
+
 <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
 <script type='module'>
@@ -24,6 +47,17 @@
 
 </script>
 <script>
+
+    const Title = document.getElementById('title')
+    const LinkList = document.getElementById('link')
+    Object.defineProperty(LinkList, "html", {
+        set(value) {
+            console.log(value)
+            Object.entries(value).forEach(([key, value]) => {
+                LinkList.querySelector('#' + key).href = value || ''
+            })
+        }
+    })
 
     hljs.initHighlightingOnLoad();
     const marked = new showdown.Converter({
@@ -39,8 +73,14 @@
     const md = document.getElementById('md')
     const root = './doc'
     URl = 'https://cdn.jsdelivr.net/npm/js-spider'
-    window.onload = function () {
-        init('/JSpider.md')
+
+    window.onload = async function () {
+        await init('/JSpider.md')
+        let { title, NPM, Github, Gitee } = marked.getMetadata()
+        Title.innerHTML = title || 'KonghaYao'
+        let obj = { NPM, Github, Gitee }
+        LinkList.html = obj
+
     }
 
     function toWhere(path) {
