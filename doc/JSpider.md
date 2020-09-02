@@ -14,6 +14,8 @@ Gitee: https://gitee.com/dongzhongzhidong/jspider
 
 ##### 这个网页已经载入了JSpider，可以使用开发者工具打开，观看例子的时候可以试着做一做。
 
+### [版本情况](./Version.md)
+
 <br>
 ## :gear: 软件架构
 JSpider 分为 
