@@ -52,6 +52,9 @@ Downloader 在 JSpider 的名称为 download。
 
 所以我使用了 [JSZip](https://github.com/Stuk/jszip) 这个库，当下载数多于 10 时自动压缩，当然也可以通过 needZip 强制压缩。
 
+#### 关于文件名称
+文件名称在没有定义时候会查找原来数组的元素（如果是继承自 Blob）的 name 属性，没找到就找后面命名数组的信息，再没找到就使用数组 index 作为名称。
+
 ### 例子
 
 ```js
@@ -59,5 +62,11 @@ let a =new JSpider()
 a.download([file1,file2],[],true)
 a.download([file1,'中',{0:1,2:2}],{2:'这是一个JSON.json'},true)
 ```
+:beetle: 注意, File 类型的文件是不能直接修改 name 属性的，所以需要使用
 
+```js
+let file1 = new File(['11111'],'1.txt')
+file1.name = '2.txt'// 无效
+file1 = new File([file1],'2.txt')//有效
+```
 # [JSpider](../JSpider.md)
