@@ -90,7 +90,7 @@
     async function init(path) {
         path = root + path
         console.log(path)
-        return await fetch(URl + path).then(res => {
+        return await fetch((URl + path).replace('./', '/')).then(res => {
             if (res.ok) {
                 return res.text()
             }
@@ -104,7 +104,7 @@
             hljs.highlightBlock(i)
         })
 
-        document.querySelectorAll('#md > a').forEach(i => {
+        document.querySelectorAll('#md  a').forEach(i => {
             i.onclick = (e) => {
                 e.preventDefault();
                 toWhere(e.target.href)
