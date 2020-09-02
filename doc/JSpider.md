@@ -12,6 +12,8 @@ Gitee: https://gitee.com/dongzhongzhidong/jspider
 ## :pencil2: 介绍
 这是一个在浏览器端使用 JS 快速爬取文件的框架。我写的第一个爬虫脚本是基于 Python 的，但是学到分析 JS 脚本之后，发现完全可以由浏览器的 JS 来发送请求并获取数据。对于少量的数据来说，右键检查并写几行代码就爬取成功，比开新的 python 脚本要轻松得多。所以我写了这个 JSpider 类来替代那些繁琐的 JS 代码。
 
+##### 这个网页已经载入了JSpider，可以使用开发者工具打开，观看例子的时候可以试着做一做。
+
 <br>
 ## :gear: 软件架构
 JSpider 分为 
