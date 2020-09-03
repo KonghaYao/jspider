@@ -14,7 +14,9 @@
     "browser",
     "front-end"
   ],
-  "scripts": {},
+  "scripts": {
+    
+  },
   "repository": {
     "type": "git",
     "url": "https://gitee.com/dongzhongzhidong/jspider.git"
