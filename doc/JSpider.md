@@ -61,7 +61,7 @@ https://cdn.jsdelivr.net/npm/js-spider/JSpider-pro.js
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 //动态载入
-import('https://cdn.jsdelivr.net/npm/js-spider@1.3.0/JSpider-core.js').then(res=>window.JSpider = res.default)
+import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js').then(res=>window.JSpider = res.default)
 ```
 
 ### 快速爬取
@@ -72,9 +72,9 @@ let spider = new JSpider()
 spider.ajax({
   urls:[
     //数组内可以是url字符串或者是下面的对象
-    'https://cdn.jsdelivr.net/npm/js-spider@1.3.0/JSpider-pro.js',
+    'https://cdn.jsdelivr.net/npm/js-spider/JSpider-pro.js',
     {
-      url:'https://cdn.jsdelivr.net/npm/js-spider@1.3.0/JSpider-core.js',
+      url:'https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js',
       options:(opt)=>{
         //这里可以修改原来的options
         return opt

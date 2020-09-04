@@ -23,7 +23,7 @@
 
 https://cdn.jsdelivr.net/npm/js-spider/JSpider-pro.js
 
-[https://cdn.jsdelivr.net/npm/js-spider@ **版本号** /JSpider- **类型** .js]()
+[https://cdn.jsdelivr.net/npm/js-spider/JSpider- **类型** .js]()
 
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入

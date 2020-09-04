@@ -3,7 +3,7 @@
 # [JSpider](./JSpider.md)
 
 ## 1.3.15
--  修复一些 Copy 的 BUG 
+-  修复一些 Copy 的 BUG ;
 
 ## 1.3.14
 - Copy 模块加入，可以通过 extend 使用
