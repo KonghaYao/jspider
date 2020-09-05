@@ -4,8 +4,10 @@
   "description": "这是一个浏览器端的爬虫框架",
   "main": "JSpider.js",
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "doc":"doc"
   },
+  "homepage": "https://dongzhongzhidong.gitee.io/jspider",
   "keywords": [
     "spider",
     "javascript",
