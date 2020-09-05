@@ -1,10 +1,10 @@
-# JSpider
+# :book: JSpider
 
-### :alembic: [完整教程](http://dongzhongzhidong.gitee.io/jspider)
+### :book: [完整教程](http://dongzhongzhidong.gitee.io/jspider)
 
-## 因为版本情况不一，请使用最新版,完整教程已经更新。
+## :o: 因为版本情况不一，请使用最新版，完整教程已经更新。
 
-### :pencil: 介绍
+### :pencil2: 介绍
 这是一个在浏览器端使用 JS 快速爬取文件的框架。我写的第一个爬虫脚本是基于 Python 的，但是学到分析 JS 脚本之后，发现完全可以由浏览器的 JS 来发送请求并获取数据。对于少量的数据来说，右键检查并写几行代码就爬取成功，比开新的 python 脚本要轻松得多。
 所以我写了这个 JSpider 类来替代那些繁琐的 JS 代码。
 
@@ -15,7 +15,7 @@
 
 <br>
 
-### 快速开始
+### :airplane: 快速开始
 
 #### JsDelivr cdn 载入  
 
@@ -59,7 +59,7 @@ spider.ajax({
 //请求完成之后就会在 spider.result 中有结果
 ```
 
-#### 引入额外的模块
+#### :candy: 引入额外的模块
 
 ```js
 let spider =new JSpider()
@@ -67,7 +67,7 @@ spider.extend('Search')
 spider.extend(['Hook','Cookies'])
 ```
 
-**:alembic: [完整教程]()**
+**:book: [完整教程](http://dongzhongzhidong.gitee.io/jspider)**
 
 <br>
 
@@ -75,7 +75,7 @@ spider.extend(['Hook','Cookies'])
 
 <br>
 
-### 软件架构
+### :gear: 软件架构
 JSpider 分为 
 
 - 请求模块
@@ -108,13 +108,13 @@ JSpider 分为
 
 <br>
 
-### 各个模块解析
+### :dart: 各个模块解析
 
 #### 如何导入
 各个模块可以通过 `extend(['Ajax','Hook'])` 来导入。
 若只想在文件中使用一个模块可以 
 
-`import Hook from "https://cdn.jsdelivr.net/npm/js-spider/lib/Hook.js"`
+`import Hook from "https://cdn.jsdelivr.net/npm/js-spider/lib/Observer/hook.js"`
 
 所有的模块都放置在 lib 文件夹下，而且模块名首字母大写。
 
@@ -144,6 +144,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 这个模块通过代理函数和对象来实现监控操作。
 
 <br>
+
 ###  :dove:  鸽子工程 :dove: :dove: :dove: :dove: :dove:
  下面的类型为包含关系 
  例如：后面的类型包含前面的类型的内容
@@ -156,7 +157,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 <br>
 
-#### JSpider-core.js 核心类型
+#### :3rd_place_medal:​ JSpider-core.js 核心类型
 - [x] :heavy_check_mark: 并发请求  (已经将队列请求包括了) 
 
 - [x] :heavy_check_mark: 定时请求 
@@ -169,7 +170,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 <br>
 
-#### JSpider-nor.js 常用类型
+#### :2nd_place_medal:​ JSpider-nor.js 常用类型
 - [x] :heavy_check_mark: XML解析: XML (String) ==> Object 
 
 
@@ -179,7 +180,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 <br>
 
-#### JSpider-pro.js 强化类型
+#### :1st_place_medal:​ JSpider-pro.js 强化类型
 
 - [x] :heavy_check_mark: hook 函数: 用于代理函数 
 
@@ -187,7 +188,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 <br>
 
-#### Extentions 扩展函数
+#### :star: Extentions 扩展函数
 
 > 这些模块将不会被上面的类型包含，但是可以通过 extend 导入。
 
@@ -204,28 +205,40 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 
 
-## 开发者使用说明
+## :rainbow: 开发者使用说明
 
 #### 如何测试 JSpider
 这个项目中的 test.html 打开，然后进控制台就已经导入了 JSpider 了，默认是 pro 类型。
 
 #### 如何找到模块的源文件
-在根目录下是 JSpider 的入口文件，
+在根目录下的 JS 文件是 JSpider 的入口文件，
 所有的模块放置在 lib 文件夹下，
-如果模块较大，可能在同名的文件夹下找到分模块。
+如果模块较大，可以在同名的文件夹下找到分模块。
 
 #### 单独载入 js 模块文件
 基本上所有的模块都可以脱离 JSpider 使用,
-引入方式为 使用 [JsDeliver](http://www.jsdelivr.com/) 提供的方式 来导入你的浏览器
+引入方式为 使用 [JsDeliver](http://www.jsdelivr.com/) 提供的 URL 和 ES6 的 import 来导入你的浏览器
 
 #### 如何支持 ES5 ?
 可以使用 webpack 打包 JSpider 文件，然后再引入就可以了。
+- [ ] 提供打包后文件。
 
+
+#### 跨域问题
+跨域问题可以通过谷歌插件，使用转接服务器等手段解决，只凭借 浏览器端 Javascript 无法解决。
+
+#### 绕过 [CSP 协议](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP) 加载 JSpider
+这个 CSP 协议是为了防止文件的非正常途经载入而使用的。所以，通过 script 标签和 import 引入不了文件，但是fetch 和 XHR 都是可以请求到文件的，但是然后以 Blob 数据接收并转化为字符串，使用 eval 注入脚本，可以绕过 CSP 协议。
+
+但是暂未提供 es5 版本文件。
+
+
+<br>
 
 ## 相关依赖
 
-[BootCDN](https://www.bootcdn.cn/): 提供动态载入下面的库
+[BootCDN](https://www.bootcdn.cn/): 提供动态载入下面的库。
 
-[JSZip](https://github.com/Stuk/jszip): 一个前端压缩数据的库
+[JSZip](https://github.com/Stuk/jszip): 一个前端压缩数据的库。
 
-[fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser): XML => JSON 的库 
+[fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser): XML => JSON 的库。 
