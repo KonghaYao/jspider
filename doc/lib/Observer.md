@@ -103,7 +103,7 @@ fetch.afterFunc.push((res)=>{
 })
 fetch('/')
 ```
-
+### [Hook例子](./Observer/Hook.md) 
 
 <br>
 ### :star: watch 函数

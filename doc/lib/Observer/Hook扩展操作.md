@@ -29,11 +29,15 @@ async function GETwatch(urlReg) {
             return res.default;
         }));
     XMLHttpRequest.prototype.open = Hook(XMLHttpRequest.prototype.open);
+    
     //=================上面为代理 open 函数=====================//
     //=================下面为注入 url     检测=====================//
+    
     XMLHttpRequest.prototype.open.Func.push((args) => {
         let [type, url, ...any] = args;
+        
         //依照正则表达式匹配 url 来debugger
+         
          if (urlReg.test(url) && type.toLocaleLowerCase() === "get") {
             let urlObj = new URL(url);
              //查看参数
@@ -55,32 +59,44 @@ GETwatch(/www/);
 
 ```js
 async function POSTwatch(urlReg) {
-    window.Hook = window.Hook || (await import ("https://cdn.jsdelivr.net/npm/js-spider/lib/Observer/hook.js").then((res)=>{console.log("%c 载入成功","color:green");return res.default ;}));
+    window.Hook = window.Hook || (await import ("https://cdn.jsdelivr.net/npm/js-spider/lib/Observer/hook.js").then((res)=>{
+        console.log("%c 载入成功","color:green");
+        return res.default ;
+        }
+        ));
     XMLHttpRequest.prototype.open = Hook(XMLHttpRequest.prototype.open);
     XMLHttpRequest.prototype.send = Hook(XMLHttpRequest.prototype.send);
     XMLHttpRequest.prototype.setRequestHeader = Hook(XMLHttpRequest.prototype.setRequestHeader);
+    
+    //========================完成代理=============================//
+    //========================接入代理函数=========================//
+    
     XMLHttpRequest.prototype.open.Func.push((args)=>{
         let[type,url,...any] = args;
         if (urlReg.test(url) && type.toLocaleLowerCase() === "post") {
+            
+            //设置“开关” 并打开 ，所以下面的函数代理可以执行
+            
             window.STOP = true;
             console.log(url);
             debugger ;
         }
-        console.log(args)
+        console.log(args);
         return args;
     }
     );
     XMLHttpRequest.prototype.setRequestHeader.Func.push((args)=>{
         if (window.STOP) {
-            console.log(args)
+            console.log(args);
         }
         return args;
     }
     );
     XMLHttpRequest.prototype.send.Func.push((args)=>{
         if (window.STOP) {
-            console.log(args)
-            debugger ;window.STOP = false;
+            console.log(args);
+            debugger;
+            window.STOP = false;
         }
         return args;
     }
@@ -90,5 +106,31 @@ async function POSTwatch(urlReg) {
 
 
 
-## 匿名函数调用
+## 匿名函数的代理
+当我们在查看源代码的时候，会有很多函数是运行在立即执行函数内部，不能被直接获取到。但是在 debugger 时，匿名函数中的函数可以被获取，这个时候它就可以被导出和代理。
 
+```js
+//立即执行函数
+
+(function (index){
+    let add = (i)=>i++
+    let plus = (i)=>add(i**i)
+    window.plus =plus
+})(i)
+
+
+//首先定下 debugger 断点，并触发
+
+add = Hook(add)
+temp1 = add // temp1就是那个藏在立即执行函数中的函数
+
+//上面为打断状态下执行的函数
+
+//添加监控 测试是否被 Hook 住
+temp1.Func.push((args)=>{
+    console.log('通过参数  ', args)
+    return args
+})
+plus(21)
+```
+# [JSpider](../../JSpider.md)
