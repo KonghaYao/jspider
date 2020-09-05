@@ -65,6 +65,10 @@ import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js').then(res=>windo
 ```
 
 ### 快速爬取
+请打开您的浏览器 开发者工具 
+快捷键：F12 or Ctrl+SHIFT+C
+这个网址已经配置了 pro 类型 的 JSpider。
+
 ```js
 //加载js模块完成之后
 let spider = new JSpider()
