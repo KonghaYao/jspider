@@ -6,7 +6,7 @@ tags:
   -Jspider
 ---
 
-# JSpider——Downloader 模块
+# :book: JSpider——Downloader 模块
 
 ## :pencil2: 介绍
 
@@ -44,16 +44,20 @@ Downloader 在 JSpider 的名称为 download。
 | nameList | 重命名的数组<br />或者只是带需要替换的序号的键值对的对象 | {0:’1.txt’,2:’2.txt’}                                     |
 | needZip  | Boolen                                                   | 是否强制压缩                                              |                                       |
 
-### 详细
+<br>
 
-#### 浏览器中最大同时下载的文件数为 10 
+### :bookmark: 详细
+
+#### :fire: 浏览器中最大同时下载的文件数为 10 
 
 这个是在我尝试爬取 m3u8 文件分片的时候发现的，Chrome不能够下载完全，只能下载前10个，后面的所有文件都没了。
 
 所以我使用了 [JSZip](https://github.com/Stuk/jszip) 这个库，当下载数多于 10 时自动压缩，当然也可以通过 needZip 强制压缩。
 
-#### 关于文件名称
+#### :candy: 关于文件名称
 文件名称在没有定义时候会查找原来数组的元素（如果是继承自 Blob）的 name 属性，没找到就找后面命名数组的信息，再没找到就使用数组 index 作为名称。
+
+<br>
 
 ### 例子
 

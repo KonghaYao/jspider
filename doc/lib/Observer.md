@@ -6,12 +6,13 @@ author: KonhaYao
 
 
 
-# :closed_book: JSpider——Observer 模块
+# :book: JSpider——Observer 模块
+
 ## :pencil2: 介绍
 
 Observer 模块是用于监视某些在浏览器中的变量的。最初设计这个模块是用来获取匿名函数的，但是后来学到了新的 Proxy 对象，发现 MDN 提及了一些用法，但是没有深入。所以我自己开发了 函数代理函数 Hook 。然后想到 Vue 的双向绑定和代理的本质其实很像，所以使用递归的方式把整个 对象 代理了，并且对象里面的对象都可以设置相应的方式来拦截数据，这就使得 Observer 这个模块的作用大幅提升了。
 
-由于 String 和 Number 等非对象和函数的类型过于简单，所以直接使用`\__defineGetter__`和`__defineSetter__`就可以完成代理，所以在这个模块中没有对这些数据的代理方式。
+由于 String 和 Number 等非对象和函数的类型过于简单，所以直接使用`__defineGetter__`和`__defineSetter__`就可以完成代理，所以在这个模块中没有对这些数据的代理方式。
 ### [JSpider教程](../JSpider.md)
 <br>
 
@@ -40,7 +41,7 @@ import('https://cdn.jsdelivr.net/npm/js-spider/lib/Observer.js').then(res=>windo
 
 Hook 通过代理函数，对函数的输入和输出进行操作。
 
-#### 代理 非Promise 函数
+#### :candy: 代理非Promise 函数
 
 默认代理 非Promise 函数，非Promise 是指返回值不为 Promise 的函数。
 
@@ -77,11 +78,11 @@ console.log(s+1)
 
 ##### 但是有一个例外，不需要返回值的 Promise 可以使用这个
 
-例如 XMLHttpRequest 的 send 函数一般是没有返回的,所以可以用
+例如 XMLHttpRequest 的 send 函数一般是没有返回的，所以可以用。
 
-#### 代理 Promise 函数
+#### :candy: 代理 Promise 函数
 
-像 fetch 这种返回 Promise 的函数，必须要使用 第二参数，若不使用，则会导致错误。
+像 fetch 这种返回 Promise 的函数，必须要使用第二参数，若不使用，则会导致错误。
 
 ```js
 let jspider =new JSpider()
@@ -102,6 +103,8 @@ fetch.afterFunc.push((res)=>{
 })
 fetch('/')
 ```
+
+
 <br>
 ### :star: watch 函数
 
@@ -147,6 +150,8 @@ a.GETTER.name = (value)=>{
 a.sex='男'
 a.name
 ```
+
+<br>
 
 #### GETTER 和 SETTER 详解
 

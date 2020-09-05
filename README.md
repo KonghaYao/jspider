@@ -2,7 +2,7 @@
 
 ### :book: [完整教程](http://dongzhongzhidong.gitee.io/jspider)
 
-## :o: 因为版本情况不一，请使用最新版，完整教程已经更新。
+## :o: 因为版本情况不一，请使用最新版！完整教程已经更新！
 
 ### :pencil2: 介绍
 这是一个在浏览器端使用 JS 快速爬取文件的框架。我写的第一个爬虫脚本是基于 Python 的，但是学到分析 JS 脚本之后，发现完全可以由浏览器的 JS 来发送请求并获取数据。对于少量的数据来说，右键检查并写几行代码就爬取成功，比开新的 python 脚本要轻松得多。
@@ -10,6 +10,7 @@
 
 ## :bangbang:  注意
 这个项目依赖 ES6 import 语法，所以某些浏览器可能不支持。
+使用这个爬虫脚本时，需要使用者能够使用 **async，await ，Promise，import** 等较新的语法。
 
 <br>
 
@@ -33,7 +34,7 @@ https://cdn.jsdelivr.net/npm/js-spider/JSpider-pro.js
 import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js').then(res=>window.JSpider = res.default)
 ```
 
-#### 快速爬取
+#### :hammer: 快速爬取
 
 ```js
 //加载js模块完成之后
@@ -159,7 +160,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 <br>
 
-#### :3rd_place_medal:​ JSpider-core.js 核心类型
+#### :star: JSpider-core.js 核心类型
 - [x] :heavy_check_mark: 并发请求  (已经将队列请求包括了) 
 
 - [x] :heavy_check_mark: 定时请求 
@@ -172,7 +173,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 <br>
 
-#### :2nd_place_medal:​ JSpider-nor.js 常用类型
+#### :star:​ JSpider-nor.js 常用类型
 - [x] :heavy_check_mark: XML解析: XML (String) ==> Object 
 
 
@@ -182,7 +183,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 <br>
 
-#### :1st_place_medal:​ JSpider-pro.js 强化类型
+#### :star: JSpider-pro.js 强化类型
 
 - [x] :heavy_check_mark: hook 函数: 用于代理函数 
 
@@ -194,7 +195,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 > 这些模块将不会被上面的类型包含，但是可以通过 extend 导入。
 
-- [ ] :alembic: Copy : 与剪贴板有关的函数
+- [x] :alembic: Copy : 与剪贴板有关的函数
 
 
 

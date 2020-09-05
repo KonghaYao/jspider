@@ -7,14 +7,14 @@ Github: https://github.com/KonghaYao/jspider
 Gitee: https://gitee.com/dongzhongzhidong/jspider
 ---
 
-# :closed_book: JSpider 教程
+# :book: JSpider 教程
 
 ## :pencil2: 介绍
 这是一个在浏览器端使用 JS 快速爬取文件的框架。我写的第一个爬虫脚本是基于 Python 的，但是学到分析 JS 脚本之后，发现完全可以由浏览器的 JS 来发送请求并获取数据。对于少量的数据来说，右键检查并写几行代码就爬取成功，比开新的 python 脚本要轻松得多。所以我写了这个 JSpider 类来替代那些繁琐的 JS 代码。
 
 ##### 这个网页已经载入了JSpider，可以使用开发者工具打开，观看例子的时候可以试着做一做。
 
-### [版本情况](./Version.md)
+### :closed_book: [版本情况](./Version.md)
 
 <br>
 ## :gear: 软件架构
@@ -64,7 +64,7 @@ https://cdn.jsdelivr.net/npm/js-spider/JSpider-pro.js
 import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js').then(res=>window.JSpider = res.default)
 ```
 
-### 快速爬取
+### :airplane: 快速爬取
 请打开您的浏览器 开发者工具 
 快捷键：F12 or Ctrl+SHIFT+C
 这个网址已经配置了 pro 类型 的 JSpider。
@@ -95,7 +95,7 @@ spider.ajax({
 //请求完成之后就会在 spider.result 中有结果
 ```
 
-###  引入额外的模块
+### :candy: 引入额外的模块
 ```js
 let spider =new JSpider()
 spider.extend('Search')
@@ -136,19 +136,23 @@ Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络
 #### [Observer 模块](./lib/Observer.md)
 这个模块通过代理函数和对象来实现监控操作。
 
+#### [Copy模块](./lib/Copy.md)
+这个模块提供了一个破解网页禁止复制的函数和一个复制到剪贴板的函数。
+
 <br>
-##  :dove:  鸽子工程 :dove: :dove: :dove: :dove: :dove:
+###  :dove:  鸽子工程 :dove: :dove: :dove: :dove: :dove:
  下面的类型为包含关系 
  例如：后面的类型包含前面的类型的内容
+
 - [x] 表示已经实现 功能可以通过extend函数引入
 
 :heavy_check_mark: 表示使用正常
 
 :alembic: 表示实验性函数
+
 <br>
 
-### JSpider-core.js 核心类型
-
+#### :star: JSpider-core.js 核心类型
 - [x] :heavy_check_mark: 并发请求  (已经将队列请求包括了) 
 
 - [x] :heavy_check_mark: 定时请求 
@@ -161,7 +165,7 @@ Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络
 
 <br>
 
-### JSpider-nor.js 常用类型
+#### :star:​ JSpider-nor.js 常用类型
 - [x] :heavy_check_mark: XML解析: XML (String) ==> Object 
 
 
@@ -171,36 +175,57 @@ Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络
 
 <br>
 
-### JSpider-pro.js 强化类型
+#### :star: JSpider-pro.js 强化类型
 
-- [x] :alembic: hook 函数: 用于代理函数 
+- [x] :heavy_check_mark: hook 函数: 用于代理函数 
 
-- [x] :alembic: Watch : 对象监听函数
+- [x] :alembic: Watch 函数: 对象监听函数
 
 <br>
 
-### Extentions 扩展函数
+#### :star: Extentions 扩展函数
 
-- [ ] :alembic: m3u8Downloader: m3u8文件的下载器
+> 这些模块将不会被上面的类型包含，但是可以通过 extend 导入。
 
-- [ ] :alembic: Copy : 与剪贴板有关的函数
+- [x] :alembic: Copy : 与剪贴板有关的函数
 
 
 
-## 开发者使用说明
 
-### 如何测试 JSpider
-这个项目中的 test.html 打开，然后进控制台就有了，
-默认是 pro 类型
+## :rainbow: 开发者使用说明
 
-### 如何找到模块的源文件
-在根目录下是 JSpider 的入口文件，
+#### 如何测试 JSpider
+这个项目中的 test.html 打开，然后进控制台就已经导入了 JSpider 了，默认是 pro 类型。
+
+#### 如何找到模块的源文件
+在根目录下的 JS 文件是 JSpider 的入口文件，
 所有的模块放置在 lib 文件夹下，
-如果模块较大，可能在同名的文件夹下找到分模块。
+如果模块较大，可以在同名的文件夹下找到分模块。
 
-### 单独载入 js 模块文件
+#### 单独载入 js 模块文件
 基本上所有的模块都可以脱离 JSpider 使用,
-引入方式为 使用 [JsDeliver](http://www.jsdelivr.com/) 提供的方式 来导入你的浏览器
+引入方式为 使用 [JsDeliver](http://www.jsdelivr.com/) 提供的 URL 和 ES6 的 import 来导入你的浏览器
 
-### 如何支持 ES5 ?
+#### 如何支持 ES5 ?
 可以使用 webpack 打包 JSpider 文件，然后再引入就可以了。
+- [ ] 提供打包后文件。
+
+
+#### 跨域问题
+跨域问题可以通过谷歌插件，使用转接服务器等手段解决，只凭借 浏览器端 Javascript 无法解决。
+
+#### 绕过 [CSP 协议](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP) 加载 JSpider
+这个 CSP 协议是为了防止文件的非正常途经载入而使用的。所以，通过 script 标签和 import 引入不了文件，但是fetch 和 XHR 都是可以请求到文件的，但是然后以 Blob 数据接收并转化为字符串，使用 eval 注入脚本，可以绕过 CSP 协议。
+
+但是暂未提供 es5 版本文件。
+
+
+<br>
+
+## 相关依赖
+
+[BootCDN](https://www.bootcdn.cn/): 提供动态载入下面的库。
+
+[JSZip](https://github.com/Stuk/jszip): 一个前端压缩数据的库。
+
+[fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser): XML => JSON 的库。 

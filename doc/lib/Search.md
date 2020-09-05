@@ -6,7 +6,7 @@ tags:
   -Jspider
 ---
 
-# :closed_book: JSpider——Search 模块
+# :book: JSpider——Search 模块
 
 ## :pencil2: 介绍
 
@@ -43,6 +43,8 @@ let a =new JSpider()
 a.Search.Globals()
 ```
 
+<br>
+
 ### :star: 对象搜索
 
 #### Search.searchObj(obj,RegExp[,maxDepth])
@@ -66,6 +68,8 @@ spider.Search.searchObj(obj,/张/)
 ```
 
 在数组中为了保持数据的结构不被破坏，使用 *** 作为表示非匹配的数据。
+
+<br>
 
 ### :star: window 搜索
 

@@ -6,7 +6,7 @@ tags:
   -Jspider
 ---
 
-# JSpider——Copy 模块
+# :book: JSpider——Copy 模块
 
 ## :pencil2: 介绍
 Copy 模块是用来处理复制的一个函数。
@@ -40,7 +40,8 @@ import('https://cdn.jsdelivr.net/npm/js-spider/lib/Copy.js').then(res=>window.Co
 Copy 模块是为了将某些限制网站复制的 JS 方式给消除掉，所以有了 Copy.clearUnCopy 函数，只要不是特殊的防止复制的方式，都可以去除禁止复制。
 
 而 Copy.copy 是用来复制的函数，虽然在控制台可以直接使用浏览器自带的 copy 函数复制，但是如果是配合油猴脚本全自动注入的话还是要额外的 copy 函数的。
-:beetle: 注意，如果填入一个 DOM 元素，将会获取它的 outerHTML 。
+
+:bangbang: 注意，如果填入一个 DOM 元素，将会获取它的 outerHTML 。
 
 
 ```js

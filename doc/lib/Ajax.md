@@ -6,7 +6,7 @@ tags:
   -Jspider
 ---
 
-# :closed_book: JSpider——Ajax 模块
+# :book: JSpider——Ajax 模块
 
 ## :pencil2: 介绍
 
@@ -31,7 +31,7 @@ https://cdn.jsdelivr.net/npm/js-spider/lib/Ajax.js
 import('https://cdn.jsdelivr.net/npm/js-spider/lib/Ajax.js').then(res=>window.Ajax = res)
 ```
 
-### 快速爬取
+### :airplane: 快速爬取
 
 ```js
 //加载js模块完成之后
@@ -69,7 +69,7 @@ ajax 方法是批量请求的入口函数，通过设置初始参数，就可以
 | ------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | urls    | Array<br />[‘http://’,{<br />url:’http://….‘,<br />options:(opt)=>opt<br />}] | urls 属性表示了你要爬取的 URL 地址，这是一个 Array , 里面包含 URL字符串 或 一个对象，并且可以混合。<br />对象中的 options 是一个修改原来请求 options 的函数 |
 | options | Object<br />与 fetch 的 options 是一致的                     | 这是默认的 fetch 的 options 属性，包含了 headers 和 body等请求的详细情况。<br />在 urls 中的对象可以通过 options 属性设置一个函数来修改 options 作为那个 url 的 options 使用。配合 limit 属性使用。 |
-| type    | async\|sync\|time<br />String                                | async 模式: 这个模式会将 URL 一个一个请求，确定完成一次后再发送下一个请求。<br/>sync 模式: 这个模式会将 多个 URL （默认3个）一起发送，确定这一批 URL 请求成功后再请求下一批。<br />time 模式: 这个模式会每间隔一定时间发送一个请求，配合 time 属性使用。 |
+| type    | async\|sync\|time<br />String                                | - async 模式: 这个模式会将 URL 一个一个请求，确定完成一次后再发送下一个请求。<br/> - sync 模式: 这个模式会将 多个 URL （默认3个）一起发送，确定这一批 URL 请求成功后再请求下一批。<br /> - time 模式: 这个模式会每间隔一定时间发送一个请求，配合 time 属性使用。 |
 | limit   | Number                                                       | 填入 每次同时发送请求的数目。<br />配合 sync 模式使用。      |
 | time    | Number                                                       | 每次间隔的时间。<br />配合 time 模式使用。                   |
 
