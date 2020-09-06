@@ -1,20 +1,35 @@
 body,
 html {
+
   margin: 0;
   padding: 0;
-  height: 100%;
-  display:block!important;
+  height: 100vh!important;
+  width: 100vw!important;
+  display:flex!important;
+  flex-direction: column;
+}
+*{
+  transition: all 0.2;
 }
 header{
+
   height:60px!important;
   width: 100%;
   display:flex;
   box-shadow: 0px 6px 15px rgb(216, 216, 216);
-  position: fixed;
+  
   top: 0;
   left: 0;
 }
-#title{
+main{
+  user-select: text;
+  height: 80vh;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.title{
   width: 100%;
   line-height:60px;
   padding:0 40px;
@@ -22,24 +37,22 @@ header{
   font-weight: 500px;
 }
 header >ul{
+  padding:0;
   display: flex;
   list-style: none;
+  justify-content: space-evenly;
+  width: 100%;
 }
 header img{
   height: 30px;
 }
 
-header >ul >li{
-  padding: 0 20px;
-}
+
 
   pre {
     white-space: break-spaces !important;
   }
-  
-  #md{
-    margin:60px auto;
-  }
+
   body {
     --lightShadow: #fafafa;
     --darkShadow: #d1d9e6;
@@ -68,33 +81,14 @@ header >ul >li{
     color: var(--textColor);
     line-height: 1.6;
   }
-  body #article {
-    min-width: 63vw;
-    height: 95vh;
-    overflow: scroll;
-  }
-  body details {
-    padding: 0 5px;
-    white-space: nowrap;
-  }
-  body main {
-    display: grid!important;
-    grid-template-columns: 1fr;
-  }
-  body main header {
-    display: flex!important;
-    height: 44px;
-    font-size: 12px;
-    border-bottom: 1px solid #00000024;
-  }
+ 
   body footer {
     border-top: 1px solid #00000024;
     position: fixed;
     bottom: 0;
-    width: 100%;
-    height: 20px;
+    width: 100vw;
     background-color: white;
-    font-size: 12px;
+    box-shadow: 0 -9px 10px 0px #e6e6e65e;
   }
   ::-webkit-scrollbar {
     /*滚动条整体样式*/
