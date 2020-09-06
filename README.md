@@ -230,7 +230,12 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 跨域问题可以通过谷歌插件，使用转接服务器等手段解决，只凭借 浏览器端 Javascript 无法解决。
 
 #### 绕过 [CSP 协议](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP) 加载 JSpider
-这个 CSP 协议是为了防止文件的非正常途经载入而使用的。所以，通过 script 标签和 import 引入不了文件，但是fetch 和 XHR 都是可以请求到文件的，但是然后以 Blob 数据接收并转化为字符串，使用 eval 注入脚本，可以绕过 CSP 协议。
+这个 CSP 协议是为了防止文件的非正常途经载入而使用的。所以一般通过 script 标签和 import 引入不了文件。
+
+但是如果 fetch 和 XHR 可以请求到文件，然后以 Blob 数据接收并转化为字符串，使用 eval 注入脚本，可以绕过 CSP 协议。
+
+如果 fetch 和 XHR 也被禁止的话，就只能手动使用 开发者工具 的 snippets 执行载入了
+
 
 但是暂未提供 es5 版本文件。
 
