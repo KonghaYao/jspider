@@ -47,6 +47,8 @@
 </script>
 
 <script>
+    let root = 'https://cdn.jsdelivr.net/gh/konghayao/jspider/doc/'
+
 
     const Title = document.getElementById('title')
     const LinkList = document.getElementById('link')
@@ -71,21 +73,24 @@
         emoji: true,
     });
     const md = document.getElementById('md')
-    let root = 'https://cdn.jsdelivr.net/npm/js-spider/doc/'
+
 
     window.onload = async function () {
-        let file = location.hash.replace('#', '') || './JSpider.md'
+        let file = location.hash.replace(/^#/, '.') || './JSpider.md'
+        console.log(file)
         await toWhere(file)
-        let { title, NPM, Github, Gitee } = marked.getMetadata()
-        Title.innerHTML = title || 'KonghaYao'
-        let obj = { NPM, Github, Gitee }
-        LinkList.html = obj
+
     }
 
     function toWhere(path) {
         let num = 0
+
         let hash = location.hash.replace(/^#/, '')
-        if (/^\.+\//.test(path)) {
+        if (path.replace(/[\/|\.|#]/g, '') == hash.replace(/[\/|\.|#]/g, '')) {
+            init(path)
+            return;
+        }
+        if (/^\.\//.test(path)) {
             while (/\/[^\/]*?\.[^\/]*?$/.test(hash)) {
                 hash = hash.replace(/\/[^\/]*?\.[^\/]*?$/, '')
             }
@@ -94,17 +99,12 @@
             num += 1
             return ''
         })
-
-
         for (; num > 0; num--) {
             hash = hash.replace(/(\/[^\/]+?$)|(\/[^\/]+?\/$)/, (p0) => {
                 /\./.test(p0) && num++
                 return ''
             })
         }
-
-        console.log(hash)
-
         hash += '/'
         if (/(^\.\/)|(^\/)/.test(path)) {
             console.log(path)
@@ -119,7 +119,6 @@
     }
 
     async function init(url) {
-        console.log(url)
         return await fetch((root + url).replace(/\/\//g, '/')).then(res => res.text()).then(res => {
             if (res) redirect(res);
         })
@@ -137,7 +136,10 @@
             }
         })
         scrollTo(0, 0)
-
+        let { title, NPM, Github, Gitee } = marked.getMetadata()
+        Title.innerHTML = title || 'KonghaYao'
+        let obj = { NPM, Github, Gitee }
+        LinkList.html = obj
     }
 
 </script>
