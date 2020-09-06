@@ -1,4 +1,4 @@
-let root = "./doc/";
+let root = "https://cdn.jsdelivr.net/npm/js-spider/doc/";
 const Default = "./1.js";
 const Title = document.getElementById("title");
 const LinkList = document.getElementById("link");
