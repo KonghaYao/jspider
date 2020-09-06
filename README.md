@@ -1,4 +1,6 @@
 # :book: JSpider
+![Version](https://img.shields.io/badge/Version-1.3.22-blue.svg) ![MIT](https://img.shields.io/badge/License-MIT-green.svg) ![coverage](https://img.shields.io/badge/coverage-80%-green.svg) ![Javascript](https://img.shields.io/badge/Javascript->=%20ES6-red.svg)
+![platform](https://img.shields.io/badge/Platform-Browser-red.svg)
 
 ### :book: [完整教程](http://dongzhongzhidong.gitee.io/jspider)
 ## :o: 因为版本情况不一，请使用最新版！完整教程已经更新！
@@ -226,7 +228,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 - [ ] 提供打包后文件。
 
 
-#### 跨域问题
+#### 跨域问题 [CORS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
 跨域问题可以通过谷歌插件，使用转接服务器等手段解决，只凭借 浏览器端 Javascript 无法解决。
 
 #### 绕过 [CSP 协议](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP) 加载 JSpider
@@ -249,3 +251,6 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 [JSZip](https://github.com/Stuk/jszip): 一个前端压缩数据的库。
 
 [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser): XML => JSON 的库。 
+
+# License
+MIT :copyright: KonghaYao
