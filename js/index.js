@@ -1,5 +1,5 @@
 let root = "https://cdn.jsdelivr.net/npm/js-spider/doc/";
-const Default = "./1.js";
+const Default = "./JSpider.md";
 const Title = document.getElementById("title");
 const LinkList = document.getElementById("link");
 Object.defineProperty(LinkList, "html", {
