@@ -1,6 +1,6 @@
 # :book: JSpider
-![Version](https://img.shields.io/badge/Version-1.3.22-blue.svg) ![MIT](https://img.shields.io/badge/License-MIT-green.svg) ![coverage](https://img.shields.io/badge/coverage-80%-green.svg) ![Javascript](https://img.shields.io/badge/Javascript->=%20ES6-red.svg)
-![platform](https://img.shields.io/badge/Platform-Browser-red.svg)
+![Version](https://img.shields.io/badge/Version-1.3.22-blue.svg) ![MIT](https://img.shields.io/badge/License-MIT-green.svg) ![Javascript](https://img.shields.io/badge/Javascript->=%20ES6-red.svg)
+![platform](https://img.shields.io/badge/Platform-Browser-red.svg) <a href='https://gitee.com/dongzhongzhidong/jspider/stargazers'><img src='https://gitee.com/dongzhongzhidong/jspider/badge/star.svg?theme=dark' alt='star'></img></a> <a href='https://gitee.com/dongzhongzhidong/jspider/members'><img src='https://gitee.com/dongzhongzhidong/jspider/badge/fork.svg?theme=dark' alt='fork'></img></a>
 
 ### :book: [完整教程](http://dongzhongzhidong.gitee.io/jspider)
 ## :o: 因为版本情况不一，请使用最新版！完整教程已经更新！
