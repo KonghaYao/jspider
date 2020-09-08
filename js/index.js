@@ -81,8 +81,11 @@ function redirect(res) {
 
     document.querySelectorAll("#md  a").forEach((i) => {
         i.onclick = (e) => {
-            e.preventDefault();
-            toWhere(e.target.outerHTML.match(/(?<=href\=")[\s\S]+?(?=")/)[0]);
+            if (!/^http/.test(e.target.href)) {
+                e.preventDefault();
+                toWhere(e.target.outerHTML.match(/(?<=href\=")[\s\S]+?(?=")/)[0]);
+            } else {
+            }
         };
     });
     scrollTo(0, 0);
