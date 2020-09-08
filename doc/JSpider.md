@@ -64,6 +64,8 @@ https://cdn.jsdelivr.net/npm/js-spider/JSpider-pro.js
 import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js').then(res=>window.JSpider = res.default)
 ```
 
+
+
 ### :airplane: 快速爬取
 请打开您的浏览器 开发者工具 
 快捷键：F12 or Ctrl+SHIFT+C

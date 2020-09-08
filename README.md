@@ -10,7 +10,7 @@
 所以我写了这个 JSpider 类来替代那些繁琐的 JS 代码。
 
 ## :bangbang:  注意
-这个项目依赖 ES6 import 语法，所以某些浏览器可能不支持。
+这个项目依赖 ES6 import 语法，所以某些浏览器可能不支持，推荐使用打包后的文件进行操作。
 使用这个爬虫脚本时，需要使用者能够使用 **async，await ，Promise，import** 等较新的语法。
 
 <br>
@@ -34,6 +34,16 @@ https://cdn.jsdelivr.net/npm/js-spider/JSpider-pro.js
 //动态载入
 import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js').then(res=>window.JSpider = res.default)
 ```
+
+<br>
+
+#### :alembic: 推荐载入打包文件
+通过下面这个 URL 载入的 JS 文件是用在浏览器版本低导致模块无法使用的情况！
+推荐在不熟悉浏览器的时候使用，因为是 webpack 打包的文件，支持 ES5 。
+```js
+'https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.js'
+```
+<br>
 
 #### :hammer: 快速爬取
 
@@ -225,7 +235,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 #### 如何支持 ES5 ?
 可以使用 webpack 打包 JSpider 文件，然后再引入就可以了。
-- [ ] 提供打包后文件。
+- [x] 提供打包后文件。
 
 
 #### 跨域问题 [CORS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
