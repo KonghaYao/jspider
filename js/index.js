@@ -81,10 +81,11 @@ function redirect(res) {
 
     document.querySelectorAll("#md  a").forEach((i) => {
         i.onclick = (e) => {
-            if (!/^http/.test(e.target.href)) {
+            let href = e.target.outerHTML.match(/(?<=href\=")[\s\S]+?(?=")/)[0];
+            if (!/^http/.test(href)) {
                 e.preventDefault();
-                toWhere(e.target.outerHTML.match(/(?<=href\=")[\s\S]+?(?=")/)[0]);
-            } else {
+                let url = toWhere(href);
+                window.AJAX(url);
             }
         };
     });
