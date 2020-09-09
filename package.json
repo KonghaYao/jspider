@@ -1,6 +1,6 @@
 {
   "name": "js-spider",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "这是一个浏览器端的爬虫框架",
   "main": "JSpider.js",
   "directories": {
