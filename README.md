@@ -37,7 +37,7 @@ import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js').then(res=>windo
 
 <br>
 
-#### :alembic: 推荐载入打包文件
+#### :alembic: 推荐——载入打包文件
 通过下面这个 URL 载入的 JS 文件是用在浏览器版本低导致模块无法使用的情况！
 推荐在不熟悉浏览器的时候使用，因为是 webpack 打包的文件，支持 ES5 。
 ```js
@@ -249,7 +249,6 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 如果 fetch 和 XHR 也被禁止的话，就只能手动使用 开发者工具 的 snippets 执行载入了
 
 
-但是暂未提供 es5 版本文件。
 
 
 <br>
