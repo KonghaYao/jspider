@@ -1,9 +1,10 @@
-//单独引入 Hook 模块
 /**
  * XMLHttpRequest 中的 GET 请求拦截
  * @date 2020-09-05
  * @param {RegExp} urlReg 匹配 url 的正则表达式，匹配到会进入 debugger
  */
+
+// 需要单独引入 Hook 模块
 async function GETwatch(urlReg) {
     window.Hook =
         window.Hook ||
