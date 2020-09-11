@@ -25,6 +25,7 @@ JSpider 分为
 - 解析模块
     - [HTML文本解析模块 -----  HTMLParser](./lib/Parser.md)
     - [XML文本解析模块 -----  XMLParser](./lib/Parser.md)
+    - [转化为 Markdown ----- TurnToMarkdown](./lib/Parser.md)
 <br>
 - [批量下载模块 ----- Downloader](./lib/Downloader.md)
 <br>
@@ -191,6 +192,7 @@ Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络
 
 - [x] :alembic: Copy : 与剪贴板有关的函数
 
+- [ ] :alembic: TurnToMarkdown : 将 HTML 文本转化为 markdown 语法
 
 
 

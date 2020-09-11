@@ -99,6 +99,8 @@ JSpider 分为
         - HTMLParser
     - XML文本解析模块
         - XMLParser
+    - 转化为 Markdown
+        - TurnToMarkdown
 - 批量下载模块
     - Downloader
 - 分析模块
@@ -136,7 +138,7 @@ JSpider 分为
 
 Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络请求。
 
-#### HTMLParser 和 XMLParser
+#### HTMLParser , XMLParser 和 TurnToMarkdown
 对于 HTML ，XML 文本的解析函数。
 
 #### Downloader 模块
@@ -156,6 +158,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 #### Observer 模块
 这个模块通过代理函数和对象来实现监控操作。
+
 
 <br>
 
@@ -208,7 +211,7 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 - [x] :alembic: Copy : 与剪贴板有关的函数
 
-
+- [ ] :alembic: TurnToMarkdown : 将 HTML 文本转化为 markdown 语法
 
 <br>
 

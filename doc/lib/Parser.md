@@ -88,5 +88,8 @@ let json = a.XMLParser(XMLString)
 let jsonArr = a.result.map(i=>a.XMLParser(i))
 ```
 
+## :star: TurnToMarkdown
+TurnToMarkdown 是用来将 HTML 格式转化为 Markdown 格式的一个模块，主要是封装了 [turndown.js](https://github.com/domchristie/turndown/) ，使得 JSpider 能够将爬取到的 HTML 文件转化为 Markdown 字符串，然后保存为 md 文件。
+
 #  [JSpider](../JSpider.md)
 
