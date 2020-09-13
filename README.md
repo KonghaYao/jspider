@@ -261,7 +261,6 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 ## 相关依赖
 
-[BootCDN](https://www.bootcdn.cn/): 提供动态载入下面的库。
 
 [JSZip](https://github.com/Stuk/jszip): 一个前端压缩数据的库。
 
