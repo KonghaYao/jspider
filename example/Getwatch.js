@@ -16,8 +16,14 @@ async function GETwatch(urlReg) {
     XMLHttpRequest.prototype.open.Func.push((args) => {
         let [type, url, ...any] = args;
         if (urlReg.test(url) && type.toLocaleLowerCase() === "get") {
-            let urlObj = new URL(url);
-            let params = Object.fromEntries(urlObj.searchParams.entries());
+            //解析参数 并发出
+            let params = Object.fromEntries(
+                url
+                    .split("?")[1]
+                    .split("&")
+                    .map((i) => i.split("=").map((pair) => decodeURIComponent(pair)))
+            );
+            console.log(params);
             console.log(params);
             debugger;
         }
