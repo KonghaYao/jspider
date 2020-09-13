@@ -1,9 +1,10 @@
 /**
- * 拦截 XHR POST 请求
+ * 拦截 XHR请求
+ * @description 单独导入 Hook 模块，并拦截 XHR 请求
  * @date 2020-09-10
  * @param {Regexp} urlReg 匹配到后会进入 debugger
  */
-async function POSTwatch(urlReg) {
+async function POSTwatch(urlReg, method = "get") {
     // Hook XHR函数
     window.Hook =
         window.Hook ||
@@ -18,7 +19,7 @@ async function POSTwatch(urlReg) {
     // open 函数添加前置函数
     XMLHttpRequest.prototype.open.Func.push((args) => {
         let [type, url, ...any] = args;
-        if (urlReg.test(url) && type.toLocaleLowerCase() === "post") {
+        if (urlReg.test(url) && type.toLocaleLowerCase() === method) {
             window.STOP = true;
 
             //解析参数 并发出
