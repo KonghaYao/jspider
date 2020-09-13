@@ -3,6 +3,9 @@
 
 # [JSpider](./JSpider.md)
 
+## 1.4.4
+- Cookies 模块支持 Cookies 更新。
+
 ## 1.4.3 
 - 更改 Ajax 函数为模块化。
 
