@@ -1,9 +1,12 @@
+# :o: 现在正在重写所有的代码使得我们的代码全部模块化，提供更好的代码质量。但是通过 npm 加载的 JSpider 仍然可以使用。
 # :book: JSpider
 ![Version](https://img.shields.io/badge/Version-1.3.22-blue.svg) ![MIT](https://img.shields.io/badge/License-MIT-green.svg) ![Javascript](https://img.shields.io/badge/Javascript->=%20ES6-red.svg)
 ![platform](https://img.shields.io/badge/Platform-Browser-red.svg) <a href='https://gitee.com/dongzhongzhidong/jspider/stargazers'><img src='https://gitee.com/dongzhongzhidong/jspider/badge/star.svg?theme=dark' alt='star'></img></a> <a href='https://gitee.com/dongzhongzhidong/jspider/members'><img src='https://gitee.com/dongzhongzhidong/jspider/badge/fork.svg?theme=dark' alt='fork'></img></a>
 
 ### :book: [完整教程](http://dongzhongzhidong.gitee.io/jspider)
 ## :o: 因为版本情况不一，请使用最新版！完整教程已经更新！
+
+
 
 ### :pencil2: 介绍
 这是一个在浏览器端使用 JS 快速爬取文件的框架。我写的第一个爬虫脚本是基于 Python 的，但是学到分析 JS 脚本之后，发现完全可以由浏览器的 JS 来发送请求并获取数据。对于少量的数据来说，右键检查并写几行代码就爬取成功，比开新的 python 脚本要轻松得多。
