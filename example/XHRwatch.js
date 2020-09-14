@@ -6,12 +6,7 @@
  */
 async function POSTwatch(urlReg, method = "get") {
     // Hook XHR函数
-    window.Hook =
-        window.Hook ||
-        (await import("https://cdn.jsdelivr.net/npm/js-spider/lib/Observer/hook.js").then((res) => {
-            console.log("%c 载入成功", "color:green");
-            return res.default;
-        }));
+    let Hook = JSpider.prototype.Observer.hook;
     XMLHttpRequest.prototype.open = Hook(XMLHttpRequest.prototype.open);
     XMLHttpRequest.prototype.send = Hook(XMLHttpRequest.prototype.send);
 

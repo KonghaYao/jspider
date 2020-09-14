@@ -1,17 +1,16 @@
 import Ajax from "./lib/Ajax.js";
-
-import extend from "./lib/extend.js";
+import Cookies from "./lib/Cookies.js";
+import Copy from "./lib/Copy.js";
+import Downloader from "./lib/Downloader.js";
+import Extend from "./lib/Extend.js";
+import Observer from "./lib/Observer.js";
 import Parser from "./lib/Parser.js";
 import Script from "./lib/Script.js";
 import Search from "./lib/Search.js";
-import Observer from "./lib/Observer.js";
 
-class JSpider {
-    ajax = Ajax;
-    extend = extend;
-    Script = Script;
-    Parser = Parser;
-    Observer = Observer;
-    Search = Search;
-}
+const ALL = { Ajax, Cookies, Copy, Downloader, Extend, ...Observer, ...Parser, Script, ...Search };
+
+class JSpider {}
+Object.assign(JSpider.prototype, ALL);
+
 export default JSpider;

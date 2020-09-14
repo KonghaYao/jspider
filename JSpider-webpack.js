@@ -1,31 +1,16 @@
-//这个是用来打包使用的
 import Ajax from "./lib/Ajax.js";
-import downloader from "./lib/Downloader.js";
-import HTMLparser from "./lib/HTMLParser.js";
-import Script from "./lib/Script.js";
-import extend from "./lib/extend.js";
-
-import XMLParser from "./lib/XMLParser.js";
 import Cookies from "./lib/Cookies.js";
-
-import Search from "./lib/Search.js";
+import Copy from "./lib/Copy.js";
+import Downloader from "./lib/Downloader.js";
+import extend from "./lib/Extend.js";
 import Observer from "./lib/Observer.js";
+import Parser from "./lib/Parser.js";
+import Script from "./lib/Script.js";
+import Search from "./lib/Search.js";
+const ALL = { Ajax, Cookies, Copy, Downloader, extend, Observer, Parser, Script, Search };
 
-class JSpider extends Ajax {
-    constructor(config = {}) {
-        super(config);
-        this.version = "pro";
+class JSpider {}
 
-        this.extend = extend;
-        this.download = downloader;
-        this.Script = Script;
-        this.HTMLParser = HTMLparser;
+Object.assign(JSpider.prototype, ALL);
 
-        this.XMLParser = XMLParser;
-        this.Cookies = Cookies;
-
-        this.Observer = Observer;
-        this.Search = Search;
-    }
-}
-window.JSpider = JSpider;
+export default JSpider;
