@@ -1,6 +1,6 @@
 ---
 title: JSpider——Search模块
-date: 2020/9/1
+date: 2020/9/15
 author: KonhaYao
 tags:
   -Jspider
@@ -12,8 +12,17 @@ tags:
 
 Search 模块是用来搜索对象中的数据的，同时携带了一个获取全局变量的函数。
 
-在做爬虫的时候，我们经常会发现很多的函数已经内置在 window 对象中，我们可以直接使用，节省我们的时间。所以我做了一个查看全局的函数。这个函数很好用了，查看函数的时候可以，但是遇到复杂的对象，里面层层包裹，用人力想要找到匹配的数据就很难了。所以我开发了 searchObj ，利用正则来匹配每一个属性和值，最终按照对象的结构返回，这样就可以完整地获取搜索值的位置并有效引用了。searchWindow 则是最为好用的操作了，对 window 对象直接搜索，所有的匹配数据都可以找到了。
-### [JSpider教程](../JSpider.md)
+<br>
+
+## 闲聊
+在做爬虫的时候，我们经常会发现很多的函数已经内置在 window 对象中，我们可以直接使用，节省我们看源代码写代码时间。
+
+所以我做了一个能够查看全局变量的函数( **Globals** )，这个函数很好用，查看函数或是变量的时候可以很快找到。
+
+但是遇到复杂的对象，里面层层包裹，用人力想要找到匹配的数据就很难了。所以我开发了 **searchBase** ，利用正则来匹配每一个属性和值，最终按照对象的结构返回，这样就可以完整地获取搜索值的位置并有效引用了。
+
+配合两个函数时，可以直接搜索全局变量，这就是使用最多的强大操作。
+
 <br>
 
 ## :hammer:  快速开始
@@ -29,25 +38,26 @@ https://cdn.jsdelivr.net/npm/js-spider/lib/Search.js
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 //动态载入
-import('https://cdn.jsdelivr.net/npm/js-spider/lib/Search.js').then(res=>window.Search = res)
+import('https://cdn.jsdelivr.net/npm/js-spider/lib/Search.js')
+            .then(res=>window.Search = res)
 ```
 
 <br>
 
-### :star: 全局变量查看
+### :candy: 全局变量查看
 
 #### Search.Globals()
 
 ```js
-let a =new JSpider()
-a.Search.Globals()
+let spider =new JSpider()
+spider.Search.Globals()
 ```
 
 <br>
 
-### :star: 对象搜索
+### :candy: 对象搜索
 
-#### Search.searchObj(obj,RegExp[,maxDepth])
+#### Search.search(obj,RegExp[,maxDepth])
 
 ```js
 let obj = {
@@ -64,23 +74,22 @@ let obj = {
 }
 
 let spider = new JSpider()
-spider.Search.searchObj(obj,/张/)
+spider.Search.search(obj,/张/)
 ```
 
 在数组中为了保持数据的结构不被破坏，使用 *** 作为表示非匹配的数据。
 
 <br>
 
-### :star: window 搜索
-
-#### Search.searchWindow(RegExp[,maxDepth])
+### :candy: window 搜索
+searchWindow 在 1.0.0 版本中可以使用，但是在 2.0.0 版本中删除了这个函数，下面的这种操作依然可以实现这个功能。
 
 ```js
 var si=11
 var s2 ='中文s'
 var i = ['ss','ssr','vv','sssr']
 var spider = new JSpider()
-spider.Search.searchWindow(/s/i)
+spider.Search.search(window,/s/i)
 ```
 
 # [JSpider](../JSpider.md)

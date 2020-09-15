@@ -11,7 +11,19 @@ tags:
 ## :pencil2: 介绍
 
 Parser 模块是用来处理文本数据的 HTML 格式或者是 XML 格式 的模块
-### [JSpider教程](../JSpider.md)
+
+<br>
+
+## 闲聊
+在请求结束以后，若只是爬取到少量的数据还可以手写代码，但是对于很多的数据的话就会出现很多错误，花费时间很多，所以我写了这个模块来处理爬取到的数据。
+
+最先出现的是 **HTML 解析模块**，用于将 HTML文本转化为 DOM 元素进行操作。
+
+后来接触到了 [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser) 这个 XML 转 对象 的 JS 库，所以就写了一个接口。
+
+然后是遇到储存时的困难，一般来说，储存 HTML 文本没有很大意义，所以我一般使用 markdown 文本存储，所以依赖了 [turndown.js](https://github.com/domchristie/turndown/) 来将 HTML 文本转化为 markdown 文本，然后下载就好多了。
+
+
 <br>
 
 ## :hammer: 快速开始
@@ -24,21 +36,22 @@ XMLParser 除了 core 版本外都已经自带了。
 
 ### JsDelivr cdn 载入链接解析
 
-https://cdn.jsdelivr.net/npm/js-spider/lib/HTMLParser.js
+https://cdn.jsdelivr.net/npm/js-spider/lib/Parser.js
 
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 //动态载入
-import('https://cdn.jsdelivr.net/npm/js-spider/lib/HTMLParser.js').then(res=>window.HTMLParser = res)
+import('https://cdn.jsdelivr.net/npm/js-spider/lib/HTMLParser.js')
+      .then(res=>window.HTMLParser = res)
 ```
 
 <br>
 
-## :star: HTMLParser 模块
+## :candy: HTMLParser 模块
 
 HTMLParser 模块用于批量解析 HTML 文本。
 
-注意： HTML 字符串必须包含 body 标签，如果不包含可以自己添加一下，再使用。
+注意： HTML 字符串必须包含 body 标签，如果不包含可以自己添加一下 body 标签再使用 HTMLParser。
 
 <br>
 
@@ -60,36 +73,43 @@ parsefunc 可以接收 HTMLParser 处理好的 dom 元素，并将返回的数�
 #### 例子
 
 ```js
-let a = new JSpider()
-a.ajax({
-    urls,options,type:'sync'
+let spider = new JSpider()
+let res = spider.Ajax({
+    urls,options,type:"start"
 })
-a.HTMLParser(a.result,(dom)=>{
+let parseResult = spider.HTMLParser(res,(dom)=>{
     dom.querySelectorAll('a').forEach(i=>i.remove())
     return dom.innerText
 })
-a.parseResult
+
 ```
 
 <br>
 
-## :star: XMLParser 模块
+## :candy: XMLParser 模块
 
 XMLParser模块是专门用来处理 XML 字符串的函数。
 
-注意，这个函数不是批处理函数，只是一个接受 XML 字符串并返回 JSON 数据的模块。
+:bangbang: 注意，这个函数不是批处理函数，只是一个接受 XML 字符串并返回 JSON 数据的模块。
 
 这里使用了 [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser) 进行转化。
 
 ```js
-let a = new JSpider()
-let json = a.XMLParser(XMLString)
+let spider = new JSpider()
+let json = spider.XMLParser(XMLString)
 
-let jsonArr = a.result.map(i=>a.XMLParser(i))
+let jsonArr = [].map(i=>a.XMLParser(i))
 ```
 
-## :star: TurnToMarkdown
+<br>
+
+## :candy: TurnToMarkdown
 TurnToMarkdown 是用来将 HTML 格式转化为 Markdown 格式的一个模块，主要是封装了 [turndown.js](https://github.com/domchristie/turndown/) ，使得 JSpider 能够将爬取到的 HTML 文件转化为 Markdown 字符串，然后保存为 md 文件。
+
+```js
+```
+
+## [推荐下一篇——Downloader](./Downloader.md)
 
 #  [JSpider](../JSpider.md)
 

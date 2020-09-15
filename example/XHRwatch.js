@@ -4,7 +4,7 @@
  * @date 2020-09-10
  * @param {Regexp} urlReg 匹配到后会进入 debugger
  */
-async function POSTwatch(urlReg, method = "get") {
+async function XHRwatch(urlReg, method = "get") {
     // Hook XHR函数
     let Hook = JSpider.prototype.Observer.hook;
     XMLHttpRequest.prototype.open = Hook(XMLHttpRequest.prototype.open);
@@ -39,4 +39,4 @@ async function POSTwatch(urlReg, method = "get") {
         return args;
     });
 }
-POSTwatch(/s/i);
+XHRwatch(/s/i);

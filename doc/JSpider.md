@@ -20,7 +20,7 @@ Gitee: https://gitee.com/dongzhongzhidong/jspider
 
 <br>
 ## :gear: 软件架构
-JSpider 分为 
+JSpider 架构 可以点击查看详细的操作
 - [请求模块 ----- Ajax](./lib/Ajax.md)
 <br>
 - [解析模块 ----- Parser](./lib/Parser.md)
@@ -48,7 +48,6 @@ JSpider 分为
     - Cookies
 <br>
 
-
 ## :hammer: 快速开始
 
 ###  JsDelivr cdn 载入链接解析
@@ -70,26 +69,25 @@ import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js')
 
 ### :airplane: 快速爬取
 请打开您的浏览器 开发者工具 
-快捷键：F12 or Ctrl+SHIFT+C
+快捷键：**F12** or **Ctrl+SHIFT+C**
 
 ```js
 //加载js模块完成之后
-let spider = new JSpider()
-//然后就可以使用各种函数了
+let spider = new JSpider();
+
 let urls = [
     "/",
-    ...[...Array(10).keys()].map((i) => {
-        return {
-            url: "/",
-            options: {
-                headers: {
-                    "content-type": "text/plain; charset=utf",
-                },
-                body: JSON.stringify({ index: i }),
+    {
+        url: "/",
+        options: {
+            headers: {
+                "content-type": "text/plain; charset=utf",
             },
-        };
-    }),
+            body: JSON.stringify({ index: 100 }),
+        },
+    },
 ];
+
 let result = await spider.Ajax({
     urls,
     options: {
@@ -98,8 +96,9 @@ let result = await spider.Ajax({
         },
         method: "post",
     },
-    type: "sync",
+    type: "start",
 });
+
 
 //请求完成之后就会在 spider.result 中有结果
 ```
@@ -131,16 +130,16 @@ Object.assign(window,JSpider.prototype);
 所有的模块都放置在 lib 文件夹下，而且模块名首字母大写。模块下的函数名都是首字母小写
 
 #### [Ajax 模块](./lib/Ajax.md)
-
 Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络请求。
-#### [HTMLParser ， XMLParser 和 TurnToMarkdown](./lib/Parser.md)
-对于 HTML ，XML 文本的解析函数。
+
+#### [Parser 模块](./lib/Parser.md)
+提供文本数据的常用转换。
 
 #### [Downloader 模块](./lib/Downloader.md)
 用于下载文件，可以下载文本和 Blob 数据。
 
 #### [Search 模块](./lib/Search.md)
-这个模块包含了三个函数，能够对 window 对象进行全面的搜索。
+这个模块包含了两个函数，能够对一个对象进行全面的搜索。
 
 #### [Script 模块](./lib/Script.js)
 通过 URL 导入其他的 JS 或 CSS 文件。
@@ -155,6 +154,16 @@ Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络
 这个模块提供了一个破解网页禁止复制的函数和一个复制到剪贴板的函数。
 
 <br>
+## 与 1.0.0 版本的不同
+### 全面模块化
+1.0.0 系列的 JSpider 的代码并没有实现完全的模块化开发，使得每个文件很庞大，很难进行查看和更新，所以 2.0.0 系列开始全面使用 ES6 的 import 实现模块化。
+
+### 单纯地处理数据
+1.0.0 版本掺杂了数据的存储功能（parseResult 等），所以导致 JSpider 中变量过于复杂，想要取这些变量的时候的单词长度又很长。所以 2.0.0 剔除了数据的存储功能，改为直接由函数返回结果，所以需要使用变量来存储。
+
+
+<br>
+
 
 ## :rainbow: 开发者使用说明
 
@@ -172,7 +181,7 @@ Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络
 
 #### 如何支持 ES5 ?
 可以使用 webpack 打包 JSpider 文件，然后再引入就可以了。
-- [x] ES5 版本打包文件  https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.min.js
+- [x] **ES5 版本打包文件**  https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.min.js
 
 
 #### 跨域问题
@@ -188,8 +197,8 @@ Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络
 
 ## 相关依赖
 
-[BootCDN](https://www.bootcdn.cn/): 提供动态载入下面的库。
-
 [JSZip](https://github.com/Stuk/jszip): 一个前端压缩数据的库。
 
 [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser): XML => JSON 的库。 
+
+[turndown](https://github.com/domchristie/turndown/)：将 HTML 文本转换为 Markdown 文本的插件

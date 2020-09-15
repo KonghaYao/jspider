@@ -13,6 +13,7 @@ let urls = [
             },
         };
     }),
+    "/",
 ];
 let b = await a.Ajax({
     urls,
@@ -22,5 +23,5 @@ let b = await a.Ajax({
         },
         method: "post",
     },
-    type: "sync",
+    type: "start",
 });

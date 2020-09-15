@@ -11,7 +11,8 @@ tags:
 ## :pencil2: 介绍
 Copy 模块是用来处理复制的一个函数。
 
-### [JSpider教程](../JSpider.md)
+## 闲聊
+
 <br>
 
 ## :hammer: 快速开始
