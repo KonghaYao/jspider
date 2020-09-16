@@ -92,4 +92,5 @@ var spider = new JSpider()
 spider.Search.search(window,/s/i)
 ```
 
+## [推荐下一篇 —— Observer](./Observer.js)
 # [JSpider](../JSpider.md)

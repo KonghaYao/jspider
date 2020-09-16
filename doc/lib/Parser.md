@@ -90,15 +90,12 @@ let parseResult = spider.HTMLParser(res,(dom)=>{
 
 XMLParser模块是专门用来处理 XML 字符串的函数。
 
-:bangbang: 注意，这个函数不是批处理函数，只是一个接受 XML 字符串并返回 JSON 数据的模块。
-
 这里使用了 [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser) 进行转化。
 
 ```js
 let spider = new JSpider()
-let json = spider.XMLParser(XMLString)
+let json = spider.XMLParser([XMLString])
 
-let jsonArr = [].map(i=>a.XMLParser(i))
 ```
 
 <br>
@@ -107,6 +104,8 @@ let jsonArr = [].map(i=>a.XMLParser(i))
 TurnToMarkdown 是用来将 HTML 格式转化为 Markdown 格式的一个模块，主要是封装了 [turndown.js](https://github.com/domchristie/turndown/) ，使得 JSpider 能够将爬取到的 HTML 文件转化为 Markdown 字符串，然后保存为 md 文件。
 
 ```js
+let spider = new JSpider()
+let MarkdownString = spider.TurnToMarkdown([HTMLString])
 ```
 
 ## [推荐下一篇——Downloader](./Downloader.md)

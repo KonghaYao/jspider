@@ -32,7 +32,8 @@ https://cdn.jsdelivr.net/npm/js-spider/lib/Copy.js
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 //动态载入
-import('https://cdn.jsdelivr.net/npm/js-spider/lib/Copy.js').then(res=>window.Copy = res)
+import('https://cdn.jsdelivr.net/npm/js-spider/lib/Copy.js')
+      .then(res=>window.Copy = res)
 ```
 
 <br>
@@ -47,15 +48,18 @@ Copy 模块是为了将某些限制网站复制的 JS 方式给消除掉，所�
 
 ```js
 //控制台
+
 let spider = new JSpider();
 await spider.extend(['Copy']);
 
 //载入完成后
+
 spider.Copy.clearUnCopy();
 spider.Copy.copy(123);
 
 spider.Copy.copy({1:2,2:3})
 spider.Copy.copy(document.querySelector('body'))
 ```
+
 
 # [JSpider教程](../JSpider.md)

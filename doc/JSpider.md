@@ -72,7 +72,9 @@ import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js')
 快捷键：**F12** or **Ctrl+SHIFT+C**
 
 ```js
+
 //加载js模块完成之后
+
 let spider = new JSpider();
 
 let urls = [

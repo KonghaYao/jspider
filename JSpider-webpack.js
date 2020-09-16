@@ -7,6 +7,7 @@ import Observer from "./lib/Observer.js";
 import Parser from "./lib/Parser.js";
 import Script from "./lib/Script.js";
 import Search from "./lib/Search.js";
+
 const ALL = { Ajax, Cookies, Copy, Downloader, extend, Observer, Parser, Script, Search };
 
 class JSpider {}

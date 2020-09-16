@@ -66,9 +66,9 @@ import('https://cdn.jsdelivr.net/npm/js-spider/lib/Downloader.js')
 ### 例子
 
 ```js
-let a =new JSpider()
-a.download([file1,file2],[],true)
-a.download([file1,'中',{0:1,2:2}],{2:'这是一个JSON.json'},true)
+let spider =new JSpider()
+spider.Downloader([file1,file2],[],true)
+spider.Downloader([file1,'中',{0:1,2:2}],{2:'这是一个JSON.json'},true)
 ```
 :beetle: 注意, File 类型的文件是不能直接修改 name 属性的，所以需要使用下面的方法。
 
