@@ -8,10 +8,12 @@
 - JSpider 不再存储结果，改为函数完成直接返回结果。
 - 所有代码模块化并添加 jsDoc 注释
 - 基本上所有函数的使用方式都有改变。
-    - Ajax 函数取消保存结果和三种请求方式，改为可以定义 **并发数** 和 **间隔时间**。
-    - Parser 中的函数都设置成了 **批量处理函数** ，输入皆为数组。
-    - Downloader 函数名称改为 Downloader
-
+    - **Ajax** 函数取消保存结果和三种请求方式，改为可以定义 **并发数** 和 **间隔时间**。
+    - **Parser** 中的函数都设置成了 **批量处理函数** ，输入皆为数组。
+        - XML 和 Markdown 那两个解析模块需要额外加载，所以需要使用await 获取结果。
+    - **Downloader** 函数名称改为 Downloader
+    - **Search** 模块剔除 searchWindow 函数，因为 search 函数配合 Globals 函数可以达成 searchWindow 函数的功能，所以取消。
+- [ ] 基于 JSpider 基础函数形成的高级函数集。
 
 ## 1.4.4
 - Cookies 模块支持 Cookies 更新。
