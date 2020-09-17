@@ -5,6 +5,8 @@
 
 ## 2.0.0
 ###**JSpider 不再兼容 1.0.0！！！！！**
+- [ ] 创建基于 JSpider 基础函数形成的高级函数集。
+
 - JSpider 的定位为工具函数集，我将会更新一些常用的基于 JSpider 的高级函数，可以通过高级函数集引用。
 - JSpider 不再存储结果，改为函数完成直接返回结果。
 - 所有代码模块化并添加 jsDoc 注释
@@ -15,7 +17,7 @@
     - **Downloader** 模块的函数名称改为 Downloader
     - **Search** 模块 searchWindow 函数转存到高级函数集中。
 
-- [ ] 基于 JSpider 基础函数形成的高级函数集。
+
 
 ## 1.4.4
 - Cookies 模块支持 Cookies 更新。

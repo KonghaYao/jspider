@@ -21,13 +21,11 @@ Downloader 模块是用来批量下载 Blob 或者是 String 格式的数据的�
 
 ## :hammer: 快速开始
 
-###  包含在 JSpider 中
-
-Downloader 包含在 JSpider 的三个版本类型中，通过引入 JSpider 类即可使用。
-
 ### JsDelivr cdn 载入链接解析
-
-https://cdn.jsdelivr.net/npm/js-spider/lib/Downloader.js
+按类型引入 
+- ES6引入 [https://cdn.jsdelivr.net/npm/js-spider/JSpider.min.js](#)
+- ES5引入 [https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.min.js](#)
+- 单个模块引入 [https://cdn.jsdelivr.net/npm/js-spider/lib/模块名.js](#)
 
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入

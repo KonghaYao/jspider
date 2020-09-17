@@ -28,7 +28,10 @@ Observer 模块只包含在 pro 版本中
 
 ### JsDelivr cdn 载入链接解析
 
-https://cdn.jsdelivr.net/npm/js-spider/lib/Observer.js
+按类型引入 
+- ES6引入 [https://cdn.jsdelivr.net/npm/js-spider/JSpider.min.js](#)
+- ES5引入 [https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.min.js](#)
+- 单个模块引入 [https://cdn.jsdelivr.net/npm/js-spider/lib/模块名.js](#)
 
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入

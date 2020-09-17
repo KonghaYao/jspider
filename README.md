@@ -228,6 +228,16 @@ Hook 模块用于控制函数，当函数被触发时会先执行我们的函数
 
 ## :rainbow: 开发者使用说明
 
+### 项目结构
+- index.html —— 项目文档展示
+- JSpider.js —— 入口模块
+- JSpider-webpack.js —— 用于 ES5 打包
+- js —— index.html 的 js 文件
+- css
+- lib —— 存储所有的模块
+
+
+
 #### 如何测试 JSpider
 这个项目中的 test.html 打开，然后进控制台就已经导入了 JSpider 了，默认是 pro 类型。
 
