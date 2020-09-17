@@ -6,8 +6,8 @@
  * @returns {Object} 返回搜索结果对象
  */
 function searchWindow(RegExp, deep) {
-    let search = this.lib.search;
-    let Globals = this.lib.Globals;
+    let search = JSpider.prototype.search;
+    let Globals = JSpider.prototype.Globals;
     return search(Globals(), RegExp, deep);
 }
 export default searchWindow;

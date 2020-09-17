@@ -7,6 +7,8 @@
 ###**JSpider 不再兼容 1.0.0！！！！！**
 - [ ] 创建基于 JSpider 基础函数形成的高级函数集。
 
+<br>
+
 - JSpider 的定位为工具函数集，我将会更新一些常用的基于 JSpider 的高级函数，可以通过高级函数集引用。
 - JSpider 不再存储结果，改为函数完成直接返回结果。
 - 所有代码模块化并添加 jsDoc 注释
@@ -16,8 +18,6 @@
         - XML 和 Markdown 两个解析模块需要额外加载，所以需要使用 await 获取结果。
     - **Downloader** 模块的函数名称改为 Downloader
     - **Search** 模块 searchWindow 函数转存到高级函数集中。
-
-
 
 ## 1.4.4
 - Cookies 模块支持 Cookies 更新。
@@ -41,18 +41,18 @@
 - 修复了关于 Globals 函数在某些情况下失效的 BUG 改为直接使用 window 对象的默认 key 数组。
 
 ## 1.3.15
--  修复一些 Copy 的 BUG ;
+-  修复一些 Copy 的 BUG。
 
 ## 1.3.14
-- Copy 模块加入，可以通过 extend 使用
+- Copy 模块加入，可以通过 extend 使用。
 
 ## 1.3.8
-- 完善了一下教程网站
+- 完善了一下教程网站。
 
 ## 1.3.5
-- 修复了 Search 模块的 searchObj 
-- 更新教程了
+- 修复了 Search 模块的 searchObj 。
+- 更新教程了。
 
 ## 1.3.4
-- 修改了部分的Ajax模块代码，使得请求结果依靠blob 的type，自动处理
-- !!!从此版本后 hook 函数开启第二参数 async ,目的是分清楚代理 Promise 和非 Promise 函数
+- 修改了部分的Ajax模块代码，使得请求结果依靠blob 的type，自动处理。
+- !!!从此版本后 hook 函数开启第二参数 async ,目的是分清楚代理 Promise 和非 Promise 函数。

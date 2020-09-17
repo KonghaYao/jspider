@@ -48,8 +48,9 @@ JSpider 架构 可以点击查看详细的操作
     - Cookies
 <br>
 
-## :hammer: 快速开始
 
+
+## :hammer: 快速开始
 ###  JsDelivr cdn 载入链接解析
 
 按类型引入 
@@ -59,13 +60,12 @@ JSpider 架构 可以点击查看详细的操作
 
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
-//动态载入
+
 import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js')
   .then(res=>window.JSpider = res.default)
+
 // ES5 可以直接在 script 标签中引入
 ```
-
-
 
 ### :airplane: 快速爬取
 请打开您的浏览器 开发者工具 
@@ -105,12 +105,19 @@ let result = await spider.Ajax({
 //请求完成之后就会在 spider.result 中有结果
 ```
 
-### :candy: 引入额外的模块
+<br>
+
+## :bee: 高级函数集
+JSpider 高级函数集是通过 Extend 函数导入的。高级函数集中包含了便捷的工具，是 JSpider 的基础模块的联合，目的是为了帮助使用者快速开始爬虫。
+
+导入的函数放置在 JSpider 实例中。
+
 ```js
-let spider =new JSpider();
-spider.Extend('Search');
-spider.Extend(['Hook','Cookies']);
+let spider = new JSpider();
+spider.Extend();
 ```
+
+<br>
 
 ### :candy: 展开 JSpider 到 window 对象
 展开后可以在 window 中直接使用 JSpider 的函数
@@ -120,16 +127,15 @@ Object.assign(window,JSpider.prototype);
 
 
 <br>
+
 ## :dart: 各个模块解析
-
 ### 如何导入
-各个模块可以通过 `extend(['Ajax','Hook'])` 来导入。
 
-若只想在文件中使用一个模块可以
+若只想在文件中使用一个模块可以使用下面的方式导入。
 
-`import Hook from "https://cdn.jsdelivr.net/npm/js-spider/lib/Hook.js"`
+`import Hook from "https://cdn.jsdelivr.net/npm/js-spider/lib/Observer/hook.js"`
 
-所有的模块都放置在 lib 文件夹下，而且模块名首字母大写。模块下的函数名都是首字母小写
+所有的模块都放置在 lib 文件夹下，而且模块名首字母大写。单个函数名为小写。
 
 #### [Ajax 模块](./lib/Ajax.md)
 Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络请求。
@@ -156,6 +162,7 @@ Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络
 这个模块提供了一个破解网页禁止复制的函数和一个复制到剪贴板的函数。
 
 <br>
+
 ## 与 1.0.0 版本的不同
 ### 全面模块化
 1.0.0 系列的 JSpider 的代码并没有实现完全的模块化开发，使得每个文件很庞大，很难进行查看和更新，所以 2.0.0 系列开始全面使用 ES6 的 import 实现模块化。
@@ -163,6 +170,8 @@ Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络
 ### 单纯地处理数据
 1.0.0 版本掺杂了数据的存储功能（parseResult 等），所以导致 JSpider 中变量过于复杂，想要取这些变量的时候的单词长度又很长。所以 2.0.0 剔除了数据的存储功能，改为直接由函数返回结果，所以需要使用变量来存储。
 
+### 使用高阶函数进行爬取
+由于 1.0.0 的函数其实是多种函数和基础函数杂糅在一起，所以在 2.0.0 中将所有 **高级函数** 用 **基础函数** 实现，便于使用者使用。
 
 <br>
 
@@ -181,7 +190,7 @@ Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络
 基本上所有的模块都可以脱离 JSpider 使用,
 引入方式为 使用 [JsDeliver](http://www.jsdelivr.com/) 提供的 URL 和 ES6 的 import 来导入你的浏览器。
 
-#### 如何支持 ES5 ?
+#### 浏览器不支持 ES6 但支持 ES5
 可以使用 webpack 打包 JSpider 文件，然后再引入就可以了。
 - [x] **ES5 版本打包文件**  https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.min.js
 

@@ -109,7 +109,7 @@ TurnToMarkdown 是用来将 HTML 格式转化为 Markdown 格式的一个模块�
 
 ```js
 let spider = new JSpider()
-let MarkdownString = spider.TurnToMarkdown([HTMLString])
+let MarkdownStringArray = spider.TurnToMarkdown([HTMLString])
 ```
 
 ## [推荐下一篇——Downloader](./Downloader.md)

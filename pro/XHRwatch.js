@@ -7,14 +7,15 @@
 async function XHRwatch(urlReg, method = "get") {
     // Hook XHR函数
 
-    let Hook = this.lib.Observer.hook;
+    let Hook = this.Observer.hook;
     XMLHttpRequest.prototype.open = Hook(XMLHttpRequest.prototype.open);
     XMLHttpRequest.prototype.send = Hook(XMLHttpRequest.prototype.send);
 
     //================ 加入函数 ===========================//
+
     // open 函数添加前置函数
     XMLHttpRequest.prototype.open.Func.push((args) => {
-        let [type, url, ...any] = args;
+        let [type, url, ...e4dany] = args;
         if (urlReg.test(url) && type.toLocaleLowerCase() === method) {
             window.STOP = true;
 
