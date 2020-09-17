@@ -36,6 +36,8 @@ spider.extend(['Copy'])
 //动态载入
 import('https://cdn.jsdelivr.net/npm/js-spider/lib/Copy.js')
       .then(res=>window.Copy = res)
+      
+// ES5 可以直接在 script 标签中引入
 ```
 
 <br>

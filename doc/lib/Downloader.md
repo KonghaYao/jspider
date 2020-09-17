@@ -32,6 +32,8 @@ Downloader 模块是用来批量下载 Blob 或者是 String 格式的数据的�
 //动态载入
 import('https://cdn.jsdelivr.net/npm/js-spider/lib/Downloader.js')
       .then(res=>window.Downloader = res)
+      
+// ES5 可以直接在 script 标签中引入
 ```
 
 <br>

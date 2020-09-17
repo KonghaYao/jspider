@@ -42,6 +42,8 @@ Search 模块包含在常用类型中，
 //动态载入
 import('https://cdn.jsdelivr.net/npm/js-spider/lib/Search.js')
             .then(res=>window.Search = res)
+            
+// ES5 可以直接在 script 标签中引入
 ```
 
 <br>

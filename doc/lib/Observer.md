@@ -36,16 +36,21 @@ Observer 模块只包含在 pro 版本中
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 //动态载入
-import('https://cdn.jsdelivr.net/npm/js-spider/lib/Observer.js').then(res=>window.Observer = res)
+import('https://cdn.jsdelivr.net/npm/js-spider/lib/Observer.js')
+            .then(res=>window.Observer = res)
+
+// ES5 可以直接在 script 标签中引入
 ```
 
 <br>
 
 ## :book: Observer 
 
-### :star: Hook 函数
+### :candy: Hook 函数
 
 Hook 通过代理函数，对函数的输入和输出进行操作。
+
+<br>
 
 #### :candy: 代理非Promise 函数
 
@@ -85,7 +90,7 @@ console.log(s+1)
 ##### 但是有一个例外，不需要返回值的 Promise 可以使用这个
 
 例如 XMLHttpRequest 的 send 函数一般是没有返回的，所以可以用。
-
+<br>
 #### :candy: 代理 Promise 函数
 
 像 fetch 这种返回 Promise 的函数，必须要使用第二参数，若不使用，则会导致错误。
@@ -112,7 +117,7 @@ fetch('/')
 ### [Hook例子](./Observer/Hook扩展操作.md) 
 
 <br>
-### :star: watch 函数
+### :candy: watch 函数
 
 watch 是用来控制 js 对象的，多层对象也可以控制。
 
@@ -193,5 +198,8 @@ a.GETTER.name = (value)=>{
     return value //这个是最终返回的数据
 }
 ```
+
+
+
 ## [推荐下一篇](./Copy.md)
 # [JSpider](../JSpider.md)

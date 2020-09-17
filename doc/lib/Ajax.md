@@ -36,6 +36,8 @@ tags:
 //动态载入
 import('https://cdn.jsdelivr.net/npm/js-spider/lib/Ajax.js')
     .then(res=>window.Ajax = res)
+    
+// ES5 可以直接在 script 标签中引入
 ```
 
 ### :airplane: 快速爬取

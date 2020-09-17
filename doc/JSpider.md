@@ -62,6 +62,7 @@ JSpider 架构 可以点击查看详细的操作
 //动态载入
 import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js')
   .then(res=>window.JSpider = res.default)
+// ES5 可以直接在 script 标签中引入
 ```
 
 

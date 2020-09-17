@@ -45,6 +45,8 @@ XMLParser 除了 core 版本外都已经自带了。
 //动态载入
 import('https://cdn.jsdelivr.net/npm/js-spider/lib/HTMLParser.js')
       .then(res=>window.HTMLParser = res)
+      
+// ES5 可以直接在 script 标签中引入
 ```
 
 <br>
