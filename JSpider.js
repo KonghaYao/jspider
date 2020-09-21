@@ -12,5 +12,4 @@ const ALL = { Ajax, Cookies, Copy, Downloader, Extend, ...Observer, ...Parser, S
 
 class JSpider {}
 Object.assign(JSpider.prototype, ALL);
-
 export default JSpider;
