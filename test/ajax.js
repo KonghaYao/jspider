@@ -15,7 +15,7 @@ let urls = [
     }),
     "/",
 ];
-let b = await spider.Ajax({
+let res = await spider.Ajax({
     urls,
     options: {
         headers: {
@@ -25,4 +25,4 @@ let b = await spider.Ajax({
     },
     type: "start",
 });
-console.log(b);
+console.log(res);
