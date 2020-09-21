@@ -1,5 +1,5 @@
-//这是一个测试文件
-let a = new JSpider();
+//这是一个 ajax 模块的测试文件
+let spider = new JSpider();
 let urls = [
     "/",
     ...[...Array(10).keys()].map((i) => {
@@ -15,7 +15,7 @@ let urls = [
     }),
     "/",
 ];
-let b = await a.Ajax({
+let b = await spider.Ajax({
     urls,
     options: {
         headers: {
@@ -25,3 +25,4 @@ let b = await a.Ajax({
     },
     type: "start",
 });
+console.log(b);
