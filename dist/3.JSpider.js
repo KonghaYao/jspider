@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{4:function(o,p,e){"use strict";e.r(p),p.default=function(o,p){return(0,JSpider.prototype.search)((0,JSpider.prototype.Globals)(),o,p)}}}]);

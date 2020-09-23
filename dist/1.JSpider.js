@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{2:function(n,o,e){"use strict";e.r(o);const r=function(n){return n.innerHTML};o.default=(n,o,e=[],t=!1)=>{let i=o||r;return(void 0).Ajax(n).then(n=>(void 0).TurnToMarkdown((void 0).HTMLParser(n,i))).then(n=>(void 0).Downloader(n,e,t))}}}]);
