@@ -1,58 +1,50 @@
-// ajax 测试
-try {
-    let urls = [
-        "/",
-        ...[...Array(10).keys()].map((i) => {
-            return {
-                url: "/",
-                options: {
-                    method: "POST",
-                    headers: {
-                        "content-type": "text/plain; charset=utf",
-                    },
-                    body: JSON.stringify({ index: i }),
+// 复制到开发者工具中使用
+
+// ajax 模块测试
+let urls = [
+    "/",
+    ...[...Array(10).keys()].map((i) => {
+        return {
+            url: "/",
+            options: {
+                method: "POST",
+                headers: {
+                    "content-type": "text/plain; charset=utf",
                 },
-            };
-        }),
-        "/",
-    ];
-    var ajaxResult = await JSpider.prototype.Ajax({
-        urls,
-        options: {
-            headers: {
-                "Content-Type": "application/json",
+                body: JSON.stringify({ index: i }),
             },
-            method: "get",
+        };
+    }),
+    "/",
+];
+let ajaxResult = await JSpider.prototype.Ajax({
+    urls,
+    options: {
+        headers: {
+            "Content-Type": "application/json",
         },
-        type: "start",
-    });
-    console.dir(ajaxResult);
-    console.log("%c ajax模块完成", "color:red");
-} catch (err) {
-    console.log("ajax模块出错", err);
-}
+        method: "get",
+    },
+    type: "start",
+});
+console.dir(ajaxResult);
+console.log("%c ajax模块完成", "color:red");
 
-//Parse 模块
-try {
-    var ParseResult = await JSpider.prototype.HTMLParser(ajaxResult, (dom) => dom.innerHTML);
-    console.dir(ParseResult);
-} catch (err) {
-    console.log("HTML解析出错", err);
-}
+// 解析模块
 
-try {
-    var Markdown = await JSpider.prototype.TurnToMarkdown(ParseResult.filter((i) => i));
-    console.log(Markdown);
-} catch (err) {
-    console.log("Markdown转换模块出错", err);
-}
+// HTML 模块测试
+let ParseResult = await JSpider.prototype.HTMLParser(ajaxResult, (dom) => dom.innerHTML);
+console.dir("解析结果：", ParseResult);
 
-//XML 解析模块
+// Markdown  模块测试
+let Markdown = await JSpider.prototype.TurnToMarkdown(ParseResult.filter((i) => i));
+console.log(Markdown);
 
-//Downloader 模块
-//无法操控事件
-try {
-    await JSpider.prototype.Downloader(Markdown, ["1.md", "2.md"], true);
-} catch (err) {
-    console.log("downloader模块出错", err);
-}
+// XML 模块测试
+let XMLresult = await JSpider.prototype.Ajax({ urls: ["./test/xmlText.xml"], type: "start" });
+console.log(XMLresult);
+let json = await JSpider.prototype.XMLParser(XMLresult);
+console.log(json);
+
+// Downloader 模块测试
+await JSpider.prototype.Downloader(Markdown, ["1.md", "2.md"], true);

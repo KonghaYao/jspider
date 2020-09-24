@@ -7,3 +7,12 @@
 第一，确保 JSpider 中的 Script 函数可以使用，通过Script引入是最合适的！
 
 第二，通过在下面的代码并在本地的开发者工具的 snippets 中写入
+
+
+
+
+```js
+let a = new JSpider();
+let Script = JSpider.prototype.Script;
+
+```
