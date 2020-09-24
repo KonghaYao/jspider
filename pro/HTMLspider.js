@@ -8,11 +8,11 @@
 const Default = function (dom) {
     return dom.innerHTML;
 };
-let HTMLspider = (ajaxConfig, parserFunc, nameList = [], needZip = false) => {
+let HTMLSpider = (ajaxConfig, parserFunc, nameList = [], needZip = false) => {
     let func = parserFunc || Default;
 
     return this.Ajax(ajaxConfig)
         .then((res) => this.TurnToMarkdown(this.HTMLParser(res, func)))
         .then((res) => this.Downloader(res, nameList, needZip));
 };
-export default HTMLspider;
+export default HTMLSpider;
