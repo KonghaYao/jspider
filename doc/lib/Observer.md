@@ -68,7 +68,7 @@ Array.prototype.pop = jspider.Observer.hook(Array.prototype.pop)
 //在被代理函数的位置上多了 Func 和 afterFunc 两个数组
 
 // Func 是在被代理函数执行之前，会拦截并处理参数
-// 返回的数组作为参数给被代理参数
+// 传入参数为数组，输出也要为数组
 Array.prototype.pop.Func.push((args)=>{
     console.log('输入参数数组',args)
     // 可以修改参数...
@@ -76,10 +76,11 @@ Array.prototype.pop.Func.push((args)=>{
 })
 
 // afterFunc 是触发在被代理函数返回数据后，将处理数据，然后输出
+//传入参数数量为 1 ，输出也为1
 Array.prototype.pop.afterFunc.push((res)=>{
     console.log('返回数据数组',res)
     // 可以修改参数...
-    return  res+1// 返回必须是数组
+    return  res+1
 })
 let s = [0].pop() 
 //s=1
@@ -88,8 +89,10 @@ console.log(s+1)
 ```
 
 ##### 但是有一个例外，不需要返回值的 Promise 可以使用这个
-
 例如 XMLHttpRequest 的 send 函数一般是没有返回的，所以可以用。
+
+##### 有一些关键的函数最好不要代理，如 Array 中的 push，如果使用的时候代理它，可能会导致向代理数据中添加代理函数时发生错误
+ 
 <br>
 #### :candy: 代理 Promise 函数
 

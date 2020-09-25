@@ -41,5 +41,4 @@ async function XHRwatch(urlReg, method = "get") {
         return args;
     });
 }
-// XHRwatch(/s/i);
 export default XHRwatch;
