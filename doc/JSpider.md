@@ -10,44 +10,17 @@ Gitee: https://gitee.com/dongzhongzhidong/jspider
 # :book: JSpider 教程
 ## Version ：2.0.0 +
 ## :pencil2: 介绍
-这是一个在浏览器端使用 JS 快速爬取文件的框架。我写的第一个爬虫脚本是基于 Python 的，但是学到分析 JS 脚本之后，发现完全可以由浏览器的 JS 来发送请求并获取数据。对于少量的数据来说，右键检查并写几行代码就爬取成功，比开新的 python 脚本要轻松得多。所以我写了这个 JSpider 类来替代那些繁琐的 JS 代码，使得我们能够在前端直接爬取或者提前测试爬虫代码。
+这是一个在浏览器端使用 JS 快速爬取文件的框架。我写的第一个爬虫脚本是基于 Python 的，但是学到分析 JS 脚本之后，发现完全可以由浏览器的 JS 来发送请求并获取数据。对于少量的数据来说，右键检查并写几行代码就爬取成功，比开新的 python 脚本要轻松得多。所以我写了这个 JSpider 工具类来替代那些繁琐的 JS 代码，使得我们能够在前端直接爬取或者提前测试爬虫代码，提高我们的爬虫效率。
 
 ##### 这个网页已经载入了JSpider，可以使用开发者工具打开，观看例子的时候可以试着做一做。
 
-##### :bangbang: 注意: 2.0.0 + 版本语法与 1.0.0 + 版本语法不同, 1.0.0 + 版本教程。
-
-### :closed_book: [版本情况](./Version.md)
+##### :bangbang: 注意: 2.0.0 + 版本语法与 1.0.0 + 版本语法不同。
 
 <br>
-## :gear: 软件架构
-JSpider 架构 可以点击查看详细的操作
-- [请求模块 ----- Ajax](./lib/Ajax.md)
-<br>
-- [解析模块 ----- Parser](./lib/Parser.md)
-    - HTML文本解析模块 -----  HTMLParser
-    - XML文本解析模块 -----  XMLParser
-    - 转化为 Markdown ----- TurnToMarkdown
-<br>
-- [批量下载模块 ----- Downloader](./lib/Downloader.md)
-<br>
-- [监视模块 ----- Observer](./lib/Observer.md)
-    - Hook
-    - Observer
-<br>
-- [搜索模块 ----- Search](./lib/Search.md)
-    - searchWindow
-    - searchObj
-    - Globals
-<br>
-- 扩展模块
-    - extend
-    - Script
-<br>
-- 专用模块
-    - Copy
-    - Cookies
-<br>
 
+## :closed_book: [版本情况](./Version.md)
+
+<br>
 
 
 ## :hammer: 快速开始
@@ -107,6 +80,28 @@ let result = await spider.Ajax({
 
 <br>
 
+## :gear: 推荐阅读顺序
+
+完成下面的阅读，可以入门 JSpider 的基本爬取功能。
+
+#### [Ajax 模块](./lib/Ajax.md)
+#### [Parser 模块](./lib/Parser.md)
+#### [Downloader 模块](./lib/Downloader.md)
+
+完成下面的阅读，我们可以使用一些额外的功能（非主要）。
+
+#### [Script 函数](./lib/Script.js) 
+#### [Cookies 对象](./lib/Cookies.js)
+#### [Copy 模块](./lib/Copy.md)
+
+完成下面的高级阅读，我们可以方便地提高分析网页方面的速度。
+
+#### [Search 模块](./lib/Search.md)
+#### [Observer 模块](./lib/Observer.md)
+
+
+<br>
+
 ## :bee: 高级函数集
 JSpider 高级函数集是通过 Extend 函数导入的。高级函数集中包含了便捷的工具，是 JSpider 的基础模块的联合，目的是为了帮助使用者快速开始爬虫。
 
@@ -120,10 +115,25 @@ spider.Extend();
 <br>
 
 ### :candy: 展开 JSpider 到 window 对象
-展开后可以在 window 中直接使用 JSpider 的函数
+展开后可以在 window 中直接使用 JSpider 的函数。
 ```js
 Object.assign(window,JSpider.prototype);
 ```
+
+<br>
+
+## :dart: 与 1.0.0 版本的不同
+
+### 全面模块化
+1.0.0 系列的 JSpider 的代码并没有实现完全的模块化开发，使得每个文件很庞大，很难进行查看和更新，所以 2.0.0 系列开始全面使用 ES6 的 import 实现模块化。
+
+### 单纯地处理数据
+1.0.0 版本掺杂了数据的存储功能（parseResult 等），所以导致 JSpider 中变量过于复杂，想要取这些变量的时候的单词长度又很长。所以 2.0.0 剔除了数据的存储功能，改为直接由函数返回结果，所以需要使用变量来存储。
+
+同时，由于使用了异步处理，除了 Downloader 不能控制下载过程外，几乎都可以使用异步进行统一操作。
+
+### 使用高阶函数进行爬取
+由于 1.0.0 的函数其实是多种函数和基础函数杂糅在一起，所以在 2.0.0 中将 **高级函数** 用 **基础函数** 实现，便于使用者使用。
 
 
 <br>
@@ -163,14 +173,15 @@ Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络
 
 ### 扩展功能
 
-#### Extend 函数
+##### [Extend 函数]()
+这个函数是用于将高级函数集导入 JSpider 中，使用高级函数集。
 
 
 ##### [Script 函数](./lib/Script.js) 
 通过 URL 导入其他的 JS 或 CSS 文件。
 
 
-##### [Cookies 函数](./lib/Cookies.js)
+##### [Cookies 对象](./lib/Cookies.js)
 这个模块用于处理 cookie 字符串。
 
 
@@ -178,22 +189,6 @@ Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络
 这个模块提供了一个破解网页禁止复制的函数和一个复制到剪贴板的函数。
 
 <br>
-
-## 与 1.0.0 版本的不同
-
-### 全面模块化
-1.0.0 系列的 JSpider 的代码并没有实现完全的模块化开发，使得每个文件很庞大，很难进行查看和更新，所以 2.0.0 系列开始全面使用 ES6 的 import 实现模块化。
-
-### 单纯地处理数据
-1.0.0 版本掺杂了数据的存储功能（parseResult 等），所以导致 JSpider 中变量过于复杂，想要取这些变量的时候的单词长度又很长。所以 2.0.0 剔除了数据的存储功能，改为直接由函数返回结果，所以需要使用变量来存储。
-
-同时，由于使用了异步处理，除了 Downloader 不能控制下载过程外，几乎都可以使用异步进行统一操作。
-
-### 使用高阶函数进行爬取
-由于 1.0.0 的函数其实是多种函数和基础函数杂糅在一起，所以在 2.0.0 中将 **高级函数** 用 **基础函数** 实现，便于使用者使用。
-
-<br>
-
 
 ## :rainbow: 开发者使用说明
 ### 如何测试 JSpider
