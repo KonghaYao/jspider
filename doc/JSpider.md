@@ -1,5 +1,6 @@
 ---
-title: JSpider 2.0
+title: JSpider
+version: 2.0
 date: 2020/9/14
 author: KonhaYao
 NPM: https://www.npmjs.com/package/js-spider

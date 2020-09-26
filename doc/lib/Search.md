@@ -1,5 +1,6 @@
 ---
 title: JSpider——Search模块
+version: 2.0
 date: 2020/9/15
 author: KonhaYao
 tags:

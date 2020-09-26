@@ -1,5 +1,6 @@
 ---
 title: JSpider——Copy模块
+version: 2.0
 date: 2020/8/30
 author: KonhaYao
 tags:
