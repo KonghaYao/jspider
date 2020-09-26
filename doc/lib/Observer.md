@@ -6,7 +6,7 @@ author: KonhaYao
 
 
 
-# :book: JSpider——Observer 模块
+# :book: JSpider —— Observer 模块 2.0
 
 ## :pencil2: 介绍
 

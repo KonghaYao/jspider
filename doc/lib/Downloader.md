@@ -6,7 +6,7 @@ tags:
   -Jspider
 ---
 
-# :book: JSpider——Downloader 模块
+# :book: JSpider——Downloader 模块 2.0
 
 ## :pencil2: 介绍
 

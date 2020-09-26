@@ -9,8 +9,5 @@ import Script from "./lib/Script.js";
 import Search from "./lib/Search.js";
 
 const ALL = { Ajax, Cookies, Copy, Downloader, Extend, ...Observer, ...Parser, Script, ...Search };
-
-class JSpider {}
+window.JSpider = class JSpider {};
 Object.assign(JSpider.prototype, ALL);
-
-export default JSpider;

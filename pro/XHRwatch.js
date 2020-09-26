@@ -7,7 +7,7 @@
 async function XHRwatch(urlReg, method = "get") {
     // Hook XHR函数
 
-    let Hook = this.Observer.hook;
+    let Hook = JSpider.prototype.hook;
     XMLHttpRequest.prototype.open = Hook(XMLHttpRequest.prototype.open);
     XMLHttpRequest.prototype.send = Hook(XMLHttpRequest.prototype.send);
 

@@ -6,12 +6,13 @@ tags:
   -Jspider
 ---
 
-# :book: JSpider——Copy 模块
+# :book: JSpider —— Copy 模块 2.0
 
 ## :pencil2: 介绍
 Copy 模块是用来处理复制的一个函数。
 
 ## 闲聊
+虽然，在开发者工具中，浏览器提供了一个 copy 函数，但是这个函数是不能够使用在非开发者工具中的，所以，产生了这个 copy 系列的函数。
 
 <br>
 
@@ -58,11 +59,11 @@ await spider.extend(['Copy']);
 
 //载入完成后
 
-spider.Copy.clearUnCopy();
-spider.Copy.copy(123);
+spider.clearUnCopy();
+spider.copy(123);
 
-spider.Copy.copy({1:2,2:3})
-spider.Copy.copy(document.querySelector('body'))
+spider.copy({1:2,2:3})
+spider.copy(document.querySelector('body'))
 ```
 
 
