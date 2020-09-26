@@ -9,8 +9,6 @@
 第二，通过在下面的代码并在本地的开发者工具的 snippets 中写入
 
 
-
-
 ```js
 let a = new JSpider();
 let Script = JSpider.prototype.Script;

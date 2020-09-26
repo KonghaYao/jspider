@@ -15,8 +15,9 @@ async function XHRwatch(urlReg, method = "get") {
 
     // open 函数添加前置函数
     XMLHttpRequest.prototype.open.Func.push((args) => {
-        let [type, url, ...e4dany] = args;
-        if (urlReg.test(url) && type.toLocaleLowerCase() === method) {
+        let [type, url] = args;
+        console.log("XHR拦截", args);
+        if (urlReg.test(url) && type.toLowerCase() === method) {
             window.STOP = true;
 
             //解析参数 并发出
