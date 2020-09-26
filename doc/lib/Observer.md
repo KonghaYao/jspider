@@ -4,8 +4,6 @@ date: 2020/8/31
 author: KonhaYao
 ---
 
-
-
 # :book: JSpider —— Observer 模块 2.0
 
 ## :pencil2: 介绍
@@ -21,10 +19,6 @@ Observer 模块是用于监视某些在浏览器中的变量的。
 
 
 ## :hammer: 快速开始
-
-###  包含在 JSpider 中
-
-Observer 模块只包含在 pro 版本中
 
 ### JsDelivr cdn 载入链接解析
 

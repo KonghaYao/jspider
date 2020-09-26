@@ -6,7 +6,7 @@ tags:
   -Jspider
 ---
 
-# :book: JSpider——Downloader 模块 2.0
+# :book: JSpider —— Downloader 模块 2.0
 
 ## :pencil2: 介绍
 
@@ -56,14 +56,14 @@ import('https://cdn.jsdelivr.net/npm/js-spider/lib/Downloader.js')
 
 这个是在我尝试爬取 m3u8 文件分片的时候发现的，Chrome 不能够下载完全，只能下载前10个，后面的所有数据都没有下载。
 
-所以我使用了 [JSZip](https://github.com/Stuk/jszip) 这个库，当下载数多于 10 时自动压缩，当然也可以通过 **needZip 参数** 强制压缩。
+所以我使用了 [JSZip](https://github.com/Stuk/jszip) 这个库，当下载数多于 10 时自动压缩。在 Downloader 中，当然也可以通过 **needZip 参数** 强制压缩。
 
 #### :candy: 关于文件名称
 文件名称在没有定义时候会查找原来数组的元素（如果是继承自 Blob）的 name 属性，没找到就找后面命名数组的信息，再没找到就使用数组 index 作为名称。
 
 <br>
 
-### 例子
+### 示例
 
 ```js
 let spider =new JSpider()
