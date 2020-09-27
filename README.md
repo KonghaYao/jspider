@@ -1,6 +1,5 @@
-# :o: 现在正在重写所有的代码使得我们的代码全部模块化，提供更好的代码质量。但是通过 npm 加载的 JSpider 仍然可以使用。
-# :book: JSpider
-![Version](https://img.shields.io/badge/Version-1.3.22-blue.svg) ![MIT](https://img.shields.io/badge/License-MIT-green.svg) ![Javascript](https://img.shields.io/badge/Javascript->=%20ES6-red.svg)
+# :book: JSpider 2.0.0+
+![Version](https://img.shields.io/badge/Version-1.3.22-blue.svg) ![MIT](https://img.shields.io/badge/License-MIT-green.svg) ![Javascript](https://img.shields.io/badge/Javascript->=%20ES5-green.svg)
 ![platform](https://img.shields.io/badge/Platform-Browser-red.svg) <a href='https://gitee.com/dongzhongzhidong/jspider/stargazers'><img src='https://gitee.com/dongzhongzhidong/jspider/badge/star.svg?theme=dark' alt='star'></img></a> <a href='https://gitee.com/dongzhongzhidong/jspider/members'><img src='https://gitee.com/dongzhongzhidong/jspider/badge/fork.svg?theme=dark' alt='fork'></img></a>
 
 ### :book: [完整教程](http://dongzhongzhidong.gitee.io/jspider)
@@ -9,280 +8,186 @@
 ## 2.0.0+ 重要更改
 将模块移至 src 文件夹，所以引用模块使用 https://cdn.jsdelivr.net/npm/js-spider/src/Ajax.js
 
-### :pencil2: 介绍
-这是一个在浏览器端使用 JS 快速爬取文件的框架。我写的第一个爬虫脚本是基于 Python 的，但是学到分析 JS 脚本之后，发现完全可以由浏览器的 JS 来发送请求并获取数据。对于少量的数据来说，右键检查并写几行代码就爬取成功，比开新的 python 脚本要轻松得多。
-所以我写了这个 JSpider 类来替代那些繁琐的 JS 代码。
+## :pencil2: 介绍
+这是一个在浏览器端使用 JS 快速爬取文件的框架。我写的第一个爬虫脚本是基于 Python 的，但是学到分析 JS 脚本之后，发现完全可以由浏览器的 JS 来发送请求并获取数据。对于少量的数据来说，右键检查并写几行代码就爬取成功，比开新的 python 脚本要轻松得多。所以我写了这个 JSpider 工具类来替代那些繁琐的 JS 代码，使得我们能够在前端直接爬取或者提前测试爬虫代码，提高我们的爬虫效率。
 
-## :bangbang:  注意
-这个项目依赖 ES6 import 语法，所以某些浏览器可能不支持，推荐使用打包后的文件进行操作。
-使用这个爬虫脚本时，需要使用者能够使用 **async，await ，Promise，import** 等较新的语法。
+##### 这个网页已经载入了JSpider，可以使用开发者工具打开，观看例子的时候可以试着做一做。
 
-<br>
-
-:pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: 
+##### :bangbang: 注意: 2.0.0 + 版本语法与 1.0.0 + 版本语法不同。
 
 <br>
 
-### :airplane: 快速开始
+## :closed_book: [版本情况](http://dongzhongzhidong.gitee.io/jspider#/Version.md)
 
-#### JsDelivr cdn 载入  
+<br>
 
-链接解析
 
-https://cdn.jsdelivr.net/npm/js-spider/JSpider-pro.js
+## :hammer: 快速开始
+###  JsDelivr cdn 载入链接解析
 
-[https://cdn.jsdelivr.net/npm/js-spider/JSpider- **类型** .js]()
+按 ES 版本引入 
+- ES6引入 [https://cdn.jsdelivr.net/npm/js-spider/JSpider.js](#)
+- ES5引入 [https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js](#)
+
+
+### 如何单独导入
+
+若只想在文件中使用一个模块可以使用下面的方式导入。
+
+`import hook from "https://cdn.jsdelivr.net/npm/js-spider/src/Observer/hook.js"`
+
+所有的模块都放置在 src 文件夹下，而且模块名首字母大写。单个函数名为小写。
 
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
-//动态载入
-import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js').then(res=>window.JSpider = res.default)
+
+import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js')
+  .then(res=>window.JSpider = res.default)
+
+// ES5 可以直接在 script 标签中引入
 ```
 
-<br>
-
-#### :alembic: 推荐——载入打包文件
-通过下面这个 URL 载入的 JS 文件是用在浏览器版本低导致模块无法使用的情况！
-推荐在不熟悉浏览器的时候使用，因为是 webpack 打包的文件，支持 ES5 。
-```js
-//正式版为 es6 版本
-'https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.js'
-// 如果被 CSP 协议阻挡，可以从下面这一条 URL 中复制源代码并在开发者工具中执行使用。
-'https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js'
-
-```
-<br>
-
-#### :hammer: 快速爬取
+### :airplane: 快速爬取
+请打开您的浏览器 开发者工具 
+快捷键：**F12** or **Ctrl+SHIFT+C**
 
 ```js
+
 //加载js模块完成之后
-let spider = new JSpider()
-//然后就可以使用各种函数了
-spider.ajax({
-  urls:[
-    //数组内可以是url字符串或者是下面的对象
-    'https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js',
+
+let spider = new JSpider();
+
+let urls = [
+    "/",
     {
-      url:'https://cdn.jsdelivr.net/npm/js-spider/JSpider.js',
-      options:(opt)=>{
-        //这里可以修改原来的options
-        return opt
-      }
-    }
-    ],
-  options:{
-    method:'GET'
-  },//默认的options
-  limits = 3, 
-  time = 200, 
-  type = "sync"//可以填 sync async time
-})
-//请求完成之后就会在 spider.result 中有结果
+        url: "/",
+        options: {
+            headers: {
+                "content-type": "text/plain; charset=utf",
+            },
+            body: JSON.stringify({ index: 100 }),
+        },
+    },
+];
+
+let result = await spider.Ajax({
+    urls,
+    options: {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        method: "post",
+    },
+    type: "start",
+});
+
+
+//请求完成之后就会在 result 中有结果
 ```
 
-#### :candy: 引入额外的模块
+<br>
+
+## :gear: 推荐阅读顺序
+
+完成下面的阅读，我们可以入门 JSpider 的基本爬取功能。
+
+#### [Ajax 模块](http://dongzhongzhidong.gitee.io/jspider#/src/Ajax.md)
+#### [Parser 模块](http://dongzhongzhidong.gitee.io/jspider#/src/Parser.md)
+#### [Downloader 模块](http://dongzhongzhidong.gitee.io/jspider#/src/Downloader.md)
+
+完成下面的阅读，我们可以使用一些额外的功能（非主要）。
+
+#### [Script 函数](http://dongzhongzhidong.gitee.io/jspider#/src/Script.js) 
+#### [Copy 模块](http://dongzhongzhidong.gitee.io/jspider#/src/Copy.md)
+#### [Cookies 对象](http://dongzhongzhidong.gitee.io/jspider#/src/Cookies.js)
+
+
+完成下面的高级阅读，我们可以方便地提高分析网页方面的速度。
+
+#### [Search 模块](http://dongzhongzhidong.gitee.io/jspider#/src/Search.md)
+#### [Observer 模块](http://dongzhongzhidong.gitee.io/jspider#/src/Observer.md)
+
+
+<br>
+
+## :bee: 高级函数集
+JSpider 高级函数集是通过 Extend 函数导入的。高级函数集中包含了便捷的工具，是 JSpider 的基础模块的联合，目的是为了帮助使用者快速开始爬虫。
+
+导入的函数放置在 JSpider 实例中。
 
 ```js
-let spider =new JSpider()
-spider.extend('Search')
-spider.extend(['Hook','Cookies'])
+let spider = new JSpider();
+spider.Extend();
 ```
 
-**:book: [完整教程](http://dongzhongzhidong.gitee.io/jspider)**
+<br>
+
+### :candy: 展开 JSpider 到 window 对象
+展开后可以在 window 中直接使用 JSpider 的函数。
+```js
+Object.assign(window,JSpider.prototype);
+```
 
 <br>
 
-:pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: 
+## :dart: 与 1.0.0 版本的不同
 
-<br>
+### 全面模块化
+1.0.0 系列的 JSpider 的代码并没有实现完全的模块化开发，使得每个文件很庞大，很难进行查看和更新，所以 2.0.0 系列开始全面使用 ES6 的 import 实现模块化。
 
-### :gear: 软件架构
-JSpider 分为 
+### 单纯地处理数据
+1.0.0 版本掺杂了数据的存储功能（parseResult 等），所以导致 JSpider 中变量过于复杂，想要取这些变量的时候的单词长度又很长。所以 2.0.0 剔除了数据的存储功能，改为直接由函数返回结果，所以需要使用变量来存储。
 
-- 请求模块
-    -  Ajax 
-- 解析模块
-    - HTML文本解析模块
-        - HTMLParser
-    - XML文本解析模块
-        - XMLParser
-    - 转化为 Markdown
-        - TurnToMarkdown
-- 批量下载模块
-    - Downloader
-- 分析模块
-    - Observer 模块
-        - Hook
-        - Observer
-    - Search 模块
-        - searchWindow
-        - searchObj
-        - Globals
-- 扩展模块
-    - extend
-    - Script
-- 专用模块
-    - m3u3Downloader
-    - Copy
-    - Cookies
+同时，由于使用了异步处理，除了 Downloader 不能控制下载过程外，几乎都可以使用异步进行统一操作。
 
-<br>
+### 使用高阶函数进行爬取
+由于 1.0.0 的函数其实是多种函数和基础函数杂糅在一起，所以在 2.0.0 中将 **高级函数** 用 **基础函数** 实现，便于使用者使用。
 
-:pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: 
-
-<br>
-
-### :dart: 各个模块解析
-
-#### 如何导入
-各个模块可以通过 `extend(['Ajax','Hook'])` 来导入。
-若只想在文件中使用一个模块可以 
-
-`import Hook from "https://cdn.jsdelivr.net/npm/js-spider/lib/Observer/hook.js"`
-
-所有的模块都放置在 lib 文件夹下，而且模块名首字母大写。
-
-#### Ajax 模块
-
-Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络请求。
-
-#### HTMLParser , XMLParser 和 TurnToMarkdown
-对于 HTML ，XML 文本的解析函数。
-
-#### Downloader 模块
-用于下载文件，可以下载文本和 Blob 数据。
-
-#### Hook 模块
-Hook 模块用于控制函数，当函数被触发时会先执行我们的函数。
-
-#### Search 模块
-这个模块包含了三个函数，能够对 window 对象进行全面的搜索。
-
-#### Script 模块
-通过 URL 导入其他的 JS 或 CSS 文件。
-
-#### Cookies 模块
-这个模块用于处理 cookie 字符串。
-
-#### Observer 模块
-这个模块通过代理函数和对象来实现监控操作。
-
-
-<br>
-
-###  :dove:  鸽子工程 :dove: :dove: :dove: :dove: :dove:
- 下面的类型为包含关系 
- 例如：后面的类型包含前面的类型的内容
-
-- [x] 表示已经实现 功能可以通过extend函数引入
-
-:heavy_check_mark: 表示使用正常
-
-:alembic: 表示实验性函数
-
-<br>
-
-#### :star: JSpider-core.js 核心类型
-- [x] :heavy_check_mark: 并发请求  (已经将队列请求包括了) 
-
-- [x] :heavy_check_mark: 定时请求 
-
-- [x] :heavy_check_mark: 批量下载并使用zip打包(JSZip) 
-
-- [x] :heavy_check_mark: 当爬取到数据之后将 HTML 文本解析 
-
-- [x] :heavy_check_mark: 可以载入外部的css或js文件 
-
-<br>
-
-#### :star:​ JSpider-nor.js 常用类型
-- [x] :heavy_check_mark: XML解析: XML (String) ==> Object 
-
-
-- [x] :heavy_check_mark: Search模块: 用正则表达式搜索对象内容 
-
-- [x] :heavy_check_mark: Cookies 函数 
-
-<br>
-
-#### :star: JSpider-pro.js 强化类型
-
-- [x] :heavy_check_mark: hook 函数: 用于代理函数 
-
-- [x] :alembic: Watch 函数: 对象监听函数
-
-<br>
-
-#### :star: Extentions 扩展函数
-
-> 这些模块将不会被上面的类型包含，但是可以通过 extend 导入。
-
-- [x] :alembic: Copy : 与剪贴板有关的函数
-
-- [ ] :alembic: TurnToMarkdown : 将 HTML 文本转化为 markdown 语法
-
-<br>
-
-:pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: :pray: 
 
 <br>
 
 
 
+
+<br>
 
 ## :rainbow: 开发者使用说明
-
-### 项目结构
-- index.html —— 项目文档展示
-- JSpider.js —— 入口模块
-- JSpider-webpack.js —— 用于 ES5 打包
-- js —— index.html 的 js 文件
-- css
-- lib —— 存储所有的模块
+### 如何测试 JSpider
+这个项目中的 test.html 打开，然后进控制台就已经导入了 JSpider 了，可以直接使用。
 
 
-
-#### 如何测试 JSpider
-这个项目中的 test.html 打开，然后进控制台就已经导入了 JSpider 了，默认是 pro 类型。
-
-#### 如何找到模块的源文件
+### 如何找到模块的源文件
 在根目录下的 JS 文件是 JSpider 的入口文件，
-所有的模块放置在 lib 文件夹下，
+所有的模块放置在 src 文件夹下，
 如果模块较大，可以在同名的文件夹下找到分模块。
 
-#### 单独载入 js 模块文件
+
+### 单独载入 js 模块文件
 基本上所有的模块都可以脱离 JSpider 使用,
-引入方式为 使用 [JsDeliver](http://www.jsdelivr.com/) 提供的 URL 和 ES6 的 import 来导入你的浏览器
-
-#### 如何支持 ES5 ?
-可以使用 webpack 打包 JSpider 文件，然后再引入就可以了。
-- [x] 提供打包后文件。
+引入方式为 使用 [JsDeliver](http://www.jsdelivr.com/) 提供的 URL 和 ES6 的 import 来导入你的浏览器。
 
 
-#### 跨域问题 [CORS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
+### 浏览器不支持 ES6 但支持 ES5
+可以使用 webpack 打包 JSpider 文件，然后再引入就可以了,下面是 webpack 打包好的地址。
+- [x] **ES5 版本打包文件**  https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js
+
+
+### 跨域问题
 跨域问题可以通过谷歌插件，使用转接服务器等手段解决，只凭借 浏览器端 Javascript 无法解决。
 
-#### 绕过 [CSP 协议](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP) 加载 JSpider
-这个 CSP 协议是为了防止文件的非正常途经载入而使用的。所以一般通过 script 标签和 import 引入不了文件。
 
-但是如果 fetch 和 XHR 可以请求到文件，然后以 Blob 数据接收并转化为字符串，使用 eval 注入脚本，可以绕过 CSP 协议。
+### 绕过 [CSP 协议](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP) 加载 JSpider
+这个 CSP 协议是为了防止文件的非正常途经载入而使用的。所以，通过 script 标签和 import 引入不了文件，但是fetch 和 XHR 都是可以请求到文件的，但是然后以 Blob 数据接收并转化为字符串，使用 eval 注入脚本，可以绕过 CSP 协议。
 
-如果 fetch 和 XHR 也被禁止的话，就只能手动使用 开发者工具 的 snippets 执行载入了
-
-
+使用开发者工具中的 **snippets** 保存 ES5 版本的JSpider，然后可以点击使用，但是导入额外的依赖可能会失败。
 
 
 <br>
 
 ## 相关依赖
 
-
 [JSZip](https://github.com/Stuk/jszip): 一个前端压缩数据的库。
 
 [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser): XML => JSON 的库。 
 
 [turndown](https://github.com/domchristie/turndown/)：将 HTML 文本转换为 Markdown 文本的插件
-
-# License
-MIT :copyright: KonghaYao

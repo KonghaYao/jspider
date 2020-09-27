@@ -84,7 +84,7 @@ let result = await spider.Ajax({
 });
 
 
-//请求完成之后就会在 spider.result 中有结果
+//请求完成之后就会在 result 中有结果
 ```
 
 <br>
