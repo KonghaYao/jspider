@@ -1,4 +1,4 @@
 import searchWindow from "./searchWindow.js";
-import XHRwatch from "./XHRwatch.js";
+import AjaxHook from "./AjaxHook.js";
 
-export default { searchWindow, XHRwatch };
+export default { searchWindow, AjaxHook };
