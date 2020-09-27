@@ -27,10 +27,18 @@ Gitee: https://gitee.com/dongzhongzhidong/jspider
 ## :hammer: 快速开始
 ###  JsDelivr cdn 载入链接解析
 
-按类型引入 
-- ES6引入 [https://cdn.jsdelivr.net/npm/js-spider/JSpider.min.js](#)
-- ES5引入 [https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.min.js](#)
-- 单个模块引入 [https://cdn.jsdelivr.net/npm/js-spider/lib/模块名.js](#)
+按 ES 版本引入 
+- ES6引入 [https://cdn.jsdelivr.net/npm/js-spider/JSpider.js](#)
+- ES5引入 [https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js](#)
+
+
+### 如何单独导入
+
+若只想在文件中使用一个模块可以使用下面的方式导入。
+
+`import hook from "https://cdn.jsdelivr.net/npm/js-spider/lib/Observer/hook.js"`
+
+所有的模块都放置在 lib 文件夹下，而且模块名首字母大写。单个函数名为小写。
 
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
@@ -83,7 +91,7 @@ let result = await spider.Ajax({
 
 ## :gear: 推荐阅读顺序
 
-完成下面的阅读，可以入门 JSpider 的基本爬取功能。
+完成下面的阅读，我们可以入门 JSpider 的基本爬取功能。
 
 #### [Ajax 模块](./lib/Ajax.md)
 #### [Parser 模块](./lib/Parser.md)
@@ -92,8 +100,9 @@ let result = await spider.Ajax({
 完成下面的阅读，我们可以使用一些额外的功能（非主要）。
 
 #### [Script 函数](./lib/Script.js) 
-#### [Cookies 对象](./lib/Cookies.js)
 #### [Copy 模块](./lib/Copy.md)
+#### [Cookies 对象](./lib/Cookies.js)
+
 
 完成下面的高级阅读，我们可以方便地提高分析网页方面的速度。
 
@@ -139,55 +148,8 @@ Object.assign(window,JSpider.prototype);
 
 <br>
 
-## :dart: 各个模块解析
-### 如何单独导入
-
-若只想在文件中使用一个模块可以使用下面的方式导入。
-
-`import Hook from "https://cdn.jsdelivr.net/npm/js-spider/lib/Observer/hook.js"`
-
-所有的模块都放置在 lib 文件夹下，而且模块名首字母大写。单个函数名为小写。
-
-<br>
-
-### 请求，处理，持久化系列模块
-#### [Ajax 模块](./lib/Ajax.md)
-Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络请求。
-
-#### [Parser 模块](./lib/Parser.md)
-提供文本包括 XML，HTML等数据的常用转换。
-
-#### [Downloader 模块](./lib/Downloader.md)
-用于下载文件，可以下载文本和 Blob 数据。
-
-<br>
-
-### 分析系列模块
-
-#### [Search 模块](./lib/Search.md)
-这个模块包含了两个函数，能够对一个对象进行全面的搜索。
-
-#### [Observer 模块](./lib/Observer.md)
-这个模块通过代理函数和对象来实现监控操作。
-
-<br>
-
-### 扩展功能
-
-##### [Extend 函数]()
-这个函数是用于将高级函数集导入 JSpider 中，使用高级函数集。
 
 
-##### [Script 函数](./lib/Script.js) 
-通过 URL 导入其他的 JS 或 CSS 文件。
-
-
-##### [Cookies 对象](./lib/Cookies.js)
-这个模块用于处理 cookie 字符串。
-
-
-##### [Copy 模块](./lib/Copy.md)
-这个模块提供了一个破解网页禁止复制的函数和一个复制到剪贴板的函数。
 
 <br>
 
@@ -208,8 +170,8 @@ Ajax 模块包含批量网络请求的基础函数，能够进行批量的网络
 
 
 ### 浏览器不支持 ES6 但支持 ES5
-可以使用 webpack 打包 JSpider 文件，然后再引入就可以了。
-- [x] **ES5 版本打包文件**  https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.min.js
+可以使用 webpack 打包 JSpider 文件，然后再引入就可以了,下面是 webpack 打包好的地址。
+- [x] **ES5 版本打包文件**  https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js
 
 
 ### 跨域问题

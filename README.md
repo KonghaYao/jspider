@@ -44,7 +44,11 @@ import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js').then(res=>windo
 通过下面这个 URL 载入的 JS 文件是用在浏览器版本低导致模块无法使用的情况！
 推荐在不熟悉浏览器的时候使用，因为是 webpack 打包的文件，支持 ES5 。
 ```js
+//正式版为 es6 版本
 'https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.js'
+// 如果被 CSP 协议阻挡，可以从下面这一条 URL 中复制源代码并在开发者工具中执行使用。
+'https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js'
+
 ```
 <br>
 
@@ -57,9 +61,9 @@ let spider = new JSpider()
 spider.ajax({
   urls:[
     //数组内可以是url字符串或者是下面的对象
-    'https://cdn.jsdelivr.net/npm/js-spider/JSpider-pro.js',
+    'https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js',
     {
-      url:'https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js',
+      url:'https://cdn.jsdelivr.net/npm/js-spider/JSpider.js',
       options:(opt)=>{
         //这里可以修改原来的options
         return opt

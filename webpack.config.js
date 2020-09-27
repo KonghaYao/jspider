@@ -1,7 +1,7 @@
 module.exports = {
     entry: "./JSpider-webpack.js",
     output: {
-        filename: "JSpider.js",
+        filename: "JSpider.webpack.js",
         path: __dirname + "/dist",
     },
     mode: "production",
