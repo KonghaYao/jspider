@@ -1,13 +1,13 @@
 //这个文件是用于 webpack 构建 ES5 版本的 JSpider 版本。
 
-import Ajax from "./lib/Ajax.js";
-import Cookies from "./lib/Cookies.js";
-import Copy from "./lib/Copy.js";
-import Downloader from "./lib/Downloader.js";
-import Observer from "./lib/Observer.js";
-import Parser from "./lib/Parser.js";
-import Script from "./lib/Script.js";
-import Search from "./lib/Search.js";
+import Ajax from "./src/Ajax.js";
+import Cookies from "./src/Cookies.js";
+import Copy from "./src/Copy.js";
+import Downloader from "./src/Downloader.js";
+import Observer from "./src/Observer.js";
+import Parser from "./src/Parser.js";
+import Script from "./src/Script.js";
+import Search from "./src/Search.js";
 
 import other from "./pro/index.js";
 

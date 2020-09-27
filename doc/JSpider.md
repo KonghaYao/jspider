@@ -36,9 +36,9 @@ Gitee: https://gitee.com/dongzhongzhidong/jspider
 
 若只想在文件中使用一个模块可以使用下面的方式导入。
 
-`import hook from "https://cdn.jsdelivr.net/npm/js-spider/lib/Observer/hook.js"`
+`import hook from "https://cdn.jsdelivr.net/npm/js-spider/src/Observer/hook.js"`
 
-所有的模块都放置在 lib 文件夹下，而且模块名首字母大写。单个函数名为小写。
+所有的模块都放置在 src 文件夹下，而且模块名首字母大写。单个函数名为小写。
 
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
@@ -160,7 +160,7 @@ Object.assign(window,JSpider.prototype);
 
 ### 如何找到模块的源文件
 在根目录下的 JS 文件是 JSpider 的入口文件，
-所有的模块放置在 lib 文件夹下，
+所有的模块放置在 src 文件夹下，
 如果模块较大，可以在同名的文件夹下找到分模块。
 
 

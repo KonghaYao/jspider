@@ -26,12 +26,12 @@ Downloader 模块是用来批量下载 Blob 或者是 String 格式的数据的�
 按类型引入 
 - ES6引入 [https://cdn.jsdelivr.net/npm/js-spider/JSpider.min.js](#)
 - ES5引入 [https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.min.js](#)
-- 单个模块引入 [https://cdn.jsdelivr.net/npm/js-spider/lib/模块名.js](#)
+- 单个模块引入 [https://cdn.jsdelivr.net/npm/js-spider/src/模块名.js](#)
 
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 //动态载入
-import('https://cdn.jsdelivr.net/npm/js-spider/lib/Downloader.js')
+import('https://cdn.jsdelivr.net/npm/js-spider/src/Downloader.js')
       .then(res=>window.Downloader = res)
       
 // ES5 可以直接在 script 标签中引入

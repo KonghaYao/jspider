@@ -1,12 +1,12 @@
-import Ajax from "./lib/Ajax.js";
-import Cookies from "./lib/Cookies.js";
-import Copy from "./lib/Copy.js";
-import Downloader from "./lib/Downloader.js";
-import Extend from "./lib/Extend.js";
-import Observer from "./lib/Observer.js";
-import Parser from "./lib/Parser.js";
-import Script from "./lib/Script.js";
-import Search from "./lib/Search.js";
+import Ajax from "./src/Ajax.js";
+import Cookies from "./src/Cookies.js";
+import Copy from "./src/Copy.js";
+import Downloader from "./src/Downloader.js";
+import Extend from "./src/Extend.js";
+import Observer from "./src/Observer.js";
+import Parser from "./src/Parser.js";
+import Script from "./src/Script.js";
+import Search from "./src/Search.js";
 
 const ALL = { Ajax, Cookies, ...Copy, Downloader, Extend, ...Observer, ...Parser, Script, ...Search };
 

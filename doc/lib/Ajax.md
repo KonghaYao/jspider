@@ -30,12 +30,12 @@ tags:
 按类型引入 
 - ES6引入 [https://cdn.jsdelivr.net/npm/js-spider/JSpider.min.js](#)
 - ES5引入 [https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.min.js](#)
-- 单个模块引入 [https://cdn.jsdelivr.net/npm/js-spider/lib/模块名.js](#)
+- 单个模块引入 [https://cdn.jsdelivr.net/npm/js-spider/src/模块名.js](#)
 
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 //动态载入
-import('https://cdn.jsdelivr.net/npm/js-spider/lib/Ajax.js')
+import('https://cdn.jsdelivr.net/npm/js-spider/src/Ajax.js')
     .then(res=>window.Ajax = res)
     
 // ES5 可以直接在 script 标签中引入

@@ -6,7 +6,8 @@
 ### :book: [完整教程](http://dongzhongzhidong.gitee.io/jspider)
 ## :o: 因为版本情况不一，请使用最新版！完整教程已经更新！
 
-
+## 2.0.0+ 重要更改
+将模块移至 src 文件夹，所以引用模块使用 https://cdn.jsdelivr.net/npm/js-spider/src/Ajax.js
 
 ### :pencil2: 介绍
 这是一个在浏览器端使用 JS 快速爬取文件的框架。我写的第一个爬虫脚本是基于 Python 的，但是学到分析 JS 脚本之后，发现完全可以由浏览器的 JS 来发送请求并获取数据。对于少量的数据来说，右键检查并写几行代码就爬取成功，比开新的 python 脚本要轻松得多。
