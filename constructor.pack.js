@@ -4,8 +4,8 @@
 const fs = require("fs");
 async function main() {
     let extend = await new Promise((resolve, reject) => {
-        fs.readdir("./src", (err, files) => {
-            resolve(files.map((i) => "./src/" + i));
+        fs.readdir("./lib", (err, files) => {
+            resolve(files.map((i) => "./lib/" + i));
         });
     });
     extend.push("./dist/JSpider.webpack.js");
@@ -18,7 +18,7 @@ async function main() {
 function read(path) {
     return new Promise((resolve, reject) => {
         fs.readFile(path, "utf-8", (err, data) => {
-            if (err) throw err;
+            if (err) throw path;
             resolve(data);
         });
     });
