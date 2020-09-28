@@ -16,6 +16,7 @@ async function AjaxHook(urlReg, method = "get") {
         let [url, options] = args;
         console.log(url);
         if (urlReg.test(url)) {
+            console.log(url);
             debugger;
         }
         return args;
