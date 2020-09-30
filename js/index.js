@@ -67,7 +67,7 @@ function toWhere(path) {
 }
 
 async function init(url) {
-    return await fetch((root + url, { cache: "no-store" }).replace(/\/\//g, "/"))
+    return await fetch((root + url, ).replace(/\/\//g, "/"),{ cache: "no-store" })
         .then((res) => res.text())
         .then((res) => {
             if (res) redirect(res);
