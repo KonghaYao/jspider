@@ -1,6 +1,6 @@
 import request from "./Ajax/request.js";
 import requestSync from "./Ajax/requestSync.js";
-
+import pipe from "./Ajax/pipe.js";
 /**
  * 批量请求入口函数
  * @date 2020-09-16
@@ -9,13 +9,16 @@ import requestSync from "./Ajax/requestSync.js";
  */
 
 async function Ajax(config) {
-    let { urls, time, options, type, limits } = config;
+    let { urls, time, options, type, limits, func } = config;
     switch (type) {
         case "start":
             console.log("%c 并发", "color:green");
             let result = await requestSync(urls, options, limits, time);
             return result.flat();
-
+        case "pipe":
+            console.log("%c 管道请求", "color:green");
+            let pipeResult = await pipe(urls, options, func, time);
+            return pipeResult;
         default:
             console.log("%c 测试", "color:green");
             return await Promise.all(
