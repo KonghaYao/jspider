@@ -88,10 +88,69 @@ ajax 方法是批量请求的入口函数，通过设置初始参数，就可以
 | limit   | Number                                                       | 分批请求的并发数。     |
 | time    | Number                                                       | 每批次间隔的时间。             |
 
-### :star: 结果的处理
-请求结果会根据下面的规则帮助您快速处理请求到的数据。结果相较于 1.0.0 版本，所有 **返回的结果都是一维数组** 。
 
-请求结果会先转化为 Blob 类型，根据 type 不同处理 文本 和 json ，若不是这两种，则会返回 Blob 数据。
+
+<br>
+### :star: 结果的处理
+请求结果会根据response Headers 中的 `content-type` 属性判断怎样处理返回的数据, 但是有时候会出现一点小问题。
+
+比如，后台返回 `content-type` 为 application/json，会直接转化为 对象格式，但是，若后台返回 `content-type` 为 `text/plain` , 将会返回文本。
+
+相较于 1.0.0 版本，**所有返回的结果都是一维数组** 。
+
+
+
+## ​:alembic:​ pipe 请求
+pipe 在 JSpider 2.0.4 加入，用于爬取那些每次请求使用了上一次的请求来验证身份的请求。
+
+```js
+let spider = new JSpider();
+await spider.Ajax({
+    urls:
+        "http://*",
+    options: {
+        headers: {
+            //填入初始的headers
+        }
+    },
+    type: "pipe",
+    func: function (res, args) {
+       let index = args[0];
+       let nextURL = '';
+       // 返回结构 :
+       // [boolean|true为继续请求,[url|请求的url,options|覆盖初始 options 的对象]]
+        return [index<=5,[ nextURL,{
+                    headers: {
+                        "x-zse-86": ''
+                    },
+                }]];
+    }
+});
+```
+### `urls`
+`urls` 在 `pipe 类型`请求时，必须为单个字符串。这个字符串是第一次请求的 URL。
+
+后面的 `func` 会修改每一次的 URL 所以不用担心后面的请求。 
+#### 关于新属性 `func`
+`func` 是每一次请求的时候的规则定义，`func` 需要填入一个函数。
+##### 接入参数：
+##### res 
+它是上一次请求的结果，如果要用到的请求参数中使用到上一次请求的结果参数的话，就可以使用它。
+##### args 
+它是总的请求环境，是一个数组类型。
+具体为 [index|当前请求次数]
+当我想要扩充功能的时候，可能会修改这个参数。
+
+#### 函数返回值
+这个函数的返回值需要按指定格式返回。
+**[boolean | 传入true为继续请求 , [ url | 第二次请求的url , options | 覆盖初始 options 的对象的属性的对象]]**
+
+第一是 **布尔值**
+代码依靠这个判断是否继续请求，填入 true 时会结束请求，所以这个是可以形成死循环不断请求的，要小心使用。
+
+第二个是**一个数组 [ url , options ]**
+`url` 是下一次请求的 url
+`options` 作为对象，可以覆盖默认的 options，实现传递不同的请求参数。
 
 
 ## [推荐下一篇——Parser](./Parser.md)

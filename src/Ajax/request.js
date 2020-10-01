@@ -15,7 +15,7 @@ function request(url, options) {
         fetch(url, options)
             .then((res) => {
                 let type = res.headers.get("content-type");
-                if (/text|xml/.test(type)) {
+                if (/text|html|rtf|xml/.test(type)) {
                     return res.text();
                 } else if (/json/.test(type)) {
                     return res.json();

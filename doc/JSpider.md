@@ -38,7 +38,7 @@ Gitee: https://gitee.com/dongzhongzhidong/jspider
 
 `import hook from "https://cdn.jsdelivr.net/npm/js-spider/src/Observer/hook.js"`
 
-所有的模块都放置在 src 文件夹下，而且模块名首字母大写。单个函数名为小写。
+所有的模块都放置在 **src 文件夹** 下，而且模块名首字母大写。单个函数名为小写。
 
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
