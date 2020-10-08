@@ -2,7 +2,7 @@
 title: JSpider——Downloader模块
 version: 2.0
 date: 2020/8/30
-author: KonhaYao
+author: KonghaYao
 tags:
   -Jspider
 ---

@@ -2,7 +2,7 @@
 title: JSpider——Observer模块
 version: 2.0
 date: 2020/8/31
-author: KonhaYao
+author: KonghaYao
 ---
 
 # :book: JSpider —— Observer 模块 2.0

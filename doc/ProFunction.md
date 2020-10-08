@@ -1,9 +1,10 @@
 ---
-title: JSpider 2.0
-date: 2020/9/17
-author: KonhaYao
+title: Cookies 模块
+version: 2.0
+date: 2020/10/6
+author: KonghaYao
 ---
-# 高级函数集
+# ​:alembic:​ 高级函数集
 ## :pencil2: 介绍
 高级函数集是通过使用 JSpider 中函数制作的工具集，在JSpider 中可以通过 Extend 函数导入到 JSpider 实例中。
 

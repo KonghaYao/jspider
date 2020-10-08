@@ -2,7 +2,7 @@
 title: JSpider——Ajax模块
 version: 2.0
 date: 2020/9/16
-author: KonhaYao
+author: KonghaYao
 tags:
   -Jspider
 ---

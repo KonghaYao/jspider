@@ -2,7 +2,7 @@
 title: JSpider
 version: 2.0
 date: 2020/9/14
-author: KonhaYao
+author: KonghaYao
 NPM: https://www.npmjs.com/package/js-spider
 Github: https://github.com/KonghaYao/jspider
 Gitee: https://gitee.com/dongzhongzhidong/jspider
