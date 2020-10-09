@@ -9,7 +9,7 @@ let urls = [
             options: {
                 method: "POST",
                 headers: {
-                    "content-type": "text/plain; charset=utf",
+                    "content-type": "application/json",
                 },
                 body: JSON.stringify({ index: i }),
             },

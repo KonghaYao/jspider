@@ -2,12 +2,14 @@
 ![Version](https://img.shields.io/badge/Version-1.3.22-blue.svg) ![MIT](https://img.shields.io/badge/License-MIT-green.svg) ![Javascript](https://img.shields.io/badge/Javascript->=%20ES5-green.svg)
 ![platform](https://img.shields.io/badge/Platform-Browser-red.svg) <a href='https://gitee.com/dongzhongzhidong/jspider/stargazers'><img src='https://gitee.com/dongzhongzhidong/jspider/badge/star.svg?theme=dark' alt='star'></img></a> <a href='https://gitee.com/dongzhongzhidong/jspider/members'><img src='https://gitee.com/dongzhongzhidong/jspider/badge/fork.svg?theme=dark' alt='fork'></img></a>
 
+修改时间：2020/10/8
+
 ### :book: [完整教程](http://dongzhongzhidong.gitee.io/jspider)
 ## :o: 因为版本情况不一，请使用最新版！完整教程已经更新！
 
 ## 2.0.0+ 重要更改
-- 将模块移至 src 文件夹，所以引用模块使用 https://cdn.jsdelivr.net/npm/js-spider/src/Ajax.js
-- 大规模的接口已经修改，所以请重新查看教程
+- 将模块移至 src 文件夹，所以引用模块使用 https://cdn.jsdelivr.net/npm/js-spider/src/Ajax.js 。
+- 大规模的接口已经修改，所以请重新查看教程。
 
 ## :pencil2: 介绍
 这是一个在浏览器端使用 JS 快速爬取文件的框架。我写的第一个爬虫脚本是基于 Python 的，但是学到分析 JS 脚本之后，发现完全可以由浏览器的 JS 来发送请求并获取数据。对于少量的数据来说，右键检查并写几行代码就爬取成功，比开新的 python 脚本要轻松得多。所以我写了这个 JSpider 工具类来替代那些繁琐的 JS 代码，使得我们能够在前端直接爬取或者提前测试爬虫代码，提高我们的爬虫效率。
@@ -42,7 +44,7 @@
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 
-import('https://cdn.jsdelivr.net/npm/js-spider/JSpider-core.js')
+import('https://cdn.jsdelivr.net/npm/js-spider/JSpider.js')
   .then(res=>window.JSpider = res.default)
 
 // ES5 可以直接在 script 标签中引入
@@ -154,22 +156,31 @@ Object.assign(window,JSpider.prototype);
 
 ## :rainbow: 开发者使用说明
 ### 如何测试 JSpider
-这个项目中的 test.html 打开，然后进控制台就已经导入了 JSpider 了，可以直接使用。
+推荐在教程网页导入 JSpider 然后跟着教程学。
 
+**方式一：**
+直接打开开发者工具，在 console 面板，输入 `import("https://cdn.jsdelivr.net/npm/js-spider/JSpider.js")`，然后运行即可导入。
+
+**方式二：**
+遇到 CSP 阻止引入外部的文件。
+使用浏览器复制 `https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js` 的文件，然后在 console 上粘贴执行即可导入。
 
 ### 如何找到模块的源文件
 在根目录下的 JS 文件是 JSpider 的入口文件，
-所有的模块放置在 src 文件夹下，
+入口文件通过 import 引入各个部分的模块文件，
+你可以看到所有的模块放置在 src 文件夹下，
 如果模块较大，可以在同名的文件夹下找到分模块。
 
 
 ### 单独载入 js 模块文件
 基本上所有的模块都可以脱离 JSpider 使用,
-引入方式为 使用 [JsDeliver](http://www.jsdelivr.com/) 提供的 URL 和 ES6 的 import 来导入你的浏览器。
+引入方式为 使用 [JsDeliver](http://www.jsdelivr.com/) 提供的 API 和 ES6 的 import 来导入你的浏览器。
 
 
 ### 浏览器不支持 ES6 但支持 ES5
-可以使用 webpack 打包 JSpider 文件，然后再引入就可以了,下面是 webpack 打包好的地址。
+在 constructor 文件夹中有一个 index.bat 双击运行即可在项目的dist 文件夹中获取创建的 es5 版本。
+也可以直接从下面的连接获取。
+ES5 版本直接将使用的外部库直接添加到源代码末尾，所以文件较大。
 - [x] **ES5 版本打包文件**  https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js
 
 
@@ -180,7 +191,9 @@ Object.assign(window,JSpider.prototype);
 ### 绕过 [CSP 协议](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP) 加载 JSpider
 这个 CSP 协议是为了防止文件的非正常途经载入而使用的。所以，通过 script 标签和 import 引入不了文件，但是fetch 和 XHR 都是可以请求到文件的，但是然后以 Blob 数据接收并转化为字符串，使用 eval 注入脚本，可以绕过 CSP 协议。
 
-使用开发者工具中的 **snippets** 保存 ES5 版本的JSpider，然后可以点击使用，但是导入额外的依赖可能会失败。
+使用开发者工具中的 **snippets** 保存 ES5 版本的JSpider源代码
+或者直接在浏览器打开 [es5 版本源代码](https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js)
+，然后复制运行即可。
 
 
 <br>
@@ -192,3 +205,7 @@ Object.assign(window,JSpider.prototype);
 [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser): XML => JSON 的库。 
 
 [turndown](https://github.com/domchristie/turndown/)：将 HTML 文本转换为 Markdown 文本的插件
+
+## License
+
+MIT

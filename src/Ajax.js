@@ -1,5 +1,5 @@
 import request from "./Ajax/request.js";
-import requestSync from "./Ajax/requestSync.js";
+import requestConcurrent from "./Ajax/requestConcurrent.js";
 import pipe from "./Ajax/pipe.js";
 /**
  * 批量请求入口函数
@@ -13,7 +13,7 @@ async function Ajax(config) {
     switch (type) {
         case "start":
             console.log("%c 并发", "color:green");
-            let result = await requestSync(urls, options, limits, time);
+            let result = await requestConcurrent(urls, options, limits, time);
             return result.flat();
         case "pipe":
             console.log("%c 管道请求", "color:green");

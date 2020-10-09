@@ -1,38 +1,36 @@
-let Cookies = {
-    SET(key, value, days = 1000) {
-        var data = new Date();
-        data.setTime(data.getTime() + days * 24 * 60 * 60 * 1000);
-        let expires = data.toUTCString();
-        document.cookie = `${key}=${value}; expires=${expires}; path=/`;
-        this.UPDATE();
-        return this;
-    },
-    DELETE(key) {
-        this.set(key, "", -1);
-        this.UPDATE();
-    },
-    UPDATE() {
+var Cookies = {};
+function UPDATE() {
+    if (document.cookie) {
         document.cookie.split(";").forEach((i) => {
             let [key, value] = i.split("=");
             value = unescape(decodeURI(value || "{}"));
             try {
-                this[key.trim()] = JSON.parse(value);
+                Cookies[key.trim()] = JSON.parse(value);
             } catch (err) {
-                this[key.trim()] = value;
+                Cookies[key.trim()] = value;
             }
         });
-    },
-};
+    }
+    return true;
+}
+function SET(key, value, days = 1000) {
+    var data = new Date();
+    data.setTime(data.getTime() + days * 24 * 60 * 60 * 1000);
+    let expires = data.toUTCString();
+    document.cookie = `${key}=${value}; expires=${expires}; path=/`;
+    UPDATE();
+    return true;
+}
 
-Cookies.UPDATE();
-
+UPDATE();
 export default new Proxy(Cookies, {
     get(target, key) {
-        target.UPDATE();
+        UPDATE();
         return target[key];
     },
     set(target, key, value) {
-        target.UPDATE();
-        return target.set(key, value, 1000);
+        let result = value ? SET(key, value, 1000) : SET(key, "", -1);
+        UPDATE();
+        return result;
     },
 });

@@ -7,7 +7,7 @@ tags:
   -Jspider
 ---
 
-# :book: JSpider——Ajax 模块 2.0
+# :book: JSpider —— Ajax 模块 2.0
 
 ## :pencil2: 介绍
 这个模块是 JSpider 的核心模块，通过控制请求频率来达到批量请求的效果。

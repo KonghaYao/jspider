@@ -1,5 +1,5 @@
 // 用于直接将 jszip 等额外的库直接合并到工具中。
-// JSpider.init.js 是 webpack 打包之后的文件，然后经过这个文件后就生成一个 JSpider.js
+// JSpider.webpack.js 是 webpack 打包之后的文件，然后经过这个文件后就生成一个 JSpider.js
 
 const fs = require("fs");
 async function main() {

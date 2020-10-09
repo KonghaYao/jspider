@@ -26,14 +26,13 @@ const mainFunc = async (arr, limits) => {
  * @param {Number} time=0 间隔时间
  * @returns {Array} 请求结果数组
  */
-function requestSync(urls, options = {}, limits = 3, time = 0) {
+function requestConcurrent(urls, options = {}, limits = 3, time = 0) {
     //定义爬取次数
-
     let num = Math.ceil(urls.length / limits);
-
     const func = (arr) => {
         return mainFunc(arr, limits);
     };
+
     // compose 函数按序执行
     return Array(num)
         .fill(func)
@@ -42,4 +41,4 @@ function requestSync(urls, options = {}, limits = 3, time = 0) {
         }, Promise.resolve([urls, options, []]))
         .then((res) => res.pop());
 }
-export default requestSync;
+export default requestConcurrent;

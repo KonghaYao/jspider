@@ -6,6 +6,8 @@
     - 用于 es6 的正式版本的入口文件。
 - **JSpider-webpack.js** 
     - 用于 webpack 的特殊 JSpider 版本。
+- **test.html**
+    - 用于离线测试 JSpider 的网页。
 - **index.html** 
     - 连接到用于展示文档的 Gitee 网页。
 - **.babelrc** 
@@ -19,7 +21,7 @@
 - **dist**
     - 放置成品打包文件。
 - **doc**
-    - 教程存放的文件夹。
+    - markdown 教程存放的文件夹。
 - **example**
     - JSpider 的示例。
 - **src**
@@ -28,5 +30,5 @@
     - JSpider 的高级函数集的存放位置，内部的index.js 是入口文件。
 - **lib**
     - JSpider 使用的额外的库。
-- **tes**
+- **test**
     - 用于测试 JSpider 的文件。
