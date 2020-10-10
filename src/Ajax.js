@@ -23,9 +23,7 @@ async function Ajax(config) {
             console.log("%c 测试", "color:green");
             return await Promise.all(
                 [0, 1, 2].map((i) => {
-                    if (urls[i]) {
-                        return request(urls[i], options);
-                    }
+                    return urls[i] ? request(urls[i], options) : null;
                 })
             ).then((res) => res.filter((i) => i));
     }

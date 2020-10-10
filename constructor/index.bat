@@ -1,1 +1,1 @@
-cd ../ && webpack && node constructor\constructor.pack.js && del  dist\JSpider.webpack.js
+cd ../ && webpack && node constructor\constructor.pack.js && del  dist\JSpider.webpack.js&&pause

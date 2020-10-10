@@ -4,7 +4,7 @@
   "description": "这是一个浏览器端的爬虫框架",
   "main": "JSpider.js",
   "directories": {
-    "lib": "lib",
+    "src": "src",
     "doc": "doc"
   },
   "homepage": "https://dongzhongzhidong.gitee.io/jspider",
@@ -16,7 +16,8 @@
     "browser",
     "front-end"
   ],
-  "scripts": {},
+  "scripts": {
+  },
   "repository": {
     "type": "git",
     "url": "https://gitee.com/dongzhongzhidong/jspider.git"
