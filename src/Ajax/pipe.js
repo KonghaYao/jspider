@@ -1,6 +1,15 @@
 import request from "./request.js";
 import sleep from "./sleep.js";
 
+/**
+ * pipe 型数据请求
+ * @date 2020-10-11
+ * @param {String} url 第一个请求的 URL
+ * @param {Object} options={} 默认的 options 请求参数
+ * @param {function} func 处理函数
+ * @param {Number} time=0 间隔时间
+ * @returns {Array} 返回全部请求的结果
+ */
 async function pipe(url, options = {}, func, time = 0) {
     let end = true;
     let all = [url, options];

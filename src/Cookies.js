@@ -1,4 +1,5 @@
 var Cookies = {};
+
 function UPDATE() {
     if (document.cookie) {
         document.cookie.split(";").forEach((i) => {
@@ -13,6 +14,7 @@ function UPDATE() {
     }
     return true;
 }
+
 function SET(key, value, days = 1000) {
     var data = new Date();
     data.setTime(data.getTime() + days * 24 * 60 * 60 * 1000);
@@ -23,6 +25,7 @@ function SET(key, value, days = 1000) {
 }
 
 UPDATE();
+
 export default new Proxy(Cookies, {
     get(target, key) {
         UPDATE();

@@ -4,6 +4,7 @@
  * @param {HTMLElement | String | Number | Object} ele 输入需要复制的数据
  * @param {any} needClear=false 是否需要执行清理 禁止复制
  */
+
 function copy(ele, needClear = false) {
     if (needClear) clearUnCopy();
 
@@ -17,4 +18,5 @@ function copy(ele, needClear = false) {
     oDiv.remove();
     console.log("%c 复制已经完成", "color:green");
 }
+
 export default copy;

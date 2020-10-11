@@ -19,6 +19,7 @@ function Script(url) {
             tag.rel = "stylesheet";
             tag.type = "text/css";
         }
+
         tag.onload = () => {
             console.log(url + "%c 载入成功", "color:green");
             resolve(true);
@@ -26,4 +27,5 @@ function Script(url) {
         document.body.appendChild(tag);
     });
 }
+
 export default Script;

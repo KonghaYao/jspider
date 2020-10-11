@@ -6,6 +6,7 @@
  * @param {Number} ms 休眠时间
  * @returns {any} 传递休眠之前的数据
  */
+
 function sleep(res, ms) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -13,4 +14,5 @@ function sleep(res, ms) {
         }, ms);
     });
 }
+
 export default sleep;

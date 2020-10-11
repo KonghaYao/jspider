@@ -8,10 +8,10 @@ import Observer from "./src/Observer.js";
 import Parser from "./src/Parser.js";
 import Script from "./src/Script.js";
 import Search from "./src/Search.js";
-
+import requestErr from "./src/Ajax/requestErr.js";
 import other from "./pro/index.js";
 
-const ALL = { Ajax, Cookies, Copy, Downloader, ...Observer, ...Parser, Script, ...Search, ...other };
+const ALL = { Ajax, Cookies, Copy, Downloader, ...Observer, ...Parser, Script, ...Search, ...other, requestErr };
 
 window.JSpider = class JSpider {};
 

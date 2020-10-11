@@ -3,6 +3,7 @@
  * @date 2020-09-12
  * @description 可以破解大部分禁止复制功能
  */
+
 function unCopyClear() {
     [document, ...document.querySelectorAll("*")].forEach((ele) => {
         ele.oncontextmenu = "";
@@ -16,4 +17,5 @@ function unCopyClear() {
     });
     console.log("清理完成");
 }
+
 export default unCopyClear;

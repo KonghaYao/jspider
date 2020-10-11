@@ -8,6 +8,7 @@ import sleep from "./sleep.js";
  * @param {Number} limits 并发数
  * @returns {Array} 剥离完一组后的原数组
  */
+
 const mainFunc = async (arr, limits) => {
     let [urls, options, result] = arr;
     let group = urls.splice(0, limits);
@@ -27,6 +28,7 @@ const mainFunc = async (arr, limits) => {
  * @param {Number} time=0 间隔时间
  * @returns {Array} 请求结果数组
  */
+
 function requestConcurrent(urls, options = {}, limits = 3, time = 0) {
     //定义爬取次数
     let num = Math.ceil(urls.length / limits);
@@ -48,4 +50,5 @@ function requestConcurrent(urls, options = {}, limits = 3, time = 0) {
             return res.pop();
         });
 }
+
 export default requestConcurrent;

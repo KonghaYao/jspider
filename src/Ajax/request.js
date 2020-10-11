@@ -7,6 +7,7 @@ import requestErr from "./requestErr.js";
  * @param {Object} options fetch 的请求 options
  * @returns {Promise} 返回结果
  */
+
 function request(url, options) {
     if (typeof url === "object") {
         options = { ...options, ...url.options };
@@ -23,12 +24,12 @@ function request(url, options) {
             } else {
                 return res.blob();
             }
-        })
-        .then((res) => res)
+        }) // 返回数据
         .catch((err) => {
-            console.log("%c " + err, "color:red;");
             // 错误转入错误列表中
+            console.log("%c " + err, "color:red;");
             requestErr.push({ url, options });
         });
 }
+
 export default request;

@@ -1,6 +1,7 @@
 import request from "./Ajax/request.js";
 import requestConcurrent from "./Ajax/requestConcurrent.js";
 import pipe from "./Ajax/pipe.js";
+
 /**
  * 批量请求入口函数
  * @date 2020-09-16
