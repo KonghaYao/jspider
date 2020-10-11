@@ -8,7 +8,9 @@ import Parser from "./src/Parser.js";
 import Script from "./src/Script.js";
 import Search from "./src/Search.js";
 
-const ALL = { Ajax, Cookies, ...Copy, Downloader, Extend, ...Observer, ...Parser, Script, ...Search };
+import requestErr from "./src/Ajax/requestErr.js";
+
+const ALL = { Ajax, Cookies, ...Copy, Downloader, Extend, ...Observer, ...Parser, Script, ...Search, requestErr };
 
 class JSpider {}
 Object.assign(JSpider.prototype, ALL);

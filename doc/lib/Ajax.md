@@ -92,12 +92,15 @@ ajax 方法是批量请求的入口函数，通过设置初始参数，就可以
 
 <br>
 ### :star: 结果的处理
+#### 函数成功时的反馈
 请求结果会根据response Headers 中的 `content-type` 属性判断怎样处理返回的数据, 但是有时候会出现一点小问题。
 
 比如，后台返回 `content-type` 为 application/json，会直接转化为 对象格式，但是，若后台返回 `content-type` 为 `text/plain` , 将会返回文本。
 
 相较于 1.0.0 版本，**所有返回的结果都是一维数组** 。
 
+#### 函数错误反馈
+当请求失败时，不会阻止后面的请求，而会直接将错误的请求的URL和 options 存放到 JSpider 实例的 requestErr 中,便于检查错误。
 
 
 ## ​:alembic:​ pipe 请求

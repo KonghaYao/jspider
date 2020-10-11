@@ -12,7 +12,8 @@ const mainFunc = async (arr, limits) => {
     let [urls, options, result] = arr;
     let group = urls.splice(0, limits);
     let res = await Promise.all(group.map((url) => request(url, options)));
-    console.log(`${limits} 个已完成` + new Date().getTime());
+    res = res.filter((i) => i);
+    console.log(`${res.length} 个已完成` + new Date().getTime());
     result.push(res);
     return [urls, options, result];
 };
@@ -36,9 +37,15 @@ function requestConcurrent(urls, options = {}, limits = 3, time = 0) {
     // compose 函数按序执行
     return Array(num)
         .fill(func)
-        .reduce((next, current) => {
-            return next.then(current).then((res) => sleep(res, time));
+        .reduce((next, current, index) => {
+            return next.then(current).then((res) => {
+                console.log(`${index} 完成`);
+                return sleep(res, time);
+            });
         }, Promise.resolve([urls, options, []]))
-        .then((res) => res.pop());
+        .then((res) => {
+            console.groupEnd("%c 请求完成", "color:green");
+            return res.pop();
+        });
 }
 export default requestConcurrent;

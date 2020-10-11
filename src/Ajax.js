@@ -12,20 +12,24 @@ async function Ajax(config) {
     let { urls, time, options, type, limits, func } = config;
     switch (type) {
         case "start":
-            console.log("%c 并发", "color:green");
+            console.group("%c 并发请求", "color:green");
             let result = await requestConcurrent(urls, options, limits, time);
             return result.flat();
         case "pipe":
-            console.log("%c 管道请求", "color:green");
+            console.group("%c 管道请求", "color:green");
+
+            //管道请求只需要首URL，其他URL由后面生成，但是这里仍然使用 urls
             let pipeResult = await pipe(urls, options, func, time);
             return pipeResult;
         default:
-            console.log("%c 测试", "color:green");
-            return await Promise.all(
+            console.group("%c 测试请求", "color:green");
+            let testResult = await Promise.all(
                 [0, 1, 2].map((i) => {
                     return urls[i] ? request(urls[i], options) : null;
                 })
             ).then((res) => res.filter((i) => i));
+            console.groupEnd("%c 请求完成", "color:green");
+            return testResult;
     }
 }
 

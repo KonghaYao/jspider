@@ -4,6 +4,8 @@
 # [JSpider](./JSpider.md)
 ## 2.0.5
 - Cookies 模块更新了检测方式。
+- Ajax 添加了请求失败后保存请求的 URL 和 options 的功能
+- JSpider 实例中添加一个 requestErr 数组，用于存放 Ajax 失败的情况。
 
 
 ## 2.0.4
