@@ -1,1 +1,0 @@
-cd ../ && webpack && node constructor\constructor.pack.js && del  dist\JSpider.webpack.js&&pause

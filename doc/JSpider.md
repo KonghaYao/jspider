@@ -175,7 +175,7 @@ Object.assign(window,JSpider.prototype);
 
 
 ### 浏览器不支持 ES6 但支持 ES5
-在 constructor 文件夹中有一个 index.bat 双击运行即可在项目的dist 文件夹中获取创建的 es5 版本。
+在根文件夹中有一个 index.bat 双击运行即可在项目的dist 文件夹中获取创建的 es5 版本。
 也可以直接从下面的连接获取。
 ES5 版本直接将使用的外部库直接添加到源代码末尾，所以文件较大。
 - [x] **ES5 版本打包文件**  https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js

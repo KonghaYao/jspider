@@ -17,7 +17,7 @@
 
 ### 文件夹
 - **constructor** 
-    - 用于直接生成dist 文件夹下的成品文件，运行 index.bat 即可。
+    - 用于构建 es5 文件的脚本。
 - **dist**
     - 放置成品打包文件。
 - **doc**
@@ -32,3 +32,5 @@
     - JSpider 使用的额外的库。
 - **test**
     - 用于测试 JSpider 的文件。
+- **index.bat**
+    - 自动构建 es5 版本工具的 bat 文件
