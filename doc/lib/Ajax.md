@@ -52,6 +52,7 @@ let urls = [
     ...[...Array(10).keys()].map((i) => {
         return {
             url: "/",
+            //这里的 options复盖了后面 Ajax config 中的 options 的对应项
             options: {
                 headers: {
                     "content-type": "text/plain; charset=utf",
@@ -70,13 +71,16 @@ let result = await spider.Ajax({
         },
         method: "post",
     },
+    limits:1,
+
     type: "start",
+    returnType:'blob'
 });
 ```
 <br>
 ## :book: 详细解答
 
-### :star: ajax(config:object,Blob:boolean)
+### :star: ajax(config:object)
 
 ajax 方法是批量请求的入口函数，通过设置初始参数，就可以开始爬取文件了。
 
@@ -86,12 +90,11 @@ ajax 方法是批量请求的入口函数，通过设置初始参数，就可以
 | ------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | urls    | Array<br />里面可以包含对象或字符串 | urls 属性表示了你要爬取的 URL 地址，这是一个 Array , 里面包含 URL字符串 或 一个对象，并且可以混合。<br />对象中的 options 可以单独覆盖某一个默认 options 的键值对 |
 | options | Object <br /> 与 fetch 的 options 是一致的                     | 这是默认的 fetch 的 options 属性，包含了 headers 和 body等请求的详细情况。配合 limit 属性使用。 |
-| type    | start(String)                     | start 时启动爬取，非 start 时自动开启，测试爬取 |
+| type    | start或pipe(String)                     | start 时启动爬取，非 start 时自动开启，测试爬取 |
 | limit   | Number                                                       | 分批请求的并发数。     |
 | time    | Number                                                       | 每批次间隔的时间。             |
+|returnType| blob,text,json(string) |表示返回数据的类型，若不填，则为自动检测|
 
-#### Blob
-如果这个位置填入 true ，则会强制返回 Blob 对象。 
 
 <br>
 ### :star: 结果的处理

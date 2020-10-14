@@ -8,7 +8,7 @@ import requestErr from "./requestErr.js";
  * @returns {Promise} 返回结果
  */
 
-function request(url, options, Blob = false) {
+function request(url, options, returnType = false) {
     if (typeof url === "object") {
         options = { ...options, ...url.options };
         options.headers = { ...options.headers, ...url.options.headers };
@@ -17,13 +17,21 @@ function request(url, options, Blob = false) {
     return fetch(url, options)
         .then((res) => {
             let type = res.headers.get("content-type");
-            if (Blob) return res.blob();
-            if (/text|html|rtf|xml/.test(type)) {
-                return res.text();
-            } else if (/json/.test(type)) {
-                return res.json();
-            } else {
-                return res.blob();
+            switch (returnType.toLowerCase()) {
+                case "blob":
+                    return res.blob();
+                case "text":
+                    return res.text();
+                case "json":
+                    return res.json();
+                default:
+                    if (/text|html|rtf|xml/.test(type)) {
+                        return res.text();
+                    } else if (/json/.test(type)) {
+                        return res.json();
+                    } else {
+                        return res.blob();
+                    }
             }
         }) // 返回数据
         .catch((err) => {

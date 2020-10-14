@@ -10,14 +10,14 @@ import sleep from "./sleep.js";
  * @param {Number} time=0 间隔时间
  * @returns {Array} 返回全部请求的结果
  */
-async function pipe(url, options = {}, func, time = 0, Blob = false) {
+async function pipe(url, options = {}, func, time = 0, returnType = false) {
     let end = true;
     let all = [url, options];
     let collection = [];
 
     console.group("%c 请求组", "color:green");
     for (let i = 0; end; i++) {
-        let res = await request(all[0], { ...options, ...all[1] }, Blob)
+        let res = await request(all[0], { ...options, ...all[1] }, returnType)
             .then((res) => {
                 console.log(`%c ${i} 完成`, "color:green;");
                 collection.push(res);

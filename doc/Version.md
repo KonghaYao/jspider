@@ -2,6 +2,9 @@
 ##### 为了更好的让使用者了解我对每个版本的更改情况，我会将版本信息写在下面便于查看。
 
 # [JSpider](./JSpider.md)
+## 2.0.6
+- Ajax(config)，config添加了 returnType,表示强制使用 json，text 或 blob 格式返回数据。
+
 ## 2.0.5
 - Cookies 模块更新了检测方式。
 - Ajax 添加了请求失败后保存请求的 URL 和 options 的功能

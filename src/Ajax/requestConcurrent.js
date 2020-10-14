@@ -9,10 +9,10 @@ import sleep from "./sleep.js";
  * @returns {Array} 剥离完一组后的原数组
  */
 
-const mainFunc = async (arr, limits, Blob) => {
+const mainFunc = async (arr, limits, returnType) => {
     let [urls, options, result] = arr;
     let group = urls.splice(0, limits);
-    let res = await Promise.all(group.map((url) => request(url, options, Blob)));
+    let res = await Promise.all(group.map((url) => request(url, options, returnType)));
     res = res.filter((i) => i);
     console.log(`${res.length} 个已完成` + new Date().getTime());
     result.push(res);
@@ -29,11 +29,11 @@ const mainFunc = async (arr, limits, Blob) => {
  * @returns {Array} 请求结果数组
  */
 
-function requestConcurrent(urls, options = {}, limits = 3, time = 0, Blob) {
+function requestConcurrent(urls, options = {}, limits = 3, time = 0, returnType) {
     //定义爬取次数
     let num = Math.ceil(urls.length / limits);
     const func = (arr) => {
-        return mainFunc(arr, limits, Blob);
+        return mainFunc(arr, limits, returnType);
     };
 
     // compose 函数按序执行
