@@ -1,6 +1,6 @@
 {
   "name": "js-spider",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "这是一个浏览器端的爬虫框架",
   "main": "JSpider.js",
   "directories": {
@@ -16,8 +16,7 @@
     "browser",
     "front-end"
   ],
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://gitee.com/dongzhongzhidong/jspider.git"
