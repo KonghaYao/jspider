@@ -19,7 +19,7 @@ Copy 模块是用来处理复制的一个函数。
 ### JsDelivr cdn 载入链接解析
 按类型引入 
 - ES6引入 [https://cdn.jsdelivr.net/npm/js-spider/JSpider.min.js](#)
-- ES5引入 [https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.min.js](#)
+- ES5引入 [https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js](#)
 - 单个模块引入 [https://cdn.jsdelivr.net/npm/js-spider/src/模块名.js](#)
 
 ```js

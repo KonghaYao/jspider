@@ -25,7 +25,7 @@ Observer 模块是用于监视某些在浏览器中的变量的。
 
 按类型引入 
 - ES6引入 [https://cdn.jsdelivr.net/npm/js-spider/JSpider.min.js](#)
-- ES5引入 [https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.min.js](#)
+- ES5引入 [https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js](#)
 - 单个模块引入 [https://cdn.jsdelivr.net/npm/js-spider/src/模块名.js](#)
 
 ```js

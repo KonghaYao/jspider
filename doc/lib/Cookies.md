@@ -23,7 +23,7 @@ console.log(jspider.Cookies);
 ```js
 let jspider = new JSpider();
 jspider.Cookies['key'] = 'value1';
-jspider.Cookies.keys = 'values';
+jspider.Cookies.keys = 'vals';
 ```
 
 ## 删除 cookies
