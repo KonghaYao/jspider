@@ -19,7 +19,7 @@ async function Ajax(config) {
         case "pipe":
             console.group("%c 管道请求", "color:green");
 
-            //管道请求只需要首URL，其他URL由后面生成，但是这里仍然使用 urls
+            //管道请求只需要首URL，其他URL由后面生成，但是这里仍然使用 urls 占位
             let pipeResult = await pipe(urls, options, func, time, returnType);
             return pipeResult;
         default:

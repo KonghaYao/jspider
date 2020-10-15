@@ -10,6 +10,7 @@ import sleep from "./sleep.js";
  * @param {Number} time=0 间隔时间
  * @returns {Array} 返回全部请求的结果
  */
+
 async function pipe(url, options = {}, func, time = 0, returnType = false) {
     let end = true;
     let all = [url, options];
