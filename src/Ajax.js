@@ -15,12 +15,16 @@ async function Ajax(config) {
         case "start":
             console.group("%c 并发请求", "color:green");
             let result = await requestConcurrent(urls, options, limits, time, returnType);
+            console.groupEnd("%c 请求完成", "color:green");
+
             return result.flat();
         case "pipe":
             console.group("%c 管道请求", "color:green");
 
             //管道请求只需要首URL，其他URL由后面生成，但是这里仍然使用 urls 占位
             let pipeResult = await pipe(urls, options, func, time, returnType);
+            console.groupEnd("%c 请求完成", "color:green");
+
             return pipeResult;
         default:
             console.group("%c 测试请求", "color:green");
@@ -30,6 +34,7 @@ async function Ajax(config) {
                 })
             ).then((res) => res.filter((i) => i));
             console.groupEnd("%c 请求完成", "color:green");
+
             return testResult;
     }
 }
