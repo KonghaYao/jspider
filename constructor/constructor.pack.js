@@ -8,7 +8,7 @@ async function main() {
     console.log("js 脚本启动");
     console.log("  读取文本夹下文件");
     let extend = await readDIR("./lib/");
-    extend.push("./dist/JSpider.webpack.js");
+    extend.unshift("./dist/JSpider.webpack.js");
 
     let results = await Promise.all(extend.map((path) => read(path)));
 

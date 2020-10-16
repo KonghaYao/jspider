@@ -208,6 +208,7 @@ ES5 版本直接将使用的外部库直接添加到源代码末尾，所以文�
 
 [turndown](https://github.com/domchristie/turndown/)：将 HTML 文本转换为 Markdown 文本的插件
 
-## License
+License
+MIT licensed
 
-MIT
+Copyright (C) KonghaYao
