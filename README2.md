@@ -32,5 +32,5 @@
     - JSpider 使用的额外的库。
 - **test**
     - 用于测试 JSpider 的文件。
-- **index.bat**
+- **build.bat**
     - 自动构建 es5 版本工具的 bat 文件
