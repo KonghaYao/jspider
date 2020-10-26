@@ -9,15 +9,17 @@ author: KonghaYao
 
 ## :pencil2: 介绍
 
-Observer 模块是用于监视某些在浏览器中的变量的。
+Observer 模块是用于监视某些在浏览器中的变量的模块。
 
 ## 闲聊
 最初设计这个模块是用来获取匿名函数的，但是后来学到了新的 Proxy 对象，发现 MDN 提及了一些用法，但是没有深入。所以我自己开发了函数代理函数 **Hook** 。然后想到 Vue 的双向绑定和代理的本质其实很像，所以使用递归的方式把整个 **对象** 代理了，并且对象里面的对象都可以设置相应的方式来拦截数据，这就使得 **Observer** 这个模块的作用大幅提升。
 
-由于 String 和 Number 等非对象和函数的类型过于简单，所以直接使用`__defineGetter__`和`__defineSetter__`就可以完成代理，所以在这个模块中没有对这些数据的代理方式。
+由于 String 和 Number 等非对象和函数的类型过于简单，所以可以直接使用 `__defineGetter__` 和 `__defineSetter__` 就可以完成代理，所以在这个模块中没有对这些数据的代理方式。
+
+
+这个模块的核心功能是实现 **对于函数和对象的观察** ，方便爬虫找到需要的网页上已有的函数来进行 js 混淆代码分析。
 
 <br>
-
 
 ## :hammer: 快速开始
 
@@ -30,7 +32,8 @@ Observer 模块是用于监视某些在浏览器中的变量的。
 
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
-//动态载入
+
+// 动态载入
 import('https://cdn.jsdelivr.net/npm/js-spider/src/Observer.js')
             .then(res=>window.Observer = res)
 
@@ -83,10 +86,11 @@ console.log(s+1)
 // 可以尝试将 hook 的第二个参数填为true，查看结果的不同。
 ```
 
-##### 但是有一个例外，不需要返回值的 Promise 可以使用这个
+##### 但是有一个例外，不需要返回值的 Promise 可以使用这个。
+
 例如 XMLHttpRequest 的 send 函数一般是没有返回的，所以可以用。
 
-##### 有一些关键的函数最好不要代理，如 Array 中的 push，如果使用的时候代理它，可能会导致向代理数据中添加代理函数时发生错误
+##### 有一些关键的函数最好不要代理，如 Array 中的 push，如果使用的时候代理它，可能会导致向代理数据中添加代理函数时发生错误。
  
 <br>
 #### :candy: 代理 Promise 函数
@@ -121,7 +125,9 @@ watch 是用来控制 js 对象的，多层对象也可以控制。
 
 由于 Proxy 对多层对象 只能代理表层的短板，我特地将 Proxy 的 get 和 set 函数导向了被代理对象的 GETTER 和 SETTER 使用者只需要将自己的函数赋值到 GETTER 和 SETTER 的相应的 key 上，就可以实现对被代理对象相应属性的代理。
 
-当每一层的受控制的对象都有 GETTER 和 SETTER 属性的时候，处理就方便了很多。
+当每一层的受控制的对象都有 **GETTER 和 SETTER** 属性的时候，处理就方便了很多。
+
+**这是一个生成代理的函数，所以必须要赋值回原来的变量，原来的变量位置上才被代理。**
 
 #### 开始代理
 
@@ -140,20 +146,20 @@ let a = {
 }
 let jspider = new JSpider()
 
-//代理方式和前面的 hook 是一致的，都要赋值给自身完成代理
+// 代理方式和前面的 hook 是一致的，都要赋值给自身完成代理
 a = jspider.Observer.watch(a)
 
 // 被设置 sex 属性的时候会触发
 a.SETTER.sex=(oldValue,value)=>{
     console.log(oldValue,value)
     console.log('你确定？')
-    return value //这个数据是最终赋值的数据
+    return value // 这个数据是最终赋值的数据
 }
 
 // 读取 name 属性的时候触发
 a.GETTER.name = (value)=>{
     console.log('你偷看')
-    return value //这个是最终返回的数据
+    return value // 这个是最终返回的数据
 }
 
 a.sex='男'
@@ -166,7 +172,7 @@ a.name
 
 ##### DEFAULT 属性
 
-在 STETTER 和 GETTER 中都有 DEFAULT 属性，该属性会在没有定义函数的属性被访问时使用。
+在 STETTER 和 GETTER 中都有 **DEFAULT 属性**，该属性包含一个 **会在没有定义 SETTER 和 GETTER 的属性被访问时** 触发的函数。
 
 ```js
 

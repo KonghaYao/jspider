@@ -13,6 +13,13 @@ author: KonghaYao
 
 当然，所有的高级函数都可以通过 JSpider 原生的函数生成，高级函数只是为了某些特殊情况下方便快速写出高效的代码，**若只是正常使用，可能永远都用不到**。
 
+## 如何导入高级函数集
+Extend 这个函数将会直接将高级函数集的函数直接导入到 JSpider 类中
+```js
+let jspider = new JSpider()
+jspider.Extend()
+```
+
 
 ## searchWindow 函数
 用于直接搜索全局变量，是 search 函数的扩展。

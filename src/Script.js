@@ -18,6 +18,8 @@ function Script(url) {
             tag.href = url;
             tag.rel = "stylesheet";
             tag.type = "text/css";
+        } else {
+            throw new Error("请确认 URL 可以导入");
         }
 
         tag.onload = () => {

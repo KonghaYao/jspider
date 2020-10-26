@@ -16,13 +16,13 @@ Parser 模块是用来处理文本数据的 HTML 格式或者是 XML 格式 的�
 <br>
 
 ## 闲聊
-在请求结束以后，若只是爬取到少量的数据还可以手写代码，但是对于很多的数据的话就会出现很多错误，花费时间很多，所以我写了这个模块来处理爬取到的数据。
+在请求结束以后，若只是爬取到少量的数据还可以手写代码，但是对于很多的数据的话就很容易出现很多错误，花费时间很多，所以我写了这个模块来处理爬取到的数据。
 
 Parser 模块中最先出现的是 **HTML 解析模块**，这个模块利用浏览器的 DOM 解析功能将 HTML文本转化为 DOM 元素进行抽取操作。
 
-后来接触到了 [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser) 这个 XML 转 对象 的 JS 库，所以就写了一个接口，让使用 JSpider 时用到 XMLParser 这个函数时，自动通过 jsDelivr 导入 [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser)。
+后来接触到了 [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser) 这个 XML 转 对象 的 JS 库，所以就写了一个接口，只有使用到 XMLParser 这个函数时，才会自动通过 jsDelivr 导入 [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser)。
 
-然后是爬虫项目遇到储存困难，一般来说，储存 HTML 文本没有很大意义，数据量大，又不方便查看。所以我一般使用 markdown 文本存储，所以依赖了 [turndown.js](https://github.com/domchristie/turndown/) 来将 HTML 文本转化为 markdown 文本，然后下载就好多了。
+然后是爬虫项目遇到 **储存困难**，一般来说，储存 HTML 文本没有很大意义，数据量大，又不方便查看。所以我一般使用 markdown 文本存储，依赖 [turndown.js](https://github.com/domchristie/turndown/) 来将 HTML 文本转化为 markdown 文本，然后下载就好多了。
 
 
 <br>

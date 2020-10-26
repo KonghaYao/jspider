@@ -4,6 +4,7 @@
 # [JSpider](./JSpider.md)
 ## 2.0.6
 - Ajax(config), config添加了 returnType, 表示强制使用 json，text 或 blob 格式返回数据。
+- 教程网站直接跳转到新的教程网页，JSpider 源代码中已经不再混杂教程网页的代码。
 
 ## 2.0.5
 - Cookies 模块更新了检测方式。
