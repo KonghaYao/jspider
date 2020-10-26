@@ -13,11 +13,17 @@ tags:
 这个模块是 JSpider 的核心模块，通过控制请求频率来达到批量请求的效果。
 
 <br>
+## :gear: 批量请求
 
-## 闲聊
-当我在一开始使用 javascript 做爬虫的时候，我需要把多次的 **fetch 分批或者是分时间** 发送，才能得到众多的数据。
 
-但是遇到某些根据请求频率来限制的网页就有可能请求失败，所以我想要从频率上控制请求的频率，这就涉及到了请求的并发数和请求的间隔时间的问题，所以我在 2.0.0 版本中直接使用 **limits 和 time** 来直接控制请求频率，而不是 1.0.0 的 type。
+### :bee: 闲聊——解决请求频率问题
+我在一开始使用 javascript 做爬虫的时候，我需要把多次的 **fetch 分批或者是分时间** 发送，才能得到众多的数据。
+
+当我直接使用 fetch 进行特别高的并发时会直接被拒绝访问，不能够爬取下来，这种情况一般在浏览器端是有提示的，但是换到像 Python 和 Java 的环境下，对新手就很不友好了。所以我想在浏览器端直接控制请求的频率并测试请求。
+
+在 Ajax 这一部分的编写中，涉及到了请求的并发数和请求的间隔时间的问题, 我将全部请求分批，每一批中包含请求 (**limits**)，然后每一批次完成后间隔一定时间 (**time**) 发送，达到较为可靠的频率控制。
+
+(我在 2.0.0 版本中直接使用 **limits 和 time** 来直接控制请求频率，而不是 1.0.0 的 type分类，这为使用者提供了良好的控制位)。
 
 **type** 原来是用来避免使用者直接发动大量的访问，所以需要使用 type 指定命令。在 2.0.0 中，type 为 start 时，将启动批量请求，否则将进行请求测试。
 
@@ -44,9 +50,10 @@ import('https://cdn.jsdelivr.net/npm/js-spider/src/Ajax.js')
 ### :airplane: 快速爬取
 
 ```js
-//加载js模块完成之后
-//这是一个测试文件
+//加载 JSpider 完成之后
 let spider = new JSpider();
+
+// 让我们先生成一个 URL 数组
 let urls = [
     "/",
     ...[...Array(10).keys()].map((i) => {
@@ -63,6 +70,8 @@ let urls = [
     }),
     "/",
 ];
+
+//发动请求
 let result = await spider.Ajax({
     urls,
     options: {
@@ -72,9 +81,9 @@ let result = await spider.Ajax({
         method: "post",
     },
     limits:1,
-
+    time:0,
     type: "start",
-    returnType:'blob'
+    returnType:'blob' // 强制返回数据为 Blob 对象
 });
 ```
 <br>
@@ -99,7 +108,7 @@ ajax 方法是批量请求的入口函数，通过设置初始参数，就可以
 <br>
 ### :star: 结果的处理
 #### 函数成功时的反馈
-请求结果会根据response Headers 中的 `content-type` 属性判断怎样处理返回的数据, 但是有时候会出现一点小问题。
+请求结果会根据 **response Headers** 中的 `content-type` 属性判断怎样处理返回的数据, 但是有时候会出现一点小问题, 所以添加一个 **returnType** 来强制返回对应数据类型。
 
 比如，后台返回 `content-type` 为 application/json，会直接转化为 对象格式，但是，若后台返回 `content-type` 为 `text/plain` , 将会返回文本。
 
@@ -109,8 +118,21 @@ ajax 方法是批量请求的入口函数，通过设置初始参数，就可以
 当请求失败时，不会阻止后面的请求，而会直接将错误的请求的URL和 options 存放到 JSpider 实例的 requestErr 中,便于检查错误。
 
 
+<br>
+
 ## ​:alembic:​ pipe 请求
 pipe 在 JSpider 2.0.4 加入，用于爬取那些每次请求使用了上一次的请求来验证身份的请求。
+
+## 闲聊——解决套娃式反爬
+
+在爬取某些网站的时候，我遇到了根据上一次请求中的信息来作为下一次请求的参数的这种反爬手段。这种反爬对速度的限制极大，而且是每次请求相互联系的情况，基础的 Ajax 就没办法了。
+
+所以我扩充了 **pipe 请求**。
+
+上面的这种反爬措施有一个突破的地方是 URL 在请求结果中给出或者 URL 极其有规律。所以可以直接在请求完成后对结果分析或者是直接拼接出 URL 给下一次请求，若是 options 中还有相关的加密，也可以在 **中间函数(func)** 中修改。
+
+
+### 示例
 
 ```js
 let spider = new JSpider();
@@ -127,7 +149,7 @@ await spider.Ajax({
        let index = args[0];
        let nextURL = '';
        // 返回结构 :
-       // [boolean|true为继续请求,[url|请求的url,options|覆盖初始 options 的对象]]
+       // [boolean,[url,options]] 详细情况参考下文
         return [index<=5,[ nextURL,{
                     headers: {
                         "x-zse-86": ''
@@ -136,10 +158,14 @@ await spider.Ajax({
     }
 });
 ```
+
 ### `urls`
 `urls` 在 `pipe 类型`请求时，必须为单个字符串。这个字符串是第一次请求的 URL。
 
 后面的 `func` 会修改每一次的 URL 所以不用担心后面的请求。 
+
+<br>
+
 #### 关于新属性 `func`
 `func` 是每一次请求的时候的规则定义，`func` 需要填入一个函数。
 ##### 接入参数：
@@ -149,6 +175,9 @@ await spider.Ajax({
 它是总的请求环境，是一个数组类型。
 具体为 [index|当前请求次数]
 当我想要扩充功能的时候，可能会修改这个参数。
+
+<br>
+
 
 #### 函数返回值
 这个函数的返回值需要按指定格式返回。
@@ -161,6 +190,7 @@ await spider.Ajax({
 `url` 是下一次请求的 url
 `options` 作为对象，可以覆盖默认的 options，实现传递不同的请求参数。
 
+<br>
 
 ## [推荐下一篇——Parser](./Parser.md)
 # [JSpider](../JSpider.md)
