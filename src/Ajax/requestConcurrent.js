@@ -9,14 +9,22 @@ import sleep from "./sleep.js";
  * @returns {Array} 剥离完一组后的原数组
  */
 
-const mainFunc = async (arr, limits, returnType) => {
-    let [urls, options, result] = arr;
+const reduceFunc = async ([urls, options, result], limits, returnType) => {
+    // 抽取 urls 内的 limits 个元素
     let group = urls.splice(0, limits);
+
+    // 组内并发
     let res = await Promise.all(group.map((url) => request(url, options, returnType)));
     res = res.filter((i) => i);
     console.log(`${res.length} 个已完成` + new Date().getTime());
+
+    // 结果保存
     result.push(res);
     return [urls, options, result];
+};
+
+const func = (arr) => {
+    return reduceFunc(arr, limits, returnType);
 };
 
 /**
@@ -30,25 +38,22 @@ const mainFunc = async (arr, limits, returnType) => {
  */
 
 function requestConcurrent(urls, options = {}, limits = 3, time = 0, returnType) {
-    //定义爬取次数
+    // 定义爬取组数
     let num = Math.ceil(urls.length / limits);
-    const func = (arr) => {
-        return mainFunc(arr, limits, returnType);
-    };
 
-    // compose 函数按序执行
-    return Array(num)
+    // 每一个函数剥除 limits 个元素并并发请求
+    let result = Array(num)
         .fill(func)
-        .reduce((next, current, index) => {
-            return next.then(current).then((res) => {
-                console.log(`${index} 完成`);
-                return sleep(res, time);
-            });
+        .reduce((next, Func, index) => {
+            return next
+                .then(Func)
+                .then((res) => (console.log(`${index} 完成`), res))
+                .then((res) => sleep(res, time));
         }, Promise.resolve([urls, options, []]))
-        .then((res) => {
-            console.groupEnd("%c 请求完成", "color:green");
-            return res.pop();
-        });
+        .then(
+            (res) => res.pop() //res中的最后一个为保存结果的数组
+        );
+    return result;
 }
 
 export default requestConcurrent;

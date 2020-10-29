@@ -7,12 +7,21 @@ NPM: https://www.npmjs.com/package/js-spider
 Github: https://github.com/KonghaYao/jspider
 Gitee: https://gitee.com/dongzhongzhidong/jspider
 ---
+# :book: JSpider 2.0.0+ Beta
+![Version](https://img.shields.io/badge/Version-1.3.22-blue.svg) ![MIT](https://img.shields.io/badge/License-MIT-green.svg) ![Javascript](https://img.shields.io/badge/Javascript->=%20ES5-green.svg)
+![platform](https://img.shields.io/badge/Platform-Browser-red.svg) <a href='https://gitee.com/dongzhongzhidong/jspider/stargazers'><img src='https://gitee.com/dongzhongzhidong/jspider/badge/star.svg?theme=dark' alt='star'></img></a> <a href='https://gitee.com/dongzhongzhidong/jspider/members'><img src='https://gitee.com/dongzhongzhidong/jspider/badge/fork.svg?theme=dark' alt='fork'></img></a>
 
-# :book: JSpider 教程
-## Version ：2.0.0 +
+修改时间：2020/10/8
+
+### :book: [完整教程](http://dongzhongzhidong.gitee.io/jspider)
+## :o: 因为版本情况不一，请使用最新版！完整教程已经更新！
+
+## 2.0.0+ 重要更改
+- 将模块移至 src 文件夹，所以引用模块使用 https://cdn.jsdelivr.net/npm/js-spider/src/Ajax.js 。
+- 大规模的接口已经修改，所以请重新查看教程。
+
 ## :pencil2: 介绍
 这是一个在浏览器端使用 JS 快速爬取文件的框架。我写的第一个爬虫脚本是基于 Python 的，但是学到分析 JS 脚本之后，发现完全可以由浏览器的 JS 来发送请求并获取数据。对于少量的数据来说，右键检查并写几行代码就爬取成功，比开新的 python 脚本要轻松得多。所以我写了这个 JSpider 工具类来替代那些繁琐的 JS 代码，使得我们能够在前端直接爬取或者提前测试爬虫代码，提高我们的爬虫效率。
-
 
 ##### 这个网页已经载入了JSpider，可以使用开发者工具打开，观看例子的时候可以试着做一做。
 
@@ -20,7 +29,7 @@ Gitee: https://gitee.com/dongzhongzhidong/jspider
 
 <br>
 
-## :closed_book: [版本情况](./Version.md)
+## :closed_book: [版本情况](http://dongzhongzhidong.gitee.io/jspider#/Version.md)
 
 <br>
 
@@ -39,7 +48,7 @@ Gitee: https://gitee.com/dongzhongzhidong/jspider
 
 `import hook from "https://cdn.jsdelivr.net/npm/js-spider/src/Observer/hook.js"`
 
-所有的模块都放置在 **src 文件夹** 下，而且模块名首字母大写。单个函数名为小写。
+所有的模块都放置在 src 文件夹下，而且模块名首字母大写。单个函数名为小写。
 
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
@@ -47,8 +56,7 @@ Gitee: https://gitee.com/dongzhongzhidong/jspider
 import('https://cdn.jsdelivr.net/npm/js-spider/JSpider.js')
   .then(res=>window.JSpider = res.default)
 
-// ES5版本 可以直接在 script 标签中引入
-// <script src="https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js"><script>
+// ES5 可以直接在 script 标签中引入
 ```
 
 ### :airplane: 快速爬取
@@ -92,25 +100,24 @@ let result = await spider.Ajax({
 <br>
 
 ## :gear: 推荐阅读顺序
-<br>
-###完成下面的阅读，我们可以入门 JSpider 的基本爬取功能。
 
-#### [Ajax 模块](./lib/Ajax.md)
-#### [Parser 模块](./lib/Parser.md)
-#### [Downloader 模块](./lib/Downloader.md)
+完成下面的阅读，我们可以入门 JSpider 的基本爬取功能。
 
-<br>
-### 完成下面的阅读，我们可以使用一些额外的功能（非主要）。
+#### [Ajax 模块](http://dongzhongzhidong.gitee.io/jspider#/src/Ajax.md)
+#### [Parser 模块](http://dongzhongzhidong.gitee.io/jspider#/src/Parser.md)
+#### [Downloader 模块](http://dongzhongzhidong.gitee.io/jspider#/src/Downloader.md)
 
-#### [Script 函数](./lib/Script.js) 
-#### [Copy 模块](./lib/Copy.md)
-#### [Cookies 对象](./lib/Cookies.js)
+完成下面的阅读，我们可以使用一些额外的功能（非主要）。
 
-<br>
-### 完成下面的高级阅读，我们可以方便地提高分析网页方面的速度。
+#### [Script 函数](http://dongzhongzhidong.gitee.io/jspider#/src/Script.js) 
+#### [Copy 模块](http://dongzhongzhidong.gitee.io/jspider#/src/Copy.md)
+#### [Cookies 对象](http://dongzhongzhidong.gitee.io/jspider#/src/Cookies.js)
 
-#### [Search 模块](./lib/Search.md)
-#### [Observer 模块](./lib/Observer.md)
+
+完成下面的高级阅读，我们可以方便地提高分析网页方面的速度。
+
+#### [Search 模块](http://dongzhongzhidong.gitee.io/jspider#/src/Search.md)
+#### [Observer 模块](http://dongzhongzhidong.gitee.io/jspider#/src/Observer.md)
 
 
 <br>
@@ -149,6 +156,10 @@ Object.assign(window,JSpider.prototype);
 由于 1.0.0 的函数其实是多种函数和基础函数杂糅在一起，所以在 2.0.0 中将 **高级函数** 用 **基础函数** 实现，便于使用者使用。
 
 
+<br>
+
+
+
 
 <br>
 
@@ -163,12 +174,12 @@ Object.assign(window,JSpider.prototype);
 遇到 CSP 阻止引入外部的文件。
 使用浏览器复制 `https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js` 的文件，然后在 console 上粘贴执行即可导入。
 
-
 ### 如何找到模块的源文件
 在根目录下的 JS 文件是 JSpider 的入口文件，
 入口文件通过 import 引入各个部分的模块文件，
 你可以看到所有的模块放置在 src 文件夹下，
 如果模块较大，可以在同名的文件夹下找到分模块。
+
 
 ### 单独载入 js 模块文件
 基本上所有的模块都可以脱离 JSpider 使用,
@@ -181,6 +192,9 @@ Object.assign(window,JSpider.prototype);
 ES5 版本直接将使用的外部库直接添加到源代码末尾，所以文件较大。
 - [x] **ES5 版本打包文件**  https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js
 
+### ES5 版本与普通版本的区别
+ES5 版本使用 webpack 将 JSpider 源代码降级为 ES5 版本并将 使用过的依赖的库并入 ES5 版本中, 使得直接导入时包括了依赖，但是这个文件的大小比原来要大很多。
+
 
 ### 跨域问题
 跨域问题可以通过谷歌插件，使用转接服务器等手段解决，只凭借 浏览器端 Javascript 无法解决。
@@ -192,12 +206,21 @@ ES5 版本直接将使用的外部库直接添加到源代码末尾，所以文�
 使用开发者工具中的 **snippets** 保存 ES5 版本的JSpider源代码
 或者直接在浏览器打开 [es5 版本源代码](https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js)
 ，然后复制运行即可。
+
+
 <br>
 
 ## 相关依赖
+
+在形成 es5 文件时，直接将下面的项目中的 JS 源文件拼接到 JSpider.es5.js 中，方便开发者在特殊环境下直接使用。
 
 [JSZip](https://github.com/Stuk/jszip): 一个前端压缩数据的库。
 
 [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser): XML => JSON 的库。 
 
 [turndown](https://github.com/domchristie/turndown/)：将 HTML 文本转换为 Markdown 文本的插件
+
+## License
+MIT licensed
+
+Copyright (C) KonghaYao

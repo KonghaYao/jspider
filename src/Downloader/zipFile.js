@@ -7,8 +7,10 @@ import Script from "../Script.js";
  */
 async function zipFile(fileList) {
     if (!window.JSZip) {
-        await Script("https://cdn.jsdelivr.net/npm/jszip@3.5.0/dist/jszip.min.js");
-        console.log("%c JSZip加载成功", "color:green");
+        let sym = await Script("https://cdn.jsdelivr.net/npm/jszip@3.5.0/dist/jszip.min.js");
+        if (!sym) {
+            throw new Error("JSzip 加载失败");
+        }
     }
 
     // 启动压缩

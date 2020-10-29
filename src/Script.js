@@ -26,6 +26,10 @@ function Script(url) {
             console.log(url + "%c 载入成功", "color:green");
             resolve(true);
         };
+        tag.onerror = () => {
+            console.log(url + "%c 载入失败", "color:red");
+            resolve(false);
+        };
         document.body.appendChild(tag);
     });
 }

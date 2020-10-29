@@ -1,3 +1,12 @@
+---
+title: JSpider
+version: 2.0
+date: 2020/9/14
+author: KonghaYao
+NPM: https://www.npmjs.com/package/js-spider
+Github: https://github.com/KonghaYao/jspider
+Gitee: https://gitee.com/dongzhongzhidong/jspider
+---
 # :book: JSpider 2.0.0+ Beta
 ![Version](https://img.shields.io/badge/Version-1.3.22-blue.svg) ![MIT](https://img.shields.io/badge/License-MIT-green.svg) ![Javascript](https://img.shields.io/badge/Javascript->=%20ES5-green.svg)
 ![platform](https://img.shields.io/badge/Platform-Browser-red.svg) <a href='https://gitee.com/dongzhongzhidong/jspider/stargazers'><img src='https://gitee.com/dongzhongzhidong/jspider/badge/star.svg?theme=dark' alt='star'></img></a> <a href='https://gitee.com/dongzhongzhidong/jspider/members'><img src='https://gitee.com/dongzhongzhidong/jspider/badge/fork.svg?theme=dark' alt='fork'></img></a>
@@ -183,6 +192,9 @@ Object.assign(window,JSpider.prototype);
 ES5 版本直接将使用的外部库直接添加到源代码末尾，所以文件较大。
 - [x] **ES5 版本打包文件**  https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js
 
+### ES5 版本与普通版本的区别
+ES5 版本使用 webpack 将 JSpider 源代码降级为 ES5 版本并将 使用过的依赖的库并入 ES5 版本中, 使得直接导入时包括了依赖，但是这个文件的大小比原来要大很多。
+
 
 ### 跨域问题
 跨域问题可以通过谷歌插件，使用转接服务器等手段解决，只凭借 浏览器端 Javascript 无法解决。
@@ -200,7 +212,7 @@ ES5 版本直接将使用的外部库直接添加到源代码末尾，所以文�
 
 ## 相关依赖
 
-在形成 es5 文件时，直接将下面的项目中的 JS 源文件拼接到 JSpider.es5 中，方便开发者在特殊环境下直接使用。
+在形成 es5 文件时，直接将下面的项目中的 JS 源文件拼接到 JSpider.es5.js 中，方便开发者在特殊环境下直接使用。
 
 [JSZip](https://github.com/Stuk/jszip): 一个前端压缩数据的库。
 

@@ -9,8 +9,7 @@ import pipe from "./Ajax/pipe.js";
  * @returns {Promise} 返回结果的 Promise 对象
  */
 
-async function Ajax(config) {
-    let { urls, time, options, type, limits, func, returnType } = config;
+async function Ajax({ urls, time, options, type, limits, func, returnType }) {
     switch (type) {
         case "start":
             console.group("%c 并发请求", "color:green");
@@ -28,11 +27,8 @@ async function Ajax(config) {
             return pipeResult;
         default:
             console.group("%c 测试请求", "color:green");
-            let testResult = await Promise.all(
-                [0, 1, 2].map((i) => {
-                    return urls[i] ? request(urls[i], options, returnType) : null;
-                })
-            ).then((res) => res.filter((i) => i));
+
+            let testResult = await requestConcurrent(urls.slice(0, 3), options, limits, time, returnType);
             console.groupEnd("%c 请求完成", "color:green");
 
             return testResult;

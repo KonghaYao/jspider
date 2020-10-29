@@ -9,14 +9,19 @@ import requestErr from "./requestErr.js";
  */
 
 function request(url, options, returnType = false) {
+    // 类型检测: 判断 url 为 string 或者是 {url:string,options:OPTIONS}
     if (typeof url === "object") {
         options = { ...options, ...url.options };
         options.headers = { ...options.headers, ...url.options.headers };
         url = url.url;
     }
-    return fetch(url, options)
+    //
+    let result = fetch(url, options)
         .then((res) => {
+            // 自动类型判断与解析
             let type = res.headers.get("content-type");
+
+            // 根据 returnType 强制返回
             switch (returnType.toLowerCase()) {
                 case "blob":
                     return res.blob();
@@ -25,20 +30,23 @@ function request(url, options, returnType = false) {
                 case "json":
                     return res.json();
                 default:
+                    //根据 content-type 判断数据
                     if (/text|html|rtf|xml/.test(type)) {
                         return res.text();
                     } else if (/json/.test(type)) {
                         return res.json();
                     } else {
+                        // 默认返回 Blob 数据
                         return res.blob();
                     }
             }
-        }) // 返回数据
+        })
         .catch((err) => {
             // 错误转入错误列表中
             console.log("%c " + err, "color:red;");
             requestErr.push({ url, options });
         });
+    return result;
 }
 
 export default request;
