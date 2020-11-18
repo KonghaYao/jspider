@@ -33,7 +33,7 @@ jspider.Extend()
 用于使用 js 代码拦截 Ajax 相关函数。
 - 对于 Ajax 拦截，我们可以使用 **开发者工具** 中的 XHR Breakpoint 来进入 debugger 状态。
 
-- 但是如果要求不进入 debugger 状态修改 Ajax 请求参数，则需要这个函数。
+- 但是如果需要实现不进入开发者工具的 debugger 状态修改 Ajax 请求参数，则需要这个函数。
 
 ```js
 

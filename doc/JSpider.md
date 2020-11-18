@@ -69,34 +69,26 @@ import('https://cdn.jsdelivr.net/npm/js-spider/JSpider.js')
 
 let spider = new JSpider();
 
-let urls = [
-    "/",
-    {
-        url: "/",
-        options: {
-            headers: {
-                "content-type": "text/plain; charset=utf",
-            },
-            body: JSON.stringify({ index: 100 }),
-        },
-    },
-];
+// 所有需要请求的　URL
+let urls = ["/",'1.html','2.html'];
 
 let result = await spider.Ajax({
     urls,
+    // 这些 options 会应用到所有的 url 请求中
     options: {
         headers: {
             "Content-Type": "application/json",
         },
         method: "post",
     },
+    // type 是控制请求方式的字符串
     type: "start",
 });
 
 
 //请求完成之后就会在 result 中有结果
 ```
-
+[Ajax 函数的 详细 API](http://dongzhongzhidong.gitee.io/jspider#/src/Ajax.md)
 <br>
 
 ## :gear: 推荐阅读顺序

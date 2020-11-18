@@ -20,7 +20,11 @@ async function HTMLparser(HTMLStringList, parseFunc) {
     );
     return allow.map((i) => {
         try {
-            let body = i.match(/(?<=\<body[\s\S]*?>)[\s\S]+(?=<\/body>)/)[0];
+            // 抽取 body 中的字符串，没有找到时使用整个字符串
+            let inner = i.match(/(?<=\<body[\s\S]*?>)[\s\S]+(?=<\/body>)/);
+            let body = inner.length ? inner[0] : i;
+
+            // 构造一个 div 保存上面取到的字符串
             let doc = document.createElement("div");
             doc.innerHTML = body;
             let result = parseFunc(doc);

@@ -54,6 +54,9 @@ import('https://cdn.jsdelivr.net/npm/js-spider/src/Ajax.js')
 let spider = new JSpider();
 
 // 让我们先生成一个 URL 数组
+// 这个数组可以为全部字符串，但是写成对象格式时可以自定义请求 options
+
+//let urls = ['1.html','2.html','3.html']
 let urls = [
     "/",
     ...[...Array(10).keys()].map((i) => {
@@ -80,9 +83,9 @@ let result = await spider.Ajax({
         },
         method: "post",
     },
-    limits:1,
-    time:0,
-    type: "start",
+    limits:1,//并发数
+    time:0,//每次并发请求间隔时间
+    type: "start",//发动请求的类型
     returnType:'blob' // 强制返回数据为 Blob 对象
 });
 ```
