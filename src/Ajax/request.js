@@ -8,7 +8,7 @@ import requestErr from "./requestErr.js";
  * @returns {Promise} 返回结果
  */
 
-function request(url, options, returnType = false) {
+function request(url, options, returnType = "") {
     // 类型检测: 判断 url 为 string 或者是 {url:string,options:OPTIONS}
     if (typeof url === "object") {
         options = { ...options, ...url.options };

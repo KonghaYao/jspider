@@ -47,7 +47,7 @@ const requestConcurrent = (urls, options = {}, limits = 3, time = 0, returnType)
         .reduce((next, Func, index) => {
             return next
                 .then(Func)
-                .then((res) => (console.log(`${index / num} %完成`, "color:green"), res))
+                .then((res) => (console.log(`${(index * 100) / num} %完成`, "color:green"), res))
                 .then((res) => sleep(res, time));
         }, Promise.resolve([urls, options, []]))
         .then(
