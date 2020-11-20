@@ -8,10 +8,10 @@ import sleep from "./sleep.js";
  * @param {Number} limits 并发数
  * @returns {Array} 剥离完一组后的原数组
  */
-
+let globalRecord = 0;
 const reduceFunc = async ([urls, options, result], limits, returnType) => {
-    // 抽取 urls 内的 limits 个元素
-    let group = urls.splice(0, limits);
+    // 复制 urls 内的 limits 个元素
+    let group = urls.slice(globalRecord, globalRecord + limits);
 
     // 组内并发
     let res = await Promise.all(group.map((url) => request(url, options, returnType)));
@@ -20,11 +20,8 @@ const reduceFunc = async ([urls, options, result], limits, returnType) => {
 
     // 结果保存
     result.push(res);
+    globalRecord = globalRecord + limits;
     return [urls, options, result];
-};
-
-const func = (arr) => {
-    return reduceFunc(arr, limits, returnType);
 };
 
 /**
@@ -37,23 +34,26 @@ const func = (arr) => {
  * @returns {Array} 请求结果数组
  */
 
-function requestConcurrent(urls, options = {}, limits = 3, time = 0, returnType) {
+const requestConcurrent = (urls, options = {}, limits = 3, time = 0, returnType) => {
+    globalRecord = 0;
     // 定义爬取组数
     let num = Math.ceil(urls.length / limits);
 
     // 每一个函数剥除 limits 个元素并并发请求
     let result = Array(num)
-        .fill(func)
+        .fill((arr) => {
+            return reduceFunc(arr, limits, returnType);
+        })
         .reduce((next, Func, index) => {
             return next
                 .then(Func)
-                .then((res) => (console.log(`${index} 完成`), res))
+                .then((res) => (console.log(`${index / num} %完成`, "color:green"), res))
                 .then((res) => sleep(res, time));
         }, Promise.resolve([urls, options, []]))
         .then(
             (res) => res.pop() //res中的最后一个为保存结果的数组
         );
     return result;
-}
+};
 
 export default requestConcurrent;

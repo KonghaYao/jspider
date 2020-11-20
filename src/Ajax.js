@@ -1,4 +1,3 @@
-import request from "./Ajax/request.js";
 import requestConcurrent from "./Ajax/requestConcurrent.js";
 import pipe from "./Ajax/pipe.js";
 
