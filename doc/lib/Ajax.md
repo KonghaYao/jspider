@@ -92,7 +92,7 @@ let result = await spider.Ajax({
 <br>
 ## :book: 详细解答
 
-### :star: ajax(config:object)
+### :star: ajax(config)
 
 ajax 方法是批量请求的入口函数，通过设置初始参数，就可以开始爬取文件了。
 

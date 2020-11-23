@@ -17,7 +17,8 @@ let urls = [
     }),
     "/",
 ];
-let ajaxResult = await JSpider.prototype.Ajax({
+let spider = new JSpider();
+let ajaxResult = await spider.Ajax({
     urls,
     options: {
         headers: {
@@ -25,26 +26,27 @@ let ajaxResult = await JSpider.prototype.Ajax({
         },
         method: "get",
     },
+    limits: 3,
+    time: 500,
     type: "start",
 });
 console.dir(ajaxResult);
-console.log("%c ajax模块完成", "color:red");
 
 // 解析模块
 
 // HTML 模块测试
-let ParseResult = await JSpider.prototype.HTMLParser(ajaxResult, (dom) => dom.innerHTML);
-console.dir("解析结果：", ParseResult);
+let ParseResult = await spider.HTMLParser(ajaxResult, (dom) => dom.innerHTML);
+console.log("解析结果：", ParseResult);
 
 // Markdown  模块测试
-let Markdown = await JSpider.prototype.TurnToMarkdown(ParseResult.filter((i) => i));
-console.log(Markdown);
+let Markdown = await spider.TurnToMarkdown(ParseResult.filter((i) => i));
+console.log("markdown解析模块", Markdown);
 
 // XML 模块测试
-let XMLresult = await JSpider.prototype.Ajax({ urls: ["./test/xmlText.xml"], type: "start" });
-console.log(XMLresult);
-let json = await JSpider.prototype.XMLParser(XMLresult);
-console.log(json);
+let XMLresult = await spider.Ajax({ urls: ["./test/xmlText.xml"], type: "start" });
+console.log("xml 解析模块请求", XMLresult);
+let json = await spider.XMLParser(XMLresult);
+console.log("xml 解析结果：", json);
 
 // Downloader 模块测试
-await JSpider.prototype.Downloader(Markdown, ["1.md", "2.md"], true);
+// await spider.Downloader(Markdown, ["1.md", "2.md"], true);

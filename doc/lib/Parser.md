@@ -11,7 +11,7 @@ tags:
 
 ## :pencil2: 介绍
 
-Parser 模块是用来处理文本数据的 HTML 格式或者是 XML 格式 的模块
+Parser 模块是用来处理文本数据的 HTML 格式或者是 XML 格式 的模块。
 
 <br>
 
