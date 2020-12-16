@@ -9,7 +9,7 @@ function toFile(fileList, nameList) {
     return fileList.map((file, index) => {
         let name = nameList[index];
         if (!(file instanceof Blob)) {
-            file = new File([JSON.stringify(file) || ""], name || index + ".txt");
+            file = new File([file || ""], name || index + ".txt");
         } else if (name || !file.name) {
             file.name = name || index + ".txt";
         }

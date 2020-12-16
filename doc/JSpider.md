@@ -81,6 +81,7 @@ let result = await spider.Ajax({
         },
         method: "post",
     },
+    returnType:'json',
     // type 是控制请求方式的字符串
     type: "start",
 });

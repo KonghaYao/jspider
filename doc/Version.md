@@ -2,6 +2,9 @@
 ##### 为了更好的让使用者了解我对每个版本的更改情况，我会将版本信息写在下面便于查看。
 
 # [JSpider](./JSpider.md)
+## 2.0.7
+- 解决 Downloader 中将字符串数组 JSON 的问题
+
 ## 2.0.6
 - Ajax(config), config添加了 returnType, 表示强制使用 json，text 或 blob 格式返回数据。
 - Ajax 在使用的时候改变了原来的数组，现在已经更改
