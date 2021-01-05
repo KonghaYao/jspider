@@ -11,14 +11,17 @@ Gitee: https://gitee.com/dongzhongzhidong/jspider
 ![Version](https://img.shields.io/badge/Version-1.3.22-blue.svg) ![MIT](https://img.shields.io/badge/License-MIT-green.svg) ![Javascript](https://img.shields.io/badge/Javascript->=%20ES5-green.svg)
 ![platform](https://img.shields.io/badge/Platform-Browser-red.svg) <a href='https://gitee.com/dongzhongzhidong/jspider/stargazers'><img src='https://gitee.com/dongzhongzhidong/jspider/badge/star.svg?theme=dark' alt='star'></img></a> <a href='https://gitee.com/dongzhongzhidong/jspider/members'><img src='https://gitee.com/dongzhongzhidong/jspider/badge/fork.svg?theme=dark' alt='fork'></img></a>
 
-修改时间：2020/10/8
+修改时间：2021/1/4
 
-### :book: [完整教程](http://dongzhongzhidong.gitee.io/jspider)
-## :o: 因为版本情况不一，请使用最新版！完整教程已经更新！
 
-## 2.0.0+ 重要更改
-- 将模块移至 src 文件夹，所以引用模块使用 https://cdn.jsdelivr.net/npm/js-spider/src/Ajax.js 。
-- 大规模的接口已经修改，所以请重新查看教程。
+## 关于项目的计划
+JSpider 在 1.0 时着重完成 JSpider 的基础功能的构建。
+在 2.0 时，对 1.0 进行了函数的更改和一些新功能的加入。
+在使用2.0的时候也遇到了一些问题，比如：
+- 如何快速地将数据转变为 Excel 能够打开的数据（这是因为数据处理的时候这个格式比较好用）
+- 如何在网页关闭后仍然能够保存我的进度和数据？（使用前端存储）
+- 既然 JSpider 基于 JS ，我想在 Nodejs 上使用它！（我用TS改写了代码）
+这些都会列入我的 3.0 计划中。（3.0计划详细查看文档末尾）
 
 ## :pencil2: 介绍
 这是一个在浏览器端使用 JS 快速爬取文件的框架。我写的第一个爬虫脚本是基于 Python 的，但是学到分析 JS 脚本之后，发现完全可以由浏览器的 JS 来发送请求并获取数据。对于少量的数据来说，右键检查并写几行代码就爬取成功，比开新的 python 脚本要轻松得多。所以我写了这个 JSpider 工具类来替代那些繁琐的 JS 代码，使得我们能够在前端直接爬取或者提前测试爬虫代码，提高我们的爬虫效率。
@@ -220,6 +223,13 @@ ES5 版本使用 webpack 将 JSpider 源代码降级为 ES5 版本并将 使用�
 
 [turndown](https://github.com/domchristie/turndown/)：将 HTML 文本转换为 Markdown 文本的插件
 
+## 3.0 计划
+3.0 计划的重点是在 Typescript 改写代码，使得代码可以编译成 浏览器版本和 Nodejs 版本。
+在请求的时候加入即时存储功能，可以保存爬取的数据情况，方便开发者保存进度。
+- [x] 使用 Typescript 改写代码。（虽然我的Typescript更菜，但是可以编译成各种版本）
+- [ ] 重新修改所有的代码，部分函数发生更改。
+- [ ] 使用浏览器的 indexDB 存储数据。（计划是使用 ZangoDB 这个处理 indexDB 的库）
+- [ ] 
 ## License
 MIT licensed
 
