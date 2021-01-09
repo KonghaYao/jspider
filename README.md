@@ -229,7 +229,12 @@ ES5 版本使用 webpack 将 JSpider 源代码降级为 ES5 版本并将 使用�
 - [x] 使用 Typescript 改写代码。（虽然我的Typescript更菜，但是可以编译成各种版本）
 - [ ] 重新修改所有的代码，部分函数发生更改。
 - [ ] 使用浏览器的 indexDB 存储数据。（计划是使用 ZangoDB 这个处理 indexDB 的库）
-- [ ] 
+- [ ] 数据直接转化为 Excel 能够打开的数据（计划使用 sheetjs 进行处理）
+
+## 4.0宏图
+4.0 计划的宏图是建立一个以 **Nodejs服务器** 为中心的分布式浏览器爬取工具，也就是说，你可以和小伙伴们愉快地爬取数据了。
+
+
 ## License
 MIT licensed
 
