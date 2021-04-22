@@ -52,11 +52,11 @@ import('https://cdn.jsdelivr.net/npm/js-spider/src/Search.js')
 
 ### :candy: 全局变量查看
 
-#### Search.Globals()
+#### Globals()
 
 ```js
 let spider =new JSpider()
-spider.Search.Globals()
+spider.Globals()
 ```
 
 <br>

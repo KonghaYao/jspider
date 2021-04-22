@@ -61,7 +61,7 @@ Hook 通过代理函数，对函数的输入和输出进行操作。
 ```js
 let jspider =new JSpider()
 //完成代理
-Array.prototype.pop = jspider.Observer.hook(Array.prototype.pop)
+Array.prototype.pop = jspider.hook(Array.prototype.pop)
 
 //在被代理函数的位置上多了 Func 和 afterFunc 两个数组
 
@@ -100,7 +100,7 @@ console.log(s+1)
 ```js
 let jspider =new JSpider()
 //完成代理
-fetch = jspider.Observer.hook(fetch,true)
+fetch = jspider.hook(fetch,true)
 
 fetch.Func.push((args)=>{
     console.log('输入参数数组',args)
