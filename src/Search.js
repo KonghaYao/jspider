@@ -13,7 +13,7 @@ function search(obj, reg, max = 5) {
     if (max < 2) {
         console.log("深度不够");
     }
-    if (!reg instanceof RegExp && reg instanceof String) {
+    if (!(reg instanceof RegExp) && reg instanceof String) {
         reg = new RegExp(reg);
     }
     if (obj instanceof Object) {
