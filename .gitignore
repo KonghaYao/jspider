@@ -9,7 +9,6 @@ node_modules/*
 .settings/
 
 dist/*
-dist/*
 
 # Executables
 *.swf
