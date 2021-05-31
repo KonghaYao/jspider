@@ -54,5 +54,8 @@ JSpider 未来的目标是兼容 NodeJS 平台和浏览器，让一套代码运�
 
 关于编程上的具体路径是实现 Typescript 化，但是限于编程能力，没有办法实现完整的 Typescript 化，所以未来的版本都会以 ECMA 标准来编写。
 
-### License
+## License
 
+MIT licensed ©KonghaYao
+
+> 这表示您可以很大程度地使用 JSpider！
