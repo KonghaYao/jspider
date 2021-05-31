@@ -1,4 +1,5 @@
-import JSpider from "../dist/bundle.js";
+import JSpider from "../dist/JSpider.js";
+import "../dist/fakeServer.js";
 const { Request, quickFunc } = JSpider.plugins;
 
 let urls = [...Array(10).keys()].map((i) => {

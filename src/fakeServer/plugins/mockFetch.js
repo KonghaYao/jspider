@@ -66,4 +66,4 @@ class MockFetch {
     }
 }
 
-export default MockFetch;
+export { MockFetch as default };
