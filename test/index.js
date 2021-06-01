@@ -1,16 +1,10 @@
 import JSpider from "../dist/JSpider.js";
 import "../dist/fakeServer.js"; // 虚拟后台
-const { Request, quickFunc } = JSpider.plugins;
+const { Request, Download } = JSpider.plugins;
 
-let urls = [...Array(10).keys()].map((i) => {
-    return "/bilibili/search";
+let urls = [...Array(1).keys()].map((i, index) => {
+    return { url: "/bilibili/search", name: index + ".json" };
 });
-const spider = new JSpider(
-    Request(),
-    quickFunc((data) => {
-        console.log(data);
-        return data;
-    })
-);
+const spider = new JSpider(Request());
 window.spider = spider;
 spider.apply(urls);

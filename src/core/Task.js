@@ -27,9 +27,9 @@ class Task {
         }
     }
     // 通过 commit 更改 Task 内部的status
-    $commit(status, payload) {
+    $commit(status, ...payload) {
         if (components.commit[status] instanceof Function) {
-            const flag = components.commit[status].apply(this, [payload]);
+            const flag = components.commit[status].apply(this, payload);
             if (flag !== false) {
                 this.$status = status;
                 this.$updatedAt = new Date();

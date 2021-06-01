@@ -14,8 +14,10 @@ const Format = function (res, returnType) {
             // 默认返回 Blob 数据 配合 node端 的buffer
             return res.buffer ? res.buffer() : res.blob();
         }
-    } else {
+    } else if (returnType) {
         return res[returnType]();
+    } else {
+        return res.json();
     }
 };
 const request = (task, RequestOptions) => {
@@ -28,7 +30,8 @@ const request = (task, RequestOptions) => {
             return Format(res, returnType);
         })
         .then((res) => {
-            task.$commit("stateChange", Object.assign(task.data, { data: res }));
+            console.log(res);
+            task.$commit("success", res);
             return task;
         })
         .catch((err) => {
@@ -38,6 +41,7 @@ const request = (task, RequestOptions) => {
 };
 export default (options) => {
     return ($source) => {
+        options = options || {};
         const { $delay = 200, $count = 3 } = options;
         return $source.pipe(concurrent((task) => request(task, options), { $delay, $count }));
     };

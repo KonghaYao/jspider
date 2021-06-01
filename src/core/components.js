@@ -35,17 +35,10 @@ export default {
 
         processing(payload) {
             // processing 可以获取到数据, 表示从中取出数据去操作
-            switch (this.$status) {
-                case "success":
-                case "processing":
-                    return false;
-                default:
-                    return this.data;
-            }
+
+            return this.data;
         },
-        stateChange(payload) {
-            this.data = payload;
-        },
+
         about(payload) {},
         retry(payload) {
             // 不能重试重试，需要先 about 或者 error

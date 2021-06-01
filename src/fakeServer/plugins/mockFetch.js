@@ -6,8 +6,8 @@ class fakeResponse {
     constructor(result) {
         this.data = result;
     }
-    header = {
-        "content-type": {},
+    headers = {
+        "content-type": "application/json",
         get(what) {
             return this[what];
         },
