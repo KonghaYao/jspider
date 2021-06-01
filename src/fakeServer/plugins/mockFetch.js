@@ -6,6 +6,12 @@ class fakeResponse {
     constructor(result) {
         this.data = result;
     }
+    header = {
+        "content-type": {},
+        get(what) {
+            return this[what];
+        },
+    };
     json() {
         return this.data instanceof Object ? this.data : JSON.parse(this.data);
     }
