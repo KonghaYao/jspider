@@ -6,5 +6,6 @@ let urls = [...Array(1).keys()].map((i, index) => {
     return { url: "/bilibili/search", name: index + ".json" };
 });
 const spider = new JSpider(Request());
+window.JSpider = JSpider;
 window.spider = spider;
 spider.apply(urls);

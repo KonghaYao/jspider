@@ -1,7 +1,10 @@
 import core from "./core/JSpider.js";
 import * as plugins from "./plugins/index.js";
 import simpleCrawl from "./simpleCrawl.js";
-core.plugins = plugins;
-core.simpleCrawl = simpleCrawl;
+import tools from "./tools/index.js";
 
-export default core;
+export default Object.assign(core, {
+    plugins,
+    simpleCrawl,
+    tools,
+});
