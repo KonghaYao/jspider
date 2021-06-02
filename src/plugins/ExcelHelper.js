@@ -1,18 +1,18 @@
-function downloadSheet(json, name) {
-    json.forEach((i) => {
-        Object.entries(i).forEach(([key, value]) => {
-            if (value instanceof Object) {
-                i[key] = JSON.stringify(value);
-            }
-        });
-        // 处理二层数据不能够写入的问题
-    });
+import createExcelFile from "./ExcelHelper/createExcelFile.js";
+import { map, delayWhen } from "rxjs/operators";
+import { load$ } from "../tools/loader.js";
 
-    console.log(json);
-    let newbook = XLSX.utils.book_new();
-    let sheet = XLSX.utils.json_to_sheet(json);
-
-    XLSX.utils.book_append_sheet(newbook, sheet, "爬取结果");
-    console.log(newbook);
-    XLSX.writeFile(newbook, name + ".xlsx", { bookType: "csv" });
-}
+// 未完成 导入 XLSX 的 Promise 到流的转变
+export default (formatter, options) => ($source) => {
+    return $source.pipe(
+        delayWhen(() => load$("xlsx")),
+        map((task) => {
+            let { name = "爬取结果", XLSXOptions = {} } = options || {};
+            let data = task.$commit("processing");
+            if (formatter) data = formatter(data);
+            let result = createExcelFile(data, name, XLSXOptions);
+            task.$commit("success", result);
+            return task;
+        })
+    );
+};

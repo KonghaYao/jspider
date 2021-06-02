@@ -6,14 +6,14 @@ const RootMap = {
     jsdelivr: "https://cdn.jsdelivr.net/",
 };
 let store = {
-    _getURL(name) {
+    _getURL(Module) {
         // name 可以直接是 URL ，构建 URL 的对象或者是保存过的库的名称
-        const isExisted = this.hasOwnProperty(name);
-        const type = typeof name;
-        if (type === "string") return [{ url: isExisted ? scriptMap[name] : name, type: "script" }];
+        const isExisted = this.hasOwnProperty(Module);
+        const type = typeof Module;
+        if (type === "string") return [{ url: isExisted ? scriptMap[Module] : Module, type: "script" }];
 
         let target;
-        if (type === "object") target = name;
+        if (type === "object") target = Module;
         return target instanceof Array ? target.map((el) => this._generateURLObject(el)) : [this._generateURLObject(target)]; // 返回值统一为数组
     },
     _generateURLObject({ root, repo, path, type = "script" }) {
@@ -34,4 +34,20 @@ function $load(Module) {
         })
     );
 }
-export { $load as default };
+import { from } from "rxjs";
+import { mergeMap } from "rxjs/operators";
+const cache = {};
+function load$(Module) {
+    const ModuleKey = JSON.stringify(Module);
+    let isDoing = cache[ModuleKey] || false;
+
+    return from([1]).pipe(
+        mergeMap(() => {
+            if (!isDoing) {
+                cache[ModuleKey] = $load(Module);
+            }
+            return from(cache[ModuleKey]);
+        })
+    );
+}
+export { $load as default, load$ };

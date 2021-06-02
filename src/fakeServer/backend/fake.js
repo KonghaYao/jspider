@@ -1,5 +1,5 @@
 import Mock from "mockjs";
-Mock.mock("/bilibili/search", {
+Mock.mock("/fake/search", {
     code: 0,
     data: {
         cost_time: {

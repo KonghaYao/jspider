@@ -1,11 +1,27 @@
 import JSpider from "../dist/JSpider.js";
 import "../dist/fakeServer.js"; // 虚拟后台
-const { Request, Download } = JSpider.plugins;
+const { Request, Download, ExcelHelper } = JSpider.plugins;
 
-let urls = [...Array(1).keys()].map((i, index) => {
-    return { url: "/bilibili/search", name: index + ".json" };
+let urls = [...Array(5).keys()].map((i, index) => {
+    return { url: "/fake/excel" };
 });
-const spider = new JSpider(Request());
+const spider = new JSpider(
+    Request(),
+    ExcelHelper(
+        function formatter(data) {
+            return data;
+        },
+        {
+            XLSXOptions: {
+                bookType: "csv",
+            },
+        }
+    ),
+    JSpider.rxjs.map((res) => {})
+
+    // Download()
+);
+
 window.JSpider = JSpider;
 window.spider = spider;
 spider.apply(urls);

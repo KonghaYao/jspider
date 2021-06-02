@@ -28,8 +28,8 @@ function toFile(data, name) {
 }
 const download = (task) => {
     //  获取数据为 request
-    const { url, name } = task.$commit("processing");
-    const data = task.$result;
+    const { url, name } = task.data;
+    const data = task.$commit("processing");
     const file = toFile(data, name || url.replace(/[^\/]*?\//g, ""));
     DownloadQueue.add(file);
 };

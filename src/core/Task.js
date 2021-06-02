@@ -9,9 +9,8 @@ class Task {
     $createdAt = new Date();
     $updatedAt = new Date();
     $errorList = [];
-    $result;
-    $readyData; // 每个中间件传出的数据
-    data = {};
+    $result; // 每个中间件传出的数据
+    data = {}; // 源数据，是由用户传入经过 format 的数据
 
     constructor(message, index) {
         if (index instanceof Number) this.$index = index;

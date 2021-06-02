@@ -33,17 +33,12 @@ export default {
         // 如果不返回视为更改状态
         // 只有返回 false 将不会更改状态, 是 false 哦
 
-        processing(payload) {
-            // processing 可以获取到数据, 表示从中取出数据去操作
-
+        start() {
             return this.data;
         },
-
-        about(payload) {},
-        retry(payload) {
-            // 不能重试重试，需要先 about 或者 error
-            if (this.$status === "retry") return false;
-            return this.data;
+        processing(payload) {
+            // processing 可以获取到数据, 表示从中取出数据去操作
+            return this.$result;
         },
 
         success(payload) {
