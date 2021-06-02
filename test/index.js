@@ -17,7 +17,9 @@ const spider = new JSpider(
             },
         }
     ),
-    JSpider.rxjs.map((res) => {})
+    JSpider.rxjs.map((res) => {
+        console.log(res);
+    })
 
     // Download()
 );

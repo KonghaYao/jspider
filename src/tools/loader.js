@@ -35,18 +35,23 @@ function $load(Module) {
     );
 }
 import { from } from "rxjs";
-import { mergeMap } from "rxjs/operators";
+import { mergeMap, map } from "rxjs/operators";
 const cache = {};
-function load$(Module) {
+function load$(Module, callback) {
     const ModuleKey = JSON.stringify(Module);
     let isDoing = cache[ModuleKey] || false;
-
     return from([1]).pipe(
         mergeMap(() => {
             if (!isDoing) {
                 cache[ModuleKey] = $load(Module);
             }
             return from(cache[ModuleKey]);
+        }),
+        map((res) => {
+            if (callback) {
+                return callback(res);
+            }
+            return res;
         })
     );
 }

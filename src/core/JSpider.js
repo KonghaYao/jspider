@@ -47,7 +47,7 @@ class JSpider {
     report(director) {
         // 根据 director 返回信息
     }
-    output() {}
+    storeInput() {}
 }
 
 export default JSpider;

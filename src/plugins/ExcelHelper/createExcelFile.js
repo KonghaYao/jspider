@@ -1,3 +1,5 @@
+import XLSX from "./xlsx.js";
+// XLSX 通过 script 导入
 function ArrayToSheet(sheetArray) {
     sheetArray.forEach((i) => {
         Object.entries(i).forEach(([key, value]) => {

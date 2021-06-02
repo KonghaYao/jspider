@@ -38,5 +38,8 @@ class Task {
             throw new Error("commit 状态错误" + this.$index);
         }
     }
+    // 数据导出和导入的接口
+    $output() {}
+    $input() {}
 }
 export { Task as default };
