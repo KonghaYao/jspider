@@ -26,7 +26,10 @@ const components = {
         Object(message) {
             // lodash 的 merge 深度地将后面的对象覆盖到 Task 对象
             // Object 的 format 直接表示对 Task 本身进行赋值
-            merge(this, message);
+            if (message._isABackup === true) {
+                merge(this, message);
+            }
+            merge(this.data, message);
         },
     },
     commit: {
@@ -39,14 +42,14 @@ const components = {
         },
         processing(payload) {
             // processing 可以获取到数据, 表示从中取出数据去操作
-            return this.$result;
+            return this._result;
         },
 
         success(payload) {
-            this.$result = payload;
+            this._result = payload;
         },
         error(payload) {
-            this.$errorList.push(new TaskError(payload));
+            this._errorList.push(new TaskError(payload));
         },
     },
 };

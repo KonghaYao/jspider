@@ -1,1 +1,1 @@
-export { $load, load$ } from "./loader.js";
+export { $load } from "./loader.js";

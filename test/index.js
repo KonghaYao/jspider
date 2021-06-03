@@ -2,29 +2,38 @@ import JSpider from "../dist/JSpider.js";
 import "../dist/fakeServer.js"; // 虚拟后台
 const { Request, Download, ExcelHelper, Store } = JSpider.plugins;
 const { getStore, setStore } = Store;
+
 let urls = [...Array(5).keys()].map((i, index) => {
     return { url: "/fake/excel" };
 });
-const spider = new JSpider(
-    Request(),
-    ExcelHelper(
-        function formatter(data) {
-            return data;
-        },
-        {
-            XLSXOptions: {
-                bookType: "csv",
+async function main() {
+    await JSpider.initPlugins(ExcelHelper, Store);
+
+    const spider = new JSpider(
+        Request(),
+        ExcelHelper(
+            function formatter(data) {
+                return data;
             },
-        }
-    ),
-    setStore(),
-    JSpider.rxjs.map((res) => {
-        console.log(res);
-    })
+            {
+                XLSXOptions: {
+                    bookType: "csv",
+                },
+            }
+        ),
+        setStore(),
+        JSpider.rxjs.map((res) => {
+            console.log(res);
+        })
 
-    // Download()
-);
+        // Download()
+    );
 
-window.JSpider = JSpider;
-window.spider = spider;
-spider.apply(urls);
+    window.JSpider = JSpider;
+    window.spider = spider;
+    let message = await getStore();
+    console.log(message);
+    spider.apply(message.length ? message : urls);
+}
+
+main();

@@ -7,4 +7,5 @@ window.Mock = Mock;
 new MockFetch(Mock);
 import "./backend/fake.js";
 import "./backend/excel.js";
+console.warn("Mockjs 运行中");
 export { Mock as default };

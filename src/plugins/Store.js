@@ -1,12 +1,13 @@
-import { prepareZangodb } from "./Store/zangodb.js";
 import { getInfo as getStore, setInfo$ } from "./Store/Information.js";
-import { zangodb as zango } from "./Store/zangodb.js";
+import { DB, init } from "./Store/zangodb.js";
 const setStore = (options) => ($source) => {
-    let { name = new Date() } = options || {};
-
-    let db = new zango.Db("mydb", [name]);
-    let STORE = db.collection(name);
-    return $source.pipe(prepareZangodb, setInfo$({ STORE }));
+    // 初始化配置
+    let { name = "default" } = options || {};
+    console.warn("您访问的数据库表名为 " + name);
+    let STORE = DB(name);
+    // 产出流
+    return $source.pipe(setInfo$({ STORE }));
 };
 const Store = { setStore, getStore };
+Store.init = init;
 export { Store };

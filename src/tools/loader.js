@@ -6,21 +6,22 @@ const RootMap = {
     jsdelivr: "https://cdn.jsdelivr.net/",
 };
 let store = {
+    scriptMap,
     _getURL(Module) {
         // name 可以直接是 URL ，构建 URL 的对象或者是保存过的库的名称
-        const isExisted = this.hasOwnProperty(Module);
-        const type = typeof Module;
-        if (type === "string") return [{ url: isExisted ? scriptMap[Module] : Module, type: "script" }];
+        let cursor = Module;
+        if (typeof Module === "string") {
+            const isExisted = scriptMap.hasOwnProperty(Module);
+            if (isExisted) cursor = scriptMap[Module]; // 输入为库存 key 值
+        }
 
-        let target;
-        if (type === "object") target = Module;
-        return target instanceof Array ? target.map((el) => this._generateURLObject(el)) : [this._generateURLObject(target)]; // 返回值统一为数组
+        if (typeof cursor === "string") return [{ url: cursor, type: "script" }];
+        return cursor instanceof Array ? cursor.map((el) => this._generateURLObject(el)) : [this._generateURLObject(cursor)]; // 返回值统一为数组
     },
     _generateURLObject({ root, repo, path, type = "script" }) {
-        return { url: RootMap[root] || root + repo + path, type };
+        return { url: (RootMap[root] || root) + repo + path, type };
     },
 };
-Object.assign(store, scriptMap);
 
 function $load(Module) {
     let urlArray = store._getURL(Module);
@@ -34,20 +35,4 @@ function $load(Module) {
         })
     );
 }
-import { from } from "rxjs";
-import { mergeMap, map } from "rxjs/operators";
-const cache = {};
-function load$(Module, callback) {
-    const ModuleKey = JSON.stringify(Module);
-    let isDoing = cache[ModuleKey] || false;
-    return from([1]).pipe(
-        mergeMap(() => {
-            if (!isDoing) {
-                cache[ModuleKey] = $load(Module);
-            }
-            return from(cache[ModuleKey]);
-        }),
-        map((res) => (callback ? callback(res) : res))
-    );
-}
-export { $load, load$ };
+export { $load };

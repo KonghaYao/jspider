@@ -10,18 +10,15 @@ class JSpider {
     }
     _aboutElementIndex = -1; // 标志中断时的元素 Index
     _status = "normal";
+    _tasks = [];
 
     apply(sourceArray) {
         return from(sourceArray)
             .pipe(
                 map((message, index) => {
-                    return new Task(message, index);
-                }),
-                filter((task, index) => {
-                    const bool = !["success"].includes(task.$status) && index > this._aboutElementIndex;
-                    // 如果被 take 了，就会记录它的 Index, 保证下次能够使用
-                    if (bool) this._aboutElementIndex = index;
-                    return bool;
+                    const task = new Task(message, index);
+                    this._tasks.push(task);
+                    return task;
                 }),
                 ...this.plugins
             )
@@ -47,7 +44,6 @@ class JSpider {
     report(director) {
         // 根据 director 返回信息
     }
-    storeInput() {}
 }
 
 export { JSpider as default };
