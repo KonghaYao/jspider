@@ -10,7 +10,7 @@ class TaskError {
 // 不能使用 $作为前缀
 // this 总是指向 TaskWrapper 实例，而不是这个对象
 // this.data 指向 data 内的信息
-export default {
+const components = {
     data() {
         return {
             url: {},
@@ -25,7 +25,8 @@ export default {
         },
         Object(message) {
             // lodash 的 merge 深度地将后面的对象覆盖到 Task 对象
-            merge(this.data, message);
+            // Object 的 format 直接表示对 Task 本身进行赋值
+            merge(this, message);
         },
     },
     commit: {
@@ -49,3 +50,4 @@ export default {
         },
     },
 };
+export { components as default };

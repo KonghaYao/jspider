@@ -26,7 +26,7 @@ function ObjectToBook(input) {
 }
 
 // input: {sheetName1:[],sheetName2:[]}
-export default function (input, fileName, XLSXOptions) {
+function createExcelFile(input, fileName, XLSXOptions) {
     let { bookType = "xlsx", bookSST = true, type = "array" } = XLSXOptions || {};
     return bookToFile(ObjectToBook(input), fileName, {
         bookType,
@@ -34,3 +34,4 @@ export default function (input, fileName, XLSXOptions) {
         type,
     });
 }
+export { createExcelFile as default };

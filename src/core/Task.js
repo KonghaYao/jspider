@@ -1,10 +1,10 @@
 import components from "./components.js";
 import type from "../utils/type.js";
-
+import { v4 as uuidv4 } from "uuid";
 // Task 的结构借鉴于 Vue 的组件写法
 class Task {
     // 所有的内部方法和属性都是前缀为 $
-    $index = 0;
+    $index = uuidv4();
     $status = "free";
     $createdAt = new Date();
     $updatedAt = new Date();
@@ -39,7 +39,9 @@ class Task {
         }
     }
     // 数据导出和导入的接口
-    $output() {}
-    $input() {}
+    $output() {
+        let { $index, $status, $createdAt, $updatedAt, $errorList, $result, data } = this;
+        return { $index, $status, $createdAt, $updatedAt, $errorList, $result, data };
+    }
 }
 export { Task as default };

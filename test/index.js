@@ -1,7 +1,7 @@
 import JSpider from "../dist/JSpider.js";
 import "../dist/fakeServer.js"; // 虚拟后台
-const { Request, Download, ExcelHelper } = JSpider.plugins;
-
+const { Request, Download, ExcelHelper, Store } = JSpider.plugins;
+const { getStore, setStore } = Store;
 let urls = [...Array(5).keys()].map((i, index) => {
     return { url: "/fake/excel" };
 });
@@ -17,6 +17,7 @@ const spider = new JSpider(
             },
         }
     ),
+    setStore(),
     JSpider.rxjs.map((res) => {
         console.log(res);
     })

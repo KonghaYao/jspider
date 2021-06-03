@@ -1,2 +1,1 @@
-import $load from "./loader.js";
-export default { $load };
+export { $load, load$ } from "./loader.js";

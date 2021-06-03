@@ -1,7 +1,7 @@
 // 使用下面的 名称可以直接导入相应的包
 // 同时，如果需要导入其他数据的时候也可以使用
-import scriptMap from "./loader/scriptStore.json";
-import loaderFunction from "./loader/loaderFunction.js";
+import { scriptMap } from "./loader/scriptStore.js";
+import { loaderFunction } from "./loader/loaderFunction.js";
 const RootMap = {
     jsdelivr: "https://cdn.jsdelivr.net/",
 };
@@ -47,12 +47,7 @@ function load$(Module, callback) {
             }
             return from(cache[ModuleKey]);
         }),
-        map((res) => {
-            if (callback) {
-                return callback(res);
-            }
-            return res;
-        })
+        map((res) => (callback ? callback(res) : res))
     );
 }
-export { $load as default, load$ };
+export { $load, load$ };

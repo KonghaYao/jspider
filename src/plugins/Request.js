@@ -38,10 +38,11 @@ const request = (task, RequestOptions) => {
             return task;
         });
 };
-export default (options) => {
+const Request = (options) => {
     return ($source) => {
         options = options || {};
         const { $delay = 200, $count = 3 } = options;
         return $source.pipe(concurrent((task) => request(task, options), { $delay, $count }));
     };
 };
+export { Request };

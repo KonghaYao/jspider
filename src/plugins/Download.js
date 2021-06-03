@@ -33,10 +33,12 @@ const download = (task) => {
     const file = toFile(data, name || url.replace(/[^\/]*?\//g, ""));
     DownloadQueue.add(file);
 };
-export default (options = {}) =>
+const Download =
+    (options = {}) =>
     ($source) => {
         return $source.pipe(
             filter((task) => task.$status !== "error" && task.$result),
             map(download)
         );
     };
+export { Download };

@@ -15,4 +15,4 @@ const loaderFunction = {
         return import(url);
     },
 };
-export default loaderFunction;
+export { loaderFunction };

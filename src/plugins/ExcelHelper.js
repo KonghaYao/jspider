@@ -1,8 +1,8 @@
 import createExcelFile from "./ExcelHelper/createExcelFile.js";
-import { map, delayWhen } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { prepareXLSX } from "./ExcelHelper/xlsx.js";
 // 未完成 导入 XLSX 的 Promise 到流的转变
-export default (formatter, options) => ($source) => {
+const ExcelHelper = (formatter, options) => ($source) => {
     return $source.pipe(
         prepareXLSX,
         map((task) => {
@@ -15,3 +15,4 @@ export default (formatter, options) => ($source) => {
         })
     );
 };
+export { ExcelHelper };

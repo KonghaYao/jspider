@@ -50,4 +50,4 @@ class JSpider {
     storeInput() {}
 }
 
-export default JSpider;
+export { JSpider as default };
