@@ -33,7 +33,11 @@ async function main() {
     window.spider = spider;
     let message = await getData();
     console.log(message);
-    spider.apply(message || urls);
+    if (message && message.length) {
+        spider.apply(message);
+    } else {
+        spider.apply(url);
+    }
 }
 
 main();
