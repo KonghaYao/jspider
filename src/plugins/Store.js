@@ -8,6 +8,5 @@ const setStore = (options) => ($source) => {
     // 产出流
     return $source.pipe(setInfo$({ STORE }));
 };
-const Store = { setStore, getStore };
-Store.init = init;
-export { Store };
+
+export { setStore, getStore, init };

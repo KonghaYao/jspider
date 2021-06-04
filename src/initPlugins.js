@@ -2,7 +2,7 @@
 function initPlugins(...plugins) {
     return Promise.all(
         plugins.reduce((col, cur) => {
-            if (cur.hasOwnProperty("init") && cur.init instanceof Function) {
+            if ("init" in cur && cur.init instanceof Function) {
                 col.push(cur.init());
             }
             return col;

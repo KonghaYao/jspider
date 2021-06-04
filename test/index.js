@@ -1,13 +1,13 @@
 import JSpider from "../dist/JSpider.js";
 import "../dist/fakeServer.js"; // 虚拟后台
-const { Request, Download, ExcelHelper, Store } = JSpider.plugins;
-const { getStore, setStore } = Store;
+const { Request, Download, ExcelHelper, Dexie } = JSpider.plugins;
+const { getData, setStore } = Dexie;
 
 let urls = [...Array(5).keys()].map((i, index) => {
     return { url: "/fake/excel" };
 });
 async function main() {
-    await JSpider.initPlugins(ExcelHelper, Store);
+    await JSpider.initPlugins(ExcelHelper, Dexie);
 
     const spider = new JSpider(
         Request(),
@@ -31,9 +31,9 @@ async function main() {
 
     window.JSpider = JSpider;
     window.spider = spider;
-    let message = await getStore();
+    let message = await getData();
     console.log(message);
-    spider.apply(message.length ? message : urls);
+    spider.apply(message || urls);
 }
 
 main();
