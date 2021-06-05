@@ -29,15 +29,7 @@ JSpider.simpleCrawl(["Your URL Array"])
 
 ```js
 import JSpider from 'JSpider.js'
-const { Request, HTMLParser, Download} = JSpider.plugins
-let workflow = new JSpider(
-    Request(requestOptions),
-    HTMLParser(() => {
-        return dom.innerHTML;
-    }),
-    Download()
-);
-workflow.apply(["Your URL Array"])
+
 ```
 
 ### 注意事项

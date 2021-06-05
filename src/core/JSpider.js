@@ -23,24 +23,30 @@ class JSpider {
         let UUIDCollection = [];
         let pipelineArray = this.plugins.reduce((col, plugin) => {
             // !使用 uuid 作为程序的唯一标识符，这个将用来判断数据是否经过同一个步骤
+
             let string = plugin.toString();
             let markUUID = this._createUUID(string); // 生成对代码的标志符
+            plugin.uuid = markUUID;
             UUIDCollection.push(string);
-            col.push(
-                concatMap((task) => {
-                    let $source = of(task);
-                    let result = task.$checkRepeat(markUUID) ? $source : $source.pipe(plugin);
-                    return result;
-                }),
-                map((task) => {
-                    task.$commit("Mark", markUUID);
-                    return task;
-                })
-            );
+            if (plugin.$canSkip === false) {
+                col.push(plugin);
+            } else {
+                col.push(
+                    concatMap((task) => {
+                        let $source = of(task);
+                        let result = task.$checkRepeat(markUUID) ? $source : $source.pipe(plugin);
+                        return result;
+                    }),
+                    map((task) => {
+                        task.$commit("Mark", markUUID);
+                        return task;
+                    })
+                );
+            }
+
             return col;
         }, []);
-        this._pluginsUUID = this._createUUID(JSON.stringify(UUIDCollection));
-        console.log(this._pluginsUUID);
+        this._pluginsUUID = this._createUUID(JSON.stringify(UUIDCollection)); // 作为整条流水线的 UUID 证明
         this.pipeline = pipe(...pipelineArray);
     }
     apply(sourceArray) {
