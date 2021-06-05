@@ -40,11 +40,17 @@ const components = {
         start() {
             return this.data;
         },
+        complete(UUID) {
+            this._complete = true;
+            this._completeUUID = UUID;
+        },
         processing(payload) {
             // processing 可以获取到数据, 表示从中取出数据去操作
             return this._result;
         },
-
+        Mark(markUUID) {
+            this._marks[markUUID] = this._result;
+        },
         success(payload) {
             this._result = payload;
         },

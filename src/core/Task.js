@@ -10,6 +10,9 @@ class Task {
     _updatedAt = new Date();
     _errorList = [];
     _result; // 每个中间件传出的数据
+    _marks = {}; // 记录完成流程的过程标志 {UUID:pluginsResult}
+    _complete = false;
+    _completeUUID;
     data = {}; // 源数据，是由用户传入经过 format 的数据
 
     constructor(message, index) {
@@ -38,11 +41,14 @@ class Task {
             throw new Error("commit 状态错误" + this._index);
         }
     }
+    $checkRepeat(markUUID) {
+        return this._marks.hasOwnProperty(markUUID);
+    }
     // 数据导出和导入的接口
     $output() {
-        let { _index, _status, _createdAt, _updatedAt, _errorList, _result, data } = this;
+        let { _index, _status, _createdAt, _updatedAt, _errorList, _result, _marks, data } = this;
 
-        return { _index, _status, _createdAt, _updatedAt, _errorList, _result, data, _isABackup: true };
+        return { _index, _status, _createdAt, _updatedAt, _errorList, _result, data, _marks, _isABackup: true };
     }
 }
 export { Task as default };

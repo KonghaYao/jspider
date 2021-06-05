@@ -21,10 +21,10 @@ async function main() {
                 },
             }
         ),
-        setStore(),
-        JSpider.rxjs.map((res) => {
-            console.log(res);
-        })
+        setStore()
+        // JSpider.rxjs.map((res) => {
+        //     console.log(res);
+        // })
 
         // Download()
     );
@@ -36,7 +36,7 @@ async function main() {
     if (message && message.length) {
         spider.apply(message);
     } else {
-        spider.apply(url);
+        spider.apply(urls);
     }
 }
 
