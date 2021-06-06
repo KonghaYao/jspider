@@ -1,5 +1,5 @@
 import { from, of, pipe } from "rxjs";
-import { concatMap, map, mergeMap, skipWhile, switchMap } from "rxjs/operators";
+import { concatMap, map, skipWhile } from "rxjs/operators";
 import Task from "./Task.js";
 import { v5 as uuidv5 } from "uuid";
 // JSpider 内部不进行 Error 相关的处理
@@ -71,10 +71,12 @@ class JSpider {
                 this.pipeline
             )
             .subscribe({
-                complete(task) {
+                next(task) {
                     // console.log(task);
-                    // task.$commit("complete", this._pluginsUUID);
-                    console.log("爬虫完成");
+                    task.$commit("complete", this._pluginsUUID);
+                },
+                complete() {
+                    console.log("爬虫全部完成");
                 },
             });
     }
