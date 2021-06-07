@@ -24,7 +24,7 @@ const request = (task, RequestOptions) => {
     const { returnType = "" } = RequestOptions;
     //  获取数据为 request
     const { url, options } = task.$commit("start");
-
+    console.log("- 爬取 ", task.$commit("start"));
     return fetch(url, options)
         .then((res) => {
             return Format(res, returnType);

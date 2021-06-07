@@ -27,6 +27,7 @@ const components = {
             // lodash 的 merge 深度地将后面的对象覆盖到 Task 对象
             // Object 的 format 直接表示对 Task 本身进行赋值
             if (message._isABackup === true) {
+                // 检查是否为导出的数据，导出性插件需要提供这个变量
                 merge(this, message);
             }
             merge(this.data, message);
@@ -40,17 +41,15 @@ const components = {
         start() {
             return this.data;
         },
-        complete(UUID) {
-            this._complete = true;
-            this._completeUUID = UUID;
-        },
         processing(payload) {
             // processing 可以获取到数据, 表示从中取出数据去操作
             return this._result;
         },
-        Mark(markUUID) {
-            this._marks[markUUID] = this._result;
+        complete(UUID) {
+            this._complete = true;
+            this._completeUUID = UUID;
         },
+
         success(payload) {
             this._result = payload;
         },

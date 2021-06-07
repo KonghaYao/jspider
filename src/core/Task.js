@@ -40,12 +40,15 @@ class Task {
             throw new Error("commit 状态错误" + this._index);
         }
     }
+    $Mark(markUUID) {
+        this._marks[markUUID] = this._result;
+    }
     $checkRepeat(markUUID) {
         return this._marks.hasOwnProperty(markUUID);
     }
     // 数据导出和导入的接口
     $output() {
-        return ["_index", "_status", "_createdAt", "_updatedAt", "_errorList", "_result", "_marks", "data"].reduce((col, cur) => ((col[cur] = this[cur]), col), {});
+        return ["_complete", , "_completeUUID", "_index", "_status", "_createdAt", "_updatedAt", "_errorList", "_result", "_marks", "data"].reduce((col, cur) => ((col[cur] = this[cur]), col), {});
     }
 }
 export { Task as default };

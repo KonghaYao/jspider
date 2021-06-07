@@ -1,5 +1,5 @@
 import { from, of, pipe } from "rxjs";
-import { concatMap, map, skipWhile } from "rxjs/operators";
+import { concatMap, map, skipWhile, tap } from "rxjs/operators";
 import Task from "./Task.js";
 import { v5 as uuidv5 } from "uuid";
 // JSpider 内部不进行 Error 相关的处理
@@ -38,7 +38,7 @@ class JSpider {
                         return result;
                     }),
                     map((task) => {
-                        task.$commit("Mark", markUUID);
+                        task.$Mark(markUUID);
                         return task;
                     })
                 );
@@ -47,34 +47,32 @@ class JSpider {
             return col;
         }, []);
         this._pluginsUUID = this._createUUID(JSON.stringify(UUIDCollection)); // 作为整条流水线的 UUID 证明
+        console.log(this._pluginsUUID);
         this.pipeline = pipe(...pipelineArray);
     }
     apply(sourceArray) {
         console.log("开始流", sourceArray);
         return from(sourceArray)
             .pipe(
-                skipWhile((message) => {
-                    // 跳过已经完成的项目
-                    if (message._complete && message._static === "complete" && task._completeUUID === this._pluginsUUID) {
-                        return true;
-                    } else {
-                        message._complete = false;
-                        message._completeUUID = "";
-                        return false;
-                    }
-                }),
                 map((message, index) => {
                     const task = new Task(message, index);
+                    task._mainUUID = this._pluginsUUID;
                     this._tasks.push(task);
                     return task;
                 }),
-                this.pipeline
+                skipWhile((task) => {
+                    // 跳过已经完成的项目
+                    if (task._complete && task._status === "complete" && task._completeUUID === this._pluginsUUID) {
+                        console.log("跳过一个目标");
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }),
+                this.pipeline,
+                map((task) => task.$commit("complete", this._pluginsUUID))
             )
             .subscribe({
-                next(task) {
-                    // console.log(task);
-                    task.$commit("complete", this._pluginsUUID);
-                },
                 complete() {
                     console.log("爬虫全部完成");
                 },
