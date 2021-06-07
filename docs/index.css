@@ -4,10 +4,7 @@ html {
 article > p {
     text-indent: 2em;
 }
-.search input:focus {
-    box-shadow: none !important;
-    border-color: transparent !important;
-}
+
 .sidebar {
     border-right: none;
     box-shadow: rgb(0 0 0 / 10%) 4px 0 6px -1px, rgb(0 0 0 / 6%) 2px 0 4px -1px;
@@ -15,16 +12,21 @@ article > p {
 .app-nav ul {
     box-shadow: rgb(0 0 0 / 10%) 0px 4px 6px -1px, rgb(0 0 0 / 6%) 0px 2px 4px -1px;
 }
-.search {
-    border-radius: 1em;
-    margin: 0.2em 0.5em;
-    box-shadow: rgb(0 0 0 / 10%) 0px 4px 6px -1px, rgb(0 0 0 / 6%) 0px 2px 4px -1px;
-}
 .app-nav {
     position: fixed;
 }
 .app-nav:hover ul {
     opacity: 1;
+}
+
+.search {
+    border-radius: 1em;
+    margin: 0.2em 0.5em;
+    box-shadow: rgb(0 0 0 / 10%) 0px 4px 6px -1px, rgb(0 0 0 / 6%) 0px 2px 4px -1px;
+}
+.search input:focus {
+    box-shadow: none !important;
+    border-color: transparent !important;
 }
 .sidebar-toggle {
     border-radius: 0 30% 0 0;
@@ -76,6 +78,7 @@ article > p {
     color: #fff;
     font-size: 1.4rem;
 }
+
 .markdown-section {
     color: #595959c9;
 
@@ -83,8 +86,15 @@ article > p {
     background-size: 20px 20px;
     background-position: 50%;
 }
+
 .markdown-section code,
 .markdown-section pre {
     background-color: #fafafa;
     border-radius: 1em;
+}
+.markdown-section code,
+.markdown-section output:after,
+.markdown-section pre {
+    font-family: Roboto Mono, Monaco, courier, monospace, -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", Arial;
 }
