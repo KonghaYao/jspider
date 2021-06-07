@@ -8,6 +8,7 @@ const {
 } = JSpider.plugins;
 const { createPlugin, initPlugins } = JSpider;
 const { getData, setStore } = Dexie;
+
 // 您的爬取路径代码
 let urls = [...Array(5).keys()].map((i, index) => {
     return { url: "/fake/excel" };
@@ -29,7 +30,6 @@ async function main() {
                 },
             }
         ),
-
         createPlugin((task) => {
             console.log(task);
             return task;

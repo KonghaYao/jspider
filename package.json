@@ -10,7 +10,8 @@
   },
   "scripts": {
     "dev": "rollup  --config rollup.config.dev.js -w",
-    "build": "rollup --config rollup.config.build.js"
+    "build": "rollup --config rollup.config.build.js",
+    "docs": "docsify serve docs"
   },
   "keywords": [
     "spider",
