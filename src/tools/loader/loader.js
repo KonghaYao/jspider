@@ -31,7 +31,7 @@ function $load(Module) {
             if (loaderFunction.hasOwnProperty(type)) {
                 return loaderFunction[type](url);
             }
-            return null;
+            return Promise.resolve(true);
         })
     );
 }

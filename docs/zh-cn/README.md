@@ -11,9 +11,9 @@
 !> **请打开浏览器开发者工具，网页已经载入了 JSpider，并创建了虚拟后台。**
 
 ```js
-import('https://cdn.jsdelivr.net/npm/js-spider/dist/esm/JSpider.js').then(res=>{
-    console.log(res)
-});
+import('https://cdn.jsdelivr.net/npm/js-spider/dist/esm/JSpider.js').then({JSpider}=>{
+    window.JSpider = JSpider;
+});// 从 jsDelivr 导入代码
 // 放入您的 URL
 JSpider.simpleCrawl(["fake/excel","fake/excel"]);
 ```
@@ -21,7 +21,9 @@ JSpider.simpleCrawl(["fake/excel","fake/excel"]);
 ### 更加高级的自定义爬取
 
 ```js
-import JSpider from 'JSpider.js';
+import('https://cdn.jsdelivr.net/npm/js-spider/dist/esm/JSpider.js').then({JSpider}=>{
+    window.JSpider = JSpider;
+});// 从 jsDelivr 导入代码
 const { createPlugin, initPlugins } = JSpider;
 
 // 导入插件，JSpider 还有很多功能插件

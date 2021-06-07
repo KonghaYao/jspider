@@ -47,6 +47,12 @@
 <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
 <script src="https://unpkg.com/docsify-count/dist/countable.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script type='module'>
+  import JSpider from 'https://cdn.jsdelivr.net/npm/js-spider/dist/esm/JSpider.js'
+  window.JSpider = JSpider
+  const { $Mock } = JSpider.tools;
+  await $Mock("excel");
+</script>
 
 
 </html>

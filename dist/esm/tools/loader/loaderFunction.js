@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-const e={script:e=>new Promise((o=>{let t=document.createElement("script");t.src=e,t.onload=()=>{console.log("加载完成"),t.remove(),o()},document.body.append(t)})),esm:e=>import(e)};export{e as loaderFunction};
+const e={script:e=>new Promise(((o,r)=>{let t=document.createElement("script");t.src=e,t.onload=()=>{console.log("加载完成"),t.remove(),o()},t.onerror=e=>r(e),document.body.append(t)})),esm:e=>import(e)};export{e as loaderFunction};

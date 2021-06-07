@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-import e from"./excel.js";const t={excel:{url:"/fake/excel",type:"GET",template:e}};export{t as Server};
+import e from"./excel.js";const t={excel:{url:"/fake/excel",type:"get",template:e}};export{t as Server};

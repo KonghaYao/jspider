@@ -37,7 +37,7 @@ class MockFetch {
             });
             if (result) {
                 const data = that.convert(result, {});
-                console.warn("代理中", data);
+                console.warn("mock代理中");
                 return new Promise((res) => res(new fakeResponse(data))).then((res) => sleepRandom(res));
             } else {
                 console.log("未使用 mockjs");

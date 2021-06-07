@@ -1,14 +1,15 @@
 const loaderFunction = {
     script(url) {
-        return new Promise((res) => {
-            let s = document.createElement("script");
-            s.src = url;
-            s.onload = () => {
+        return new Promise((resolve, reject) => {
+            let script = document.createElement("script");
+            script.src = url;
+            script.onload = () => {
                 console.log("加载完成");
-                s.remove();
-                res();
+                script.remove();
+                resolve();
             };
-            document.body.append(s);
+            script.onerror = (err) => reject(err);
+            document.body.append(script);
         });
     },
     esm(url) {

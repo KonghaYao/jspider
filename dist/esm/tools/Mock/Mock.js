@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-import{Server as o}from"./Server/index.js";import{$load as r}from"../loader/loader.js";import{MockFetch as e}from"./plugins/mockFetch.js";import"./Server/excel.js";import"../loader/scriptStore.js";import"../loader/loaderFunction.js";const t={};async function i(i){if(window.Mock||await r("mockjs").then((()=>e(window.Mock))),!t[i]){let{url:r,type:e,template:c}=o[i];window.Mock.mock(r,e,c),t[i]=!0}}export{i as $Mock};
+import{Server as o}from"./Server/index.js";import{$load as r}from"../loader/loader.js";import{MockFetch as e}from"./plugins/mockFetch.js";import"./Server/excel.js";import"../loader/scriptStore.js";import"../loader/loaderFunction.js";const c={};async function t(t){if(window.Mock||(await r("mockjs"),new e(window.Mock),console.warn("Mockjs 载入并代理 Ajax 中")),!c[t]){console.log("mock",t);let{url:r,type:e,template:i}=o[t];window.Mock.mock(r,e,i),c[t]=!0}}export{t as $Mock};

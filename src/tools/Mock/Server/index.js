@@ -3,7 +3,7 @@ import excelTemplate from "./excel.js";
 const Server = {
     excel: {
         url: "/fake/excel",
-        type: "GET",
+        type: "get",
         template: excelTemplate,
     },
 };
