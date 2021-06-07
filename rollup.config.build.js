@@ -63,6 +63,11 @@ export default [
                 name: "JSpider",
                 exports: "named",
             },
+            {
+                // 打包出口
+                file: "./dist/esm/JSpider.min.js",
+                format: "es",
+            },
         ],
     },
 ];
