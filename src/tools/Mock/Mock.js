@@ -1,5 +1,5 @@
 import { Server } from "./Server/index.js";
-import { $load } from "../loader.js";
+import { $load } from "../loader/loader.js";
 import { MockFetch } from "./plugins/mockFetch.js";
 const cache = {};
 async function Mock(MockSiteName) {
@@ -12,4 +12,4 @@ async function Mock(MockSiteName) {
         cache[MockSiteName] = true;
     }
 }
-export { Mock };
+export { Mock as $Mock };
