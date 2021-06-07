@@ -6,7 +6,9 @@
 
 ### 极速爬取
 
-只有简单的两行, 适用于极速操作，这会直接将这些 URL 中的内容下载到本地。
+只有简单的几行, 适用于极速操作，这会直接将这些 URL 中的内容下载到本地。
+
+!> 右键 -> 检查，打开浏览器 Devtools，在 Console 中即可使用这些代码哦！
 
 !> **请打开浏览器开发者工具，网页已经载入了 JSpider，并创建了虚拟后台。**
 
@@ -18,6 +20,7 @@ import('https://cdn.jsdelivr.net/npm/js-spider/dist/esm/JSpider.js').then({JSpid
 JSpider.simpleCrawl(["fake/excel","fake/excel"]);
 ```
 
+> 这里是通过 Mockjs 对 URL 进行了代理，所以接收得到数据
 ### 更加高级的自定义爬取
 
 ```js
@@ -79,3 +82,24 @@ JSpider 未来的目标是兼容 NodeJS 平台和浏览器，让一套代码运�
 ## License
 
  Copyright © KonghaYao MIT licensed
+
+## 对于 JSpider 使用的库的感谢声明
+
+JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm 和 jsDelivr 网站两个来源载入。排名不分先后，只是记录个人对于这些库的使用体验。
+
+1. Rxjs 十分好用的响应式编程库，以至于 JSpider 的主要构架就是使用它写出来的。
+
+2. Rollup 代码打包库，使用 Rollup 打包的库为我的项目节省了很多时间。
+
+3. Mockjs 很有想法的一个前端数据代理库，很可惜的是没有提供 fetch 的代理，所以我自己做了一个插件。
+
+4. lodash-es 无敌的工具库，在一些比较常用的底层代码中有使用。
+
+5. xlsx ExcelHelper 的核心插件，用于从对象数据直接构建 Excel 常用文件的操作，十分好用的一个插件。
+
+6. jszip
+
+7. dexie.js JSpider 得以链接 indexDB 进行储存操作的救星，说实话 indexDB 的 API 太乱了。
+
+8. zangodb.js 这个也是对 indexDB 的数据操作的一个库，API 简单易用，但是在项目中选择了更为活跃的 dexie.js 进行了indexDB 的链接。
+
