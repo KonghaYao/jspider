@@ -11,7 +11,9 @@
 !> **请打开浏览器开发者工具，网页已经载入了 JSpider，并创建了虚拟后台。**
 
 ```js
-import JSpider from 'JSpider.js';
+import('https://cdn.jsdelivr.net/npm/js-spider/dist/esm/JSpider.js').then(res=>{
+    console.log(res)
+});
 // 放入您的 URL
 JSpider.simpleCrawl(["fake/excel","fake/excel"]);
 ```
