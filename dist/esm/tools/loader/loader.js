@@ -1,39 +1,25 @@
-import { scriptMap as scriptStore } from './scriptStore.js';
-import { loaderFunction } from './loaderFunction.js';
+/**
+ * MIT License
+ * 
+ * Copyright (c) 2020 动中之动
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
-// 使用下面的 名称可以直接导入相应的包
-const RootMap = {
-    jsdelivr: "https://cdn.jsdelivr.net/",
-};
-let store = {
-    scriptMap: scriptStore,
-    _getURL(Module) {
-        // name 可以直接是 URL ，构建 URL 的对象或者是保存过的库的名称
-        let cursor = Module;
-        if (typeof Module === "string") {
-            const isExisted = scriptStore.hasOwnProperty(Module);
-            if (isExisted) cursor = scriptStore[Module]; // 输入为库存 key 值
-        }
-
-        if (typeof cursor === "string") return [{ url: cursor, type: "script" }];
-        return cursor instanceof Array ? cursor.map((el) => this._generateURLObject(el)) : [this._generateURLObject(cursor)]; // 返回值统一为数组
-    },
-    _generateURLObject({ root, repo, path, type = "script" }) {
-        return { url: (RootMap[root] || root) + repo + path, type };
-    },
-};
-
-function $load(Module) {
-    let urlArray = store._getURL(Module);
-    return Promise.all(
-        urlArray.map(({ url, type }) => {
-            console.log(url);
-            if (loaderFunction.hasOwnProperty(type)) {
-                return loaderFunction[type](url);
-            }
-            return null;
-        })
-    );
-}
-
-export { $load };
+import{scriptMap as t}from"./scriptStore.js";import{loaderFunction as e}from"./loaderFunction.js";const r={jsdelivr:"https://cdn.jsdelivr.net/"};let p={scriptMap:t,_getURL(e){let r=e;if("string"==typeof e){t.hasOwnProperty(e)&&(r=t[e])}return"string"==typeof r?[{url:r,type:"script"}]:r instanceof Array?r.map((t=>this._generateURLObject(t))):[this._generateURLObject(r)]},_generateURLObject:({root:t,repo:e,path:p,type:o="script"})=>({url:(r[t]||t)+e+p,type:o})};function o(t){let r=p._getURL(t);return Promise.all(r.map((({url:t,type:r})=>(console.log(t),e.hasOwnProperty(r)?e[r](t):null))))}export{o as $load};

@@ -1,53 +1,25 @@
-import { o as operate, O as OperatorSubscriber, m as map } from '../map-f4798e28.js';
+/**
+ * MIT License
+ * 
+ * Copyright (c) 2020 动中之动
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
-function filter(predicate, thisArg) {
-    return operate(function (source, subscriber) {
-        var index = 0;
-        source.subscribe(new OperatorSubscriber(subscriber, function (value) { return predicate.call(thisArg, value, index++) && subscriber.next(value); }));
-    });
-}
-
-// 在 浏览器中下载是不能够同时进行的，也就是说，如果前面的没有下载完，后面的又提交
-// 会导致后面的全部失效，所以设置 Promise 下载队列
-const DownloadQueue = {
-    main: Promise.resolve(true),
-    add(file) {
-        this.main.then(() => {
-            return aDownload(file);
-        });
-    },
-};
-const aDownload = function (file) {
-    let a = document.createElement("a");
-    a.href = URL.createObjectURL(file);
-    a.download = file.name;
-    a.click();
-    URL.revokeObjectURL(a.href);
-    a.remove();
-    console.log("%c 完成", "color:green");
-};
-function toFile(data, name) {
-    if (data instanceof File) return data;
-    if (data instanceof Blob) {
-        data.name = name;
-        return data;
-    }
-    return new File([JSON.stringify(data)], name);
-}
-const download = (task) => {
-    //  获取数据为 request
-    const { url, name } = task.data;
-    const data = task.$commit("processing");
-    const file = toFile(data, name || url.replace(/[^\/]*?\//g, ""));
-    DownloadQueue.add(file);
-};
-const Download =
-    (options = {}) =>
-    ($source) => {
-        return $source.pipe(
-            filter((task) => task.$status !== "error" && task.$result),
-            map(download)
-        );
-    };
-
-export { Download };
+import{o as e,O as n,m as r}from"../map-f4798e28.js";const t={main:Promise.resolve(!0),add(e){this.main.then((()=>o(e)))}},o=function(e){let n=document.createElement("a");n.href=URL.createObjectURL(e),n.download=e.name,n.click(),URL.revokeObjectURL(n.href),n.remove(),console.log("%c 完成","color:green")};const a=e=>{const{url:n,name:r}=e.data,o=function(e,n){return e instanceof File?e:e instanceof Blob?(e.name=n,e):new File([JSON.stringify(e)],n)}(e.$commit("processing"),r||n.replace(/[^\/]*?\//g,""));t.add(o)},c=(t={})=>t=>{return t.pipe((o=e=>"error"!==e.$status&&e.$result,e((function(e,r){var t=0;e.subscribe(new n(r,(function(e){return o.call(c,e,t++)&&r.next(e)})))}))),r(a));var o,c};export{c as Download};
