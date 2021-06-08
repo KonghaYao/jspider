@@ -11,13 +11,5 @@
   * [在线训练场](zh-cn/playground.md)
 
 * [JSpider 2 教程](/v2/JSpider.md)
-  * [Ajax](/v2/lib/Ajax.md)
-  * [Cookies](/v2/lib/Cookies.md)
-  * [Copy](/v2/lib/Copy.md)
-  * [Download](/v2/lib/Downloader.md)
-  * [Observer](/v2/lib/Observer.md)
-  * [Parser](/v2/lib/Parser.md)
-  * [Search](/v2/lib/Search.md)
-  
 * 版本相关
   * [版本更新清单]()

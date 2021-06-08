@@ -1,11 +1,4 @@
----
-title: JSpider——Downloader模块
-version: 2.0
-date: 2020/8/30
-author: KonghaYao
-tags:
-  -Jspider
----
+
 
 # :book: JSpider —— Downloader 模块 2.0
 
@@ -80,7 +73,3 @@ let file1 = new File(['11111'],'1.txt')
 file1.name = '2.txt'// 无效
 file1 = new File([file1],'2.txt')//有效
 ```
-
-## [推荐下一篇 —— Search](./Search.md)
-
-# [JSpider](../JSpider.md)

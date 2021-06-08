@@ -1,11 +1,4 @@
----
-title: JSpider——Search模块
-version: 2.0
-date: 2020/9/15
-author: KonghaYao
-tags:
-  -Jspider
----
+
 
 # :book: JSpider —— Search 模块 2.0
 
@@ -104,6 +97,3 @@ spider.Search.search(window,/s/i)
 // 推荐的方式
 spider.Search.search(spider.Search.Globals(),/s/i)
 ```
-
-## [推荐下一篇 —— Observer](./Observer.js)
-# [JSpider](../JSpider.md)

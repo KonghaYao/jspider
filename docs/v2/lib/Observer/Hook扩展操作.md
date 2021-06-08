@@ -1,10 +1,3 @@
----
-title: Hook函数扩展操作
-date: 2020/9/5
-author: KonhaYao
-tags:
-  -Jspider
----
 # Hook 函数扩展操作
 
 Hook 是 JSpider 的 Observer 的一个函数，使用 Proxy 对函数的参数进行控制操作。灵活使用 Hook 对于爬虫的 Ajax 监控和其他一些判断操作都有作用。
@@ -86,4 +79,3 @@ XHRwatch(/s/i);
 ```
 
 
-# [JSpider](../../JSpider.md)

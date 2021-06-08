@@ -1,11 +1,4 @@
----
-title: JSpider——Copy模块
-version: 2.0
-date: 2020/8/30
-author: KonghaYao
-tags:
-  -Jspider
----
+
 
 # :book: JSpider —— Copy 模块 2.0
 
@@ -56,6 +49,3 @@ spider.copy(123);
 spider.copy({1:2,2:3})
 spider.copy(document.querySelector('body'))
 ```
-
-
-# [JSpider教程](../JSpider.md)

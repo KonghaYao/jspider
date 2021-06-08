@@ -1,11 +1,3 @@
----
-title: JSpider——Ajax模块
-version: 2.0
-date: 2020/9/16
-author: KonghaYao
-tags:
-  -Jspider
----
 
 # :book: JSpider —— Ajax 模块 2.0
 
@@ -32,11 +24,6 @@ tags:
 <br>
 
 ## :hammer: 快速开始
-### JsDelivr cdn 载入链接解析
-按类型引入 
-- ES6引入 [https://cdn.jsdelivr.net/npm/js-spider/JSpider.min.js](#)
-- ES5引入 [https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js](#)
-- 单个模块引入 [https://cdn.jsdelivr.net/npm/js-spider/src/模块名.js](#)
 
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
@@ -192,8 +179,3 @@ await spider.Ajax({
 第二个是**一个数组 [ url , options ]**
 `url` 是下一次请求的 url
 `options` 作为对象，可以覆盖默认的 options，实现传递不同的请求参数。
-
-<br>
-
-## [推荐下一篇——Parser](./Parser.md)
-# [JSpider](../JSpider.md)

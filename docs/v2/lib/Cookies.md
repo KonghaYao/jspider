@@ -1,11 +1,3 @@
----
-title: JSpider——Cookies 模块
-version: 2.0
-date: 2020/10/6
-author: KonghaYao
-tags:
-  -Jspider
----
 
 # :alembic:​ JSpider —— Cookies 模块 2.0
 浏览器本身对于 js 获取 cookies 是有限制, js 获取 cookies 需要符合 同一个域名并被服务器允许才可以获取, 所以能够操作的 cookies 是有限制的, 但是请求的时候携带的 cookies ，所以对于 cookies 的操作其实是很一般的查看和删除修改。

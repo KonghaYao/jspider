@@ -1,11 +1,3 @@
----
-title: JSpider——Parser模块
-version: 2.0
-date: 2020/8/30
-author: KonghaYao
-tags:
-  -Jspider
----
 
 # :book: JSpider —— Parser 模块 2.0
 
@@ -114,10 +106,4 @@ let MarkdownStringArray = spider.TurnToMarkdown([HTMLString])
 ```
 
 <br>
-
-- [ ] CSV 模块
-
-## [推荐下一篇——Downloader](./Downloader.md)
-
-#  [JSpider](../JSpider.md)
 
