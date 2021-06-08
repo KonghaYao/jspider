@@ -1,4 +1,4 @@
-# JSpider 3
+# JSpider 3 BETA
 
 > JSpider 3 是在 Chrome Devtools 中进行爬虫的爬虫框架, 这个框架包括了完整的爬虫支持。
 
@@ -79,11 +79,7 @@ JSpider 未来的目标是兼容 NodeJS 平台和浏览器，让一套代码运�
 
 关于编程上的具体路径是实现 Typescript 化，但是限于编程能力，没有办法实现完整的 Typescript 化，所以未来的版本都会以 ECMA 标准来编写。
 
-## License
-
- Copyright © KonghaYao MIT licensed
-
-## 对于 JSpider 使用的库的感谢声明
+## **对于 JSpider 使用的库的感谢声明**
 
 JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm 和 jsDelivr 网站两个来源载入。排名不分先后，只是记录个人对于这些库的使用体验。
 
@@ -103,3 +99,10 @@ JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm �
 
 8. zangodb.js 这个也是对 indexDB 的数据操作的一个库，API 简单易用，但是在项目中选择了更为活跃的 dexie.js 进行了indexDB 的链接。
 
+9. uuid 用于创建 UUID 的项目，可以生成唯一的标识，用于 JSpider 的底层逻辑中。
+
+**感谢上面的项目为 JSpider 提供了众多的帮助！**
+
+## License
+
+ Copyright © KonghaYao MIT licensed

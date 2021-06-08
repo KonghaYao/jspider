@@ -12,5 +12,6 @@ const scriptStore = {
     gsap: ["https://cdn.jsdelivr.net/npm/gsap@3.6.1/dist/gsap.min.js", "https://cdn.jsdelivr.net/npm/gsap@3.6.1/dist/ScrollTrigger.min.js"],
     animejs: "https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js",
     rxjs: "https://cdn.jsdelivr.net/npm/rxjs@7.1.0/dist/bundles/rxjs.umd.min.js",
+    jszip: "https://cdn.jsdelivr.net/npm/jszip@3.6.0/dist/jszip.min.js",
 };
 export { scriptStore as scriptMap };
