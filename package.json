@@ -1,6 +1,6 @@
 {
   "name": "js-spider",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "main": "dist/JSpider.js",
   "author": "KonghaYao <20192831006@m.scnu.edu.cn>",
   "license": "MIT",
