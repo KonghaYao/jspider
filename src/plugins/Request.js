@@ -41,8 +41,8 @@ const request = (task, RequestOptions) => {
 const Request = (options) => {
     return ($source) => {
         options = options || {};
-        const { $delay = 200, $count = 3 } = options;
-        return $source.pipe(concurrent((task) => request(task, options), { $delay, $count }));
+        const { $delay = 200, $count = 3, RequestOptions = {} } = options;
+        return $source.pipe(concurrent((task) => request(task, RequestOptions), { $delay, $count }));
     };
 };
 export { Request };

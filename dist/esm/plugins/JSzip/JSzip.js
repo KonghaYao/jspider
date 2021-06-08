@@ -2,13 +2,13 @@ import { $load } from '../../tools/loader/loader.js';
 import '../../tools/loader/scriptStore.js';
 import '../../tools/loader/loaderFunction.js';
 
-let Dexie;
+let JSZip;
 function init() {
-    return $load("dexie").then((res) => {
-        Dexie = window.Dexie;
+    return $load("jszip").then((res) => {
+        JSZip = window.JSZip;
     });
 }
-var Dexie$1 = Dexie;
+var JSZip$1 = JSZip;
 
-export default Dexie$1;
-export { Dexie, init };
+export default JSZip$1;
+export { JSZip, init };

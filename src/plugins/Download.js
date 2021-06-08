@@ -18,21 +18,22 @@ const aDownload = function (file) {
     a.click();
     URL.revokeObjectURL(a.href);
     a.remove();
-    console.log("%c 完成", "color:green");
+    console.log("%c 下载完成", "color:green");
 };
 
 const download = (task) => {
     //  获取数据为 request
     const { url, name } = task.data;
     const data = task.$commit("processing");
-    const file = toFile(data, name || url.replace(/[^\/]*?\//g, ""));
+    const file = toFile(data, name || (typeof url === "string" ? url.replace(/[^\/]*?\//g, "") : ""));
     DownloadQueue.add(file);
+    return task;
 };
 const Download =
     (options = {}) =>
     ($source) => {
         return $source.pipe(
-            filter((task) => task.$status !== "error" && task.$result),
+            filter((task) => task._status !== "error" && task._result),
             map(download)
         );
     };

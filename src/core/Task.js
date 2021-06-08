@@ -13,11 +13,13 @@ class Task {
     _marks = {}; // 记录完成流程的过程标志 {UUID:pluginsResult}
     _complete = false;
     _completeUUID;
+    _mainUUID;
     data = {}; // 源数据，是由用户传入经过 format 的数据
 
-    constructor(message) {
+    constructor(message, UUID) {
         Object.assign(this.data, Components.data());
         this.$formatMessage(message);
+        this._markUUID = UUID;
     }
     $formatMessage(message) {
         let MessageType = type(message);
@@ -48,7 +50,10 @@ class Task {
     }
     // 数据导出和导入的接口
     $output() {
-        return ["_complete", , "_completeUUID", "_index", "_status", "_createdAt", "_updatedAt", "_errorList", "_result", "_marks", "data"].reduce((col, cur) => ((col[cur] = this[cur]), col), {});
+        return ["_complete", , "_completeUUID", "_mainUUID", "_index", "_status", "_createdAt", "_updatedAt", "_errorList", "_result", "_marks", "data"].reduce(
+            (col, cur) => ((col[cur] = this[cur]), col),
+            {}
+        );
     }
 }
 export { Task as default };

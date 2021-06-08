@@ -1,5 +1,5 @@
 import { from, of, pipe } from "rxjs";
-import { concatMap, map, skipWhile, tap } from "rxjs/operators";
+import { concatMap, map, mergeMap, skipWhile, tap } from "rxjs/operators";
 import Task from "./Task.js";
 import { v5 as uuidv5 } from "uuid";
 // JSpider 内部不进行 Error 相关的处理
@@ -32,11 +32,11 @@ class JSpider {
                 col.push(plugin);
             } else {
                 col.push(
-                    concatMap((task) => {
-                        let $source = of(task);
-                        let result = task.$checkRepeat(markUUID) ? $source : $source.pipe(plugin);
-                        return result;
-                    }),
+                    function (source) {
+                        let result;
+                        let $source = source.pipe(tap((task) => (result = task.$checkRepeat(markUUID))));
+                        return result ? $source : $source.pipe(plugin);
+                    },
                     map((task) => {
                         task.$Mark(markUUID);
                         return task;
@@ -50,13 +50,13 @@ class JSpider {
         console.log(this._pluginsUUID);
         this.pipeline = pipe(...pipelineArray);
     }
+
     apply(sourceArray) {
         console.log("开始流", sourceArray);
         return from(sourceArray)
             .pipe(
-                map((message, index) => {
-                    const task = new Task(message, index);
-                    task._mainUUID = this._pluginsUUID;
+                map((message) => {
+                    const task = new Task(message, this._pluginsUUID);
                     this._tasks.push(task);
                     return task;
                 }),
@@ -69,8 +69,9 @@ class JSpider {
                         return false;
                     }
                 }),
+
                 this.pipeline,
-                map((task) => task.$commit("complete", this._pluginsUUID))
+                tap((task) => task.$commit("complete", this._pluginsUUID))
             )
             .subscribe({
                 complete() {

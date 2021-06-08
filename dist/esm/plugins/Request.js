@@ -1,25 +1,56 @@
-/**
- * MIT License
- * 
- * Copyright (c) 2020 动中之动
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
+import concurrent from '../utils/concurrent.js';
+import '../from-87624c8d.js';
+import '../Subscriber-66236423.js';
+import '../bufferCount-cc50a06c.js';
+import '../mergeMap-063b7a69.js';
+import '../map-94257997.js';
+import '../of-f7a7e7ed.js';
 
-import t from"../utils/concurrent.js";import"../mergeMap-1cf10555.js";import"../map-f4798e28.js";import"../concatMap-0d4163f6.js";import"../delayWhen-ec4378ef.js";const e=e=>r=>{e=e||{};const{$delay:o=200,$count:n=3}=e;return r.pipe(t((t=>((t,e)=>{const{returnType:r=""}=e,{url:o,options:n}=t.$commit("start");return console.log("- 爬取 ",t.$commit("start")),fetch(o,n).then((t=>function(t,e){let r=t.headers.get("content-type")||"";return t.returnType&&"auto"!==t.returnType?e?t[e]():t.json():/text|html|rtf|xml/.test(r)?t.text():/json/.test(r)?t.json():/arrayBuffer/.test(r)?t.arrayBuffer():t.buffer?t.buffer():t.blob()}(t,r))).then((e=>(t.$commit("success",e),t))).catch((e=>(t.$commit("error",e),t)))})(t,e)),{$delay:o,$count:n}))};export{e as Request};
+const Format = function (res, returnType) {
+    let type = res.headers.get("content-type") || "";
+    // 根据 returnType 强制返回
+    if (!res.returnType || res.returnType === "auto") {
+        // 自动判断类型并解析
+        if (/text|html|rtf|xml/.test(type)) {
+            return res.text();
+        } else if (/json/.test(type)) {
+            return res.json();
+        } else if (/arrayBuffer/.test(type)) {
+            return res.arrayBuffer();
+        } else {
+            // 默认返回 Blob 数据 配合 node端 的buffer
+            return res.buffer ? res.buffer() : res.blob();
+        }
+    } else if (returnType) {
+        return res[returnType]();
+    } else {
+        return res.json();
+    }
+};
+const request = (task, RequestOptions) => {
+    const { returnType = "" } = RequestOptions;
+    //  获取数据为 request
+    const { url, options } = task.$commit("start");
+    console.log("- 爬取 ", task.$commit("start"));
+    return fetch(url, options)
+        .then((res) => {
+            return Format(res, returnType);
+        })
+        .then((res) => {
+            task.$commit("success", res);
+            return task;
+        })
+        .catch((err) => {
+            task.$commit("error", err);
+            return task;
+        });
+};
+const Request = (options) => {
+    return ($source) => {
+        options = options || {};
+        const { $delay = 200, $count = 3, RequestOptions = {} } = options;
+        return $source.pipe(concurrent((task) => request(task, RequestOptions), { $delay, $count }));
+    };
+};
+
+export { Request };

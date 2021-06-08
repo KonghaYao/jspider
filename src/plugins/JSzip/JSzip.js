@@ -1,10 +1,10 @@
-let JSzip;
+let JSZip;
 import { $load } from "../../tools/loader/loader.js";
 function init() {
     return $load("jszip").then((res) => {
-        JSzip = window.JSzip;
+        JSZip = window.JSZip;
     });
 }
 
-export { JSzip, init };
-export default JSzip;
+export { JSZip, init };
+export default JSZip;
