@@ -1,25 +1,20 @@
-/**
- * MIT License
- * 
- * Copyright (c) 2020 动中之动
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
+import { JSZip } from './JSzip.js';
+import '../../tools/loader/loader.js';
+import '../../tools/loader/scriptStore.js';
+import '../../tools/loader/loaderFunction.js';
 
-import{JSZip as o}from"./JSzip.js";import"../../tools/loader/loader.js";import"../../tools/loader/scriptStore.js";import"../../tools/loader/loaderFunction.js";async function e(e,t,r){let a=new o;e.forEach((o=>a.file(o.name,o)));let l=await a.generateAsync({type:"blob"});return l.name=`${t}-${r}.zip`,l}export{e as zipper};
+async function zipper(fileArray, zipName, index) {
+    // 启动压缩
+    let zip = new JSZip();
+    //压入所有文件
+    fileArray.forEach((file) => zip.file(file.name, file));
+    //设置压缩格式，开始打包
+    let content = await zip.generateAsync({
+        type: "blob", //nodejs用 nodebuffer ,浏览器用 blob
+    });
+    // 给压缩文件一个名称
+    content.name = `${zipName}-${index}.zip`;
+    return content;
+}
+
+export { zipper };

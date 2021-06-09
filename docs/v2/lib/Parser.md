@@ -30,13 +30,13 @@ XMLParser 除了 core 版本外都已经自带了。
 ### JsDelivr cdn 载入链接解析
 
 按类型引入 
-- ES6引入 [https://cdn.jsdelivr.net/npm/js-spider/JSpider.min.js](#)
-- ES5引入 [https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js](#)
-- 单个模块引入 [https://cdn.jsdelivr.net/npm/js-spider/src/模块名.js](#)
+- ES6引入 [https://cdn.jsdelivr.net/gh/KonghaYao/jspider/JSpider.min.js](#)
+- ES5引入 [https://cdn.jsdelivr.net/gh/KonghaYao/jspider/dist/JSpider.es5.js](#)
+- 单个模块引入 [https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/模块名.js](#)
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 //动态载入
-import('https://cdn.jsdelivr.net/npm/js-spider/src/HTMLParser.js')
+import('https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/HTMLParser.js')
       .then(res=>window.HTMLParser = res)
       
 // ES5 可以直接在 script 标签中引入

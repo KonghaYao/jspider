@@ -1,25 +1,411 @@
-/**
- * MIT License
- * 
- * Copyright (c) 2020 动中之动
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
+import { v as validate, s as stringify, T as Task } from '../Task-f41dffa5.js';
+import { _ as __extends, S as Subscriber, i as isFunction } from '../Subscriber-66236423.js';
+import { m as map } from '../map-94257997.js';
+import { p as pipe, f as from } from '../from-87624c8d.js';
+import './components.js';
+import '../utils/type.js';
 
-import{v as t,s as r,T as e}from"../Task-f41dffa5.js";import{_ as n,S as i,i as o}from"../Subscriber-66236423.js";import{m as s}from"../map-94257997.js";import{p as a,f as p}from"../from-87624c8d.js";import"./components.js";import"../utils/type.js";function c(){}var u=function(){function t(t){this.predicate=t}return t.prototype.call=function(t,r){return r.subscribe(new l(t,this.predicate))},t}(),l=function(t){function r(r,e){var n=t.call(this,r)||this;return n.predicate=e,n.skipping=!0,n.index=0,n}return n(r,t),r.prototype._next=function(t){var r=this.destination;this.skipping&&this.tryCallPredicate(t),this.skipping||r.next(t)},r.prototype.tryCallPredicate=function(t){try{var r=this.predicate(t,this.index++);this.skipping=Boolean(r)}catch(t){this.destination.error(t)}},r}(i);function h(t,r,e){return function(n){return n.lift(new f(t,r,e))}}var f=function(){function t(t,r,e){this.nextOrObserver=t,this.error=r,this.complete=e}return t.prototype.call=function(t,r){return r.subscribe(new _(t,this.nextOrObserver,this.error,this.complete))},t}(),_=function(t){function r(r,e,n,i){var s=t.call(this,r)||this;return s._tapNext=c,s._tapError=c,s._tapComplete=c,s._tapError=n||c,s._tapComplete=i||c,o(e)?(s._context=s,s._tapNext=e):e&&(s._context=e,s._tapNext=e.next||c,s._tapError=e.error||c,s._tapComplete=e.complete||c),s}return n(r,t),r.prototype._next=function(t){try{this._tapNext.call(this._context,t)}catch(t){return void this.destination.error(t)}this.destination.next(t)},r.prototype._error=function(t){try{this._tapError.call(this._context,t)}catch(t){return void this.destination.error(t)}this.destination.error(t)},r.prototype._complete=function(){try{this._tapComplete.call(this._context)}catch(t){return void this.destination.error(t)}return this.destination.complete()},r}(i);function d(t,r,e,n){switch(t){case 0:return r&e^~r&n;case 1:return r^e^n;case 2:return r&e^r&n^e&n;case 3:return r^e^n}}function m(t,r){return t<<r|t>>>32-r}var y=function(e,n,i){function o(e,o,s,a){if("string"==typeof e&&(e=function(t){t=unescape(encodeURIComponent(t));for(var r=[],e=0;e<t.length;++e)r.push(t.charCodeAt(e));return r}(e)),"string"==typeof o&&(o=function(r){if(!t(r))throw TypeError("Invalid UUID");var e,n=new Uint8Array(16);return n[0]=(e=parseInt(r.slice(0,8),16))>>>24,n[1]=e>>>16&255,n[2]=e>>>8&255,n[3]=255&e,n[4]=(e=parseInt(r.slice(9,13),16))>>>8,n[5]=255&e,n[6]=(e=parseInt(r.slice(14,18),16))>>>8,n[7]=255&e,n[8]=(e=parseInt(r.slice(19,23),16))>>>8,n[9]=255&e,n[10]=(e=parseInt(r.slice(24,36),16))/1099511627776&255,n[11]=e/4294967296&255,n[12]=e>>>24&255,n[13]=e>>>16&255,n[14]=e>>>8&255,n[15]=255&e,n}(o)),16!==o.length)throw TypeError("Namespace must be array-like (16 iterable integer values, 0-255)");var p=new Uint8Array(16+e.length);if(p.set(o),p.set(e,o.length),(p=i(p))[6]=15&p[6]|n,p[8]=63&p[8]|128,s){a=a||0;for(var c=0;c<16;++c)s[a+c]=p[c];return s}return r(p)}try{o.name=e}catch(t){}return o.DNS="6ba7b810-9dad-11d1-80b4-00c04fd430c8",o.URL="6ba7b811-9dad-11d1-80b4-00c04fd430c8",o}("v5",80,(function(t){var r=[1518500249,1859775393,2400959708,3395469782],e=[1732584193,4023233417,2562383102,271733878,3285377520];if("string"==typeof t){var n=unescape(encodeURIComponent(t));t=[];for(var i=0;i<n.length;++i)t.push(n.charCodeAt(i))}else Array.isArray(t)||(t=Array.prototype.slice.call(t));t.push(128);for(var o=t.length/4+2,s=Math.ceil(o/16),a=new Array(s),p=0;p<s;++p){for(var c=new Uint32Array(16),u=0;u<16;++u)c[u]=t[64*p+4*u]<<24|t[64*p+4*u+1]<<16|t[64*p+4*u+2]<<8|t[64*p+4*u+3];a[p]=c}a[s-1][14]=8*(t.length-1)/Math.pow(2,32),a[s-1][14]=Math.floor(a[s-1][14]),a[s-1][15]=8*(t.length-1)&4294967295;for(var l=0;l<s;++l){for(var h=new Uint32Array(80),f=0;f<16;++f)h[f]=a[l][f];for(var _=16;_<80;++_)h[_]=m(h[_-3]^h[_-8]^h[_-14]^h[_-16],1);for(var y=e[0],g=e[1],v=e[2],U=e[3],b=e[4],x=0;x<80;++x){var I=Math.floor(x/20),w=m(y,5)+d(I,g,v,U)+b+r[I]+h[x]>>>0;b=U,U=v,v=m(g,30)>>>0,g=y,y=w}e[0]=e[0]+y>>>0,e[1]=e[1]+g>>>0,e[2]=e[2]+v>>>0,e[3]=e[3]+U>>>0,e[4]=e[4]+b>>>0}return[e[0]>>24&255,e[0]>>16&255,e[0]>>8&255,255&e[0],e[1]>>24&255,e[1]>>16&255,e[1]>>8&255,255&e[1],e[2]>>24&255,e[2]>>16&255,e[2]>>8&255,255&e[2],e[3]>>24&255,e[3]>>16&255,e[3]>>8&255,255&e[3],e[4]>>24&255,e[4]>>16&255,e[4]>>8&255,255&e[4]]}));export default class{constructor(...t){this.plugins=t,this._createPipeline()}marksPath=[];plugins=[];_aboutElementIndex=-1;_status="normal";_tasks=[];_pluginsUUID;_createUUID(t){return y(t,y.URL)}_createPipeline(){let t=[],r=this.plugins.reduce(((r,e)=>{let n=e.toString(),i=this._createUUID(n);return e.uuid=i,t.push(n),!1===e.$canSkip?r.push(e):r.push((function(t){let r,n=t.pipe(h((t=>r=t.$checkRepeat(i))));return r?n:n.pipe(e)}),s((t=>(t.$Mark(i),t)))),r}),[]);this._pluginsUUID=this._createUUID(JSON.stringify(t)),console.log(this._pluginsUUID),this.pipeline=a(...r)}apply(t){return console.log("开始流",t),p(t).pipe(s((t=>{const r=new e(t,this._pluginsUUID);return this._tasks.push(r),r})),(r=t=>!(!t._complete||"complete"!==t._status||t._completeUUID!==this._pluginsUUID||(console.log("跳过一个目标"),0)),function(t){return t.lift(new u(r))}),this.pipeline,h((t=>t.$commit("complete",this._pluginsUUID)))).subscribe({complete(){console.log("爬虫全部完成")}});var r}setting(){}restart(){}retry(){}about(){}report(t){}}
+/** PURE_IMPORTS_START  PURE_IMPORTS_END */
+function noop() { }
+
+/** PURE_IMPORTS_START tslib,_Subscriber PURE_IMPORTS_END */
+function skipWhile(predicate) {
+    return function (source) { return source.lift(new SkipWhileOperator(predicate)); };
+}
+var SkipWhileOperator = /*@__PURE__*/ (function () {
+    function SkipWhileOperator(predicate) {
+        this.predicate = predicate;
+    }
+    SkipWhileOperator.prototype.call = function (subscriber, source) {
+        return source.subscribe(new SkipWhileSubscriber(subscriber, this.predicate));
+    };
+    return SkipWhileOperator;
+}());
+var SkipWhileSubscriber = /*@__PURE__*/ (function (_super) {
+    __extends(SkipWhileSubscriber, _super);
+    function SkipWhileSubscriber(destination, predicate) {
+        var _this = _super.call(this, destination) || this;
+        _this.predicate = predicate;
+        _this.skipping = true;
+        _this.index = 0;
+        return _this;
+    }
+    SkipWhileSubscriber.prototype._next = function (value) {
+        var destination = this.destination;
+        if (this.skipping) {
+            this.tryCallPredicate(value);
+        }
+        if (!this.skipping) {
+            destination.next(value);
+        }
+    };
+    SkipWhileSubscriber.prototype.tryCallPredicate = function (value) {
+        try {
+            var result = this.predicate(value, this.index++);
+            this.skipping = Boolean(result);
+        }
+        catch (err) {
+            this.destination.error(err);
+        }
+    };
+    return SkipWhileSubscriber;
+}(Subscriber));
+
+/** PURE_IMPORTS_START tslib,_Subscriber,_util_noop,_util_isFunction PURE_IMPORTS_END */
+function tap(nextOrObserver, error, complete) {
+    return function tapOperatorFunction(source) {
+        return source.lift(new DoOperator(nextOrObserver, error, complete));
+    };
+}
+var DoOperator = /*@__PURE__*/ (function () {
+    function DoOperator(nextOrObserver, error, complete) {
+        this.nextOrObserver = nextOrObserver;
+        this.error = error;
+        this.complete = complete;
+    }
+    DoOperator.prototype.call = function (subscriber, source) {
+        return source.subscribe(new TapSubscriber(subscriber, this.nextOrObserver, this.error, this.complete));
+    };
+    return DoOperator;
+}());
+var TapSubscriber = /*@__PURE__*/ (function (_super) {
+    __extends(TapSubscriber, _super);
+    function TapSubscriber(destination, observerOrNext, error, complete) {
+        var _this = _super.call(this, destination) || this;
+        _this._tapNext = noop;
+        _this._tapError = noop;
+        _this._tapComplete = noop;
+        _this._tapError = error || noop;
+        _this._tapComplete = complete || noop;
+        if (isFunction(observerOrNext)) {
+            _this._context = _this;
+            _this._tapNext = observerOrNext;
+        }
+        else if (observerOrNext) {
+            _this._context = observerOrNext;
+            _this._tapNext = observerOrNext.next || noop;
+            _this._tapError = observerOrNext.error || noop;
+            _this._tapComplete = observerOrNext.complete || noop;
+        }
+        return _this;
+    }
+    TapSubscriber.prototype._next = function (value) {
+        try {
+            this._tapNext.call(this._context, value);
+        }
+        catch (err) {
+            this.destination.error(err);
+            return;
+        }
+        this.destination.next(value);
+    };
+    TapSubscriber.prototype._error = function (err) {
+        try {
+            this._tapError.call(this._context, err);
+        }
+        catch (err) {
+            this.destination.error(err);
+            return;
+        }
+        this.destination.error(err);
+    };
+    TapSubscriber.prototype._complete = function () {
+        try {
+            this._tapComplete.call(this._context);
+        }
+        catch (err) {
+            this.destination.error(err);
+            return;
+        }
+        return this.destination.complete();
+    };
+    return TapSubscriber;
+}(Subscriber));
+
+function parse(uuid) {
+  if (!validate(uuid)) {
+    throw TypeError('Invalid UUID');
+  }
+
+  var v;
+  var arr = new Uint8Array(16); // Parse ########-....-....-....-............
+
+  arr[0] = (v = parseInt(uuid.slice(0, 8), 16)) >>> 24;
+  arr[1] = v >>> 16 & 0xff;
+  arr[2] = v >>> 8 & 0xff;
+  arr[3] = v & 0xff; // Parse ........-####-....-....-............
+
+  arr[4] = (v = parseInt(uuid.slice(9, 13), 16)) >>> 8;
+  arr[5] = v & 0xff; // Parse ........-....-####-....-............
+
+  arr[6] = (v = parseInt(uuid.slice(14, 18), 16)) >>> 8;
+  arr[7] = v & 0xff; // Parse ........-....-....-####-............
+
+  arr[8] = (v = parseInt(uuid.slice(19, 23), 16)) >>> 8;
+  arr[9] = v & 0xff; // Parse ........-....-....-....-############
+  // (Use "/" to avoid 32-bit truncation when bit-shifting high-order bytes)
+
+  arr[10] = (v = parseInt(uuid.slice(24, 36), 16)) / 0x10000000000 & 0xff;
+  arr[11] = v / 0x100000000 & 0xff;
+  arr[12] = v >>> 24 & 0xff;
+  arr[13] = v >>> 16 & 0xff;
+  arr[14] = v >>> 8 & 0xff;
+  arr[15] = v & 0xff;
+  return arr;
+}
+
+function stringToBytes(str) {
+  str = unescape(encodeURIComponent(str)); // UTF8 escape
+
+  var bytes = [];
+
+  for (var i = 0; i < str.length; ++i) {
+    bytes.push(str.charCodeAt(i));
+  }
+
+  return bytes;
+}
+
+var DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
+var URL = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
+function v35 (name, version, hashfunc) {
+  function generateUUID(value, namespace, buf, offset) {
+    if (typeof value === 'string') {
+      value = stringToBytes(value);
+    }
+
+    if (typeof namespace === 'string') {
+      namespace = parse(namespace);
+    }
+
+    if (namespace.length !== 16) {
+      throw TypeError('Namespace must be array-like (16 iterable integer values, 0-255)');
+    } // Compute hash of namespace and value, Per 4.3
+    // Future: Use spread syntax when supported on all platforms, e.g. `bytes =
+    // hashfunc([...namespace, ... value])`
+
+
+    var bytes = new Uint8Array(16 + value.length);
+    bytes.set(namespace);
+    bytes.set(value, namespace.length);
+    bytes = hashfunc(bytes);
+    bytes[6] = bytes[6] & 0x0f | version;
+    bytes[8] = bytes[8] & 0x3f | 0x80;
+
+    if (buf) {
+      offset = offset || 0;
+
+      for (var i = 0; i < 16; ++i) {
+        buf[offset + i] = bytes[i];
+      }
+
+      return buf;
+    }
+
+    return stringify(bytes);
+  } // Function#name is not settable on some platforms (#270)
+
+
+  try {
+    generateUUID.name = name; // eslint-disable-next-line no-empty
+  } catch (err) {} // For CommonJS default export support
+
+
+  generateUUID.DNS = DNS;
+  generateUUID.URL = URL;
+  return generateUUID;
+}
+
+// Adapted from Chris Veness' SHA1 code at
+// http://www.movable-type.co.uk/scripts/sha1.html
+function f(s, x, y, z) {
+  switch (s) {
+    case 0:
+      return x & y ^ ~x & z;
+
+    case 1:
+      return x ^ y ^ z;
+
+    case 2:
+      return x & y ^ x & z ^ y & z;
+
+    case 3:
+      return x ^ y ^ z;
+  }
+}
+
+function ROTL(x, n) {
+  return x << n | x >>> 32 - n;
+}
+
+function sha1(bytes) {
+  var K = [0x5a827999, 0x6ed9eba1, 0x8f1bbcdc, 0xca62c1d6];
+  var H = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0];
+
+  if (typeof bytes === 'string') {
+    var msg = unescape(encodeURIComponent(bytes)); // UTF8 escape
+
+    bytes = [];
+
+    for (var i = 0; i < msg.length; ++i) {
+      bytes.push(msg.charCodeAt(i));
+    }
+  } else if (!Array.isArray(bytes)) {
+    // Convert Array-like to Array
+    bytes = Array.prototype.slice.call(bytes);
+  }
+
+  bytes.push(0x80);
+  var l = bytes.length / 4 + 2;
+  var N = Math.ceil(l / 16);
+  var M = new Array(N);
+
+  for (var _i = 0; _i < N; ++_i) {
+    var arr = new Uint32Array(16);
+
+    for (var j = 0; j < 16; ++j) {
+      arr[j] = bytes[_i * 64 + j * 4] << 24 | bytes[_i * 64 + j * 4 + 1] << 16 | bytes[_i * 64 + j * 4 + 2] << 8 | bytes[_i * 64 + j * 4 + 3];
+    }
+
+    M[_i] = arr;
+  }
+
+  M[N - 1][14] = (bytes.length - 1) * 8 / Math.pow(2, 32);
+  M[N - 1][14] = Math.floor(M[N - 1][14]);
+  M[N - 1][15] = (bytes.length - 1) * 8 & 0xffffffff;
+
+  for (var _i2 = 0; _i2 < N; ++_i2) {
+    var W = new Uint32Array(80);
+
+    for (var t = 0; t < 16; ++t) {
+      W[t] = M[_i2][t];
+    }
+
+    for (var _t = 16; _t < 80; ++_t) {
+      W[_t] = ROTL(W[_t - 3] ^ W[_t - 8] ^ W[_t - 14] ^ W[_t - 16], 1);
+    }
+
+    var a = H[0];
+    var b = H[1];
+    var c = H[2];
+    var d = H[3];
+    var e = H[4];
+
+    for (var _t2 = 0; _t2 < 80; ++_t2) {
+      var s = Math.floor(_t2 / 20);
+      var T = ROTL(a, 5) + f(s, b, c, d) + e + K[s] + W[_t2] >>> 0;
+      e = d;
+      d = c;
+      c = ROTL(b, 30) >>> 0;
+      b = a;
+      a = T;
+    }
+
+    H[0] = H[0] + a >>> 0;
+    H[1] = H[1] + b >>> 0;
+    H[2] = H[2] + c >>> 0;
+    H[3] = H[3] + d >>> 0;
+    H[4] = H[4] + e >>> 0;
+  }
+
+  return [H[0] >> 24 & 0xff, H[0] >> 16 & 0xff, H[0] >> 8 & 0xff, H[0] & 0xff, H[1] >> 24 & 0xff, H[1] >> 16 & 0xff, H[1] >> 8 & 0xff, H[1] & 0xff, H[2] >> 24 & 0xff, H[2] >> 16 & 0xff, H[2] >> 8 & 0xff, H[2] & 0xff, H[3] >> 24 & 0xff, H[3] >> 16 & 0xff, H[3] >> 8 & 0xff, H[3] & 0xff, H[4] >> 24 & 0xff, H[4] >> 16 & 0xff, H[4] >> 8 & 0xff, H[4] & 0xff];
+}
+
+var v5 = v35('v5', 0x50, sha1);
+
+// JSpider 内部不进行 Error 相关的处理
+// 因为 Error 是在 Plugins 内部处理的，不通过 JSpider
+class JSpider {
+    constructor(...plugins) {
+        this.plugins = plugins; // 对 plugins 判断
+
+        this._createPipeline();
+    }
+    marksPath = [];
+    plugins = [];
+    _aboutElementIndex = -1; // 标志中断时的元素 Index
+    _status = "normal";
+    _tasks = [];
+    _pluginsUUID; //标志走过这一条流程线的 UUID 值
+    _createUUID(string) {
+        return v5(string, v5.URL);
+    }
+    _createPipeline() {
+        let UUIDCollection = [];
+        let pipelineArray = this.plugins.reduce((col, plugin) => {
+            // !使用 uuid 作为程序的唯一标识符，这个将用来判断数据是否经过同一个步骤
+
+            let string = plugin.toString();
+            let markUUID = this._createUUID(string); // 生成对代码的标志符
+            plugin.uuid = markUUID;
+            UUIDCollection.push(string);
+            if (plugin.$canSkip === false) {
+                col.push(plugin);
+            } else {
+                col.push(
+                    function (source) {
+                        let result;
+                        let $source = source.pipe(tap((task) => (result = task.$checkRepeat(markUUID))));
+                        return result ? $source : $source.pipe(plugin);
+                    },
+                    map((task) => {
+                        task.$Mark(markUUID);
+                        return task;
+                    })
+                );
+            }
+
+            return col;
+        }, []);
+        this._pluginsUUID = this._createUUID(JSON.stringify(UUIDCollection)); // 作为整条流水线的 UUID 证明
+        console.log(this._pluginsUUID);
+        this.pipeline = pipe(...pipelineArray);
+    }
+
+    apply(sourceArray) {
+        console.log("开始流", sourceArray);
+        return from(sourceArray)
+            .pipe(
+                map((message) => {
+                    const task = new Task(message, this._pluginsUUID);
+                    this._tasks.push(task);
+                    return task;
+                }),
+                skipWhile((task) => {
+                    // 跳过已经完成的项目
+                    if (task._complete && task._status === "complete" && task._completeUUID === this._pluginsUUID) {
+                        console.log("跳过一个目标");
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }),
+
+                this.pipeline,
+                tap((task) => task.$commit("complete", this._pluginsUUID))
+            )
+            .subscribe({
+                complete() {
+                    console.log("爬虫全部完成");
+                },
+            });
+    }
+
+    setting() {
+        // 对 JSpider 进行设置
+    }
+    restart() {
+        // 重新获取并覆盖数据
+    }
+    retry() {
+        // 对发生错误或失败的 Task 进行重试
+    }
+    about() {
+        // 中断事件流
+    }
+    report(director) {
+        // 根据 director 返回信息
+    }
+}
+
+export default JSpider;

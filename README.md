@@ -2,6 +2,8 @@
 
 > JSpider 3 是在 Chrome Devtools 中进行爬虫的爬虫框架, 这个框架包括了完整的爬虫支持。
 
+[JSpier 3.0 教程](http://dongzhongzhidong.gitee.io/jspider/)
+
 ## JSpider 3 更新内容
 
 JSpider 相较于 2.0+ 版本：

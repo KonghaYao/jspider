@@ -19,7 +19,7 @@
 
 ## 2.0.0+ 重要更改
 
-- 将模块移至 lib 文件夹，所以引用模块使用 https://cdn.jsdelivr.net/npm/js-spider/lib/Ajax.js 。
+- 将模块移至 lib 文件夹，所以引用模块使用 https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/Ajax.js 。
 - 大规模的接口已经修改，所以请重新查看教程。
 
 ## :pencil2: 介绍
@@ -38,22 +38,22 @@
 
 按 ES 版本引入
 
-- ES6引入 https://cdn.jsdelivr.net/npm/js-spider/JSpider.js
+- ES6引入 https://cdn.jsdelivr.net/gh/KonghaYao/jspider/JSpider.js
 
-- ES5引入 https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js
+- ES5引入 https://cdn.jsdelivr.net/gh/KonghaYao/jspider/dist/JSpider.es5.js
 
 ### 如何单独导入
 
 若只想在文件中使用一个模块可以使用下面的方式导入。
 
-`import hook from "https://cdn.jsdelivr.net/npm/js-spider/lib/Observer/hook.js"`
+`import hook from "https://cdn.jsdelivr.net/gh/KonghaYao/jspider/lib/Observer/hook.js"`
 
 所有的模块都放置在 lib 文件夹下，而且模块名首字母大写。单个函数名为小写。
 
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 
-import('https://cdn.jsdelivr.net/npm/js-spider/JSpider.js')
+import('https://cdn.jsdelivr.net/gh/KonghaYao/jspider/JSpider.js')
   .then(res=>window.JSpider = res.default)
 
 // ES5 可以直接在 script 标签中引入
@@ -164,11 +164,11 @@ Object.assign(window,JSpider.prototype);
 推荐在教程网页导入 JSpider 然后跟着教程学。
 
 **方式一：**
-直接打开开发者工具，在 console 面板，输入 `import("https://cdn.jsdelivr.net/npm/js-spider/JSpider.js")`，然后运行即可导入。
+直接打开开发者工具，在 console 面板，输入 `import("https://cdn.jsdelivr.net/gh/KonghaYao/jspider/JSpider.js")`，然后运行即可导入。
 
 **方式二：**
 遇到 CSP 阻止引入外部的文件。
-使用浏览器复制 `https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js` 的文件，然后在 console 上粘贴执行即可导入。
+使用浏览器复制 `https://cdn.jsdelivr.net/gh/KonghaYao/jspider/dist/JSpider.es5.js` 的文件，然后在 console 上粘贴执行即可导入。
 
 ### 如何找到模块的源文件
 在根目录下的 JS 文件是 JSpider 的入口文件，
@@ -186,7 +186,7 @@ Object.assign(window,JSpider.prototype);
 在根文件夹中有一个 index.bat 双击运行即可在项目的dist 文件夹中获取创建的 es5 版本。
 也可以直接从下面的连接获取。
 ES5 版本直接将使用的外部库直接添加到源代码末尾，所以文件较大。
-- [x] **ES5 版本打包文件**  https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js
+- [x] **ES5 版本打包文件**  https://cdn.jsdelivr.net/gh/KonghaYao/jspider/dist/JSpider.es5.js
 
 ### ES5 版本与普通版本的区别
 ES5 版本使用 webpack 将 JSpider 源代码降级为 ES5 版本并将 使用过的依赖的库并入 ES5 版本中, 使得直接导入时包括了依赖，但是这个文件的大小比原来要大很多。
@@ -200,7 +200,7 @@ ES5 版本使用 webpack 将 JSpider 源代码降级为 ES5 版本并将 使用�
 这个 CSP 协议是为了防止文件的非正常途经载入而使用的。所以，通过 script 标签和 import 引入不了文件，但是fetch 和 XHR 都是可以请求到文件的，但是然后以 Blob 数据接收并转化为字符串，使用 eval 注入脚本，可以绕过 CSP 协议。
 
 使用开发者工具中的 **snippets** 保存 ES5 版本的JSpider源代码
-或者直接在浏览器打开 [es5 版本源代码](https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.es5.js)
+或者直接在浏览器打开 [es5 版本源代码](https://cdn.jsdelivr.net/gh/KonghaYao/jspider/dist/JSpider.es5.js)
 ，然后复制运行即可。
 
 

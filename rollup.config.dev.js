@@ -1,7 +1,7 @@
 import resolve from "rollup-plugin-node-resolve"; // 帮助寻找node_modules里的包
 import commonjs from "rollup-plugin-commonjs"; // 将非ES6语法的包转为ES6可用
 import multiInput from "rollup-plugin-multi-input";
-import del from "rollup-plugin-delete";
+// import del from "rollup-plugin-delete";
 import json from "@rollup/plugin-json";
 
 export default {
@@ -12,7 +12,6 @@ export default {
         format: "es",
     },
     plugins: [
-        del({ targets: "dist/*" }),
         multiInput(),
         json(),
         resolve({
