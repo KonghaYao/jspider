@@ -11,7 +11,7 @@ async function Mock(MockSiteName) {
     }
 
     if (!cache[MockSiteName]) {
-        console.log("mock", MockSiteName);
+        console.log("mock 启动后台 ", MockSiteName);
         let { url, type, template } = Server[MockSiteName];
         window.Mock.mock(url, type, template);
         cache[MockSiteName] = true;
