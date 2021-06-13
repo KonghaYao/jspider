@@ -1,75 +1,25 @@
-function sleepRandom(result) {
-    return new Promise((res) => setTimeout(() => res(result), 200));
-}
-// 对 mockjs 扩充 fetch 的代理
-class fakeResponse {
-    constructor(result) {
-        this.data = result;
-    }
-    headers = {
-        "content-type": "application/json",
-        get(what) {
-            return this[what];
-        },
-    };
-    json() {
-        return this.data instanceof Object ? this.data : JSON.parse(this.data);
-    }
-    blob() {
-        return new Blob([this.data]);
-    }
-    text() {
-        return JSON.stringify(this.data);
-    }
-}
-class MockFetch {
-    constructor(Mock) {
-        this.Mock = Mock;
-        if (!window.fetch.isFake) this.fakeFetch();
-    }
-    fakeFetch() {
-        const that = this;
-        window.$fetch = window.fetch;
-        window.fetch = function (url, options = {}) {
-            let result = that.find({
-                url,
-                type: options.method || "GET",
-            });
-            if (result) {
-                const data = that.convert(result, {});
-                console.warn("mock代理中");
-                return new Promise((res) => res(new fakeResponse(data))).then((res) => sleepRandom(res));
-            } else {
-                console.log("未使用 mockjs");
-                return window.$fetch(...arguments).then((res) => sleepRandom(res));
-            }
-        };
-    }
-    // 查找与请求参数匹配的数据模板：URL，Type
-    // options = {url,type}
-    find(options) {
-        for (var sUrlType in this.Mock.XHR.Mock._mocked) {
-            var item = this.Mock.XHR.Mock._mocked[sUrlType];
-            if ((!item.rurl || this.match(item.rurl, options.url)) && (!item.rtype || this.match(item.rtype, options.type.toLowerCase()))) {
-                // console.log('[mock]', options.url, '>', item.rurl)
-                return item;
-            }
-        }
-        return false;
-    }
-    // 匹配 url 用的
-    match(expected, actual) {
-        if (this.Mock.Util.type(expected) === "string") {
-            return expected === actual;
-        }
-        if (this.Mock.Util.type(expected) === "regexp") {
-            return expected.test(actual);
-        }
-    }
-    // 数据模板 ＝> 响应数据
-    convert(item, options) {
-        return this.Mock.Util.isFunction(item.template) ? item.template(options) : this.Mock.XHR.Mock.mock(item.template);
-    }
-}
+/**
+ * MIT License
+ * 
+ * Copyright (c) 2020 动中之动
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
-export { MockFetch };
+function t(t){return new Promise((e=>setTimeout((()=>e(t)),200)))}class e{constructor(t){this.data=t}headers={"content-type":"application/json",get(t){return this[t]}};json(){return this.data instanceof Object?this.data:JSON.parse(this.data)}blob(){return new Blob([this.data])}text(){return JSON.stringify(this.data)}}class o{constructor(t){this.Mock=t,window.fetch.isFake||this.fakeFetch()}fakeFetch(){const o=this;window.$fetch=window.fetch,window.fetch=function(n,r={}){let i=o.find({url:n,type:r.method||"GET"});if(i){const n=o.convert(i,{});return console.warn("mock代理中"),new Promise((t=>t(new e(n)))).then((e=>t(e)))}return console.log("未使用 mockjs"),window.$fetch(...arguments).then((e=>t(e)))}}find(t){for(var e in this.Mock.XHR.Mock._mocked){var o=this.Mock.XHR.Mock._mocked[e];if((!o.rurl||this.match(o.rurl,t.url))&&(!o.rtype||this.match(o.rtype,t.type.toLowerCase())))return o}return!1}match(t,e){return"string"===this.Mock.Util.type(t)?t===e:"regexp"===this.Mock.Util.type(t)?t.test(e):void 0}convert(t,e){return this.Mock.Util.isFunction(t.template)?t.template(e):this.Mock.XHR.Mock.mock(t.template)}}export{o as MockFetch};

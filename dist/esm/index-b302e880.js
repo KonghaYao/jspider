@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-import{Dexie as e}from"./Dexie.js";import"../../tools/loader/loader.js";import"../../tools/loader/scriptStore.js";import"../../tools/loader/loaderFunction.js";const o={};function t(t){console.log(o);let r=new e(t);return r.open().catch("NoSuchDatabaseError",(o=>(r.close(),r=new e(t),r.version(1).stores({default:"_index,createdAt"}),r.open()))).then((e=>o[t]=e))}async function r(e="JSpider"){return o.hasOwnProperty(e)||await t(e),new Promise(((t,r)=>o[e].table("default").toArray(t)))}async function n(e,r){return o.hasOwnProperty(e)||await t(e),o[e].table("default").put(r,"_index")}export{r as getData,n as putData};
+import{Request as e}from"./plugins/Request.js";import{Download as o}from"./plugins/Download.js";import{ExcelHelper as p}from"./plugins/ExcelHelper.js";import{ZipFile as r}from"./plugins/zipFile.js";import{D as i}from"./Dexie-0fbec255.js";var l=Object.freeze({__proto__:null,Request:e,Download:o,ExcelHelper:p,ZipFile:r,Dexie:i});export{l as p};

@@ -1,45 +1,25 @@
-import { _ as __extends, S as Subscriber } from './Subscriber-66236423.js';
+/**
+ * MIT License
+ * 
+ * Copyright (c) 2020 动中之动
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
-/** PURE_IMPORTS_START tslib,_Subscriber PURE_IMPORTS_END */
-function map(project, thisArg) {
-    return function mapOperation(source) {
-        if (typeof project !== 'function') {
-            throw new TypeError('argument is not a function. Are you looking for `mapTo()`?');
-        }
-        return source.lift(new MapOperator(project, thisArg));
-    };
-}
-var MapOperator = /*@__PURE__*/ (function () {
-    function MapOperator(project, thisArg) {
-        this.project = project;
-        this.thisArg = thisArg;
-    }
-    MapOperator.prototype.call = function (subscriber, source) {
-        return source.subscribe(new MapSubscriber(subscriber, this.project, this.thisArg));
-    };
-    return MapOperator;
-}());
-var MapSubscriber = /*@__PURE__*/ (function (_super) {
-    __extends(MapSubscriber, _super);
-    function MapSubscriber(destination, project, thisArg) {
-        var _this = _super.call(this, destination) || this;
-        _this.project = project;
-        _this.count = 0;
-        _this.thisArg = thisArg || _this;
-        return _this;
-    }
-    MapSubscriber.prototype._next = function (value) {
-        var result;
-        try {
-            result = this.project.call(this.thisArg, value, this.count++);
-        }
-        catch (err) {
-            this.destination.error(err);
-            return;
-        }
-        this.destination.next(result);
-    };
-    return MapSubscriber;
-}(Subscriber));
-
-export { map as m };
+import{_ as t,S as r}from"./Subscriber-66236423.js";function n(t,r){return function(n){if("function"!=typeof t)throw new TypeError("argument is not a function. Are you looking for `mapTo()`?");return n.lift(new i(t,r))}}var i=function(){function t(t,r){this.project=t,this.thisArg=r}return t.prototype.call=function(t,r){return r.subscribe(new o(t,this.project,this.thisArg))},t}(),o=function(r){function n(t,n,i){var o=r.call(this,t)||this;return o.project=n,o.count=0,o.thisArg=i||o,o}return t(n,r),n.prototype._next=function(t){var r;try{r=this.project.call(this.thisArg,t,this.count++)}catch(t){return void this.destination.error(t)}this.destination.next(r)},n}(r);export{n as m};

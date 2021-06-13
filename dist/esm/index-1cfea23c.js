@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-import{Dexie as e}from"./Dexie.js";import"../../tools/loader/loader.js";import"../../tools/loader/scriptStore.js";import"../../tools/loader/loaderFunction.js";const o={};function t(t){console.log(o);let r=new e(t);return r.open().catch("NoSuchDatabaseError",(o=>(r.close(),r=new e(t),r.version(1).stores({default:"_index,createdAt"}),r.open()))).then((e=>o[t]=e))}async function r(e="JSpider"){return o.hasOwnProperty(e)||await t(e),new Promise(((t,r)=>o[e].table("default").toArray(t)))}async function n(e,r){return o.hasOwnProperty(e)||await t(e),o[e].table("default").put(r,"_index")}export{r as getData,n as putData};
+import{$load as o}from"./tools/loader/loader.js";import{$Mock as r}from"./tools/Mock/Mock.js";var t=Object.freeze({__proto__:null,$load:o,$Mock:r});export{t};
