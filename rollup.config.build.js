@@ -54,14 +54,12 @@ export default [
                 // 打包出口
                 dir: "./dist/cjs",
                 format: "cjs",
-                exports: "named",
             },
             {
                 // 打包出口
                 dir: "./dist/iife",
                 format: "iife",
                 name: "JSpider",
-                exports: "named",
             },
             {
                 // 打包出口

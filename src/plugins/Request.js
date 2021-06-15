@@ -2,7 +2,7 @@ import concurrent from "../utils/concurrent.js";
 const Format = function (res, returnType) {
     let type = res.headers.get("content-type") || "";
     // 根据 returnType 强制返回
-    if (!res.returnType || res.returnType === "auto") {
+    if (!returnType || returnType === "auto") {
         // 自动判断类型并解析
         if (/text|html|rtf|xml/.test(type)) {
             return res.text();
@@ -21,10 +21,10 @@ const Format = function (res, returnType) {
     }
 };
 const request = (task, RequestOptions) => {
-    const { returnType = "" } = RequestOptions;
+    const { returnType = "json" } = RequestOptions;
     //  获取数据为 request
     const { url, options } = task.$commit("start");
-    console.log("- 爬取 ", task.$commit("start"));
+    console.log("- 爬取 ", url);
     return fetch(url, options)
         .then((res) => {
             return Format(res, returnType);

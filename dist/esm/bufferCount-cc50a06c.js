@@ -1,25 +1,91 @@
-/**
- * MIT License
- * 
- * Copyright (c) 2020 动中之动
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
+import { _ as __extends, S as Subscriber } from './Subscriber-66236423.js';
 
-import{_ as t,S as e}from"./Subscriber-66236423.js";function r(t,e){return void 0===e&&(e=null),function(r){return r.lift(new n(t,e))}}var n=function(){function t(t,e){this.bufferSize=t,this.startBufferEvery=e,this.subscriberClass=e&&t!==e?s:i}return t.prototype.call=function(t,e){return e.subscribe(new this.subscriberClass(t,this.bufferSize,this.startBufferEvery))},t}(),i=function(e){function r(t,r){var n=e.call(this,t)||this;return n.bufferSize=r,n.buffer=[],n}return t(r,e),r.prototype._next=function(t){var e=this.buffer;e.push(t),e.length==this.bufferSize&&(this.destination.next(e),this.buffer=[])},r.prototype._complete=function(){var t=this.buffer;t.length>0&&this.destination.next(t),e.prototype._complete.call(this)},r}(e),s=function(e){function r(t,r,n){var i=e.call(this,t)||this;return i.bufferSize=r,i.startBufferEvery=n,i.buffers=[],i.count=0,i}return t(r,e),r.prototype._next=function(t){var e=this,r=e.bufferSize,n=e.startBufferEvery,i=e.buffers,s=e.count;this.count++,s%n==0&&i.push([]);for(var f=i.length;f--;){var u=i[f];u.push(t),u.length===r&&(i.splice(f,1),this.destination.next(u))}},r.prototype._complete=function(){for(var t=this.buffers,r=this.destination;t.length>0;){var n=t.shift();n.length>0&&r.next(n)}e.prototype._complete.call(this)},r}(e);export{r as b};
+/** PURE_IMPORTS_START tslib,_Subscriber PURE_IMPORTS_END */
+function bufferCount(bufferSize, startBufferEvery) {
+    if (startBufferEvery === void 0) {
+        startBufferEvery = null;
+    }
+    return function bufferCountOperatorFunction(source) {
+        return source.lift(new BufferCountOperator(bufferSize, startBufferEvery));
+    };
+}
+var BufferCountOperator = /*@__PURE__*/ (function () {
+    function BufferCountOperator(bufferSize, startBufferEvery) {
+        this.bufferSize = bufferSize;
+        this.startBufferEvery = startBufferEvery;
+        if (!startBufferEvery || bufferSize === startBufferEvery) {
+            this.subscriberClass = BufferCountSubscriber;
+        }
+        else {
+            this.subscriberClass = BufferSkipCountSubscriber;
+        }
+    }
+    BufferCountOperator.prototype.call = function (subscriber, source) {
+        return source.subscribe(new this.subscriberClass(subscriber, this.bufferSize, this.startBufferEvery));
+    };
+    return BufferCountOperator;
+}());
+var BufferCountSubscriber = /*@__PURE__*/ (function (_super) {
+    __extends(BufferCountSubscriber, _super);
+    function BufferCountSubscriber(destination, bufferSize) {
+        var _this = _super.call(this, destination) || this;
+        _this.bufferSize = bufferSize;
+        _this.buffer = [];
+        return _this;
+    }
+    BufferCountSubscriber.prototype._next = function (value) {
+        var buffer = this.buffer;
+        buffer.push(value);
+        if (buffer.length == this.bufferSize) {
+            this.destination.next(buffer);
+            this.buffer = [];
+        }
+    };
+    BufferCountSubscriber.prototype._complete = function () {
+        var buffer = this.buffer;
+        if (buffer.length > 0) {
+            this.destination.next(buffer);
+        }
+        _super.prototype._complete.call(this);
+    };
+    return BufferCountSubscriber;
+}(Subscriber));
+var BufferSkipCountSubscriber = /*@__PURE__*/ (function (_super) {
+    __extends(BufferSkipCountSubscriber, _super);
+    function BufferSkipCountSubscriber(destination, bufferSize, startBufferEvery) {
+        var _this = _super.call(this, destination) || this;
+        _this.bufferSize = bufferSize;
+        _this.startBufferEvery = startBufferEvery;
+        _this.buffers = [];
+        _this.count = 0;
+        return _this;
+    }
+    BufferSkipCountSubscriber.prototype._next = function (value) {
+        var _a = this, bufferSize = _a.bufferSize, startBufferEvery = _a.startBufferEvery, buffers = _a.buffers, count = _a.count;
+        this.count++;
+        if (count % startBufferEvery === 0) {
+            buffers.push([]);
+        }
+        for (var i = buffers.length; i--;) {
+            var buffer = buffers[i];
+            buffer.push(value);
+            if (buffer.length === bufferSize) {
+                buffers.splice(i, 1);
+                this.destination.next(buffer);
+            }
+        }
+    };
+    BufferSkipCountSubscriber.prototype._complete = function () {
+        var _a = this, buffers = _a.buffers, destination = _a.destination;
+        while (buffers.length > 0) {
+            var buffer = buffers.shift();
+            if (buffer.length > 0) {
+                destination.next(buffer);
+            }
+        }
+        _super.prototype._complete.call(this);
+    };
+    return BufferSkipCountSubscriber;
+}(Subscriber));
+
+export { bufferCount as b };
