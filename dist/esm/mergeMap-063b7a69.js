@@ -1,146 +1,25 @@
-import { _ as __extends, S as Subscriber } from './Subscriber-66236423.js';
-import { m as map } from './map-94257997.js';
-import { O as Observable, s as subscribeTo, f as from } from './from-87624c8d.js';
+/**
+ * MIT License
+ * 
+ * Copyright (c) 2020 动中之动
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
-/** PURE_IMPORTS_START tslib,_Subscriber,_Observable,_util_subscribeTo PURE_IMPORTS_END */
-var SimpleInnerSubscriber = /*@__PURE__*/ (function (_super) {
-    __extends(SimpleInnerSubscriber, _super);
-    function SimpleInnerSubscriber(parent) {
-        var _this = _super.call(this) || this;
-        _this.parent = parent;
-        return _this;
-    }
-    SimpleInnerSubscriber.prototype._next = function (value) {
-        this.parent.notifyNext(value);
-    };
-    SimpleInnerSubscriber.prototype._error = function (error) {
-        this.parent.notifyError(error);
-        this.unsubscribe();
-    };
-    SimpleInnerSubscriber.prototype._complete = function () {
-        this.parent.notifyComplete();
-        this.unsubscribe();
-    };
-    return SimpleInnerSubscriber;
-}(Subscriber));
-var SimpleOuterSubscriber = /*@__PURE__*/ (function (_super) {
-    __extends(SimpleOuterSubscriber, _super);
-    function SimpleOuterSubscriber() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    SimpleOuterSubscriber.prototype.notifyNext = function (innerValue) {
-        this.destination.next(innerValue);
-    };
-    SimpleOuterSubscriber.prototype.notifyError = function (err) {
-        this.destination.error(err);
-    };
-    SimpleOuterSubscriber.prototype.notifyComplete = function () {
-        this.destination.complete();
-    };
-    return SimpleOuterSubscriber;
-}(Subscriber));
-function innerSubscribe(result, innerSubscriber) {
-    if (innerSubscriber.closed) {
-        return undefined;
-    }
-    if (result instanceof Observable) {
-        return result.subscribe(innerSubscriber);
-    }
-    return subscribeTo(result)(innerSubscriber);
-}
-
-/** PURE_IMPORTS_START tslib,_map,_observable_from,_innerSubscribe PURE_IMPORTS_END */
-function mergeMap(project, resultSelector, concurrent) {
-    if (concurrent === void 0) {
-        concurrent = Number.POSITIVE_INFINITY;
-    }
-    if (typeof resultSelector === 'function') {
-        return function (source) { return source.pipe(mergeMap(function (a, i) { return from(project(a, i)).pipe(map(function (b, ii) { return resultSelector(a, b, i, ii); })); }, concurrent)); };
-    }
-    else if (typeof resultSelector === 'number') {
-        concurrent = resultSelector;
-    }
-    return function (source) { return source.lift(new MergeMapOperator(project, concurrent)); };
-}
-var MergeMapOperator = /*@__PURE__*/ (function () {
-    function MergeMapOperator(project, concurrent) {
-        if (concurrent === void 0) {
-            concurrent = Number.POSITIVE_INFINITY;
-        }
-        this.project = project;
-        this.concurrent = concurrent;
-    }
-    MergeMapOperator.prototype.call = function (observer, source) {
-        return source.subscribe(new MergeMapSubscriber(observer, this.project, this.concurrent));
-    };
-    return MergeMapOperator;
-}());
-var MergeMapSubscriber = /*@__PURE__*/ (function (_super) {
-    __extends(MergeMapSubscriber, _super);
-    function MergeMapSubscriber(destination, project, concurrent) {
-        if (concurrent === void 0) {
-            concurrent = Number.POSITIVE_INFINITY;
-        }
-        var _this = _super.call(this, destination) || this;
-        _this.project = project;
-        _this.concurrent = concurrent;
-        _this.hasCompleted = false;
-        _this.buffer = [];
-        _this.active = 0;
-        _this.index = 0;
-        return _this;
-    }
-    MergeMapSubscriber.prototype._next = function (value) {
-        if (this.active < this.concurrent) {
-            this._tryNext(value);
-        }
-        else {
-            this.buffer.push(value);
-        }
-    };
-    MergeMapSubscriber.prototype._tryNext = function (value) {
-        var result;
-        var index = this.index++;
-        try {
-            result = this.project(value, index);
-        }
-        catch (err) {
-            this.destination.error(err);
-            return;
-        }
-        this.active++;
-        this._innerSub(result);
-    };
-    MergeMapSubscriber.prototype._innerSub = function (ish) {
-        var innerSubscriber = new SimpleInnerSubscriber(this);
-        var destination = this.destination;
-        destination.add(innerSubscriber);
-        var innerSubscription = innerSubscribe(ish, innerSubscriber);
-        if (innerSubscription !== innerSubscriber) {
-            destination.add(innerSubscription);
-        }
-    };
-    MergeMapSubscriber.prototype._complete = function () {
-        this.hasCompleted = true;
-        if (this.active === 0 && this.buffer.length === 0) {
-            this.destination.complete();
-        }
-        this.unsubscribe();
-    };
-    MergeMapSubscriber.prototype.notifyNext = function (innerValue) {
-        this.destination.next(innerValue);
-    };
-    MergeMapSubscriber.prototype.notifyComplete = function () {
-        var buffer = this.buffer;
-        this.active--;
-        if (buffer.length > 0) {
-            this._next(buffer.shift());
-        }
-        else if (this.active === 0 && this.hasCompleted) {
-            this.destination.complete();
-        }
-    };
-    return MergeMapSubscriber;
-}(SimpleOuterSubscriber));
-
-export { mergeMap as m };
+import{_ as t,S as n}from"./Subscriber-66236423.js";import{m as i}from"./map-94257997.js";import{O as e,s as o,f as r}from"./from-87624c8d.js";var s=function(n){function i(t){var i=n.call(this)||this;return i.parent=t,i}return t(i,n),i.prototype._next=function(t){this.parent.notifyNext(t)},i.prototype._error=function(t){this.parent.notifyError(t),this.unsubscribe()},i.prototype._complete=function(){this.parent.notifyComplete(),this.unsubscribe()},i}(n),u=function(n){function i(){return null!==n&&n.apply(this,arguments)||this}return t(i,n),i.prototype.notifyNext=function(t){this.destination.next(t)},i.prototype.notifyError=function(t){this.destination.error(t)},i.prototype.notifyComplete=function(){this.destination.complete()},i}(n);function c(t,n,e){return void 0===e&&(e=Number.POSITIVE_INFINITY),"function"==typeof n?function(o){return o.pipe(c((function(e,o){return r(t(e,o)).pipe(i((function(t,i){return n(e,t,o,i)})))}),e))}:("number"==typeof n&&(e=n),function(n){return n.lift(new p(t,e))})}var p=function(){function t(t,n){void 0===n&&(n=Number.POSITIVE_INFINITY),this.project=t,this.concurrent=n}return t.prototype.call=function(t,n){return n.subscribe(new f(t,this.project,this.concurrent))},t}(),f=function(n){function i(t,i,e){void 0===e&&(e=Number.POSITIVE_INFINITY);var o=n.call(this,t)||this;return o.project=i,o.concurrent=e,o.hasCompleted=!1,o.buffer=[],o.active=0,o.index=0,o}return t(i,n),i.prototype._next=function(t){this.active<this.concurrent?this._tryNext(t):this.buffer.push(t)},i.prototype._tryNext=function(t){var n,i=this.index++;try{n=this.project(t,i)}catch(t){return void this.destination.error(t)}this.active++,this._innerSub(n)},i.prototype._innerSub=function(t){var n=new s(this),i=this.destination;i.add(n);var r=function(t,n){if(!n.closed)return t instanceof e?t.subscribe(n):o(t)(n)}(t,n);r!==n&&i.add(r)},i.prototype._complete=function(){this.hasCompleted=!0,0===this.active&&0===this.buffer.length&&this.destination.complete(),this.unsubscribe()},i.prototype.notifyNext=function(t){this.destination.next(t)},i.prototype.notifyComplete=function(){var t=this.buffer;this.active--,t.length>0?this._next(t.shift()):0===this.active&&this.hasCompleted&&this.destination.complete()},i}(u);export{c as m};
