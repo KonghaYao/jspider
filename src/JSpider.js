@@ -12,5 +12,4 @@ const JSpider = Object.assign(core, {
     ...pluginTools,
 });
 
-export { JSpider };
 export default JSpider;

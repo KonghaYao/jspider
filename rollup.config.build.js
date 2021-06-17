@@ -54,6 +54,7 @@ export default [
                 // 打包出口
                 dir: "./dist/cjs",
                 format: "cjs",
+                exports: "default",
             },
             {
                 // 打包出口
