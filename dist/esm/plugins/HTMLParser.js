@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-import{m as t}from"../map-94257997.js";import"../Subscriber-66236423.js";const e={svg:"image/svg+xml",html:"text/html",xml:"text/xml"},r=(r,m)=>s=>{let{formatter:o}=m||{};return s.pipe(t((t=>{let s=t.$commit("processing");o&&(s=o(s));let i=function(t,r,m){let{documentType:s}=m;return r((new DOMParser).parseFromString(t,e[s]))}(s,r,m);return t.$commit("success",i),t})))};export{r as HTMLParser};
+import{m as t}from"../map-39ac3b74.js";import"../Subscriber-4bc9607d.js";const e={svg:"image/svg+xml",html:"text/html",xml:"text/xml"},r=(r,m)=>s=>{let{formatter:o}=m||{};return s.pipe(t((t=>{let s=t.$commit("processing");o&&(s=o(s));let c=function(t,r,m){let{documentType:s}=m;return r((new DOMParser).parseFromString(t,e[s]))}(s,r,m);return t.$commit("success",c),t})))};export{r as HTMLParser};

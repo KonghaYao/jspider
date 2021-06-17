@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-import{m as i}from"./mergeMap-063b7a69.js";import{o as n}from"./of-f7a7e7ed.js";function e(...i){return Promise.all(i.reduce(((i,n)=>("init"in n&&n.init instanceof Function&&i.push(n.init()),i)),[]))}const t=function(e,t){let{canSkip:o=!1}=t||{};const r=t=>t.pipe(i((i=>n(e(i)))));return r.$canSkip=o,r};var o=Object.freeze({__proto__:null,initPlugins:e,createPlugin:t});export{t as c,e as i,o as p};
+import{Request as e}from"./plugins/Request.js";import{Download as o}from"./plugins/Download.js";import{ExcelHelper as p}from"./plugins/ExcelHelper.js";import{ZipFile as r}from"./plugins/zipFile.js";import{D as i}from"./Dexie-915c307d.js";var l=Object.freeze({__proto__:null,Request:e,Download:o,ExcelHelper:p,ZipFile:r,Dexie:i});export{l as p};

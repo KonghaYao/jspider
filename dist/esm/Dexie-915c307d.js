@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-import{_ as t,S as r}from"./Subscriber-66236423.js";function n(t,r){return function(n){if("function"!=typeof t)throw new TypeError("argument is not a function. Are you looking for `mapTo()`?");return n.lift(new i(t,r))}}var i=function(){function t(t,r){this.project=t,this.thisArg=r}return t.prototype.call=function(t,r){return r.subscribe(new o(t,this.project,this.thisArg))},t}(),o=function(r){function n(t,n,i){var o=r.call(this,t)||this;return o.project=n,o.count=0,o.thisArg=i||o,o}return t(n,r),n.prototype._next=function(t){var r;try{r=this.project.call(this.thisArg,t,this.count++)}catch(t){return void this.destination.error(t)}this.destination.next(r)},n}(r);export{n as m};
+import{init as e}from"./plugins/Dexie/Dexie.js";import{putData as t,getData as r}from"./plugins/Dexie/data.js";import{d as o}from"./delayWhen-2c1232cb.js";import{f as i}from"./from-d10c21fa.js";const a=e=>r=>{let{dbName:a="JSpider"}=e||{};return r.pipe(o((e=>{e.$commit("complete",e._mainUUID);let r=e.$output();return r._isABackup=!0,i(t(a,r))})))};var m=Object.freeze({__proto__:null,getData:r,setStore:a,init:e});export{m as D,a as s};

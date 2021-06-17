@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-import{O as n,a as r,b as o}from"./from-87624c8d.js";function t(n){return n&&"function"==typeof n.schedule}function e(t,e){return e?o(t,e):new n(r(t))}function f(){for(var n=[],r=0;r<arguments.length;r++)n[r]=arguments[r];var f=n[n.length-1];return t(f)?(n.pop(),o(n,f)):e(n)}export{f as o};
+import{_ as t,S as n}from"./Subscriber-4bc9607d.js";import{O as o,s as i}from"./subscribeTo-a0871bd2.js";var r=function(n){function o(t){var o=n.call(this)||this;return o.parent=t,o}return t(o,n),o.prototype._next=function(t){this.parent.notifyNext(t)},o.prototype._error=function(t){this.parent.notifyError(t),this.unsubscribe()},o.prototype._complete=function(){this.parent.notifyComplete(),this.unsubscribe()},o}(n),e=function(n){function o(){return null!==n&&n.apply(this,arguments)||this}return t(o,n),o.prototype.notifyNext=function(t){this.destination.next(t)},o.prototype.notifyError=function(t){this.destination.error(t)},o.prototype.notifyComplete=function(){this.destination.complete()},o}(n);function s(t,n){if(!n.closed)return t instanceof o?t.subscribe(n):i(t)(n)}export{r as S,e as a,s as i};

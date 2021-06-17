@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-import{Request as e}from"./plugins/Request.js";import{Download as o}from"./plugins/Download.js";import{ExcelHelper as p}from"./plugins/ExcelHelper.js";import{ZipFile as r}from"./plugins/zipFile.js";import{D as i}from"./Dexie-573fedf8.js";var l=Object.freeze({__proto__:null,Request:e,Download:o,ExcelHelper:p,ZipFile:r,Dexie:i});export{l as p};
+function e(e){return e&&"function"==typeof e.schedule}export{e as i};

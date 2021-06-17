@@ -1,4 +1,4 @@
-import concurrent from "../utils/concurrent.js";
+import { concurrent } from "../utils/concurrent.js";
 const Format = function (res, returnType) {
     let type = res.headers.get("content-type") || "";
     // 根据 returnType 强制返回
@@ -34,15 +34,17 @@ const request = (task, RequestOptions) => {
             return task;
         })
         .catch((err) => {
-            task.$commit("error", err);
-            return task;
+            throw err;
         });
 };
-const Request = (options) => {
-    return ($source) => {
-        options = options || {};
-        const { $delay = 200, $count = 3, RequestOptions = {} } = options;
-        return $source.pipe(concurrent((task) => request(task, RequestOptions), { $delay, $count }));
-    };
+// 在超过重试次数时，进行的操作
+const HandleError = function (err, err$) {
+    throw err;
 };
+const Request =
+    ({ delay = 200, buffer = 3, retry = 3, handleError = null, RequestOptions = {} } = {}) =>
+    ($source) => {
+        return $source.pipe(concurrent((task) => request(task, RequestOptions), { delay, buffer, retry, handleError: handleError || HandleError }));
+    };
+
 export { Request };
