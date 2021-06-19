@@ -18,7 +18,10 @@ article > p {
 .app-nav:hover ul {
     opacity: 1;
 }
-
+.markdown-section figure,
+.markdown-section p {
+    margin: 0.2em 0;
+}
 .search {
     border-radius: 1em;
     margin: 0.2em 0.5em;
@@ -80,7 +83,7 @@ article > p {
 }
 
 .markdown-section {
-    color: #595959c9;
+    color: #000000c9;
 
     background-image: linear-gradient(90deg, rgba(60, 10, 30, 0.04) 3%, transparent 0), linear-gradient(1turn, rgba(60, 10, 30, 0.04) 3%, transparent 0);
     background-size: 20px 20px;

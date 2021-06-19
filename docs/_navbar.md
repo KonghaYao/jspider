@@ -2,10 +2,9 @@
   * [快速开始](zh-cn/quickstart.md)
   
 
-* 高级配置
- 
-
 * 开发者清单
+  * [爬虫小工具](zh-cn/tools)
+  * [JSpider 高级配置](zh-cn/pro)
   
 * 小技巧
   * [在线训练场](zh-cn/playground.md)
@@ -18,6 +17,3 @@
   * [Observer](/v2/lib/Observer.md)
   * [Parser](/v2/lib/Parser.md)
   * [Search](/v2/lib/Search.md)
-  
-* 版本相关
-  * [版本更新清单]()

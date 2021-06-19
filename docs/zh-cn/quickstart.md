@@ -5,13 +5,17 @@
 
 ## 如果你只想快速爬取文件
 
+### 0. 打开开发者工具
+
+**右键 ➡ 检查，然后您可以在 Console 下面直接书写您的代码**
+
 ### 1. 导入文件
 
 使用 import 异步导入您的插件，并将 JSpider 写入到 window 对象。
 
 代码需要异步执行，可以在 **Console** 中直接使用。若您对应于 **Devtools** 不太熟悉，可以先阅读 [Devtools 爬虫指南](/zh-cn/Devtools.md)。
 
-!> 注意： 在本网站中，已经直接帮您导入 JSpider 到 window 对象了，不用再重复这一步骤。
+!> 注意： 本网站的开发者工具中，已经直接帮您导入 JSpider 到 window 对象了，不用再重复这一步骤。
 
 ```js
 import('https://cdn.jsdelivr.net/npm/js-spider/dist/esm/JSpider.js').then({JSpider}=>{
