@@ -1,10 +1,10 @@
 // 私有属性的调用值
-const private = Symbol("hook property");
+const Private = Symbol("hook property");
 
 // 向私有属性进行函数事件挂载
 function $on(eventName, callback) {
     try {
-        this[private][eventName].push(callback);
+        this[Private][eventName].push(callback);
     } catch (e) {
         throw "事件挂载失败";
     }
@@ -13,7 +13,7 @@ function $on(eventName, callback) {
 // 如果一个事件同时挂载了两次，需要遍历全部元素才能判断
 function $off(eventName, callback) {
     try {
-        this[private][eventName] = this[private][eventName].filter((element) => element !== callback);
+        this[Private][eventName] = this[Private][eventName].filter((element) => element !== callback);
     } catch (e) {
         throw "事件删除失败";
     }
@@ -21,7 +21,7 @@ function $off(eventName, callback) {
 
 export function createProperty(func) {
     // 布置前置函数和后置函数
-    func[private] = {
+    func[Private] = {
         before: [],
         after: [],
     };
@@ -29,4 +29,4 @@ export function createProperty(func) {
     func.$on = $on;
     func.$off = $off;
 }
-export { private };
+export { Private };

@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-import o from"./ExcelHelper/createExcelFile.js";import{init as r}from"./ExcelHelper/xlsx.js";import{m as e}from"../map-39ac3b74.js";import"../tools/loader/loader.js";import"../tools/loader/scriptStore.js";import"../tools/loader/loaderFunction.js";import"../Subscriber-4bc9607d.js";const t=(r,t)=>s=>s.pipe(e(((e,s)=>{let{name:i="爬取结果",XLSXOptions:l={}}=t||{},m=e.$commit("processing");r&&(m=r(m));let p=o(m,i,l);return e.$commit("success",p),e})));t.init=r;export{t as ExcelHelper};
+import o from"./ExcelHelper/createExcelFile.js";import{init as r}from"./ExcelHelper/xlsx.js";import{m as e}from"../map-39ac3b74.js";import"../tools/loader/loader.js";import"../tools/loader/loaderFunction.js";import"../tools/loader/scriptStore.js";import"../tools/loader/jsDelivr.js";import"../utils/type.js";import"../Subscriber-4bc9607d.js";const t=(r,t)=>s=>s.pipe(e(((e,s)=>{let{name:i="爬取结果",XLSXOptions:l={}}=t||{},m=e.$commit("processing");r&&(m=r(m));let p=o(m,i,l);return e.$commit("success",p),e})));t.init=r;export{t as ExcelHelper};

@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-import{$load as o}from"../../tools/loader/loader.js";import"../../tools/loader/scriptStore.js";import"../../tools/loader/loaderFunction.js";let r;function t(){return o("jszip").then((o=>{r=window.JSZip}))}var e=r;export default e;export{r as JSZip,t as init};
+import{$load as o}from"../../tools/loader/loader.js";import"../../tools/loader/loaderFunction.js";import"../../tools/loader/scriptStore.js";import"../../tools/loader/jsDelivr.js";import"../../utils/type.js";let t;function r(){return o("jszip").then((o=>{t=window.JSZip}))}var e=t;export default e;export{t as JSZip,r as init};

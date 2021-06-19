@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-import{$load as o}from"../../tools/loader/loader.js";import"../../tools/loader/scriptStore.js";import"../../tools/loader/loaderFunction.js";let e;function r(){return o("dexie").then((o=>{e=window.Dexie}))}var t=e;export default t;export{e as Dexie,r as init};
+import{$load as o}from"../../tools/loader/loader.js";import"../../tools/loader/loaderFunction.js";import"../../tools/loader/scriptStore.js";import"../../tools/loader/jsDelivr.js";import"../../utils/type.js";let t;function r(){return o("dexie").then((o=>{t=window.Dexie}))}var e=t;export default e;export{t as Dexie,r as init};

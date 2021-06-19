@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-import{JSZip as o}from"./JSzip.js";import"../../tools/loader/loader.js";import"../../tools/loader/scriptStore.js";import"../../tools/loader/loaderFunction.js";async function e(e,t,r){let a=new o;e.forEach((o=>a.file(o.name,o)));let l=await a.generateAsync({type:"blob"});return l.name=`${t}-${r}.zip`,l}export{e as zipper};
+import{JSZip as o}from"./JSzip.js";import"../../tools/loader/loader.js";import"../../tools/loader/loaderFunction.js";import"../../tools/loader/scriptStore.js";import"../../tools/loader/jsDelivr.js";import"../../utils/type.js";async function t(t,e,r){let l=new o;t.forEach((o=>l.file(o.name,o)));let i=await l.generateAsync({type:"blob"});return i.name=`${e}-${r}.zip`,i}export{t as zipper};

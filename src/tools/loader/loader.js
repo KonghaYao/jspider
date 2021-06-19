@@ -1,38 +1,59 @@
 // 使用下面的 名称可以直接导入相应的包
 // 同时，如果需要导入其他数据的时候也可以使用
-import { scriptMap } from "./scriptStore.js";
 import { loaderFunction } from "./loaderFunction.js";
-const RootMap = {
-    jsdelivr: "https://cdn.jsdelivr.net/",
-};
-let store = {
-    scriptMap,
-    _getURL(Module) {
-        // name 可以直接是 URL ，构建 URL 的对象或者是保存过的库的名称
-        let cursor = Module;
-        if (typeof Module === "string") {
-            const isExisted = scriptMap.hasOwnProperty(Module);
-            if (isExisted) cursor = scriptMap[Module]; // 输入为库存 key 值
-        }
-
-        if (typeof cursor === "string") return [{ url: cursor, type: "script" }];
-        return cursor instanceof Array ? cursor.map((el) => this._generateURLObject(el)) : [this._generateURLObject(cursor)]; // 返回值统一为数组
-    },
-    _generateURLObject({ root, repo, path, type = "script" }) {
-        return { url: (RootMap[root] || root) + repo + path, type };
-    },
-};
-
-function $load(Module) {
-    let urlArray = store._getURL(Module);
-    return Promise.all(
-        urlArray.map(({ url, type }) => {
-            console.log(url);
-            if (loaderFunction.hasOwnProperty(type)) {
-                return loaderFunction[type](url);
+import scriptMap from "./scriptStore.js";
+import { jsdelivr } from "./jsDelivr.js";
+const URLTest = /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/;
+class ImportURL {
+    url = "";
+    type = "script"; //引入方式 script esm css
+    path = "";
+    version = "";
+    way = "npm";
+    constructor(Module) {
+        if (typeof Module == "string") {
+            if (URLTest.test(Module)) {
+                //字符串 URL
+                this.URL(Module);
+            } else {
+                //字符串表示 npm 中的包名
+                scriptMap.hasOwnProperty(Module)
+                    ? (this.url = scriptMap[Module])
+                    : this.jsdelivr({
+                          name: Module,
+                      });
             }
-            return Promise.resolve(true);
-        })
-    );
+        } else {
+            // object 形式的
+            this.jsdelivr(Module);
+        }
+    }
+    URL(urlString) {
+        this.url = urlString;
+    }
+    jsdelivr({ name, way = "npm", path = "", version = "", type }) {
+        this.path = path;
+        this.version = version;
+        this.way = way;
+        this.type = type;
+        this.url = jsdelivr(name, { version, store: way, path });
+    }
+    async getURL() {
+        return loaderFunction[this.type || "script"](this.url);
+    }
 }
-export { $load };
+/**
+ * $load 外部暴露的接口
+ * @date 2021-06-19
+ * @param {String|Object} Module :{}
+ * @param {Object} options
+ * @returns {Promise}
+ */
+import { type } from "../../utils/type.js";
+export function $load(Module) {
+    if (type(Module) === "array") {
+        return Promise.all(Module.map((i) => new ImportURL(i).getURL()));
+    } else {
+        return new ImportURL(Module).getURL();
+    }
+}

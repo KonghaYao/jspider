@@ -1,4 +1,4 @@
-import { searchBase } from "./Search/searchBase.js";
+import { searchObj } from "./searchObj.js";
 import { isRegExp, isString } from "lodash-es";
 /**
  * 搜索入口函数
@@ -15,7 +15,7 @@ export function search(obj, reg, max = 5) {
         reg = new RegExp(reg);
     }
     if (obj instanceof Object) {
-        return Object.fromEntries(searchBase(Object.entries(obj), reg, max));
+        return Object.fromEntries(searchObj(Object.entries(obj), reg, max));
     } else {
         throw new Error("不是对象，不能搜索");
     }

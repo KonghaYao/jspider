@@ -1,10 +1,5 @@
-const scriptStore = {
-    zangodb: {
-        root: "jsdelivr",
-        repo: "gh/erikolson186/zangodb/",
-        path: "dist/zangodb.min.js",
-        type: "script",
-    },
+export default {
+    zangodb: "https://cdn.jsdelivr.net/gh/erikolson186/zangodb/dist/zangodb.min.js",
     dexie: "https://cdn.jsdelivr.net/npm/dexie@3.0.3/dist/dexie.min.js",
     mockjs: "https://cdn.jsdelivr.net/npm/mockjs-esm/dist/mock.min.js",
     xlsx: "https://cdn.jsdelivr.net/npm/xlsx@0.17.0/dist/xlsx.full.min.js",
@@ -16,4 +11,3 @@ const scriptStore = {
     "ajax-hook": "https://unpkg.com/ajax-hook@2.0.3/dist/ajaxhook.min.js",
     axios: "https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js",
 };
-export { scriptStore as scriptMap };

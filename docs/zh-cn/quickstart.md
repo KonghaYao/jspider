@@ -132,7 +132,7 @@ const spider = new JSpider(
 
 ## 如果你想要高级自定义
 
-
+建议查看右上角的开发者文档模块下的文章。
 
 ## 如果你想深入了解 JSpider 的机制
 
@@ -140,3 +140,4 @@ const spider = new JSpider(
 
 1. 对于 [Rxjs](https://rxjs.dev/) 有一些了解。( 这个库涉及很多艰深的编程理念，学习曲线较陡峭 )
 
+2. 学习 JSpider 的源码。

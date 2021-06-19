@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-import{$load as o}from"../../tools/loader/loader.js";import"../../tools/loader/scriptStore.js";import"../../tools/loader/loaderFunction.js";let r;function t(){return o("xlsx").then((()=>{r=window.XLSX}))}var e=r;export default e;export{r as XLSX,t as init};
+import{$load as o}from"../../tools/loader/loader.js";import"../../tools/loader/loaderFunction.js";import"../../tools/loader/scriptStore.js";import"../../tools/loader/jsDelivr.js";import"../../utils/type.js";let t;function r(){return o("xlsx").then((()=>{t=window.XLSX}))}var e=t;export default e;export{t as XLSX,r as init};
