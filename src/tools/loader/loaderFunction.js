@@ -13,9 +13,6 @@ const loaderFunction = {
             document.body.append(script);
         });
     },
-    esm(url) {
-        return import(url);
-    },
     css(url) {
         return new Promise((resolve, reject) => {
             let style = document.createElement("style");

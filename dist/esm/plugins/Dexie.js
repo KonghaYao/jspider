@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-export{init}from"./Dexie/Dexie.js";export{getData}from"./Dexie/data.js";import"../delayWhen-2c1232cb.js";import"../from-d10c21fa.js";export{s as setStore}from"../Dexie-9a2b5656.js";import"../tools/loader/loader.js";import"../tools/loader/loaderFunction.js";import"../tools/loader/scriptStore.js";import"../tools/loader/jsDelivr.js";import"../utils/type.js";import"../Subscriber-4bc9607d.js";import"../subscribeTo-a0871bd2.js";
+export{init}from"./Dexie/Dexie.js";export{getData}from"./Dexie/data.js";import"../delayWhen-2c1232cb.js";import"../from-d10c21fa.js";export{s as setStore}from"../Dexie-a4f68edb.js";import"../tools/loader/loader.js";import"../tools/loader/loaderFunction.js";import"../tools/loader/scriptStore.js";import"../tools/loader/jsDelivr.js";import"../utils/type.js";import"../Subscriber-4bc9607d.js";import"../subscribeTo-a0871bd2.js";

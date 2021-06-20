@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-const e={script:e=>new Promise(((o,r)=>{let t=document.createElement("script");t.src=e,t.onload=()=>{console.log("加载完成"),t.remove(),o()},t.onerror=e=>r(e),document.body.append(t)})),esm:e=>import(e),css:e=>new Promise(((o,r)=>{let t=document.createElement("style");t.rel="stylesheet",t.src=e,t.onload=()=>{console.log("加载完成"),o()},t.onerror=e=>r(e),document.body.append(t)}))};export{e as loaderFunction};
+const e={script:e=>new Promise(((o,n)=>{let r=document.createElement("script");r.src=e,r.onload=()=>{console.log("加载完成"),r.remove(),o()},r.onerror=e=>n(e),document.body.append(r)})),css:e=>new Promise(((o,n)=>{let r=document.createElement("style");r.rel="stylesheet",r.src=e,r.onload=()=>{console.log("加载完成"),o()},r.onerror=e=>n(e),document.body.append(r)}))};export{e as loaderFunction};
