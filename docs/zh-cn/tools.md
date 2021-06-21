@@ -1,23 +1,23 @@
-# JSpider.tools —— 爬虫小工具
+# JSpider—— 爬虫小工具
 
->    tools 是对于爬虫有一些帮助的浏览器端的工具函数
+!>    tools 是对于爬虫有一些帮助的浏览器端的工具函数, 所有的函数都是 **以 $ 开头命名** 表示。
 
-## 插件导入工具 tools.$load(NameOrURL)
+## 插件导入工具 $load(string|object)
 
-插件导入工具 $load 是用于导入 js 插件或者是 css 文件的快速导入函数。
+>    插件导入工具 $load 是用于导入 js 插件或者是 css 文件的快速导入函数。
 
 ### 导入我想要的模块
 
 很多情况下 JS 导入 没有 import 关键字时期的 iife 形式封装的模块时，使用的手段具有很大的重复性，所以在 JSpider 中直接封装了导入模块的函数——$load。
 
 ```js
-let { $load } = JSpider.tools
+let { $load } = JSpider
 
-// npm 包名载入
+// ! npm 包名载入
 $load('rxjs');// 这里的是在 npm 包管理器内的名称，这个是一个唯一的小写字符串
 $load('jszip');
 
-// url 载入
+// !url 载入
 
 $load('https://cdn.jsdelivr.net/npm/jquery');
 $load({
@@ -25,8 +25,7 @@ $load({
     url:'https://cdn.jsdelivr.net/npm/jquery'
 })
 
-// 具体载入
-
+// 具体载入 （高级使用）
 $load({
     name:'jquery', 
     version:'3.6.0', // 版本号，可以不填，不填为最新版
@@ -34,8 +33,7 @@ $load({
     way:'npm'// 默认为 npm 包加载
 })
 
-// 混杂多个载入
-
+// 混杂多个载入（高级使用）
 $load([{
     name:'jquery', 
     version:'3.6.0', // 版本号，可以不填，不填为最新版
@@ -44,4 +42,6 @@ $load([{
 },'lodash'])
 
 ```
+
+## JS 变量查找工具
 

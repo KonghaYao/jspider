@@ -10,9 +10,8 @@ import iframe from "./window-default.json";
  * @returns {Object} 返回 window 的属性和对象
  */
 import { difference, pick } from "lodash-es";
-function GlobalVars() {
+export function $GlobalVars() {
     // 通过比较得出window上的变量
     const diff = difference(Object.keys(window), iframe);
     return pick(window, diff);
 }
-export { GlobalVars };

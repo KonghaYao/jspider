@@ -5,7 +5,7 @@ import del from "rollup-plugin-delete";
 import json from "@rollup/plugin-json";
 
 export default {
-    input: ["src/**/*.js"], // 打包入口
+    input: "src/JSpider.js", // 打包入口
     output: {
         // 打包出口
         dir: "./dist/esm",

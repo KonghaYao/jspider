@@ -8,14 +8,12 @@ import { isRegExp, isString } from "lodash-es";
  * @param {Number} max=5 最大搜索深度
  * @returns {Object} 返回搜索结果的结构化结果
  */
-export function search(obj, reg, max = 5) {
-    if (max < 2) max = 2;
-
+export function $search(obj, reg) {
     if (!isRegExp(reg) && isString(reg)) {
         reg = new RegExp(reg);
     }
     if (obj instanceof Object) {
-        return Object.fromEntries(searchObj(Object.entries(obj), reg, max));
+        return Object.fromEntries(searchObj(Object.entries(obj), reg));
     } else {
         throw new Error("不是对象，不能搜索");
     }

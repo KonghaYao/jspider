@@ -8,7 +8,7 @@ const DEFAULT = (key, value) => value;
  * @param {Object} obj 被代理对象
  * @returns {Proxy} 返回代理的对象
  */
-function watch(obj) {
+function $watch(obj) {
     let type = Object.prototype.toString.call(obj).match(/(?<=\[object\s+)\S+?(?=\])/)[0];
     if ((type === "Object" || type === "Array") && obj) {
         let arr = Object.entries(obj);
@@ -82,4 +82,4 @@ function set(target, key, value) {
     }
 }
 
-export { watch };
+export { $watch };

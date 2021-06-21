@@ -17,7 +17,7 @@ import { asyncApply } from "./hook/asyncApply.js";
  * 如果 async = true 则会将所有的结果转化为一个 Promise
  */
 
-export function hook(func, async = false) {
+export function $hook(func, async = false) {
     createProperty(func);
     return new Proxy(func, {
         apply: async ? asyncApply : syncApply,

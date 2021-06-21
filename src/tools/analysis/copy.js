@@ -28,7 +28,7 @@ function clearCopyBarriers() {
  * @param {any} content 要复制的东西，可以是 DOM
  * @param {Boolean} clearBarriers=false 顺便帮你解决不能复制的问题，可能会失败
  */
-export function copy(content, clearBarriers = false) {
+export function $copy(content, clearBarriers = false) {
     if (clearBarriers) clearCopyBarriers();
 
     // 询问 window.copy 是否被覆盖了
