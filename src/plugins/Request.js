@@ -20,16 +20,19 @@ const Format = function (res, returnType) {
         return res.json();
     }
 };
+
+import consola from "consola";
 const request = (task, RequestOptions) => {
     const { returnType = "json" } = RequestOptions;
     //  获取数据为 request
     const { url, options } = task.$commit("start");
-    console.log("- 爬取 ", url);
+    consola.start("- 爬取 ", url);
     return fetch(url, options)
         .then((res) => {
             return Format(res, returnType);
         })
         .then((res) => {
+            consola.success(url + " 爬取成功");
             task.$commit("success", res);
             return task;
         })

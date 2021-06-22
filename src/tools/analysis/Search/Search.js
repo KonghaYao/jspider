@@ -12,6 +12,9 @@ export function $search(obj, reg) {
     if (!isRegExp(reg) && isString(reg)) {
         reg = new RegExp(reg);
     }
+    if (obj instanceof Array) {
+        return searchObj(Object.entries({ i: obj }), reg)[0][1];
+    }
     if (obj instanceof Object) {
         return Object.fromEntries(searchObj(Object.entries(obj), reg));
     } else {

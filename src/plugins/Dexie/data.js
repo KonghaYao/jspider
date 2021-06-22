@@ -1,7 +1,7 @@
+import Consola from "consola";
 import { Dexie } from "./Dexie.js";
 const dbCache = {};
 function openDB(dbName) {
-    console.log(dbCache);
     let db = new Dexie(dbName);
     return db
         .open()
@@ -18,10 +18,15 @@ function openDB(dbName) {
 //获得表数据
 async function getData(dbName = "JSpider") {
     if (!dbCache.hasOwnProperty(dbName)) await openDB(dbName);
-    return new Promise((resolve, reject) => dbCache[dbName].table("default").toArray(resolve));
+    return new Promise((resolve, reject) => {
+        Consola.success("从 index DB 中取出数据");
+        return dbCache[dbName].table("default").toArray(resolve);
+    });
 }
 async function putData(dbName, value) {
     if (!dbCache.hasOwnProperty(dbName)) await openDB(dbName);
-    return dbCache[dbName].table("default").put(value, "_index");
+    const data = dbCache[dbName].table("default").put(value, "_index");
+    Consola.success("置入数据成功");
+    return data;
 }
 export { getData, putData };

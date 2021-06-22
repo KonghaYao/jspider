@@ -1,7 +1,8 @@
-import { from, of, pipe } from "rxjs";
-import { concatMap, map, mergeMap, skipWhile, tap } from "rxjs/operators";
+import { from, pipe } from "rxjs";
+import { map, skipWhile, tap } from "rxjs/operators";
 import Task from "./Task.js";
 import { v5 as uuidv5 } from "uuid";
+import consola from "consola";
 // JSpider 内部不进行 Error 相关的处理
 // 因为 Error 是在 Plugins 内部处理的，不通过 JSpider
 class JSpider {
@@ -47,12 +48,11 @@ class JSpider {
             return col;
         }, []);
         this._pluginsUUID = this._createUUID(JSON.stringify(UUIDCollection)); // 作为整条流水线的 UUID 证明
-        console.log(this._pluginsUUID);
+        consola.start("任务总编号:", this._pluginsUUID);
         this.pipeline = pipe(...pipelineArray);
     }
 
     apply(sourceArray) {
-        console.log("开始流", sourceArray);
         return from(sourceArray)
             .pipe(
                 map((message) => {
@@ -63,7 +63,7 @@ class JSpider {
                 skipWhile((task) => {
                     // 跳过已经完成的项目
                     if (task._complete && task._status === "complete" && task._completeUUID === this._pluginsUUID) {
-                        console.log("跳过一个目标");
+                        consola.warn("跳过一个目标");
                         return true;
                     } else {
                         return false;
@@ -75,7 +75,7 @@ class JSpider {
             )
             .subscribe({
                 complete() {
-                    console.log("爬虫全部完成");
+                    consola.success("爬虫全部完成");
                 },
             });
     }

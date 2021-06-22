@@ -1,5 +1,4 @@
 import { merge } from "lodash-es";
-
 class TaskError {
     constructor(message) {
         this.err = message;

@@ -43,5 +43,35 @@ $load([{
 
 ```
 
-## JS 变量查找工具
+## JS 变量查找工具——$search(Object,RegexpOrString)
+
+对象查找器 $search =,   \$search 用于查找一个对象上是否含有符合 RegExpOrString 的部分属性，并返回一个具体对象
+
+```js
+let obj = {
+    "name": [
+        "毛静",
+        "侯秀英",
+        "张平",
+        "张涛",
+        "董刚",
+        "熊艳",
+        "宋娜",
+        "余刚",
+        "邹静",
+        "白静"
+    ],
+    "paragraph": "精行意史规管口进江及反识极增争几林。"
+}
+
+
+
+JSpider.$search(obj,/毛/) 
+//结果 {name: ["毛静"]}
+
+JSpider.$search(obj,'毛') 
+//结果 {name: ["毛静"]}
+```
+
+!>  注意不可以对引用了自身的对象进行 search，这样会导致不断搜索自身而死循环。
 

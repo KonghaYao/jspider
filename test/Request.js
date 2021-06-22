@@ -32,7 +32,6 @@ async function main() {
             }
         ),
         createPlugin((task) => {
-            console.log(task);
             return task;
         }),
         setStore()

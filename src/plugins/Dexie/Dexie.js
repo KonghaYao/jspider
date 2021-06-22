@@ -1,7 +1,7 @@
 let Dexie;
 import { $load } from "../../tools/loader/loader.js";
 function init() {
-    return $load("dexie").then((res) => {
+    return $load("dexie").then(() => {
         Dexie = window.Dexie;
     });
 }

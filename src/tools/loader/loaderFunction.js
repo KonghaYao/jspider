@@ -1,3 +1,4 @@
+import consola from "consola";
 const loaderFunction = {
     script(url) {
         return new Promise((resolve, reject) => {
@@ -5,7 +6,7 @@ const loaderFunction = {
             script.src = url;
 
             script.onload = () => {
-                console.log("加载完成");
+                consola.success(url + " 加载完成");
                 script.remove();
                 resolve();
             };
@@ -19,7 +20,7 @@ const loaderFunction = {
             style.rel = "stylesheet";
             style.src = url;
             style.onload = () => {
-                console.log("加载完成");
+                consola.success(url + " 加载完成");
                 resolve();
             };
             style.onerror = (err) => reject(err);

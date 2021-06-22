@@ -10,4 +10,5 @@ export default {
     jszip: "https://cdn.jsdelivr.net/npm/jszip@3.6.0/dist/jszip.min.js",
     "ajax-hook": "https://unpkg.com/ajax-hook@2.0.3/dist/ajaxhook.min.js",
     axios: "https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js",
+    react: ["https://unpkg.com/react@16/umd/react.production.min.js", "https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"],
 };
