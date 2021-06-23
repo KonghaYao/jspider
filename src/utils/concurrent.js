@@ -1,8 +1,9 @@
 import { retryAndDelay } from "./retryAndDelay.js";
-import { pipe, from, of } from "rxjs";
+import { pipe, from, of, EMPTY } from "rxjs";
 import { bufferCount, mergeMap, concatMap, switchMap, catchError } from "rxjs/operators";
+
 // 并发控制操作符
-export const concurrent = (
+export function concurrent(
     promiseFunc, // 并发的异步函数用于接收上流来的数据
     {
         retry = 3, // 若发生失败时最大重试次数
@@ -13,18 +14,25 @@ export const concurrent = (
             throw err;
         },
     } = {}
-) =>
-    pipe(
+) {
+    const single = (res) => from(promiseFunc(...res));
+    return pipe(
         bufferCount(buffer),
         concatMap((array) =>
             from(array).pipe(
                 mergeMap((...args) =>
                     of(args).pipe(
-                        switchMap((res) => from(promiseFunc(...res))),
+                        switchMap(single),
+
                         retryAndDelay(retry, delay),
-                        catchError(handleError)
+
+                        catchError((...args) => {
+                            const clear = handleError(...args); // 自定义错误处理
+                            return clear || EMPTY; // 通过 EMPTY 取消掉这个订阅
+                        })
                     )
                 )
             )
         )
     );
+}

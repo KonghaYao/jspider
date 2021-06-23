@@ -1,17 +1,15 @@
 import resolve from "rollup-plugin-node-resolve"; // 帮助寻找node_modules里的包
 import commonjs from "rollup-plugin-commonjs"; // 将非ES6语法的包转为ES6可用
-import del from "rollup-plugin-delete";
 import json from "@rollup/plugin-json";
 
 export default {
-    input: "src/JSpider.js", // 打包入口
+    input: "src/index.js", // 打包入口
     output: {
         // 打包出口
         dir: "./dist/esm",
         format: "es",
     },
     plugins: [
-        del({ targets: "dist/*" }),
         json(),
         resolve({
             browser: true,
