@@ -1,6 +1,6 @@
 import { retryAndDelay } from "./retryAndDelay.js";
-import { pipe, from, of, EMPTY } from "rxjs";
-import { bufferCount, mergeMap, concatMap, switchMap, catchError } from "rxjs/operators";
+import { pipe, of, EMPTY, timer } from "rxjs";
+import { bufferCount, concatMap, switchMap, catchError, delayWhen } from "rxjs/operators";
 
 // 并发控制操作符
 export function concurrent(
@@ -8,31 +8,29 @@ export function concurrent(
     {
         retry = 3, // 若发生失败时最大重试次数
         buffer = 3, // 每次并发处理的次数
-        delay = 300, // 每次延迟的次数；与 retryAndDelay 相同的一个函数
+        delay = 0, // 每个分组之间的间隔
+        retryDelay = 300, // 每次延迟的次数；与 retryAndDelay 相同的一个函数
         handleError = function (err, err$) {
             // 重试错误时的操作
-            throw err;
+            throw new Error(err);
         },
     } = {}
 ) {
-    const single = (res) => from(promiseFunc(...res));
+    const asyncSingle = (data) =>
+        of(data).pipe(
+            switchMap((res) => of(promiseFunc(res))),
+            retryAndDelay(retry, retryDelay),
+            catchError((...args) => {
+                const clear = handleError(...args); // 自定义错误处理
+                return clear || EMPTY; // 通过 EMPTY 取消掉这个订阅
+            })
+        );
     return pipe(
         bufferCount(buffer),
-        concatMap((array) =>
-            from(array).pipe(
-                mergeMap((...args) =>
-                    of(args).pipe(
-                        switchMap(single),
-
-                        retryAndDelay(retry, delay),
-
-                        catchError((...args) => {
-                            const clear = handleError(...args); // 自定义错误处理
-                            return clear || EMPTY; // 通过 EMPTY 取消掉这个订阅
-                        })
-                    )
-                )
-            )
-        )
+        delayWhen((_, index) => {
+            return timer(index * delay);
+        }), // 无论如何每一组都会被推迟的时间量
+        switchMap((array) => of(...array)),
+        concatMap(asyncSingle)
     );
 }
