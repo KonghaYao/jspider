@@ -7,7 +7,7 @@ const { $Mock } = JSpider;
 async function Main() {
     // 导入后台
     await $Mock("excel");
-    main();
-    // ZipTest();
+    // main();
+    ZipTest();
 }
 Main();

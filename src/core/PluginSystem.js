@@ -14,11 +14,11 @@
 *这里提一件事情，如果是在 options 里面写了函数，然后在 Plugin 内部写了相应调用函数的逻辑，就可以实现针对每个输入进行不同的返回*
 
 */
-import { EMPTY, from, of, pipe } from "rxjs";
+import { EMPTY, from, Observable, of, pipe } from "rxjs";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { createUUID } from "./createUUID.js";
 class PLUGIN {
-    constructor({ forceRetry = true, name = null, main, init = null, error = null, complete = null, options = null, saveMiddleResult = false, operator }) {
+    constructor({ forceRetry = true, name = null, main, init = null, error = null, complete = null, options = {}, saveMiddleResult = false, operator }) {
         const uuid = createUUID(main.toString());
         if (operator) this.operator = operator;
         // 写入自身中
@@ -44,8 +44,8 @@ class PLUGIN {
                         map((task) => [task.$commit("start", this.uuid), task.originData]),
 
                         switchMap(([data, originData]) => {
-                            const result = this.main(data, this.options, originData);
-                            return result instanceof Promise ? from(result) : of(result);
+                            const result = this.main(data, originData);
+                            return result instanceof Promise || result instanceof Observable ? from(result) : of(result);
                         }),
                         map((result) => {
                             task.$commit("success", result, this.uuid, this.saveMiddleResult);

@@ -31,6 +31,10 @@ const components = {
             }
             merge(this.originData, message);
         },
+        // 是 Task Group 的类型
+        Array(message) {
+            this.originData = message;
+        },
     },
     commit: {
         // 对应 $commit(status,payload) 函数

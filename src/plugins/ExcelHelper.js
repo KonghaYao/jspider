@@ -8,7 +8,7 @@ export const ExcelHelper = function (formatter, options = {}) {
     return Plugin({
         init,
         options,
-        main: function (data) {
+        main(data) {
             let { fileName = "爬取结果", XLSXOptions = {} } = this.options;
             if (formatter instanceof Function) data = formatter(data);
             return createExcelFile(data, fileName, XLSXOptions);

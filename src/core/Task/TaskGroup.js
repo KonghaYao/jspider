@@ -3,24 +3,34 @@ const components = {
     data: () => ({}),
     commit: {
         start(pluginUUID) {
-            return this.originData.map((task) => task.$commit("start", pluginUUID));
+            this._marks[pluginUUID] = null;
+
+            return this._result || this.originData.map((task) => task.$commit("start", pluginUUID));
         },
         complete(UUID) {
+            this._processUUID = UUID;
+            this._complete = true;
             this.originData.forEach((task) => task.$commit("complete", UUID));
+            return true;
         },
-        success(payload, UUID) {
+        success(payload, UUID, saveResult = false) {
+            this._marks[UUID] = saveResult ? this._result : true;
+            this._result = payload;
             this.originData.forEach((task) => task.$commit("success", payload, UUID, false));
+            return true;
         },
         error(payload) {
+            this._errorList.push(new TaskError(payload));
             this.originData.forEach((task) => task.$commit("error", payload));
+            return true;
         },
     },
 };
 const { commit } = components;
-
-export class TaskGroup {
-    constructor(...array) {
-        this.originData = new Array(...array);
+import { Task } from "./Task.js";
+export class TaskGroup extends Task {
+    constructor(array, UUID) {
+        super(new Array(...array), UUID);
     }
     $commit(status, ...payload) {
         if (commit[status] instanceof Function) {

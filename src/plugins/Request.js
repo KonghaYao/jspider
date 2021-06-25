@@ -29,7 +29,8 @@ const Format = function (res, returnType) {
 // Plugin 的核心函数 (this.main)，用于请求
 // 第一参数为 Task 内部使用 start 事件返回的参数，你可以看成是上一个 Plugin 返回给你的数据
 // 第二个为 Plugin 内部的 options, 可以调用这些数据进行操作
-const request = ({ url, options = {} }, { returnType = "json" } = {}) => {
+const request = function ({ url, options = {} }) {
+    const { returnType = "json" } = this.options;
     //  获取数据为 request
 
     console.log("- 爬取 ", url);

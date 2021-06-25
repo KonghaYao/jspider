@@ -1,5 +1,5 @@
 import { JSZip } from "./JSzip.js";
-const index = 0;
+let index = 0;
 async function zipper(fileArray, zipName) {
     // 启动压缩
     let zip = new JSZip();
