@@ -1,100 +1,48 @@
-import { from, pipe } from "rxjs";
-import { map, skipWhile, tap } from "rxjs/operators";
-import Task from "./Task.js";
-import { v5 as uuidv5 } from "uuid";
-import consola from "consola";
-// JSpider 内部不进行 Error 相关的处理
-// 因为 Error 是在 Plugins 内部处理的，不通过 JSpider
-class JSpider {
-    constructor(...plugins) {
-        this.plugins = plugins; // 对 plugins 判断
+import { createTask, skipSame } from "./coreOperators/index.js";
+import { createUUID } from "./createUUID.js";
+import { concurrent } from "../utils/concurrent.js";
+import { from } from "rxjs";
+import { filter, tap } from "rxjs/operators";
 
-        this._createPipeline();
+export class JSpider {
+    _ready = false;
+    uuid = "";
+
+    #PluginLine = [];
+    constructor(...Plugins) {
+        this.#createLineUUID(Plugins);
+        this.Plugins = Plugins;
     }
-    marksPath = [];
-    plugins = [];
-    _aboutElementIndex = -1; // 标志中断时的元素 Index
-    _status = "normal";
-    _tasks = [];
-    _pluginsUUID; //标志走过这一条流程线的 UUID 值
-    _createUUID(string) {
-        return uuidv5(string, uuidv5.URL);
-    }
-    _createPipeline() {
-        let UUIDCollection = [];
-        let pipelineArray = this.plugins.reduce((col, plugin) => {
-            // !使用 uuid 作为程序的唯一标识符，这个将用来判断数据是否经过同一个步骤
-
-            let string = plugin.toString();
-            let markUUID = this._createUUID(string); // 生成对代码的标志符
-            plugin.uuid = markUUID;
-            UUIDCollection.push(string);
-            if (plugin.$canSkip === false) {
-                col.push(plugin);
-            } else {
-                col.push(
-                    function (source) {
-                        let result;
-                        let $source = source.pipe(tap((task) => (result = task.$checkRepeat(markUUID))));
-                        return result ? $source : $source.pipe(plugin);
-                    },
-                    map((task) => {
-                        task.$Mark(markUUID);
-                        return task;
-                    })
-                );
-            }
-
-            return col;
-        }, []);
-        this._pluginsUUID = this._createUUID(JSON.stringify(UUIDCollection)); // 作为整条流水线的 UUID 证明
-        consola.start("任务总编号:", this._pluginsUUID);
-        this.pipeline = pipe(...pipelineArray);
+    #createLineUUID(Plugins) {
+        this.uuid = createUUID(Plugins.reduce((string, plugin) => string + plugin.uuid, ""));
     }
 
-    apply(sourceArray) {
-        return from(sourceArray)
+    #preparePlugins() {
+        return this.Plugins.reduce((promise, plugin) => {
+            this.#PluginLine.push(plugin.operator(this));
+            if (plugin.init instanceof Function) promise.then(() => plugin.init());
+            return promise;
+        }, Promise.resolve()).then(() => (this._ready = true));
+    }
+
+    use(plugin) {}
+    // 初始化未解决
+    async apply(inputs) {
+        if (!this._ready) {
+            await this.#preparePlugins();
+        }
+        from(inputs)
             .pipe(
-                map((message) => {
-                    const task = new Task(message, this._pluginsUUID);
-                    this._tasks.push(task);
-                    return task;
-                }),
-                skipWhile((task) => {
-                    // 跳过已经完成的项目
-                    if (task._complete && task._status === "complete" && task._completeUUID === this._pluginsUUID) {
-                        consola.warn("跳过一个目标");
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }),
-
-                this.pipeline,
-                tap((task) => task.$commit("complete", this._pluginsUUID))
+                createTask(this),
+                skipSame(this),
+                ...this.#PluginLine,
+                tap((task) => {
+                    // from(task).pipe(tap(console.log)).subscribe();
+                    task.$commit("complete", this.uuid);
+                })
             )
             .subscribe({
-                complete() {
-                    consola.success("爬虫全部完成");
-                },
+                complete() {},
             });
     }
-
-    setting() {
-        // 对 JSpider 进行设置
-    }
-    restart() {
-        // 重新获取并覆盖数据
-    }
-    retry() {
-        // 对发生错误或失败的 Task 进行重试
-    }
-    about() {
-        // 中断事件流
-    }
-    report(director) {
-        // 根据 director 返回信息
-    }
 }
-
-export { JSpider as default };

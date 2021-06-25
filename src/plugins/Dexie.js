@@ -1,7 +1,9 @@
 import { init } from "./Dexie/Dexie.js";
 import { putData, getData } from "./Dexie/data.js";
-import { delayWhen } from "rxjs/operators";
+
 import { from } from "rxjs";
+import { delayWhen } from "rxjs/operators";
+
 const setStore = (options) => ($source) => {
     // 初始化配置
     let { dbName = "JSpider" } = options || {};

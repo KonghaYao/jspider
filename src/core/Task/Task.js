@@ -1,12 +1,12 @@
 import Components from "./TaskComponents.js";
-import type from "../src/utils/type.js";
+import type from "../../utils/type.js";
 import { v4 as uuidv4 } from "uuid";
 import { pick } from "lodash-es";
 const { format, commit } = Components;
 
 // Task 的结构借鉴于 Vue 的组件写法
 
-class Task {
+export class Task {
     _index = uuidv4();
     _status = "free";
     _createdAt = new Date();
@@ -55,4 +55,3 @@ class Task {
         return output;
     }
 }
-export { Task as default };

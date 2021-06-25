@@ -1066,7 +1066,7 @@ var async = asyncScheduler;
 function noop() { }
 
 /** PURE_IMPORTS_START tslib,_Subscriber PURE_IMPORTS_END */
-function map$1(project, thisArg) {
+function map(project, thisArg) {
     return function mapOperation(source) {
         if (typeof project !== 'function') {
             throw new TypeError('argument is not a function. Are you looking for `mapTo()`?');
@@ -1435,7 +1435,7 @@ function mergeMap(project, resultSelector, concurrent) {
         concurrent = Number.POSITIVE_INFINITY;
     }
     if (typeof resultSelector === 'function') {
-        return function (source) { return source.pipe(mergeMap(function (a, i) { return from(project(a, i)).pipe(map$1(function (b, ii) { return resultSelector(a, b, i, ii); })); }, concurrent)); };
+        return function (source) { return source.pipe(mergeMap(function (a, i) { return from(project(a, i)).pipe(map(function (b, ii) { return resultSelector(a, b, i, ii); })); }, concurrent)); };
     }
     else if (typeof resultSelector === 'number') {
         concurrent = resultSelector;
@@ -2059,7 +2059,7 @@ var SkipWhileSubscriber = /*@__PURE__*/ (function (_super) {
 /** PURE_IMPORTS_START tslib,_map,_observable_from,_innerSubscribe PURE_IMPORTS_END */
 function switchMap(project, resultSelector) {
     if (typeof resultSelector === 'function') {
-        return function (source) { return source.pipe(switchMap(function (a, i) { return from(project(a, i)).pipe(map$1(function (b, ii) { return resultSelector(a, b, i, ii); })); })); };
+        return function (source) { return source.pipe(switchMap(function (a, i) { return from(project(a, i)).pipe(map(function (b, ii) { return resultSelector(a, b, i, ii); })); })); };
     }
     return function (source) { return source.lift(new SwitchMapOperator(project)); };
 }
@@ -2782,91 +2782,6 @@ var baseSetToString = !defineProperty ? identity : function(func, string) {
  */
 var setToString = shortOut(baseSetToString);
 
-/**
- * The base implementation of `_.findIndex` and `_.findLastIndex` without
- * support for iteratee shorthands.
- *
- * @private
- * @param {Array} array The array to inspect.
- * @param {Function} predicate The function invoked per iteration.
- * @param {number} fromIndex The index to search from.
- * @param {boolean} [fromRight] Specify iterating from right to left.
- * @returns {number} Returns the index of the matched value, else `-1`.
- */
-function baseFindIndex(array, predicate, fromIndex, fromRight) {
-  var length = array.length,
-      index = fromIndex + (fromRight ? 1 : -1);
-
-  while ((fromRight ? index-- : ++index < length)) {
-    if (predicate(array[index], index, array)) {
-      return index;
-    }
-  }
-  return -1;
-}
-
-/**
- * The base implementation of `_.isNaN` without support for number objects.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is `NaN`, else `false`.
- */
-function baseIsNaN(value) {
-  return value !== value;
-}
-
-/**
- * A specialized version of `_.indexOf` which performs strict equality
- * comparisons of values, i.e. `===`.
- *
- * @private
- * @param {Array} array The array to inspect.
- * @param {*} value The value to search for.
- * @param {number} fromIndex The index to search from.
- * @returns {number} Returns the index of the matched value, else `-1`.
- */
-function strictIndexOf(array, value, fromIndex) {
-  var index = fromIndex - 1,
-      length = array.length;
-
-  while (++index < length) {
-    if (array[index] === value) {
-      return index;
-    }
-  }
-  return -1;
-}
-
-/**
- * The base implementation of `_.indexOf` without `fromIndex` bounds checks.
- *
- * @private
- * @param {Array} array The array to inspect.
- * @param {*} value The value to search for.
- * @param {number} fromIndex The index to search from.
- * @returns {number} Returns the index of the matched value, else `-1`.
- */
-function baseIndexOf(array, value, fromIndex) {
-  return value === value
-    ? strictIndexOf(array, value, fromIndex)
-    : baseFindIndex(array, baseIsNaN, fromIndex);
-}
-
-/**
- * A specialized version of `_.includes` for arrays without support for
- * specifying an index to search from.
- *
- * @private
- * @param {Array} [array] The array to inspect.
- * @param {*} target The value to search for.
- * @returns {boolean} Returns `true` if `target` is found, else `false`.
- */
-function arrayIncludes(array, value) {
-  var length = array == null ? 0 : array.length;
-  return !!length && baseIndexOf(array, value, 0) > -1;
-}
-
 /** Used as references for various `Number` constants. */
 var MAX_SAFE_INTEGER$1 = 9007199254740991;
 
@@ -3317,9 +3232,9 @@ var argsTag = '[object Arguments]',
     mapTag = '[object Map]',
     numberTag = '[object Number]',
     objectTag$1 = '[object Object]',
-    regexpTag$1 = '[object RegExp]',
+    regexpTag = '[object RegExp]',
     setTag = '[object Set]',
-    stringTag$1 = '[object String]',
+    stringTag = '[object String]',
     weakMapTag = '[object WeakMap]';
 
 var arrayBufferTag = '[object ArrayBuffer]',
@@ -3346,8 +3261,8 @@ typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] =
 typedArrayTags[dataViewTag] = typedArrayTags[dateTag] =
 typedArrayTags[errorTag] = typedArrayTags[funcTag] =
 typedArrayTags[mapTag] = typedArrayTags[numberTag] =
-typedArrayTags[objectTag$1] = typedArrayTags[regexpTag$1] =
-typedArrayTags[setTag] = typedArrayTags[stringTag$1] =
+typedArrayTags[objectTag$1] = typedArrayTags[regexpTag] =
+typedArrayTags[setTag] = typedArrayTags[stringTag] =
 typedArrayTags[weakMapTag] = false;
 
 /**
@@ -3610,7 +3525,7 @@ function hashDelete(key) {
 }
 
 /** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED$2 = '__lodash_hash_undefined__';
+var HASH_UNDEFINED$1 = '__lodash_hash_undefined__';
 
 /** Used for built-in method references. */
 var objectProto$2 = Object.prototype;
@@ -3631,7 +3546,7 @@ function hashGet(key) {
   var data = this.__data__;
   if (nativeCreate) {
     var result = data[key];
-    return result === HASH_UNDEFINED$2 ? undefined : result;
+    return result === HASH_UNDEFINED$1 ? undefined : result;
   }
   return hasOwnProperty$2.call(data, key) ? data[key] : undefined;
 }
@@ -3657,7 +3572,7 @@ function hashHas(key) {
 }
 
 /** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED$1 = '__lodash_hash_undefined__';
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
 
 /**
  * Sets the hash `key` to `value`.
@@ -3672,7 +3587,7 @@ var HASH_UNDEFINED$1 = '__lodash_hash_undefined__';
 function hashSet(key, value) {
   var data = this.__data__;
   this.size += this.has(key) ? 0 : 1;
-  data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED$1 : value;
+  data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
   return this;
 }
 
@@ -4382,7 +4297,7 @@ function stackHas(key) {
 }
 
 /** Used as the size to enable large array optimizations. */
-var LARGE_ARRAY_SIZE$1 = 200;
+var LARGE_ARRAY_SIZE = 200;
 
 /**
  * Sets the stack `key` to `value`.
@@ -4398,7 +4313,7 @@ function stackSet(key, value) {
   var data = this.__data__;
   if (data instanceof ListCache) {
     var pairs = data.__data__;
-    if (!Map || (pairs.length < LARGE_ARRAY_SIZE$1 - 1)) {
+    if (!Map || (pairs.length < LARGE_ARRAY_SIZE - 1)) {
       pairs.push([key, value]);
       this.size = ++data.size;
       return this;
@@ -4501,71 +4416,6 @@ function initCloneObject(object) {
   return (typeof object.constructor == 'function' && !isPrototype(object))
     ? baseCreate(getPrototype(object))
     : {};
-}
-
-/** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED = '__lodash_hash_undefined__';
-
-/**
- * Adds `value` to the array cache.
- *
- * @private
- * @name add
- * @memberOf SetCache
- * @alias push
- * @param {*} value The value to cache.
- * @returns {Object} Returns the cache instance.
- */
-function setCacheAdd(value) {
-  this.__data__.set(value, HASH_UNDEFINED);
-  return this;
-}
-
-/**
- * Checks if `value` is in the array cache.
- *
- * @private
- * @name has
- * @memberOf SetCache
- * @param {*} value The value to search for.
- * @returns {number} Returns `true` if `value` is found, else `false`.
- */
-function setCacheHas(value) {
-  return this.__data__.has(value);
-}
-
-/**
- *
- * Creates an array cache object to store unique values.
- *
- * @private
- * @constructor
- * @param {Array} [values] The values to cache.
- */
-function SetCache(values) {
-  var index = -1,
-      length = values == null ? 0 : values.length;
-
-  this.__data__ = new MapCache;
-  while (++index < length) {
-    this.add(values[index]);
-  }
-}
-
-// Add methods to `SetCache`.
-SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
-SetCache.prototype.has = setCacheHas;
-
-/**
- * Checks if a `cache` value for `key` exists.
- *
- * @private
- * @param {Object} cache The cache to query.
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function cacheHas(cache, key) {
-  return cache.has(key);
 }
 
 /**
@@ -4882,174 +4732,6 @@ function baseMerge(object, source, srcIndex, customizer, stack) {
 }
 
 /**
- * This function is like `arrayIncludes` except that it accepts a comparator.
- *
- * @private
- * @param {Array} [array] The array to inspect.
- * @param {*} target The value to search for.
- * @param {Function} comparator The comparator invoked per element.
- * @returns {boolean} Returns `true` if `target` is found, else `false`.
- */
-function arrayIncludesWith(array, value, comparator) {
-  var index = -1,
-      length = array == null ? 0 : array.length;
-
-  while (++index < length) {
-    if (comparator(value, array[index])) {
-      return true;
-    }
-  }
-  return false;
-}
-
-/** Used as the size to enable large array optimizations. */
-var LARGE_ARRAY_SIZE = 200;
-
-/**
- * The base implementation of methods like `_.difference` without support
- * for excluding multiple arrays or iteratee shorthands.
- *
- * @private
- * @param {Array} array The array to inspect.
- * @param {Array} values The values to exclude.
- * @param {Function} [iteratee] The iteratee invoked per element.
- * @param {Function} [comparator] The comparator invoked per element.
- * @returns {Array} Returns the new array of filtered values.
- */
-function baseDifference(array, values, iteratee, comparator) {
-  var index = -1,
-      includes = arrayIncludes,
-      isCommon = true,
-      length = array.length,
-      result = [],
-      valuesLength = values.length;
-
-  if (!length) {
-    return result;
-  }
-  if (iteratee) {
-    values = arrayMap(values, baseUnary(iteratee));
-  }
-  if (comparator) {
-    includes = arrayIncludesWith;
-    isCommon = false;
-  }
-  else if (values.length >= LARGE_ARRAY_SIZE) {
-    includes = cacheHas;
-    isCommon = false;
-    values = new SetCache(values);
-  }
-  outer:
-  while (++index < length) {
-    var value = array[index],
-        computed = iteratee == null ? value : iteratee(value);
-
-    value = (comparator || value !== 0) ? value : 0;
-    if (isCommon && computed === computed) {
-      var valuesIndex = valuesLength;
-      while (valuesIndex--) {
-        if (values[valuesIndex] === computed) {
-          continue outer;
-        }
-      }
-      result.push(value);
-    }
-    else if (!includes(values, computed, comparator)) {
-      result.push(value);
-    }
-  }
-  return result;
-}
-
-/**
- * Creates an array of `array` values not included in the other given arrays
- * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
- * for equality comparisons. The order and references of result values are
- * determined by the first array.
- *
- * **Note:** Unlike `_.pullAll`, this method returns a new array.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Array
- * @param {Array} array The array to inspect.
- * @param {...Array} [values] The values to exclude.
- * @returns {Array} Returns the new array of filtered values.
- * @see _.without, _.xor
- * @example
- *
- * _.difference([2, 1], [2, 3]);
- * // => [1]
- */
-var difference = baseRest(function(array, values) {
-  return isArrayLikeObject(array)
-    ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true))
-    : [];
-});
-
-/** `Object#toString` result references. */
-var stringTag = '[object String]';
-
-/**
- * Checks if `value` is classified as a `String` primitive or object.
- *
- * @static
- * @since 0.1.0
- * @memberOf _
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a string, else `false`.
- * @example
- *
- * _.isString('abc');
- * // => true
- *
- * _.isString(1);
- * // => false
- */
-function isString(value) {
-  return typeof value == 'string' ||
-    (!isArray(value) && isObjectLike(value) && baseGetTag(value) == stringTag);
-}
-
-/** `Object#toString` result references. */
-var regexpTag = '[object RegExp]';
-
-/**
- * The base implementation of `_.isRegExp` without Node.js optimizations.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a regexp, else `false`.
- */
-function baseIsRegExp(value) {
-  return isObjectLike(value) && baseGetTag(value) == regexpTag;
-}
-
-/* Node.js helper references. */
-var nodeIsRegExp = nodeUtil && nodeUtil.isRegExp;
-
-/**
- * Checks if `value` is classified as a `RegExp` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a regexp, else `false`.
- * @example
- *
- * _.isRegExp(/abc/);
- * // => true
- *
- * _.isRegExp('/abc/');
- * // => false
- */
-var isRegExp = nodeIsRegExp ? baseUnary(nodeIsRegExp) : baseIsRegExp;
-
-/**
  * This method is like `_.assign` except that it recursively merges own and
  * inherited enumerable string keyed properties of source objects into the
  * destination object. Source properties that resolve to `undefined` are
@@ -5199,7 +4881,7 @@ class TaskError {
 // 不能使用 $作为前缀
 // this 总是指向 TaskWrapper 实例，而不是这个对象
 // this.originData 指向 data 内的信息
-const components$1 = {
+const components = {
     data() {
         return {
             url: {},
@@ -5351,7 +5033,7 @@ function stringToBytes(str) {
 }
 
 var DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
-var URL$1 = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
+var URL = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
 function v35 (name, version, hashfunc) {
   function generateUUID(value, namespace, buf, offset) {
     if (typeof value === 'string') {
@@ -5396,7 +5078,7 @@ function v35 (name, version, hashfunc) {
 
 
   generateUUID.DNS = DNS;
-  generateUUID.URL = URL$1;
+  generateUUID.URL = URL;
   return generateUUID;
 }
 
@@ -5517,7 +5199,7 @@ function sha1(bytes) {
 
 var v5 = v35('v5', 0x50, sha1);
 
-const { format, commit: commit$1 } = components$1;
+const { format, commit } = components;
 
 // Task 的结构借鉴于 Vue 的组件写法
 
@@ -5535,7 +5217,7 @@ class Task {
     _processUUID = ""; // JSpider 的实例的 UUID
 
     constructor(message, UUID) {
-        Object.assign(this.originData, components$1.data());
+        Object.assign(this.originData, components.data());
         this.$formatMessage(message);
         this._processUUID = UUID;
     }
@@ -5549,8 +5231,8 @@ class Task {
     }
     // 通过 commit 更改 Task 内部的status
     $commit(status, ...payload) {
-        if (commit$1[status] instanceof Function) {
-            const returnData = commit$1[status].apply(this, payload);
+        if (commit[status] instanceof Function) {
+            const returnData = commit[status].apply(this, payload);
             if (returnData !== false) {
                 this._status = status;
                 this._updatedAt = new Date();
@@ -5573,7 +5255,7 @@ class Task {
 
 const createTask = (context) =>
     pipe(
-        map$1((message) => {
+        map((message) => {
             const task = new Task(message, context.uuid);
 
             return task;
@@ -5717,7 +5399,7 @@ class JSpider {
 }
 
 /*
-关于 PLUGIN 的参数
+关于 PLUGIN 的生命周期
 
 1. init 函数 (可以没有): 在 spider 预处理的时候会对所有 PLUGIN 的 init 函数进行异步顺序调用保证插件在运行前载入。
 
@@ -5726,10 +5408,6 @@ class JSpider {
 3. error 函数 (错误处理函数): 相当于在 main 函数 error 时调用的函数，可以取消这个流，也可以处理完 error 后继续执行
 
 4. complete 函数: 没有发生任何的 error 的情况下完成 main 方法时调用的函数
-
-5. options 属性对象: 这个是接受所有参数的一个对象，在创建 Plugin 时，如果在 Object.options 写入了一个对象，则能够被全局以 this.options 得到，方便上面的函数进行调用
-
-*这里提一件事情，如果是在 options 里面写了函数，然后在 Plugin 内部写了相应调用函数的逻辑，就可以实现针对每个输入进行不同的返回*
 
 */
 class PLUGIN {
@@ -5757,10 +5435,10 @@ class PLUGIN {
             switchMap((task) => {
                 if (task.$checkRepeat(this.uuid) || this.forceRetry) {
                     return of(task).pipe(
-                        map$1((task) => task.$commit("start", this.uuid)),
+                        map((task) => task.$commit("start", this.uuid)),
 
                         switchMap((originData) => of(this.main(originData, this.options))),
-                        map$1((result) => {
+                        map((result) => {
                             task.$commit("success", result, this.uuid, this.saveMiddleResult);
                             return task;
                         })
@@ -5799,9 +5477,6 @@ function Plugin(Process) {
     }
 }
 
-// ! 这个 Request 文件是标准的 Plugin 的高级注册示例
-
-// Format 是边缘的处理逻辑，用于自动化相应返回数据的格式处理，与 Plugin 关系较小
 const Format = function (res, returnType) {
     let type = res.headers.get("content-type") || "";
     // 根据 returnType 强制返回
@@ -5824,15 +5499,12 @@ const Format = function (res, returnType) {
     }
 };
 
-// Plugin 的核心函数 (this.main)，用于请求
-// 第一参数为 Task 内部使用 start 事件返回的参数，你可以看成是上一个 Plugin 返回给你的数据
-// 第二个为 Plugin 内部的 options, 可以调用这些数据进行操作
-const request = ({ url, options = {} }, { returnType } = {}) => {
+const request = ({ url, options = {} }) => {
     //  获取数据为 request
 
     console.log("- 爬取 ", url);
     return fetch(url, options)
-        .then((res) => Format(res, returnType))
+        .then((res) => Format(res, options.returnType))
         .then((res) => {
             console.log(url + " 爬取成功");
             return res;
@@ -5841,752 +5513,21 @@ const request = ({ url, options = {} }, { returnType } = {}) => {
             throw err;
         });
 };
-
 // 在超过重试次数时，进行的操作
 const HandleError = function (err, err$) {
     throw err;
 };
+
 const Request = function (options) {
     return Plugin({
-        init() {}, // 在所有工作开始前会启动的函数，可以用于 Promise 加载一些 js 插件
-        main: request, // 功能性的核心函数
-        options, // 接收所有的参数，提供给所有函数使用
-
+        init() {},
+        main: request,
+        options,
         operator(context) {
-            // 复写 operator 函数，属于高级操作，可以操作到最顶层的数据流环节
-
-            // 通过 this.options 来获取传入的参数，这个参数解析都是由 Plugin 开发者来设置逻辑的
-            // 所以灵活性很高
             const { delay = 200, buffer = 3, retry = 3, handleError = null } = this.options;
-
-            return ($source) =>
-                $source.pipe(
-                    concurrent(
-                        (task) =>
-                            // 注意此处的 TaskStarter 是 Plugin 内置的函数，通过这个函数可以直接回应 Task
-                            // 使得 Plugin 开发者 不用学 Task 相关知识，而只是调用一下这个形式就可以了
-                            // this.TaskStarter 是用于间接调用 this.main 函数的 Wrapper 函数，主要是对 Task 进行一些操作
-                            this.TaskStarter(task),
-                        { delay, buffer, retry, handleError: handleError || HandleError }
-                    )
-                );
+            return ($source) => $source.pipe(concurrent((task) => this.TaskStarter(task), { delay, buffer, retry, handleError: handleError || HandleError }));
         },
     });
 };
 
-function toFile(data, name) {
-    if (data instanceof File) return data;
-    if (data instanceof Blob) {
-        data.name = name;
-        return data;
-    }
-    return new File([JSON.stringify(data)], name);
-}
-
-// 在 浏览器中下载是不能够同时进行的，也就是说，如果前面的没有下载完，后面的又提交
-// 会导致后面的全部失效，所以设置 Promise 下载队列
-const DownloadQueue = {
-    main: Promise.resolve(true),
-    add(file) {
-        this.main.then(() => {
-            return aDownload(file);
-        });
-    },
-};
-// a 标签下载的方式貌似为同步模式（未验证）
-const aDownload = function (file) {
-    let a = document.createElement("a");
-    a.href = URL.createObjectURL(file);
-    a.download = file.name;
-    a.click();
-    URL.revokeObjectURL(a.href);
-    a.remove();
-    console.log("%c 下载完成", "color:green");
-};
-
-const download = ({ url }, { DownloadFileName: name }) => {
-    const data = task.$commit("processing");
-    const file = toFile(data, name || (typeof url === "string" ? url.replace(/[^\/]*?\//g, "") : ""));
-    DownloadQueue.add(file);
-    return null;
-};
-const Download = function (options) {
-    return Plugin({
-        main: download,
-        options,
-    });
-};
-
-var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-function createCommonjsModule(fn, module) {
-	return module = { exports: {} }, fn(module, module.exports), module.exports;
-}
-
-var consola_browser = createCommonjsModule(function (module, exports) {
-!function(t,e){module.exports=e();}(commonjsGlobal,(function(){function t(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function e(t,e){for(var r=0;r<e.length;r++){var o=e[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(t,o.key,o);}}function r(t,r,o){return r&&e(t.prototype,r),o&&e(t,o),t}function o(t,e,r){return e in t?Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):t[e]=r,t}function n(t,e){var r=Object.keys(t);if(Object.getOwnPropertySymbols){var o=Object.getOwnPropertySymbols(t);e&&(o=o.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),r.push.apply(r,o);}return r}function s(t){for(var e=1;e<arguments.length;e++){var r=null!=arguments[e]?arguments[e]:{};e%2?n(Object(r),!0).forEach((function(e){o(t,e,r[e]);})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(r)):n(Object(r)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(r,e));}));}return t}function i(t){return function(t){if(Array.isArray(t))return l(t)}(t)||function(t){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(t))return Array.from(t)}(t)||a(t)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function a(t,e){if(t){if("string"==typeof t)return l(t,e);var r=Object.prototype.toString.call(t).slice(8,-1);return "Object"===r&&t.constructor&&(r=t.constructor.name),"Map"===r||"Set"===r?Array.from(t):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?l(t,e):void 0}}function l(t,e){(null==e||e>t.length)&&(e=t.length);for(var r=0,o=new Array(e);r<e;r++)o[r]=t[r];return o}function u(t){if("undefined"==typeof Symbol||null==t[Symbol.iterator]){if(Array.isArray(t)||(t=a(t))){var e=0,r=function(){};return {s:r,n:function(){return e>=t.length?{done:!0}:{done:!1,value:t[e++]}},e:function(t){throw t},f:r}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var o,n,s=!0,i=!1;return {s:function(){o=t[Symbol.iterator]();},n:function(){var t=o.next();return s=t.done,t},e:function(t){i=!0,n=t;},f:function(){try{s||null==o.return||o.return();}finally{if(i)throw n}}}}var c={};c[c.Fatal=0]="Fatal",c[c.Error=0]="Error",c[c.Warn=1]="Warn",c[c.Log=2]="Log",c[c.Info=3]="Info",c[c.Success=3]="Success",c[c.Debug=4]="Debug",c[c.Trace=5]="Trace",c[c.Silent=-1/0]="Silent",c[c.Verbose=1/0]="Verbose";var f={silent:{level:-1},fatal:{level:c.Fatal},error:{level:c.Error},warn:{level:c.Warn},log:{level:c.Log},info:{level:c.Info},success:{level:c.Success},debug:{level:c.Debug},trace:{level:c.Trace},verbose:{level:c.Trace},ready:{level:c.Info},start:{level:c.Info}};function h(t){return e=t,"[object Object]"===Object.prototype.toString.call(e)&&(!(!t.message&&!t.args)&&!t.stack);var e;}var p=!1,y=[],d=function(){function e(){var r=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};for(var o in t(this,e),this._reporters=r.reporters||[],this._types=r.types||f,this.level=void 0!==r.level?r.level:3,this._defaults=r.defaults||{},this._async=void 0!==r.async?r.async:void 0,this._stdout=r.stdout,this._stderr=r.stderr,this._mockFn=r.mockFn,this._throttle=r.throttle||1e3,this._throttleMin=r.throttleMin||5,this._types){var n=s(s({type:o},this._types[o]),this._defaults);this[o]=this._wrapLogFn(n),this[o].raw=this._wrapLogFn(n,!0);}this._mockFn&&this.mockTypes(),this._lastLogSerialized=void 0,this._lastLog=void 0,this._lastLogTime=void 0,this._lastLogCount=0,this._throttleTimeout=void 0;}return r(e,[{key:"create",value:function(t){return new e(Object.assign({reporters:this._reporters,level:this.level,types:this._types,defaults:this._defaults,stdout:this._stdout,stderr:this._stderr,mockFn:this._mockFn},t))}},{key:"withDefaults",value:function(t){return this.create({defaults:Object.assign({},this._defaults,t)})}},{key:"withTag",value:function(t){return this.withDefaults({tag:this._defaults.tag?this._defaults.tag+":"+t:t})}},{key:"addReporter",value:function(t){return this._reporters.push(t),this}},{key:"removeReporter",value:function(t){if(t){var e=this._reporters.indexOf(t);if(e>=0)return this._reporters.splice(e,1)}else this._reporters.splice(0);return this}},{key:"setReporters",value:function(t){return this._reporters=Array.isArray(t)?t:[t],this}},{key:"wrapAll",value:function(){this.wrapConsole(),this.wrapStd();}},{key:"restoreAll",value:function(){this.restoreConsole(),this.restoreStd();}},{key:"wrapConsole",value:function(){for(var t in this._types)console["__"+t]||(console["__"+t]=console[t]),console[t]=this[t].raw;}},{key:"restoreConsole",value:function(){for(var t in this._types)console["__"+t]&&(console[t]=console["__"+t],delete console["__"+t]);}},{key:"wrapStd",value:function(){this._wrapStream(this.stdout,"log"),this._wrapStream(this.stderr,"log");}},{key:"_wrapStream",value:function(t,e){var r=this;t&&(t.__write||(t.__write=t.write),t.write=function(t){r[e].raw(String(t).trim());});}},{key:"restoreStd",value:function(){this._restoreStream(this.stdout),this._restoreStream(this.stderr);}},{key:"_restoreStream",value:function(t){t&&t.__write&&(t.write=t.__write,delete t.__write);}},{key:"pauseLogs",value:function(){p=!0;}},{key:"resumeLogs",value:function(){p=!1;var t,e=u(y.splice(0));try{for(e.s();!(t=e.n()).done;){var r=t.value;r[0]._logFn(r[1],r[2]);}}catch(t){e.e(t);}finally{e.f();}}},{key:"mockTypes",value:function(t){if(this._mockFn=t||this._mockFn,"function"==typeof this._mockFn)for(var e in this._types)this[e]=this._mockFn(e,this._types[e])||this[e],this[e].raw=this[e];}},{key:"_wrapLogFn",value:function(t,e){var r=this;return function(){for(var o=arguments.length,n=new Array(o),s=0;s<o;s++)n[s]=arguments[s];if(!p)return r._logFn(t,n,e);y.push([r,t,n,e]);}}},{key:"_logFn",value:function(t,e,r){var o=this;if(t.level>this.level)return !!this._async&&Promise.resolve(!1);var n=Object.assign({date:new Date,args:[]},t);!r&&1===e.length&&h(e[0])?Object.assign(n,e[0]):n.args=Array.from(e),n.message&&(n.args.unshift(n.message),delete n.message),n.additional&&(Array.isArray(n.additional)||(n.additional=n.additional.split("\n")),n.args.push("\n"+n.additional.join("\n")),delete n.additional),n.type="string"==typeof n.type?n.type.toLowerCase():"",n.tag="string"==typeof n.tag?n.tag.toLowerCase():"";var a=function(){var t=arguments.length>0&&void 0!==arguments[0]&&arguments[0],e=o._lastLogCount-o._throttleMin;if(o._lastLog&&e>0){var r=i(o._lastLog.args);e>1&&r.push("(repeated ".concat(e," times)")),o._log(s(s({},o._lastLog),{},{args:r})),o._lastLogCount=1;}if(t){if(o._lastLog=n,o._async)return o._logAsync(n);o._log(n);}};clearTimeout(this._throttleTimeout);var l=this._lastLogTime?n.date-this._lastLogTime:0;if(this._lastLogTime=n.date,l<this._throttle)try{var u=JSON.stringify([n.type,n.tag,n.args]),c=this._lastLogSerialized===u;if(this._lastLogSerialized=u,c&&(this._lastLogCount++,this._lastLogCount>this._throttleMin))return void(this._throttleTimeout=setTimeout(a,this._throttle))}catch(t){}a(!0);}},{key:"_log",value:function(t){var e,r=u(this._reporters);try{for(r.s();!(e=r.n()).done;){e.value.log(t,{async:!1,stdout:this.stdout,stderr:this.stderr});}}catch(t){r.e(t);}finally{r.f();}}},{key:"_logAsync",value:function(t){var e=this;return Promise.all(this._reporters.map((function(r){return r.log(t,{async:!0,stdout:e.stdout,stderr:e.stderr})})))}},{key:"stdout",get:function(){return this._stdout||console._stdout}},{key:"stderr",get:function(){return this._stderr||console._stderr}}]),e}();d.prototype.add=d.prototype.addReporter,d.prototype.remove=d.prototype.removeReporter,d.prototype.clear=d.prototype.removeReporter,d.prototype.withScope=d.prototype.withTag,d.prototype.mock=d.prototype.mockTypes,d.prototype.pause=d.prototype.pauseLogs,d.prototype.resume=d.prototype.resumeLogs;var v,g=function(){function e(r){t(this,e),this.options=Object.assign({},r),this.defaultColor="#7f8c8d",this.levelColorMap={0:"#c0392b",1:"#f39c12",3:"#00BCD4"},this.typeColorMap={success:"#2ecc71"};}return r(e,[{key:"log",value:function(t){var e=t.level<1?console.__error||console.error:1===t.level&&console.warn?console.__warn||console.warn:console.__log||console.log,r="log"!==t.type?t.type:"",o=t.tag?t.tag:"",n=this.typeColorMap[t.type]||this.levelColorMap[t.level]||this.defaultColor,s="\n      background: ".concat(n,";\n      border-radius: 0.5em;\n      color: white;\n      font-weight: bold;\n      padding: 2px 0.5em;\n    "),a="%c".concat([o,r].filter(Boolean).join(":"));"string"==typeof t.args[0]?e.apply(void 0,["".concat(a,"%c ").concat(t.args[0]),s,""].concat(i(t.args.slice(1)))):e.apply(void 0,[a,s].concat(i(t.args)));}}]),e}();return "undefined"!=typeof window&&window.consola||((v=new d({reporters:[new g]})).Consola=d,v.LogLevel=c,v.BrowserReporter=g,v)}));
-});
-
-const loaderFunction = {
-    script(url) {
-        return new Promise((resolve, reject) => {
-            let script = document.createElement("script");
-            script.src = url;
-
-            script.onload = () => {
-                consola_browser.success(url + " 加载完成");
-                script.remove();
-                resolve();
-            };
-            script.onerror = (err) => reject(err);
-            document.body.append(script);
-        });
-    },
-    css(url) {
-        return new Promise((resolve, reject) => {
-            let style = document.createElement("style");
-            style.rel = "stylesheet";
-            style.src = url;
-            style.onload = () => {
-                consola_browser.success(url + " 加载完成");
-                resolve();
-            };
-            style.onerror = (err) => reject(err);
-            document.body.append(style);
-        });
-    },
-};
-
-var scriptMap = {
-    zangodb: "https://cdn.jsdelivr.net/gh/erikolson186/zangodb/dist/zangodb.min.js",
-    dexie: "https://cdn.jsdelivr.net/npm/dexie@3.0.3/dist/dexie.min.js",
-    mockjs: "https://cdn.jsdelivr.net/npm/mockjs-esm/dist/mock.min.js",
-    xlsx: "https://cdn.jsdelivr.net/npm/xlsx@0.17.0/dist/xlsx.full.min.js",
-    lodash: "https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js",
-    gsap: ["https://cdn.jsdelivr.net/npm/gsap@3.6.1/dist/gsap.min.js", "https://cdn.jsdelivr.net/npm/gsap@3.6.1/dist/ScrollTrigger.min.js"],
-    animejs: "https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js",
-    rxjs: "https://cdn.jsdelivr.net/npm/rxjs@7.1.0/dist/bundles/rxjs.umd.min.js",
-    jszip: "https://cdn.jsdelivr.net/npm/jszip@3.6.0/dist/jszip.min.js",
-    "ajax-hook": "https://unpkg.com/ajax-hook@2.0.3/dist/ajaxhook.min.js",
-    axios: "https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js",
-    react: ["https://unpkg.com/react@16/umd/react.production.min.js", "https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"],
-};
-
-// 借助 jsdelivr 网站的免费 cdn 实现直接查询导入插件的功能。
-const URI = `https://cdn.jsdelivr.net`;
-const wayMap = Object.entries({
-    npm: /^npm?/i,
-    gh: /gh?|github/i,
-    wp: /wordpress|wp/i,
-});
-
-function jsdelivr(moduleName, { version = "", store = "npm", path = "" } = {}) {
-    const way = wayMap.reduce((final, [key, value]) => {
-        return value.test(store) ? key : final;
-    }, "npm");
-    return `${URI}/${way}/${moduleName}${version ? "@" + version : ""}${path ? "/" + path : ""}`;
-}
-
-// 使用下面的 名称可以直接导入相应的包
-const URLTest = /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/;
-
-// 根据 name object 获取 url
-function fromName({ name, way, path, version }) {
-    if (scriptMap.hasOwnProperty(name)) {
-        // 优先使用自带的位置
-        return scriptMap[name];
-    } else {
-        return jsdelivr(name, { version, store: way, path: path });
-    }
-}
-
-const handle = {
-    Object({ url = "", name, way = "npm", path = "", version = "", type = "script" }) {
-        if (!url) {
-            // 没有 url 属性
-            const result = fromName({ name, way, path, version });
-            if (typeof result === "string") {
-                url = result;
-            } else {
-                // 发现 scriptMap 内部的描述是完整的 $load 可以接收的 array 和 object 类型
-                return $load(result);
-            }
-        }
-        return loaderFunction[type](url);
-    },
-    String(Module) {
-        return this.Object({ [URLTest.test(Module) ? "url" : "name"]: Module });
-    },
-    Array(arr) {
-        return Promise.all(arr.map((i) => $load(i)));
-    },
-};
-async function $load(Module) {
-    return handle[type(Module)](Module);
-}
-
-let XLSX;
-
-// XLSX 通过 script 导入
-function ArrayToSheet(sheetArray) {
-    sheetArray.forEach((i) => {
-        Object.entries(i).forEach(([key, value]) => {
-            if (value instanceof Object) {
-                i[key] = JSON.stringify(value);
-            }
-        });
-        // 处理二层数据不能够写入的问题
-    });
-    return XLSX.utils.json_to_sheet(sheetArray);
-}
-
-function bookToFile(book, name, options) {
-    let ArrayBuffer = XLSX.write(book, options);
-    return new File([ArrayBuffer], name + "." + options.bookType);
-}
-function ObjectToBook(input) {
-    let book = XLSX.utils.book_new();
-    Object.entries(input).forEach(([sheetName, sheetArray]) => {
-        let sheet = ArrayToSheet(sheetArray);
-        XLSX.utils.book_append_sheet(book, sheet, sheetName);
-    });
-    return book;
-}
-
-// input: {sheetName1:[],sheetName2:[]}
-function createExcelFile(input, fileName, XLSXOptions) {
-    let { bookType = "xlsx", bookSST = true, type = "array" } = XLSXOptions || {};
-    return bookToFile(ObjectToBook(input), fileName, {
-        bookType,
-        bookSST,
-        type,
-    });
-}
-
-// 未完成 导入 XLSX 的 Promise 到流的转变
-
-// ExcelHelper 是将 Object => Book => File 用于下载的一个库
-const ExcelHelper = function (options) {
-    return Plugin({
-        init,
-        options,
-        main: function (data) {
-            let { fileName = "爬取结果", XLSXOptions = {} } = this.options;
-            return createExcelFile(data, fileName, XLSXOptions);
-        },
-    });
-};
-
-let JSZip;
-function init$1() {
-    return $load("jszip").then((res) => {
-        JSZip = window.JSZip;
-    });
-}
-
-const index = 0;
-async function zipper(fileArray, zipName) {
-    // 启动压缩
-    let zip = new JSZip();
-    //压入所有文件
-    fileArray.forEach((file) => zip.file(file.name, file));
-    //设置压缩格式，开始打包
-    let content = await zip.generateAsync({
-        type: "blob", //nodejs用 nodebuffer ,浏览器用 blob
-    });
-    // 给压缩文件一个名称
-    content.name = `${zipName}-${index++}.zip`;
-    return content;
-}
-
-// Task 的结构借鉴于 Vue 的组件写法
-const components = {
-    data: () => ({}),
-    commit: {
-        start(pluginUUID) {
-            return this.originData.map((task) => task.$commit("start", pluginUUID));
-        },
-        complete(UUID) {
-            this.originData.forEach((task) => task.$commit("complete", UUID));
-        },
-        success(payload, UUID) {
-            this.originData.forEach((task) => task.$commit("success", payload, UUID, false));
-        },
-        error(payload) {
-            this.originData.forEach((task) => task.$commit("error", payload));
-        },
-    },
-};
-const { commit } = components;
-
-class TaskGroup {
-    constructor(...array) {
-        this.originData = new Array(...array);
-    }
-    $commit(status, ...payload) {
-        if (commit[status] instanceof Function) {
-            const returnData = commit[status].apply(this, payload);
-            if (returnData !== false) {
-                this._status = status;
-                this._updatedAt = new Date();
-                return returnData;
-            }
-        } else {
-            throw new Error("commit 状态错误" + this._index);
-        }
-    }
-    $checkRepeat() {
-        return true;
-    }
-    $break() {
-        return this.originData;
-    }
-}
-
-const ZipFile = function (options) {
-    return Plugin({
-        init: init$1,
-        main(data, { zipFileName }) {
-            return from(data).pipe(
-                map((blob) => toFile(blob, zipFileName)),
-                switchMap((files) => zipper(files, zipFileName))
-            );
-        },
-        options,
-        operator(context) {
-            const { zipFileNumber = 3 } = this.options;
-            return (source) =>
-                source.pipe(
-                    bufferCount(zipFileNumber),
-                    switchMap((tasks) => this.TaskStarter(new TaskGroup(...tasks))),
-                    switchMap((task) => from(task.$break()))
-                );
-        },
-    });
-};
-
-var plugins = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    Request: Request,
-    Download: Download,
-    ExcelHelper: ExcelHelper,
-    ZipFile: ZipFile
-});
-
-// 解决无限debugger的一种方式
-// 对于无限 debugger 不一定有效
-function $antiDebugger() {
-    if (!Function.prototype.$constructor) {
-        // 对 Function 构造函数外包一层
-        Function.prototype.$constructor = Function.prototype.constructor;
-        Function.prototype.constructor = function () {
-            if (arguments && typeof arguments[0] === "string") {
-                if ("debugger" === arguments[0]) {
-                    return;
-                }
-            }
-            return Function.prototype.$constructor.apply(this, arguments);
-        };
-    }
-}
-
-/**
- * 这是清理copy的函数，目的是为了能够让用户进行复制
- * @date 2021-03-02
- */
-function clearCopyBarriers() {
-    [document, ...document.querySelectorAll("*")].forEach((ele) => {
-        // 删除对象属性上的函数
-        ele.oncontextmenu = "";
-        ele.oncopy = "";
-        ele.oncut = "";
-        ele.onselectstart = true;
-
-        //清除事件绑定的控制
-        let event = window.getEventListeners(ele);
-        // 清除 快捷键 copy cut 事件的占用
-        ["keydown", "copy", "cut"].forEach((eventName) => {
-            if (event.hasOwnProperty(eventName)) {
-                event[eventName].forEach((target) => ele.removeEventListener(eventName, target.listener));
-            }
-        });
-    });
-    consola_browser.success("copy 方式清理完成");
-}
-/**
- * 复制函数
- * @description 这个函数只能用在浏览器环境中
- * @date 2021-03-02
- * @param {any} content 要复制的东西，可以是 DOM
- * @param {Boolean} clearBarriers=false 顺便帮你解决不能复制的问题，可能会失败
- */
-function $copy(content, clearBarriers = false) {
-    if (clearBarriers) clearCopyBarriers();
-
-    // 询问 window.copy 是否被覆盖了
-    if (!(window.copy && window.copy.toString() === "function copy(value) { [Command Line API] }")) {
-        // 尝试重置 copy 函数
-        delete window.copy;
-    }
-    // 直接使用控制台的复制功能
-    // ! 在开发者工具中可以调用这个函数
-    window.copy(content);
-    consola_browser.success("copy 完成，请您查看您的剪贴版");
-}
-
-var iframe = [
-	"webkitStorageInfo",
-	"0",
-	"1",
-	"cookieStore",
-	"crossOriginIsolated",
-	"onbeforexrselect",
-	"ontransitioncancel",
-	"ontransitionrun",
-	"ontransitionstart",
-	"originAgentCluster",
-	"showDirectoryPicker",
-	"showOpenFilePicker",
-	"showSaveFilePicker",
-	"trustedTypes",
-	"parent",
-	"opener",
-	"top",
-	"length",
-	"frames",
-	"closed",
-	"location",
-	"self",
-	"window",
-	"document",
-	"name",
-	"customElements",
-	"history",
-	"locationbar",
-	"menubar",
-	"personalbar",
-	"scrollbars",
-	"statusbar",
-	"toolbar",
-	"status",
-	"frameElement",
-	"navigator",
-	"origin",
-	"external",
-	"screen",
-	"innerWidth",
-	"innerHeight",
-	"scrollX",
-	"pageXOffset",
-	"scrollY",
-	"pageYOffset",
-	"visualViewport",
-	"screenX",
-	"screenY",
-	"outerWidth",
-	"outerHeight",
-	"devicePixelRatio",
-	"clientInformation",
-	"screenLeft",
-	"screenTop",
-	"defaultStatus",
-	"defaultstatus",
-	"styleMedia",
-	"onsearch",
-	"isSecureContext",
-	"onabort",
-	"onblur",
-	"oncancel",
-	"oncanplay",
-	"oncanplaythrough",
-	"onchange",
-	"onclick",
-	"onclose",
-	"oncontextmenu",
-	"oncuechange",
-	"ondblclick",
-	"ondrag",
-	"ondragend",
-	"ondragenter",
-	"ondragleave",
-	"ondragover",
-	"ondragstart",
-	"ondrop",
-	"ondurationchange",
-	"onemptied",
-	"onended",
-	"onerror",
-	"onfocus",
-	"onformdata",
-	"oninput",
-	"oninvalid",
-	"onkeydown",
-	"onkeypress",
-	"onkeyup",
-	"onload",
-	"onloadeddata",
-	"onloadedmetadata",
-	"onloadstart",
-	"onmousedown",
-	"onmouseenter",
-	"onmouseleave",
-	"onmousemove",
-	"onmouseout",
-	"onmouseover",
-	"onmouseup",
-	"onmousewheel",
-	"onpause",
-	"onplay",
-	"onplaying",
-	"onprogress",
-	"onratechange",
-	"onreset",
-	"onresize",
-	"onscroll",
-	"onseeked",
-	"onseeking",
-	"onselect",
-	"onstalled",
-	"onsubmit",
-	"onsuspend",
-	"ontimeupdate",
-	"ontoggle",
-	"onvolumechange",
-	"onwaiting",
-	"onwebkitanimationend",
-	"onwebkitanimationiteration",
-	"onwebkitanimationstart",
-	"onwebkittransitionend",
-	"onwheel",
-	"onauxclick",
-	"ongotpointercapture",
-	"onlostpointercapture",
-	"onpointerdown",
-	"onpointermove",
-	"onpointerup",
-	"onpointercancel",
-	"onpointerover",
-	"onpointerout",
-	"onpointerenter",
-	"onpointerleave",
-	"onselectstart",
-	"onselectionchange",
-	"onanimationend",
-	"onanimationiteration",
-	"onanimationstart",
-	"ontransitionend",
-	"onafterprint",
-	"onbeforeprint",
-	"onbeforeunload",
-	"onhashchange",
-	"onlanguagechange",
-	"onmessage",
-	"onmessageerror",
-	"onoffline",
-	"ononline",
-	"onpagehide",
-	"onpageshow",
-	"onpopstate",
-	"onrejectionhandled",
-	"onstorage",
-	"onunhandledrejection",
-	"onunload",
-	"performance",
-	"stop",
-	"open",
-	"alert",
-	"confirm",
-	"prompt",
-	"print",
-	"queueMicrotask",
-	"requestAnimationFrame",
-	"cancelAnimationFrame",
-	"captureEvents",
-	"releaseEvents",
-	"requestIdleCallback",
-	"cancelIdleCallback",
-	"getComputedStyle",
-	"matchMedia",
-	"moveTo",
-	"moveBy",
-	"resizeTo",
-	"resizeBy",
-	"scroll",
-	"scrollTo",
-	"scrollBy",
-	"getSelection",
-	"find",
-	"webkitRequestAnimationFrame",
-	"webkitCancelAnimationFrame",
-	"fetch",
-	"btoa",
-	"atob",
-	"setTimeout",
-	"clearTimeout",
-	"setInterval",
-	"clearInterval",
-	"createImageBitmap",
-	"close",
-	"focus",
-	"blur",
-	"postMessage",
-	"onappinstalled",
-	"onbeforeinstallprompt",
-	"crypto",
-	"indexedDB",
-	"sessionStorage",
-	"localStorage",
-	"chrome",
-	"onpointerrawupdate",
-	"speechSynthesis",
-	"webkitRequestFileSystem",
-	"webkitResolveLocalFileSystemURL",
-	"openDatabase",
-	"applicationCache",
-	"caches",
-	"ondevicemotion",
-	"ondeviceorientation",
-	"ondeviceorientationabsolute"
-];
-
-function $GlobalVars() {
-    // 通过比较得出window上的变量
-    const diff = difference(Object.keys(window), iframe);
-    return pick(window, diff);
-}
-
-const TypeMap = {
-    RE: "",
-    StringFunction(all, key, value, key_value) {
-        if (this.RE.test(value + "")) all.push(key_value);
-        return all;
-    },
-
-    Array(all, key, value) {
-        var arr = searchObj(Object.entries(value), this.RE);
-
-        const Value = arr.reduce((final, [k, v]) => {
-            final[parseInt(k)] = v;
-            return final;
-        }, []);
-        if (arr.length) all.push([key, Value]);
-
-        return all;
-    },
-    Function(all, key, value) {
-        let entries = searchObj(Object.entries(value), this.RE);
-        if (entries.length) all.push([key, Object.assign(value, Object.fromEntries(entries))]);
-        return all;
-    },
-    Object(all, key, value) {
-        let entries = searchObj(Object.entries(value), this.RE);
-        if (entries.length) all.push([key, Object.fromEntries(entries)]);
-
-        return all;
-    },
-};
-TypeMap.Number = TypeMap.StringFunction;
-TypeMap.String = TypeMap.StringFunction;
-/**
- * 搜索对象内深度搜索符合正则表达式的对象键或值
- * @date 2020-09-17
- * @param {Array} arr 一个由对象生成的二维数组
- * @param {Regexp} RE 搜索的正则表达式
- * @param {Number} deep=5 最大搜索深度
- * @returns {Array} 返回搜索结果
- */
-function searchObj(arr, RE, keepUnknown = false) {
-    return arr.reduce((all, key_value) => {
-        const [key, value] = key_value;
-        //判断 key 中是否有符合项
-        if (RE.test(key)) {
-            return [...all, key_value];
-        } else {
-            //判断数据类型 分类操作
-            TypeMap.RE = RE;
-            let type$1 = type(value);
-            if (TypeMap.hasOwnProperty(type$1)) {
-                return TypeMap[type$1](all, key, value, key_value);
-            } else {
-                return keepUnknown ? [all, key_value] : all;
-            }
-        }
-    }, []);
-}
-
-/**
- * 搜索入口函数
- * @date 2020-09-16
- * @param {Object} obj 被搜索的对象
- * @param {Regexp} regex 搜索使用的正则表达式
- * @param {Number} max=5 最大搜索深度
- * @returns {Object} 返回搜索结果的结构化结果
- */
-function $search(obj, reg) {
-    if (!isRegExp(reg) && isString(reg)) {
-        reg = new RegExp(reg);
-    }
-    if (obj instanceof Array) {
-        return searchObj(Object.entries({ i: obj }), reg)[0][1];
-    }
-    if (obj instanceof Object) {
-        return Object.fromEntries(searchObj(Object.entries(obj), reg));
-    } else {
-        throw new Error("不是对象，不能搜索");
-    }
-}
-
-var excelTemplate = {
-    "data|100": [
-        {
-            ID: "@increment()",
-            name: "@cname()",
-            description: "@csentence()",
-            avatar: '@dataImage("64x64")',
-            address: "@region()",
-            province: "@province()",
-        },
-    ],
-};
-
-// 在这里配置 url 和 type 信息
-const Server = {
-    excel: {
-        url: "/fake/excel",
-        type: "get",
-        template: excelTemplate,
-    },
-};
-
-const cache = {};
-async function Mock(MockSiteName) {
-    // 导入 Mockjs
-    if (!window.Mock) {
-        await $load("mockjs");
-        consola_browser.warn("Mockjs 载入并代理 Ajax 中");
-    }
-
-    if (!cache[MockSiteName]) {
-        consola_browser.warn("mock 启动后台 ", MockSiteName);
-        let { url, type, template } = Server[MockSiteName];
-        window.Mock.mock(url, type, template);
-        cache[MockSiteName] = true;
-    }
-}
-
-var tools = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    $antiDebugger: $antiDebugger,
-    $copy: $copy,
-    $GlobalVars: $GlobalVars,
-    $search: $search,
-    $load: $load,
-    $Mock: Mock
-});
-
-Object.assign(JSpider, tools, {
-    plugins,
-    Plugin,
-});
-
-export default JSpider;
+export { JSpider, Plugin, Request };

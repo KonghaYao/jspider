@@ -1,5 +1,5 @@
 import { retryAndDelay } from "./retryAndDelay.js";
-import { pipe, of, EMPTY, timer } from "rxjs";
+import { pipe, of, EMPTY, timer, Observable, from } from "rxjs";
 import { bufferCount, concatMap, switchMap, catchError, delayWhen } from "rxjs/operators";
 
 // 并发控制操作符
@@ -18,7 +18,10 @@ export function concurrent(
 ) {
     const asyncSingle = (data) =>
         of(data).pipe(
-            switchMap((res) => of(promiseFunc(res))),
+            switchMap((res) => {
+                const result = promiseFunc(res); // 当 promiseFunc 返回一个 Observable 时可以通过下面的方式进行统一
+                return result instanceof Observable ? from(result) : of(result);
+            }),
             retryAndDelay(retry, retryDelay),
             catchError((...args) => {
                 const clear = handleError(...args); // 自定义错误处理

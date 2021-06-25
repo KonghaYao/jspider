@@ -11,7 +11,8 @@ const Parser = function (string, func, options) {
     let dom = parser.parseFromString(string, type[documentType]);
     return func(dom);
 };
-const HTMLParser = (callback, options) => (source) => {
+
+export const HTMLParser = (callback, options) => (source) => {
     let { formatter } = options || {};
     return source.pipe(
         map((task) => {
@@ -23,4 +24,3 @@ const HTMLParser = (callback, options) => (source) => {
         })
     );
 };
-export { HTMLParser };

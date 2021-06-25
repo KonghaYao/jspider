@@ -1,36 +1,32 @@
-import { zipper } from "./JSzip/zipper.js";
 import { from } from "rxjs";
-import { bufferCount, map, mergeMap, tap } from "rxjs/operators";
-import { tasksToFiles } from "./JSzip/tasksToFiles.js";
+import { bufferCount, switchMap } from "rxjs/operators";
 
-import Task from "../core/Task.js";
-const ZipFile =
-    (options = {}) =>
-    (source) => {
-        let { zipName = "", $chunk = 1 } = options;
-        let pipeArray = [];
+import { Plugin } from "../core/PluginSystem.js";
 
-        if ($chunk >= 1) pipeArray.push(bufferCount($chunk));
-        return source.pipe(
-            ...pipeArray,
-            mergeMap((tasksArray, index) => {
-                let files = tasksArray.map(tasksToFiles);
-                let zipFile = zipper(files, zipName || new Date().getTime(), index);
-                return from(zipFile).pipe(
-                    map((zipFile) => {
-                        const newTask = new Task(
-                            {
-                                data: tasksArray,
-                            },
-                            tasksArray[0]._pluginsUUID
-                        );
-                        newTask.$commit("success", zipFile);
-                        return newTask;
-                    })
-                );
-            })
-        );
-    };
 import { init } from "./JSzip/JSzip.js";
-ZipFile.init = init;
-export { ZipFile };
+import { zipper } from "./JSzip/zipper.js";
+
+import { toFile } from "./utils/toFile.js";
+import { TaskGroup } from "../core/Task/TaskGroup.js";
+
+export const ZipFile = function (options = {}) {
+    return Plugin({
+        init,
+        main(data, { zipFileName }) {
+            return from(data).pipe(
+                map((blob) => toFile(blob, zipFileName)),
+                switchMap((files) => zipper(files, zipFileName))
+            );
+        },
+        options,
+        operator(context) {
+            const { zipFileNumber = 3 } = this.options;
+            return (source) =>
+                source.pipe(
+                    bufferCount(zipFileNumber),
+                    switchMap((tasks) => this.TaskStarter(new TaskGroup(...tasks))),
+                    switchMap((task) => from(task.$break()))
+                );
+        },
+    });
+};

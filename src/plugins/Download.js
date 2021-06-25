@@ -1,4 +1,3 @@
-import { map, filter } from "rxjs/operators";
 import { toFile } from "./utils/toFile.js";
 // 在 浏览器中下载是不能够同时进行的，也就是说，如果前面的没有下载完，后面的又提交
 // 会导致后面的全部失效，所以设置 Promise 下载队列
@@ -21,20 +20,16 @@ const aDownload = function (file) {
     console.log("%c 下载完成", "color:green");
 };
 
-const download = (task) => {
-    //  获取数据为 request
-    const { url, name } = task.data;
-    const data = task.$commit("processing");
-    const file = toFile(data, name || (typeof url === "string" ? url.replace(/[^\/]*?\//g, "") : ""));
+const download = (data, { DownloadFileName: name }, originData) => {
+    const file = toFile(data, name || (typeof url === "string" ? originData.url.replace(/[^\/]*?\//g, "") : ""));
     DownloadQueue.add(file);
-    return task;
+    return null;
 };
-const Download =
-    (options = {}) =>
-    ($source) => {
-        return $source.pipe(
-            filter((task) => task._status !== "error" && task._result),
-            map(download)
-        );
-    };
-export { Download };
+
+import { Plugin } from "../core/PluginSystem.js";
+export const Download = function (options = {}) {
+    return Plugin({
+        main: download,
+        options,
+    });
+};

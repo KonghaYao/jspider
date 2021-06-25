@@ -7,7 +7,7 @@ export const retryAndDelay = (count, delay) =>
         retryWhen((err$) =>
             err$.pipe(
                 scan((errCount, err) => {
-                    console.log("尝试次数", errCount);
+                    console.log("尝试次数", errCount, err);
                     if (errCount >= count) throw new Error("超出尝试次数", err);
                     return errCount + 1;
                 }, 0),

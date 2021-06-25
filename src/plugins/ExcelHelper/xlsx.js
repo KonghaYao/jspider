@@ -6,4 +6,3 @@ function init() {
     });
 }
 export { XLSX, init };
-export default XLSX;
