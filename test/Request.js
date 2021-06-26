@@ -1,5 +1,5 @@
 // 测试 基础 Plugins 的代码
-import JSpider from "../dist/esm/JSpider.js";
+import JSpider from "../dist/JSpider.esm.min.js";
 const {
     Request, // 请求库
     Download, // 下载库

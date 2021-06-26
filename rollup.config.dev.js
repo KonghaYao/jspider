@@ -6,7 +6,7 @@ export default {
     input: "src/JSpider.js", // 打包入口
     output: {
         // 打包出口
-        file: "./dist/esm/JSpider.js",
+        file: "./dist/JSpider.esm.min.js",
         format: "es",
     },
     plugins: [

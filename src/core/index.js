@@ -1,2 +1,4 @@
-export { JSpider } from "./JSpider";
-export { Plugin } from "./PluginSystem.js";
+export * from "./JSpider";
+export * from "./PluginSystem.js";
+export * from "./Task/Task.js";
+export * from "./Task/TaskGroup.js";

@@ -19,6 +19,7 @@ export const ZipFile = function (options = {}) {
         },
         options,
         operator(context) {
+            // 复写 operator
             const { chunk = 3 } = this.options;
             return (source) =>
                 source.pipe(

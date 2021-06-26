@@ -4,42 +4,55 @@ import { terser } from "rollup-plugin-terser";
 import license from "rollup-plugin-license";
 import del from "rollup-plugin-delete";
 import json from "@rollup/plugin-json";
-
-export default {
-    input: "src/JSpider.js", // 打包入口
-    plugins: [
-        del({ targets: "dist/*" }),
-        json(),
-        resolve({
-            browser: true,
-        }),
-        commonjs(), // 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
-        terser(),
-        license({
-            banner: {
-                content: {
-                    file: "./LICENSE",
-                },
+const plugins = [
+    json(),
+    resolve({
+        browser: true,
+    }),
+    commonjs(), // 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
+    terser(),
+    license({
+        banner: {
+            content: {
+                file: "./LICENSE",
             },
-        }),
-    ],
-    output: [
-        {
-            // 打包出口
-            dir: "./dist/cjs",
-            format: "cjs",
-            exports: "default",
         },
-        {
-            // 打包出口
-            dir: "./dist/iife",
-            format: "iife",
-            name: "JSpider",
-        },
-        {
-            // 打包出口
-            file: "./dist/esm/JSpider.min.js",
-            format: "es",
-        },
-    ],
-};
+    }),
+];
+export default [
+    {
+        input: "src/JSpider.js", // 打包入口
+        plugins: [del({ targets: "dist/*" }), ...plugins],
+        output: [
+            {
+                // 打包出口
+                file: "./dist/JSpider.min.js",
+                format: "iife",
+                name: "JSpider",
+            },
+            {
+                // 打包出口
+                file: "./dist/JSpider.umd.min.js",
+                format: "umd",
+                name: "JSpider",
+            },
+            {
+                // 打包出口
+                file: "./dist/JSpider.cjs.min.js",
+                format: "cjs",
+                exports: "default",
+            },
+        ],
+    },
+    {
+        input: "src/JSpider.esm.js", // 打包入口
+        plugins,
+        output: [
+            {
+                // 打包出口
+                file: "./dist/JSpider.esm.min.js",
+                format: "es",
+            },
+        ],
+    },
+];
