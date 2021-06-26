@@ -3,7 +3,7 @@ import { putData, getData } from "./Dexie/data.js";
 
 import { from } from "rxjs";
 import { delayWhen } from "rxjs/operators";
-
+// FIXME 未进行 Plugin 化
 const setStore = (options) => ($source) => {
     // 初始化配置
     let { dbName = "JSpider" } = options || {};

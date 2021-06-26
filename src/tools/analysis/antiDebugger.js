@@ -1,5 +1,6 @@
 // 解决无限debugger的一种方式
 // 对于无限 debugger 不一定有效
+// TODO 验证有效性
 export function $antiDebugger() {
     if (!Function.prototype.$constructor) {
         // 对 Function 构造函数外包一层

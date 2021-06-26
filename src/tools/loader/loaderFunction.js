@@ -27,5 +27,6 @@ const loaderFunction = {
             document.body.append(style);
         });
     },
+    // TODO UMD AMD 等类型的 JS 代码的载入
 };
 export { loaderFunction };

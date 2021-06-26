@@ -8,23 +8,23 @@
 
 只有简单的几行, 适用于极速操作，这会直接将这些 URL 中的内容下载到本地。
 
-!> 右键 -> 检查，打开浏览器 Devtools，在 Console 中即可使用这些代码哦！
-
-!> **请打开浏览器开发者工具，网页已经载入了 JSpider，并创建了虚拟后台。**
+> 右键 -> 检查，打开浏览器 Devtools，在 Console 中即可使用这些代码哦！
+> **请打开浏览器开发者工具，网页已经载入了 JSpider，并创建了虚拟后台。**
+> 这里是通过 Mockjs 对 URL 进行了代理，所以接收得到数据。
 
 ```js
-import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then({JSpider}=>{
+import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.min.js').then({JSpider}=>{
     window.JSpider = JSpider;
 });// 从 jsDelivr 导入代码
 // 放入您的 URL
 JSpider.simpleCrawl(["fake/excel","fake/excel"]);
 ```
 
-> 这里是通过 Mockjs 对 URL 进行了代理，所以接收得到数据
+
 ### 更加高级的自定义爬取
 
 ```js
-import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then({JSpider}=>{
+import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.min.js').then({JSpider}=>{
     window.JSpider = JSpider;
 });// 从 jsDelivr 导入代码
 const { createPlugin, initPlugins } = JSpider;
@@ -52,7 +52,7 @@ spider.apply(urls);
 
 ```
 
-!> [更多自定义代码教程](/zh-cn/quickstart)
+> [更多自定义代码教程](/zh-cn/quickstart)
 
 ### 注意事项
 
@@ -108,3 +108,4 @@ JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm �
 ## License
 
  Copyright © KonghaYao MIT licensed
+

@@ -4,6 +4,10 @@ html {
 article > p {
     text-indent: 2em;
 }
+[class^="drawio-viewer-index-"] {
+    display: flex;
+    justify-content: center;
+}
 .token.comment {
     color: #d73a49;
     font-family: system-ui;
