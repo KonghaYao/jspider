@@ -13,7 +13,7 @@
 !> **请打开浏览器开发者工具，网页已经载入了 JSpider，并创建了虚拟后台。**
 
 ```js
-import('https://cdn.jsdelivr.net/npm/js-spider/dist/esm/JSpider.js').then({JSpider}=>{
+import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then({JSpider}=>{
     window.JSpider = JSpider;
 });// 从 jsDelivr 导入代码
 // 放入您的 URL
@@ -24,7 +24,7 @@ JSpider.simpleCrawl(["fake/excel","fake/excel"]);
 ### 更加高级的自定义爬取
 
 ```js
-import('https://cdn.jsdelivr.net/npm/js-spider/dist/esm/JSpider.js').then({JSpider}=>{
+import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then({JSpider}=>{
     window.JSpider = JSpider;
 });// 从 jsDelivr 导入代码
 const { createPlugin, initPlugins } = JSpider;
@@ -93,7 +93,7 @@ JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm �
 
 5. xlsx ExcelHelper 的核心插件，用于从对象数据直接构建 Excel 常用文件的操作，十分好用的一个插件。
 
-6. jszip
+6. jszip 用于制作压缩文件的插件，十分好用
 
 7. dexie.js JSpider 得以链接 indexDB 进行储存操作的救星，说实话 indexDB 的 API 太乱了。
 
@@ -101,7 +101,9 @@ JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm �
 
 9. uuid 用于创建 UUID 的项目，可以生成唯一的标识，用于 JSpider 的底层逻辑中。
 
-**感谢上面的项目为 JSpider 提供了众多的帮助！**
+10. consola 用于控制台的输出美化
+
+**感谢上面的项目为 JSpider 的丰富功能提供了众多的帮助！**
 
 ## License
 

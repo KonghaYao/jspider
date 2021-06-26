@@ -18,7 +18,7 @@
 !> 注意： 本网站的开发者工具中，已经直接帮您导入 JSpider 到 window 对象了，不用再重复这一步骤。
 
 ```js
-import('https://cdn.jsdelivr.net/npm/js-spider/dist/esm/JSpider.js').then({JSpider}=>{
+import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then({JSpider}=>{
     window.JSpider = JSpider;
 });// 从 jsDelivr 导入代码
 ```

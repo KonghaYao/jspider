@@ -42,6 +42,11 @@ export default [
                 format: "cjs",
                 exports: "default",
             },
+            {
+                // 打包出口
+                file: "./dist/JSpider.esm.min.js",
+                format: "es",
+            },
         ],
     },
     {
@@ -50,7 +55,7 @@ export default [
         output: [
             {
                 // 打包出口
-                file: "./dist/JSpider.esm.min.js",
+                file: "./dist/JSpider.js",
                 format: "es",
             },
         ],
