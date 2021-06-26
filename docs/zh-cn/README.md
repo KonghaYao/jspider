@@ -13,42 +13,49 @@
 > 这里是通过 Mockjs 对 URL 进行了代理，所以接收得到数据。
 
 ```js
-import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.min.js').then({JSpider}=>{
+import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then(({default:JSpider})=>{
     window.JSpider = JSpider;
+    // 放入您的 URL
+    JSpider.simpleCrawl(["fake/excel","fake/excel"]);
 });// 从 jsDelivr 导入代码
-// 放入您的 URL
-JSpider.simpleCrawl(["fake/excel","fake/excel"]);
 ```
 
 
 ### 更加高级的自定义爬取
 
 ```js
-import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.min.js').then({JSpider}=>{
+
+import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then(({default:JSpider})=>{
     window.JSpider = JSpider;
+    const {
+        Request, // 请求库
+        Download, // 下载库
+        ExcelHelper, // 转换数据为表格数据的插件
+    } = JSpider.plugins;
+    const { Plugin } = JSpider;
+
+    // 您的爬取路径代码
+    let urls = [...Array(5).keys()].map((i, index) => {
+        return { url: "/fake/excel" };
+    });
+    
+    //! 这些是主要代码
+    const spider = new JSpider(
+        Request(),
+        // 您可以使用这种方式进行自定义插件代码
+        Plugin((data) => {
+            console.log(data);
+            return data;
+        }),
+        ExcelHelper({
+            XLSXOptions: {
+                bookType: "csv", // 可以指定为 csv 或者 xlsx
+            },
+        }),
+        Download()
+    );
+    spider.apply(urls);
 });// 从 jsDelivr 导入代码
-const { createPlugin, initPlugins } = JSpider;
-
-// 导入插件，JSpider 还有很多功能插件
-const {
-    Request, // 请求库
-    Download, // 下载库
-} = JSpider.plugins;
-
-// 您的爬取路径代码, 这里是直接构建出数组
-let urls = [...Array(5).keys()].map((i, index) => {
-    return { url: "/fake/excel" };
-});
-
-const spider = new JSpider(
-    Request(),
-    createPlugin((task) => {
-        console.log(task._result);
-        return task;
-    }),
-    Download()
-);
-spider.apply(urls);
 
 ```
 
@@ -59,7 +66,6 @@ spider.apply(urls);
 #### 1. **CORS 和 CSP (Content Security Policy) 协议导致您无法爬取到数据。**
 
 **CORS 和 CSP 是浏览器的安全策略**，与 JSpider 无关，我推荐您遵守。很多网站使用了这两种协议来防止 Javascript 语言在浏览器中为所欲为，所以如果您使用的是 Chrome，可以在 [Chrome 插件商店](https://chrome.google.com/webstore/category/extensions?hl=zh-CN) 中搜索 CORS 和 CSP，安装相应的插件即可解除这两个协议的报错。我无法保证这些插件的安全性，所以在此不推荐。
-
 
 ## JSpider 3 更新内容
 
@@ -87,7 +93,7 @@ JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm �
 
 2. Rollup 代码打包库，使用 Rollup 打包的库为我的项目节省了很多时间。
 
-3. Mockjs 很有想法的一个前端数据代理库，很可惜的是没有提供 fetch 的代理，所以我自己做了一个插件。
+3. Mockjs 很有想法的一个前端数据代理库，很可惜的是没有提供 fetch 的代理，所以我自己重做了这个库。
 
 4. lodash-es 无敌的工具库，在一些比较常用的底层代码中有使用。
 
@@ -103,9 +109,10 @@ JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm �
 
 10. consola 用于控制台的输出美化
 
+11. docsify 基于 Vue 的很好用的前端文档网页生成工具，由于本身的扩展性较好，所以添加了一些功能。
+
 **感谢上面的项目为 JSpider 的丰富功能提供了众多的帮助！**
 
 ## License
 
- Copyright © KonghaYao MIT licensed
-
+ Copyright © KonghaYao 江夏尧 动中之动 MIT licensed

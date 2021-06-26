@@ -5,6 +5,8 @@
 
 ## 如果你只想快速爬取文件
 
+[](../../src/AboutAPI.drawio ':include')
+
 ### 0. 打开开发者工具
 
 **右键 ➡ 检查，然后您可以在 Console 下面直接书写您的代码**
@@ -13,14 +15,14 @@
 
 使用 import 异步导入您的插件，并将 JSpider 写入到 window 对象。
 
-代码需要异步执行，可以在 **Console** 中直接使用。若您对应于 **Devtools** 不太熟悉，可以先阅读 [Devtools 爬虫指南](/zh-cn/Devtools.md)。
+代码需要异步执行，可以在 **Console** 中直接使用。若您对应于 **Devtools** 不太熟悉，可以先阅读 **[Devtools 爬虫指南](/zh-cn/Devtools.md)**。
 
 !> 注意： 本网站的开发者工具中，已经直接帮您导入 JSpider 到 window 对象了，不用再重复这一步骤。
 
 ```js
-import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then({JSpider}=>{
+import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then(({default:JSpider})=>{
     window.JSpider = JSpider;
-});// 从 jsDelivr 导入代码
+});// 这个步骤是异步的，也就是说，您需要等待它完成，或者直接在 then 内部写代码
 ```
 
 ### 2. 载入插件
@@ -72,18 +74,16 @@ spider.apply(urls);
 !> 下面的方式生成的 Plugin 是非专业，只是临时用途的。
 
 ```js
-const { createPlugin } = JSpider;
+const Plugin = JSpider.Plugin;
 const spider = new JSpider(
     Request(),
-    createPlugin((task) => {
-        //! task 是内部封装的一个对象 
-        //! task 下的 _result 属性是上一个 Plugin 的操作
-        console.log(task._result);
-        return task;
+    Plugin((data) => {
+       
+        console.log(data);
+        return data;
     }),
     // Download()
 ); 
-
 ```
 
 ### 2. 使用更多 Plugins
@@ -92,20 +92,14 @@ const spider = new JSpider(
 
 ```js
 const {
-    initPlugins,
+    Plugin,
     plugins:{
         Request, // 请求库
         Download, // 下载库
         ExcelHelper, // 转换数据为表格数据的插件
-        Dexie, // indexDB 暂存数据的插件
     }   
 } = JSpider;
 
-// 部分 Plugins 需要提前注册才能够使用。
-//! 注意这里的 await 是可以执行在 Console 环境中的，但是在 代码文件中是需要 async 函数中的。
-await initPlugins(ExcelHelper, Dexie);
-const { setStore } = Dexie
-// 额。。。如果你懒的话。 await initPlugins(...Object.values(JSpider.plugins));
 
 const spider = new JSpider(
     Request(),
@@ -121,9 +115,6 @@ const spider = new JSpider(
             },
         }
     ),
-    // 如果使用了 Dexie Plugin 中的 setStore 的话，会向 indexDB 保存文件，可以通过 Dexie.getData 取出。
-    // 另外 Dexie.js 是支持 JSpider 对接 indexDB 的十分优秀的项目。
-    setStore(),  
     //! 如果使用了 Download, 会使用 a 标签的方式下载文件，Chrome 会弹窗提示是否下载多个文件，确认即可。
     // 如果您的数据过多的话，下载文件会比较多。
     Download()
@@ -134,10 +125,10 @@ const spider = new JSpider(
 
 建议查看右上角的开发者文档模块下的文章。
 
-## 如果你想深入了解 JSpider 的机制
+## 如果你想深入了解 JSpider 的机制。
 
 您可以先学习：
 
-1. 对于 [Rxjs](https://rxjs.dev/) 有一些了解。( 这个库涉及很多艰深的编程理念，学习曲线较陡峭 )
+1. 对于 [Rxjs](https://rxjs.dev/) 有一些了解。( 这个库涉及很多艰深的编程理念，学习曲线较陡峭 )。JSpider 的源代码的多数逻辑都是使用 Rxjs 这个库进行实现的，所以如果不了解 Rxjs 的话，是很难理解 JSpider 的。
 
 2. 学习 JSpider 的源码。
