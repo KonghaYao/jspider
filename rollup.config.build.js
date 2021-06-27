@@ -21,7 +21,7 @@ const plugins = [
 ];
 export default [
     {
-        input: "src/JSpider.js", // 打包入口
+        input: "src/JSpider.js", // 通用版本打包
         plugins: [del({ targets: "dist/*" }), ...plugins],
         output: [
             {
@@ -50,7 +50,7 @@ export default [
         ],
     },
     {
-        input: "src/JSpider.esm.js", // 打包入口
+        input: "src/JSpider.esm.js", // 这是一个可以进行 TreeShake 的版本
         plugins,
         output: [
             {

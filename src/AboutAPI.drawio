@@ -1,19 +1,19 @@
 <mxfile>
     <diagram id="GZQI3QZnvFwZNke9cP7p" name="第 1 页">
-        <mxGraphModel dx="1399" dy="777" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="990" dy="544" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="4" style="edgeStyle=elbowEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.005;entryY=0.663;entryDx=0;entryDy=0;entryPerimeter=0;sketch=1;" edge="1" parent="1" source="2" target="3">
+                <mxCell id="4" style="edgeStyle=elbowEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.005;entryY=0.663;entryDx=0;entryDy=0;entryPerimeter=0;sketch=1;" parent="1" source="2" target="3" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="6" style="edgeStyle=elbowEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2" target="5">
+                <mxCell id="6" style="edgeStyle=elbowEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="2" target="5" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="8" style="edgeStyle=elbowEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="2" target="7">
+                <mxCell id="8" style="edgeStyle=elbowEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="2" target="7" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="10" style="edgeStyle=elbowEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="2" target="9">
+                <mxCell id="10" style="edgeStyle=elbowEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="2" target="9" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="360" y="550"/>
@@ -21,73 +21,68 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="11" style="edgeStyle=elbowEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="2" target="12">
+                <mxCell id="11" style="edgeStyle=elbowEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="2" target="12" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="210" y="550" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="2" value="&lt;h1&gt;&lt;font face=&quot;Comic Sans MS&quot; color=&quot;#ff3333&quot;&gt;JSpider&lt;/font&gt;&lt;/h1&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#ffe6cc;sketch=1;strokeColor=#d79b00;glass=0;shadow=0;" vertex="1" parent="1">
+                <mxCell id="2" value="&lt;h1&gt;&lt;font face=&quot;Comic Sans MS&quot; color=&quot;#ff3333&quot;&gt;JSpider&lt;/font&gt;&lt;/h1&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#ffe6cc;sketch=1;strokeColor=#d79b00;glass=0;shadow=0;" parent="1" vertex="1">
                     <mxGeometry x="120" y="330" width="140" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="13" style="edgeStyle=elbowEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="3" target="7">
+                <mxCell id="13" style="edgeStyle=elbowEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="3" target="7" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="650" y="250"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="18" style="rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontColor=none;dashed=1;" edge="1" parent="1" source="3" target="17">
+                <mxCell id="18" style="rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontColor=none;dashed=1;" parent="1" source="3" target="17" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="&lt;h1&gt;&lt;font face=&quot;Comic Sans MS&quot; color=&quot;#ff4fb9&quot;&gt;Plugin&lt;/font&gt;&lt;/h1&gt;" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=2;hachureGap=8;fillStyle=zigzag;sketch=1;shadow=0;glass=0;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+                <mxCell id="3" value="&lt;h1&gt;&lt;font face=&quot;Comic Sans MS&quot; color=&quot;#ff4fb9&quot;&gt;Plugin&lt;/font&gt;&lt;/h1&gt;" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=2;hachureGap=8;fillStyle=zigzag;sketch=1;shadow=0;glass=0;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
                     <mxGeometry x="460" y="140" width="140" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="21" style="edgeStyle=none;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;fontFamily=Comic Sans MS;fontColor=none;" edge="1" parent="1" source="5" target="20">
+                <mxCell id="21" style="edgeStyle=none;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;fontFamily=Comic Sans MS;fontColor=none;" parent="1" source="5" target="20" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="&lt;h1&gt;&lt;font color=&quot;#ff4fb9&quot; face=&quot;Comic Sans MS&quot;&gt;$toolsName&lt;/font&gt;&lt;/h1&gt;" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=2;hachureGap=8;fillStyle=zigzag;sketch=1;shadow=0;glass=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+                <mxCell id="5" value="&lt;h1&gt;&lt;font color=&quot;#ff4fb9&quot; face=&quot;Comic Sans MS&quot;&gt;$toolsName&lt;/font&gt;&lt;/h1&gt;" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=2;hachureGap=8;fillStyle=zigzag;sketch=1;shadow=0;glass=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
                     <mxGeometry x="460" y="440" width="200" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="19" style="rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontFamily=Comic Sans MS;fontColor=none;" edge="1" parent="1" source="7" target="16">
+                <mxCell id="19" style="rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontFamily=Comic Sans MS;fontColor=none;" parent="1" source="7" target="16" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="7" value="&lt;h1&gt;&lt;font face=&quot;Comic Sans MS&quot; color=&quot;#ff4fb9&quot;&gt;plugins&lt;/font&gt;&lt;/h1&gt;" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=2;hachureGap=8;fillStyle=zigzag;sketch=1;shadow=0;glass=0;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+                <mxCell id="7" value="&lt;h1&gt;&lt;font face=&quot;Comic Sans MS&quot; color=&quot;#ff4fb9&quot;&gt;plugins&lt;/font&gt;&lt;/h1&gt;" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=2;hachureGap=8;fillStyle=zigzag;sketch=1;shadow=0;glass=0;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
                     <mxGeometry x="460" y="270" width="140" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="23" style="edgeStyle=none;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontFamily=Comic Sans MS;fontColor=none;" edge="1" parent="1" source="9" target="22">
+                <mxCell id="23" style="edgeStyle=none;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontFamily=Comic Sans MS;fontColor=none;" parent="1" source="9" target="22" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="9" value="&lt;h1&gt;&lt;font color=&quot;#ff4fb9&quot; face=&quot;Comic Sans MS&quot;&gt;simpleCrawl&lt;/font&gt;&lt;/h1&gt;" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=2;hachureGap=8;fillStyle=zigzag;sketch=1;shadow=0;glass=0;fillColor=#C2C6FF;" vertex="1" parent="1">
+                <mxCell id="9" value="&lt;h1&gt;&lt;font color=&quot;#ff4fb9&quot; face=&quot;Comic Sans MS&quot;&gt;simpleCrawl&lt;/font&gt;&lt;/h1&gt;" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=2;hachureGap=8;fillStyle=zigzag;sketch=1;shadow=0;glass=0;fillColor=#C2C6FF;" parent="1" vertex="1">
                     <mxGeometry x="260" y="710" width="200" height="95" as="geometry"/>
                 </mxCell>
-                <mxCell id="12" value="&lt;h2&gt;&lt;font face=&quot;Comic Sans MS&quot; color=&quot;#ff4fb9&quot;&gt;JSpider is also an important Function&lt;/font&gt;&lt;/h2&gt;" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=2;hachureGap=8;fillStyle=zigzag;sketch=1;shadow=0;glass=0;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+                <mxCell id="12" value="&lt;h2&gt;&lt;font face=&quot;Comic Sans MS&quot; color=&quot;#ff4fb9&quot;&gt;JSpider is also an important Function&lt;/font&gt;&lt;/h2&gt;" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=2;hachureGap=8;fillStyle=zigzag;sketch=1;shadow=0;glass=0;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" parent="1" vertex="1">
                     <mxGeometry x="60" y="470" width="215" height="120" as="geometry"/>
                 </mxCell>
-                <UserObject label="&lt;h2&gt;&lt;font&gt;Produce&lt;/font&gt;&lt;/h2&gt;" placeholders="1" name="Variable" id="14">
-                    <mxCell style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;shadow=0;glass=0;rotation=0;labelBackgroundColor=none;labelBorderColor=none;noLabel=1;fontColor=none;fontFamily=Comic Sans MS;" vertex="1" parent="1">
-                        <mxGeometry x="680" y="180" width="80" height="20" as="geometry"/>
-                    </mxCell>
-                </UserObject>
-                <mxCell id="15" value="&lt;h1&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 24px&quot;&gt;JSpider's API&lt;/font&gt;&lt;/h1&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;sketch=1;glass=0;shadow=0;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#0000CC;" vertex="1" parent="1">
+                <mxCell id="15" value="&lt;h1&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 24px&quot;&gt;JSpider's API&lt;/font&gt;&lt;/h1&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;sketch=1;glass=0;shadow=0;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#0000CC;" parent="1" vertex="1">
                     <mxGeometry x="120" y="70" width="265" height="70" as="geometry"/>
                 </mxCell>
                 <UserObject label="plugins are the offical JSpider plugin store" placeholders="1" name="Variable" id="16">
-                    <mxCell style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;shadow=0;glass=0;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontColor=none;fontSize=15;" vertex="1" parent="1">
+                    <mxCell style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;shadow=0;glass=0;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontColor=none;fontSize=15;" parent="1" vertex="1">
                         <mxGeometry x="655" y="350" width="140" height="70" as="geometry"/>
                     </mxCell>
                 </UserObject>
                 <UserObject label="Plugin can create a plugin" placeholders="1" name="Variable" id="17">
-                    <mxCell style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;shadow=0;glass=0;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontColor=none;fontSize=15;" vertex="1" parent="1">
+                    <mxCell style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;shadow=0;glass=0;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontColor=none;fontSize=15;" parent="1" vertex="1">
                         <mxGeometry x="680" y="90" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </UserObject>
                 <UserObject label="$toolsName are a template that have many useful function help you to break some rules in the front end" placeholders="1" name="Variable" id="20">
-                    <mxCell style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;shadow=0;glass=0;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontColor=none;fontSize=15;" vertex="1" parent="1">
+                    <mxCell style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;shadow=0;glass=0;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontColor=none;fontSize=15;" parent="1" vertex="1">
                         <mxGeometry x="577" y="558" width="218" height="152" as="geometry"/>
                     </mxCell>
                 </UserObject>
                 <UserObject label="simpleCrawl is just a simple version of JSpider,It can crawl just use the URL Array" placeholders="1" name="Variable" id="22">
-                    <mxCell style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;shadow=0;glass=0;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontSize=15;" vertex="1" parent="1">
+                    <mxCell style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;shadow=0;glass=0;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontSize=15;labelPosition=center;verticalLabelPosition=middle;" parent="1" vertex="1">
                         <mxGeometry x="500" y="740" width="240" height="100" as="geometry"/>
                     </mxCell>
                 </UserObject>
