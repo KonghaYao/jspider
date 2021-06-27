@@ -2,9 +2,9 @@
 
 !>    tools 是对于爬虫有一些帮助的浏览器端的工具函数, 所有的函数都是 **以 $ 开头命名** 表示。
 
-## 插件导入工具 $load(string|object)
+## $load(string|object)
 
->    插件导入工具 $load 是用于导入 js 插件或者是 css 文件的快速导入函数。
+> 插件导入工具 $load 是用于导入 js 插件或者是 css 文件的快速导入函数。
 
 ### 导入我想要的模块
 
@@ -43,9 +43,9 @@ $load([{
 
 ```
 
-## JS 变量查找工具——$search(Object,RegexpOrString)
+## $search(Object,RegexpOrString)
 
-对象查找器 $search =,   \$search 用于查找一个对象上是否含有符合 RegExpOrString 的部分属性，并返回一个具体对象
+JS 变量查找工具 对象查找器 $search,  \$search 用于查找一个对象上是否含有符合 RegExpOrString 的部分属性，并返回一个具体对象
 
 ```js
 let obj = {
@@ -64,8 +64,6 @@ let obj = {
     "paragraph": "精行意史规管口进江及反识极增争几林。"
 }
 
-
-
 JSpider.$search(obj,/毛/) 
 //结果 {name: ["毛静"]}
 
@@ -74,4 +72,3 @@ JSpider.$search(obj,'毛')
 ```
 
 !>  注意不可以对引用了自身的对象进行 search，这样会导致不断搜索自身而死循环。
-

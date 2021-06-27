@@ -5,6 +5,7 @@ class TaskError {
         this.errTime = new Date();
     }
 }
+
 // 这种写法借鉴了 Vue 的组件写法，所以叫做 components
 // 不能使用 $作为前缀
 // this 总是指向 TaskWrapper 实例，而不是这个对象

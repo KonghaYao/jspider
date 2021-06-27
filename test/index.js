@@ -1,4 +1,4 @@
-import JSpider from "../dist/esm/JSpider.js";
+import JSpider from "../dist/JSpider.esm.min.js";
 window.JSpider = JSpider;
 import { main } from "./Request.js";
 import { ZipTest } from "./ZipTest.js";

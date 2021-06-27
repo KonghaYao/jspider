@@ -4,11 +4,19 @@ import json from "@rollup/plugin-json";
 
 export default {
     input: "src/JSpider.js", // 打包入口
-    output: {
-        // 打包出口
-        file: "./dist/JSpider.esm.min.js",
-        format: "es",
-    },
+    output: [
+        {
+            // 打包出口
+            file: "./dist/JSpider.esm.min.js",
+            format: "es",
+        },
+        {
+            // 打包出口
+            file: "./dist/JSpider.min.js",
+            format: "iife",
+            name: "JSpider",
+        },
+    ],
     plugins: [
         json(),
         resolve({

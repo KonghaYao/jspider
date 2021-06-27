@@ -3,7 +3,6 @@ import type from "../../utils/type.js";
 import { v4 as uuidv4 } from "uuid";
 import { pick } from "lodash-es";
 const { format, commit } = Components;
-
 // Task 的结构借鉴于 Vue 的组件写法
 
 export class Task {
@@ -12,7 +11,6 @@ export class Task {
     _createdAt = new Date();
     _updatedAt = new Date();
     _errorList = [];
-
     originData = {}; // 源数据，是由用户传入经过 format 的数据
     _result; // 每个中间件传出的数据
     _marks = {}; // 记录完成流程的过程标志 { UUID: pluginsResult }

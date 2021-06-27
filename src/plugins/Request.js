@@ -35,7 +35,12 @@ const request = function ({ url, options = {} }) {
 
     console.log("- 爬取 ", url);
     return fetch(url, options)
-        .then((res) => Format(res, returnType))
+        .then((res) => {
+            if (!res.ok) {
+                throw Error(res.statusText);
+            }
+            return Format(res, returnType);
+        })
         .then((res) => {
             console.log(url + " 爬取成功");
             return res;

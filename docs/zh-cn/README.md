@@ -13,11 +13,12 @@
 > 这里是通过 Mockjs 对 URL 进行了代理，所以接收得到数据。
 
 ```js
+// 从 jsDelivr 导入代码
 import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then(({default:JSpider})=>{
     window.JSpider = JSpider;
     // 放入您的 URL
     JSpider.simpleCrawl(["fake/excel","fake/excel"]);
-});// 从 jsDelivr 导入代码
+});
 ```
 
 
@@ -25,37 +26,34 @@ import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then(({
 
 ```js
 
-import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then(({default:JSpider})=>{
-    window.JSpider = JSpider;
-    const {
-        Request, // 请求库
-        Download, // 下载库
-        ExcelHelper, // 转换数据为表格数据的插件
-    } = JSpider.plugins;
-    const { Plugin } = JSpider;
+const {
+    Request, // 请求库
+    Download, // 下载库
+    ExcelHelper, // 转换数据为表格数据的插件
+} = JSpider.plugins;
+const { Plugin } = JSpider;
 
-    // 您的爬取路径代码
-    let urls = [...Array(5).keys()].map((i, index) => {
-        return { url: "/fake/excel" };
-    });
-    
-    //! 这些是主要代码
-    const spider = new JSpider(
-        Request(),
-        // 您可以使用这种方式进行自定义插件代码
-        Plugin((data) => {
-            console.log(data);
-            return data;
-        }),
-        ExcelHelper({
-            XLSXOptions: {
-                bookType: "csv", // 可以指定为 csv 或者 xlsx
-            },
-        }),
-        Download()
-    );
-    spider.apply(urls);
-});// 从 jsDelivr 导入代码
+// 您的爬取路径代码
+let urls = [...Array(5).keys()].map((i, index) => {
+    return { url: "/fake/excel" };
+});
+
+//! 这些是主要代码
+const spider = new JSpider(
+    Request(),
+    // 您可以使用这种方式进行自定义插件代码
+    Plugin((data) => {
+        console.log(data);
+        return data;
+    }),
+    ExcelHelper({
+        XLSXOptions: {
+            bookType: "csv", // 可以指定为 csv 或者 xlsx
+        },
+    }),
+    Download()
+);
+spider.apply(urls);
 
 ```
 
