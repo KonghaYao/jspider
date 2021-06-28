@@ -7,8 +7,7 @@
 
     -   [JSpider 高级配置](zh-cn/pro.md)
 
--   内置插件
-    -
+-   ## 内置插件
 -   小技巧
 
     -   [在线训练场](zh-cn/playground.md)

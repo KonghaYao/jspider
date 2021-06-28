@@ -1,18 +1,15 @@
 # /.editorconfig
 
-
-# 顶层editorconfig文件标识
 root = true
 
-# 针对所有文件适用
 [*]
 
-indent_style = space # 缩进符使用的风格 （tab ｜ space）
-indent_size = 4 # 缩进大小
-end_of_line = lf # 控制换行类型(lf | cr | crlf)
-charset = utf-8 # 编码格式
-trim_trailing_whitespace = true #行开始是不是清除空格
-insert_final_newline = true #文件最后添加空行
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
 
 [*.md]
 trim_trailing_whitespace = false
