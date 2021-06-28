@@ -6,7 +6,7 @@ export default {
             description: "@csentence()",
             avatar: "@dataImage('64x64')",
             address: "@region()",
-            province: "@province()"
-        }
-    ]
+            province: "@province()",
+        },
+    ],
 };

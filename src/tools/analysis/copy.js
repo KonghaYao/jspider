@@ -17,9 +17,7 @@ function clearCopyBarriers() {
         // 清除 快捷键 copy cut 事件的占用
         ["keydown", "copy", "cut"].forEach((eventName) => {
             if (event.hasOwnProperty(eventName)) {
-                event[eventName].forEach((target) =>
-                    ele.removeEventListener(eventName, target.listener)
-                );
+                event[eventName].forEach((target) => ele.removeEventListener(eventName, target.listener));
             }
         });
     });
@@ -36,9 +34,7 @@ export function $copy(content, clearBarriers = false) {
     if (clearBarriers) clearCopyBarriers();
 
     // 询问 window.copy 是否被覆盖了
-    if (
-        !(window.copy && window.copy.toString() === "function copy(value) { [Command Line API] }")
-    ) {
+    if (!(window.copy && window.copy.toString() === "function copy(value) { [Command Line API] }")) {
         // 尝试重置 copy 函数
         delete window.copy;
     }

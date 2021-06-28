@@ -1,3 +1,9 @@
+/*
+ * @Author: KonghaYao
+ * @Date: 2021-06-28 21:07:14
+ * @Last Modified by:   KonghaYao
+ * @Last Modified time: 2021-06-28 21:07:14
+ */
 import { merge } from "lodash-es";
 import { TaskError } from "./TaskError";
 
@@ -10,7 +16,7 @@ const components = {
         return {
             url: {},
             options: {},
-            result: null
+            result: null,
         };
     },
     format: {
@@ -30,7 +36,7 @@ const components = {
         // 是 Task Group 的类型
         Array(message) {
             this.originData = message;
-        }
+        },
     },
     commit: {
         // 对应 $commit(status,payload) 函数
@@ -54,7 +60,7 @@ const components = {
         error(payload) {
             this._errorList.push(new TaskError(payload));
             return true;
-        }
-    }
+        },
+    },
 };
 export default components;

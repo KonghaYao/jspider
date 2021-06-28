@@ -31,7 +31,7 @@ function createExcelFile(input, fileName, XLSXOptions) {
     return bookToFile(ObjectToBook(input), fileName, {
         bookType,
         bookSST,
-        type
+        type,
     });
 }
 export { createExcelFile as default };

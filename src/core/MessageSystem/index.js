@@ -9,5 +9,5 @@ import consola from "consola";
 export const console = {
     log(...args) {
         consola.log(...args);
-    }
+    },
 };

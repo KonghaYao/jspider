@@ -14,7 +14,7 @@ const setStore = (options) => ($source) => {
             Information._isABackup = true;
 
             return from(putData(dbName, Information));
-        })
+        }),
     );
 };
 

@@ -1,3 +1,9 @@
+/*
+ * @Author: KonghaYao
+ * @Date: 2021-06-28 21:07:23
+ * @Last Modified by:   KonghaYao
+ * @Last Modified time: 2021-06-28 21:07:23
+ */
 import { TaskError } from "./TaskError";
 import { Task } from "./Task.js";
 
@@ -26,8 +32,8 @@ const components = {
             this._errorList.push(new TaskError(payload));
             this.originData.forEach((task) => task.$commit("error", payload));
             return true;
-        }
-    }
+        },
+    },
 };
 const { commit } = components;
 export class TaskGroup extends Task {

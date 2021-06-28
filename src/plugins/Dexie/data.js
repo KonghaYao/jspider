@@ -10,7 +10,7 @@ function openDB(dbName) {
             db.close();
             db = new Dexie(dbName);
             db.version(1).stores({
-                default: "_index,createdAt"
+                default: "_index,createdAt",
             });
             return db.open();
         })

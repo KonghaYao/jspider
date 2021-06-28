@@ -1,3 +1,9 @@
+/*
+ * @Author: KonghaYao
+ * @Date: 2021-06-28 21:06:08
+ * @Last Modified by: KonghaYao
+ * @Last Modified time: 2021-06-28 21:19:44
+ */
 import { pipe, of, EMPTY, timer, Observable, from } from "rxjs";
 import { bufferCount, concatMap, switchMap, catchError, delayWhen } from "rxjs/operators";
 import { retryAndDelay } from "./retryAndDelay.js";
@@ -19,25 +25,27 @@ export function concurrent(
         handleError = function handleError(err, err$) {
             // 重试错误时的操作
             throw new Error(err, err$);
-        }
-    } = {}
+        },
+    } = {},
 ) {
     const asyncSingle = (data) =>
         of(data).pipe(
             switchMap((res) => {
-                const result = promiseFunc(res); // 当 promiseFunc 返回一个 Observable 时可以通过下面的方式进行统一
+                // 当 promiseFunc 返回一个 Observable 时可以通过下面的方式进行统一
+                const result = promiseFunc(res);
                 return result instanceof Observable ? from(result) : of(result);
             }),
             retryAndDelay(retry, retryDelay),
             catchError((...args) => {
                 const clear = handleError(...args); // 自定义错误处理
                 return clear || EMPTY; // 通过 EMPTY 取消掉这个订阅
-            })
+            }),
         );
     return pipe(
         bufferCount(buffer),
-        delayWhen((_, index) => timer(index * delay)), // 无论如何每一组都会被推迟的时间量
+        // 无论如何每一组都会被推迟的时间量
+        delayWhen((_, index) => timer(index * delay)),
         switchMap((array) => of(...array)),
-        concatMap(asyncSingle)
+        concatMap(asyncSingle),
     );
 }

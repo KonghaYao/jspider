@@ -4,7 +4,7 @@ import mitt from "mitt";
 const core = mitt();
 const eventMap = {
     error() {},
-    log() {}
+    log() {},
 };
 Object.entries(eventMap).map(([key, value]) => core.on(key, value));
 
@@ -13,7 +13,7 @@ const counter = {
     error: 0,
     retry: 0,
     failed: 0,
-    messageStack: []
+    messageStack: [],
 };
 console.log(counter);
 
@@ -21,13 +21,13 @@ console.log(counter);
 const consoleMap = {
     log() {},
     error() {},
-    info() {}
+    info() {},
 };
 
 const console = new Proxy(window.console, {
     get(target, what) {
         return consoleMap?.[what] || target?.[what];
-    }
+    },
 });
 
 export { console };

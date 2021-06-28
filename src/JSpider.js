@@ -1,3 +1,9 @@
+/*
+ * @Author: KonghaYao
+ * @Date: 2021-06-28 21:05:42
+ * @Last Modified by:   KonghaYao
+ * @Last Modified time: 2021-06-28 21:05:42
+ */
 import { JSpider, Plugin } from "./core/index.js";
 import * as plugins from "./plugins/index.js";
 import * as tools from "./tools/index.js"; // 工具都是 $ 开头的函数
@@ -7,7 +13,7 @@ import { simpleCrawl } from "./simpleCrawl.js";
 Object.assign(JSpider, tools, {
     plugins,
     Plugin,
-    simpleCrawl
+    simpleCrawl,
 });
 
 export default JSpider;

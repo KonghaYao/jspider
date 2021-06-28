@@ -6,7 +6,7 @@ import { concurrent } from "../utils/concurrent.js";
 // ! 这个 Request 文件是标准的 Plugin 的高级注册示例
 
 // Format 是边缘的处理逻辑，用于自动化相应返回数据的格式处理，与 Plugin 关系较小
-const Format = function (res, returnType) {
+function Format(res, returnType) {
     const type = res.headers.get("content-type") || "";
     // 根据 returnType 强制返回
     if (!returnType || returnType === "auto") {
@@ -27,13 +27,13 @@ const Format = function (res, returnType) {
         return res[returnType]();
     }
     return res.json();
-};
+}
 
 // Plugin 的核心函数 (this.main)，用于请求
 // 第一参数为 Task 内部使用 start 事件返回的参数，你可以看成是上一个 Plugin 返回给你的数据
 // 第二个为 Plugin 内部的 options, 可以调用这些数据进行操作
 
-const request = function ({ url, options = {} }) {
+function request({ url, options = {} }) {
     const { returnType = "json" } = this.options;
 
     //  获取数据为 request
@@ -52,13 +52,13 @@ const request = function ({ url, options = {} }) {
         .catch((err) => {
             throw err;
         });
-};
+}
 
 // 在超过重试次数时，进行的操作
-const HandleError = function (err) {
+function HandleError(err) {
     throw err;
-};
-export const Request = function (options = {}) {
+}
+export function Request(options = {}) {
     return Plugin({
         init() {}, // 在所有工作开始前会启动的函数，可以用于 Promise 加载一些 js 插件
         main: request, // 功能性的核心函数
@@ -75,18 +75,21 @@ export const Request = function (options = {}) {
                 $source.pipe(
                     concurrent(
                         (task) =>
-                            // 注意此处的 TaskStarter 是 Plugin 内置的函数，通过这个函数可以直接回应 Task
-                            // 使得 Plugin 开发者 不用学 Task 相关知识，而只是调用一下这个形式就可以了
-                            // this.TaskStarter 是用于间接调用 this.main 函数的 Wrapper 函数，主要是对 Task 进行一些操作
+                            // 注意此处的 TaskStarter 是 Plugin 内置的函数，
+                            // 通过这个函数可以直接回应 Task
+                            // 使得 Plugin 开发者 不用学 Task 相关知识，
+                            // 而只是调用一下这个形式就可以了
+                            // TaskStarter 是用于间接调用 main 函数的 Wrapper 函数，
+                            // 主要是对 Task 进行一些操作
                             this.TaskStarter(task),
                         {
                             delay,
                             buffer,
                             retry,
-                            handleError: handleError || HandleError
-                        }
-                    )
+                            handleError: handleError || HandleError,
+                        },
+                    ),
                 );
-        }
+        },
     });
-};
+}

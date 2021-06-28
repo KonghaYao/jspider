@@ -3,7 +3,7 @@ const URI = "https://cdn.jsdelivr.net";
 const wayMap = Object.entries({
     npm: /^npm?/i,
     gh: /gh?|github/i,
-    wp: /wordpress|wp/i
+    wp: /wordpress|wp/i,
 });
 
 /**

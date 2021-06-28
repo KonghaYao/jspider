@@ -1,3 +1,9 @@
+/*
+ * @Author: KonghaYao
+ * @Date: 2021-06-28 21:07:46
+ * @Last Modified by:   KonghaYao
+ * @Last Modified time: 2021-06-28 21:07:46
+ */
 import { pipe } from "rxjs";
 import { skipWhile } from "rxjs/operators";
 
@@ -10,5 +16,5 @@ export const skipSame = (context) =>
                 return true;
             }
             return false;
-        })
+        }),
     );

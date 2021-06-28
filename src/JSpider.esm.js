@@ -1,3 +1,9 @@
+/*
+ * @Author: KonghaYao
+ * @Date: 2021-06-28 21:05:59
+ * @Last Modified by:   KonghaYao
+ * @Last Modified time: 2021-06-28 21:05:59
+ */
 export { JSpider, Task, TaskGroup, Plugin } from "./core/index.js";
 export * as plugins from "./plugins/index.js";
 export * as tools from "./tools/index.js"; // 工具都是 $ 开头的函数

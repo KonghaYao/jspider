@@ -1,3 +1,9 @@
+/*
+ * @Author: KonghaYao
+ * @Date: 2021-06-28 21:06:52
+ * @Last Modified by:   KonghaYao
+ * @Last Modified time: 2021-06-28 21:06:52
+ */
 import { createTask, skipSame } from "./coreOperators/index.js";
 import { createUUID } from "./createUUID.js";
 import { from } from "rxjs";
@@ -40,10 +46,10 @@ export class JSpider {
                 tap((task) => {
                     // from(task).pipe(tap(console.log)).subscribe();
                     task.$commit("complete", this.uuid);
-                })
+                }),
             )
             .subscribe({
-                complete() {}
+                complete() {},
             });
     }
 }

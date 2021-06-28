@@ -51,7 +51,7 @@ const handle = {
     },
     Array(arr) {
         return Promise.all(arr.map((i) => $load(i)));
-    }
+    },
 };
 export async function $load(Module) {
     return handle[type(Module)](Module);

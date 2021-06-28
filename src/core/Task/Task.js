@@ -1,3 +1,9 @@
+/*
+ * @Author: KonghaYao
+ * @Date: 2021-06-28 21:07:10
+ * @Last Modified by:   KonghaYao
+ * @Last Modified time: 2021-06-28 21:07:10
+ */
 import Components from "./TaskComponents.js";
 import type from "../../utils/type.js";
 import { v4 as uuidv4 } from "uuid";
@@ -57,7 +63,7 @@ export class Task {
             "_errorList",
             "_result",
             "_marks",
-            "originData"
+            "originData",
         ]);
         output._isABackup = true;
         return output;

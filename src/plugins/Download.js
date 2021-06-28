@@ -7,7 +7,7 @@ const DownloadQueue = {
     main: Promise.resolve(true),
     add(file) {
         this.main.then(() => aDownload(file));
-    }
+    },
 };
 // a 标签下载的方式貌似为同步模式（未验证）
 const aDownload = function (file) {
@@ -21,16 +21,13 @@ const aDownload = function (file) {
 };
 
 const download = (data, { DownloadFileName: name }, originData) => {
-    const file = toFile(
-        data,
-        name || (typeof url === "string" ? originData.url.replace(/[^\/]*?\//g, "") : "")
-    );
+    const file = toFile(data, name || (typeof url === "string" ? originData.url.replace(/[^\/]*?\//g, "") : ""));
     DownloadQueue.add(file);
     return null;
 };
 export const Download = function (options = {}) {
     return Plugin({
         main: download,
-        options
+        options,
     });
 };

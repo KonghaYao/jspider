@@ -20,6 +20,6 @@ import { asyncApply } from "./hook/asyncApply.js";
 export function $hook(func, async = false) {
     createProperty(func);
     return new Proxy(func, {
-        apply: async ? asyncApply : syncApply
+        apply: async ? asyncApply : syncApply,
     });
 }

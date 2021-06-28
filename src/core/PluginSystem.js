@@ -1,4 +1,10 @@
 /*
+ * @Author: KonghaYao
+ * @Date: 2021-06-28 21:06:34
+ * @Last Modified by:   KonghaYao
+ * @Last Modified time: 2021-06-28 21:06:34
+ */
+/*
 关于 PLUGIN 的参数
 
 1. init 函数 (可以没有): 在 spider 预处理的时候会对所有 PLUGIN 的 init 函数进行异步顺序调用保证插件在运行前载入。
@@ -28,7 +34,7 @@ class PLUGIN {
         complete = null,
         options = {},
         saveMiddleResult = false,
-        operator
+        operator,
     }) {
         const uuid = createUUID(main.toString());
         if (operator) this.operator = operator;
@@ -42,7 +48,7 @@ class PLUGIN {
             complete, // 函数完成时的提示事件
             options, // main 函数接收的 options
             saveMiddleResult, // 是否保存结果到每一个 Task 中
-            forceRetry // 是否强制重新使用 Plugin
+            forceRetry, // 是否强制重新使用 Plugin
         });
     }
 
@@ -64,7 +70,7 @@ class PLUGIN {
                         map((result) => {
                             task.$commit("success", result, this.uuid, this.saveMiddleResult);
                             return task;
-                        })
+                        }),
                     );
                 }
                 console.log("跳过一个目标");
@@ -82,7 +88,7 @@ class PLUGIN {
                 throw args[0];
             }),
             // 完成 Plugin
-            tap((task) => this.complete && this.complete(task))
+            tap((task) => this.complete && this.complete(task)),
         );
     }
 
@@ -94,7 +100,7 @@ class PLUGIN {
 export function Plugin(Process) {
     if (Process instanceof Function) {
         return new PLUGIN({
-            main: Process
+            main: Process,
         });
     }
     if (Process instanceof Object) {

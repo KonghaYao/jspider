@@ -1,3 +1,9 @@
+/*
+ * @Author: KonghaYao
+ * @Date: 2021-06-28 21:06:13
+ * @Last Modified by:   KonghaYao
+ * @Last Modified time: 2021-06-28 21:06:13
+ */
 import { pipe, timer } from "rxjs";
 import { delayWhen, scan, retryWhen } from "rxjs/operators";
 
@@ -21,7 +27,7 @@ export const retryAndDelay = (count, delay) =>
                         default:
                             throw new Error("您输入的 delay 错误");
                     }
-                })
-            )
-        )
+                }),
+            ),
+        ),
     );
