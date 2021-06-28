@@ -19,17 +19,7 @@ import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { createUUID } from "./createUUID.js";
 
 class PLUGIN {
-    constructor({
-        forceRetry = true,
-        name = null,
-        main,
-        init = null,
-        error = null,
-        complete = null,
-        options = {},
-        saveMiddleResult = false,
-        operator
-    }) {
+    constructor({ forceRetry = true, name = null, main, init = null, error = null, complete = null, options = {}, saveMiddleResult = false, operator }) {
         const uuid = createUUID(main.toString());
         if (operator) this.operator = operator;
         // 写入自身中
@@ -53,25 +43,14 @@ class PLUGIN {
             switchMap((task) => {
                 if (task.$checkRepeat(this.uuid) || this.forceRetry) {
                     return of(task).pipe(
-                        map((task) => [
-                            task.$commit("start", this.uuid),
-                            task.originData
-                        ]),
+                        map((task) => [task.$commit("start", this.uuid), task.originData]),
 
                         switchMap(([data, originData]) => {
                             const result = this.main(data, originData);
-                            return result instanceof Promise ||
-                                result instanceof Observable
-                                ? from(result)
-                                : of(result);
+                            return result instanceof Promise || result instanceof Observable ? from(result) : of(result);
                         }),
                         map((result) => {
-                            task.$commit(
-                                "success",
-                                result,
-                                this.uuid,
-                                this.saveMiddleResult
-                            );
+                            task.$commit("success", result, this.uuid, this.saveMiddleResult);
                             return task;
                         })
                     );

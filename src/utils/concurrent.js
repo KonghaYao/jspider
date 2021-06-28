@@ -1,11 +1,5 @@
 import { pipe, of, EMPTY, timer, Observable, from } from "rxjs";
-import {
-    bufferCount,
-    concatMap,
-    switchMap,
-    catchError,
-    delayWhen
-} from "rxjs/operators";
+import { bufferCount, concatMap, switchMap, catchError, delayWhen } from "rxjs/operators";
 import { retryAndDelay } from "./retryAndDelay.js";
 
 /**

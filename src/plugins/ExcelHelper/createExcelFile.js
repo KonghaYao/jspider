@@ -27,11 +27,7 @@ function ObjectToBook(input) {
 
 // input: {sheetName1:[],sheetName2:[]}
 function createExcelFile(input, fileName, XLSXOptions) {
-    const {
-        bookType = "xlsx",
-        bookSST = true,
-        type = "array"
-    } = XLSXOptions || {};
+    const { bookType = "xlsx", bookSST = true, type = "array" } = XLSXOptions || {};
     return bookToFile(ObjectToBook(input), fileName, {
         bookType,
         bookSST,

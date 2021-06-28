@@ -13,15 +13,7 @@ const wayMap = Object.entries({
  * @param {any} options
  * @return {any}
  */
-export function jsdelivr(
-    moduleName,
-    { version = "", store = "npm", path = "" } = {}
-) {
-    const way = wayMap.reduce(
-        (final, [key, value]) => (value.test(store) ? key : final),
-        "npm"
-    );
-    return `${URI}/${way}/${moduleName}${version ? `@${version}` : ""}${
-        path ? `/${path}` : ""
-    }`;
+export function jsdelivr(moduleName, { version = "", store = "npm", path = "" } = {}) {
+    const way = wayMap.reduce((final, [key, value]) => (value.test(store) ? key : final), "npm");
+    return `${URI}/${way}/${moduleName}${version ? `@${version}` : ""}${path ? `/${path}` : ""}`;
 }

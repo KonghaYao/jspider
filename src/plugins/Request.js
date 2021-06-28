@@ -69,12 +69,7 @@ export const Request = function (options = {}) {
 
             // 通过 this.options 来获取传入的参数，这个参数解析都是由 Plugin 开发者来设置逻辑的
             // 所以灵活性很高
-            const {
-                delay = 200,
-                buffer = 3,
-                retry = 3,
-                handleError = null
-            } = this.options;
+            const { delay = 200, buffer = 3, retry = 3, handleError = null } = this.options;
 
             return ($source) =>
                 $source.pipe(

@@ -10,9 +10,7 @@ const DEFAULT = (key, value) => value;
  * @return {Proxy} 返回代理的对象
  */
 function $watch(obj) {
-    const type = Object.prototype.toString
-        .call(obj)
-        .match(/(?<=\[object\s+)\S+?(?=\])/)[0];
+    const type = Object.prototype.toString.call(obj).match(/(?<=\[object\s+)\S+?(?=\])/)[0];
     if ((type === "Object" || type === "Array") && obj) {
         const arr = Object.entries(obj);
         arr.forEach(([key, value]) => {

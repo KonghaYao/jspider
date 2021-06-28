@@ -9,8 +9,5 @@ import { Private } from "./createProperty.js";
 
 export async function asyncApply(target, thisArg, args) {
     const { before, after } = target[Private];
-    return [...before, target, ...after].reduce(
-        (a, b) => a.then((res) => b.call(thisArg, res)),
-        Promise.resolve(args)
-    );
+    return [...before, target, ...after].reduce((a, b) => a.then((res) => b.call(thisArg, res)), Promise.resolve(args));
 }

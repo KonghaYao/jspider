@@ -8,10 +8,7 @@ const components = {
         start(pluginUUID) {
             this._marks[pluginUUID] = null;
 
-            return (
-                this._result ||
-                this.originData.map((task) => task.$commit("start", pluginUUID))
-            );
+            return this._result || this.originData.map((task) => task.$commit("start", pluginUUID));
         },
         complete(UUID) {
             this._processUUID = UUID;
@@ -22,9 +19,7 @@ const components = {
         success(payload, UUID, saveResult = false) {
             this._marks[UUID] = saveResult ? this._result : true;
             this._result = payload;
-            this.originData.forEach((task) =>
-                task.$commit("success", payload, UUID, false)
-            );
+            this.originData.forEach((task) => task.$commit("success", payload, UUID, false));
             return true;
         },
         error(payload) {

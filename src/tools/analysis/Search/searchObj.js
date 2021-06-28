@@ -20,8 +20,7 @@ const TypeMap = {
     },
     Function(all, key, value) {
         const entries = searchObj(Object.entries(value), this.RE);
-        if (entries.length)
-            all.push([key, Object.assign(value, Object.fromEntries(entries))]);
+        if (entries.length) all.push([key, Object.assign(value, Object.fromEntries(entries))]);
         return all;
     },
     Object(all, key, value) {

@@ -21,13 +21,7 @@ const aDownload = function (file) {
 };
 
 const download = (data, { DownloadFileName: name }, originData) => {
-    const file = toFile(
-        data,
-        name ||
-            (typeof url === "string"
-                ? originData.url.replace(/[^\/]*?\//g, "")
-                : "")
-    );
+    const file = toFile(data, name || (typeof url === "string" ? originData.url.replace(/[^\/]*?\//g, "") : ""));
     DownloadQueue.add(file);
     return null;
 };

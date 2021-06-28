@@ -13,8 +13,7 @@ import { jsdelivr } from "./jsDelivr.js";
  */
 import { type } from "../../utils/type.js";
 
-const URLTest =
-    /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/;
+const URLTest = /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/;
 
 /**
  * 根据 name object 获取 url
@@ -34,14 +33,7 @@ function fromName({ name, way, path, version }) {
 }
 
 const handle = {
-    Object({
-        url = "",
-        name,
-        way = "npm",
-        path = "",
-        version = "",
-        type = "script"
-    }) {
+    Object({ url = "", name, way = "npm", path = "", version = "", type = "script" }) {
         if (!url) {
             // 没有 url 属性
             const result = fromName({ name, way, path, version });
