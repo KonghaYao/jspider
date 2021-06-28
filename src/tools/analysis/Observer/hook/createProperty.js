@@ -15,7 +15,9 @@ function $on(eventName, callback) {
 // 如果一个事件同时挂载了两次，需要遍历全部元素才能判断
 function $off(eventName, callback) {
     try {
-        this[Private][eventName] = this[Private][eventName].filter((element) => element !== callback);
+        this[Private][eventName] = this[Private][eventName].filter(
+            (element) => element !== callback
+        );
     } catch {
         throw new Error("事件删除失败");
     }

@@ -48,7 +48,17 @@ export class Task {
     }
     // 数据导出和导入的接口
     $output() {
-        const output = pick(["_processUUID", "_index", "_status", "_createdAt", "_updatedAt", "_errorList", "_result", "_marks", "originData"]);
+        const output = pick([
+            "_processUUID",
+            "_index",
+            "_status",
+            "_createdAt",
+            "_updatedAt",
+            "_errorList",
+            "_result",
+            "_marks",
+            "originData"
+        ]);
         output._isABackup = true;
         return output;
     }

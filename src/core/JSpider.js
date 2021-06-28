@@ -19,7 +19,9 @@ export class JSpider {
     #preparePlugins() {
         return this.Plugins.reduce((promise, plugin) => {
             this.#PluginLine.push(plugin.operator(this));
-            if (plugin.init instanceof Function) promise.then(() => plugin.init());
+            if (plugin.init instanceof Function) {
+                promise.then(() => plugin.init());
+            }
             return promise;
         }, Promise.resolve()).then(() => (this._ready = true));
     }
