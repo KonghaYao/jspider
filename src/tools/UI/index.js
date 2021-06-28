@@ -21,7 +21,7 @@ export class UIManager {
             background-color: rgba(0, 0, 0, 0.3);
             z-index: 1000000000000;
         `.replace(/\s/g, "");
-        document.body.appendChild($root);
+        document.body.appendChild(this.$root);
         consola.success("向 dom 中 注入 ui 成功");
     }
 }

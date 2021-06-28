@@ -23,7 +23,7 @@ export class Task {
         this._processUUID = UUID;
     }
     $formatMessage(message) {
-        let MessageType = type(message);
+        const MessageType = type(message);
         if (format[MessageType] instanceof Function) {
             format[MessageType].apply(this, [message]);
         } else {
