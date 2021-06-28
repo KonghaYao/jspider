@@ -15,7 +15,7 @@ export const retryAndDelay = (count, delay) =>
                     switch (typeof delay) {
                         case "string":
                         case "number":
-                            return timer(parseInt(delay));
+                            return timer(parseInt(delay, 10));
                         case "function":
                             return timer(delay(...args));
                         default:

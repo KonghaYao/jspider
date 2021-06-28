@@ -14,7 +14,7 @@ function ArrayToSheet(sheetArray) {
 
 function bookToFile(book, name, options) {
     const ArrayBuffer = XLSX.write(book, options);
-    return new File([ArrayBuffer], name + "." + options.bookType);
+    return new File([ArrayBuffer], `${name}.${options.bookType}`);
 }
 function ObjectToBook(input) {
     const book = XLSX.utils.book_new();

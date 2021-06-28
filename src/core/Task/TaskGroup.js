@@ -1,4 +1,5 @@
 import { TaskError } from "./TaskError";
+import { Task } from "./Task.js";
 
 // Task 的结构借鉴于 Vue 的组件写法
 const components = {
@@ -34,11 +35,11 @@ const components = {
     }
 };
 const { commit } = components;
-import { Task } from "./Task.js";
 export class TaskGroup extends Task {
     constructor(array, UUID) {
         super(new Array(...array), UUID);
     }
+
     $commit(status, ...payload) {
         if (commit[status] instanceof Function) {
             const returnData = commit[status].apply(this, payload);
@@ -48,12 +49,14 @@ export class TaskGroup extends Task {
                 return returnData;
             }
         } else {
-            throw new Error("commit 状态错误" + this._index);
+            throw new Error(`commit 状态错误${this._index}`);
         }
     }
+
     $checkRepeat() {
         return true;
     }
+
     $break() {
         return this.originData;
     }

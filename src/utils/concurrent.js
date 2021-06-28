@@ -1,4 +1,3 @@
-import { retryAndDelay } from "./retryAndDelay.js";
 import { pipe, of, EMPTY, timer, Observable, from } from "rxjs";
 import {
     bufferCount,
@@ -7,6 +6,7 @@ import {
     catchError,
     delayWhen
 } from "rxjs/operators";
+import { retryAndDelay } from "./retryAndDelay.js";
 
 /**
  * 并发控制操作符
@@ -22,7 +22,7 @@ export function concurrent(
         buffer = 3, // 每次并发处理的次数
         delay = 0, // 每个分组之间的间隔
         retryDelay = 300, // 每次延迟的次数；与 retryAndDelay 相同的一个函数
-        handleError = function (err, err$) {
+        handleError = function handleError(err, err$) {
             // 重试错误时的操作
             throw new Error(err, err$);
         }
@@ -42,9 +42,7 @@ export function concurrent(
         );
     return pipe(
         bufferCount(buffer),
-        delayWhen((_, index) => {
-            return timer(index * delay);
-        }), // 无论如何每一组都会被推迟的时间量
+        delayWhen((_, index) => timer(index * delay)), // 无论如何每一组都会被推迟的时间量
         switchMap((array) => of(...array)),
         concatMap(asyncSingle)
     );

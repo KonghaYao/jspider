@@ -1,6 +1,7 @@
+import consola from "consola";
 import { Server } from "./Server/index.js";
 import { $load } from "../loader/loader.js";
-import consola from "consola";
+
 const cache = {};
 async function Mock(MockSiteName) {
     // 导入 Mockjs

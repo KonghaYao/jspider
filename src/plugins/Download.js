@@ -1,12 +1,12 @@
 import { toFile } from "./utils/toFile.js";
+
+import { Plugin } from "../core/PluginSystem.js";
 // 在 浏览器中下载是不能够同时进行的，也就是说，如果前面的没有下载完，后面的又提交
 // 会导致后面的全部失效，所以设置 Promise 下载队列
 const DownloadQueue = {
     main: Promise.resolve(true),
     add(file) {
-        this.main.then(() => {
-            return aDownload(file);
-        });
+        this.main.then(() => aDownload(file));
     }
 };
 // a 标签下载的方式貌似为同步模式（未验证）
@@ -31,8 +31,6 @@ const download = (data, { DownloadFileName: name }, originData) => {
     DownloadQueue.add(file);
     return null;
 };
-
-import { Plugin } from "../core/PluginSystem.js";
 export const Download = function (options = {}) {
     return Plugin({
         main: download,

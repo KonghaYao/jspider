@@ -17,6 +17,7 @@
 import { EMPTY, from, Observable, of, pipe } from "rxjs";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { createUUID } from "./createUUID.js";
+
 class PLUGIN {
     constructor({
         forceRetry = true,
@@ -44,6 +45,7 @@ class PLUGIN {
             forceRetry // 是否强制重新使用 Plugin
         });
     }
+
     // 对 main 函数外包一层，直接启动 main 函数的执行，返回一条流
     TaskStarter(task) {
         return of(task).pipe(
@@ -73,10 +75,9 @@ class PLUGIN {
                             return task;
                         })
                     );
-                } else {
-                    console.log("跳过一个目标");
-                    return of(task);
                 }
+                console.log("跳过一个目标");
+                return of(task);
             }),
 
             // 捕获到异常
@@ -86,9 +87,8 @@ class PLUGIN {
                     afterError = this.error(task, ...args);
                     if (afterError) throw afterError;
                     return EMPTY;
-                } else {
-                    throw args[0];
                 }
+                throw args[0];
             }),
             // 完成 Plugin
             tap((task) => this.complete && this.complete(task))
@@ -105,9 +105,9 @@ export function Plugin(Process) {
         return new PLUGIN({
             main: Process
         });
-    } else if (Process instanceof Object) {
-        return new PLUGIN(Process);
-    } else {
-        throw new Error("Plugin must be input a function or Object");
     }
+    if (Process instanceof Object) {
+        return new PLUGIN(Process);
+    }
+    throw new Error("Plugin must be input a function or Object");
 }

@@ -13,19 +13,20 @@ const Format = function (res, returnType) {
         // 自动判断类型并解析
         if (/text|html|rtf|xml/.test(type)) {
             return res.text();
-        } else if (/json/.test(type)) {
-            return res.json();
-        } else if (/arrayBuffer/.test(type)) {
-            return res.arrayBuffer();
-        } else {
-            // 默认返回 Blob 数据 配合 node端 的buffer
-            return res.buffer ? res.buffer() : res.blob();
         }
-    } else if (returnType) {
-        return res[returnType]();
-    } else {
-        return res.json();
+        if (/json/.test(type)) {
+            return res.json();
+        }
+        if (/arrayBuffer/.test(type)) {
+            return res.arrayBuffer();
+        }
+        // 默认返回 Blob 数据 配合 node端 的buffer
+        return res.buffer ? res.buffer() : res.blob();
     }
+    if (returnType) {
+        return res[returnType]();
+    }
+    return res.json();
 };
 
 // Plugin 的核心函数 (this.main)，用于请求
@@ -45,7 +46,7 @@ const request = function ({ url, options = {} }) {
             return Format(res, returnType);
         })
         .then((res) => {
-            console.log(url + " 爬取成功");
+            console.log(`${url} 爬取成功`);
             return res;
         })
         .catch((err) => {

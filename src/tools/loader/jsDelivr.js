@@ -17,10 +17,11 @@ export function jsdelivr(
     moduleName,
     { version = "", store = "npm", path = "" } = {}
 ) {
-    const way = wayMap.reduce((final, [key, value]) => {
-        return value.test(store) ? key : final;
-    }, "npm");
-    return `${URI}/${way}/${moduleName}${version ? "@" + version : ""}${
-        path ? "/" + path : ""
+    const way = wayMap.reduce(
+        (final, [key, value]) => (value.test(store) ? key : final),
+        "npm"
+    );
+    return `${URI}/${way}/${moduleName}${version ? `@${version}` : ""}${
+        path ? `/${path}` : ""
     }`;
 }

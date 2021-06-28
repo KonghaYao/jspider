@@ -11,8 +11,7 @@ export const skipSame = (context) =>
             ) {
                 console.warn("跳过一个目标");
                 return true;
-            } else {
-                return false;
             }
+            return false;
         })
     );

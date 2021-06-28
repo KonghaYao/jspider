@@ -8,7 +8,7 @@ export function $antiDebugger() {
         Function.prototype.$constructor = Function.prototype.constructor;
         Function.prototype.constructor = function (...args) {
             if (args && typeof args[0] === "string") {
-                if ("debugger" === args[0]) {
+                if (args[0] === "debugger") {
                     return;
                 }
             }

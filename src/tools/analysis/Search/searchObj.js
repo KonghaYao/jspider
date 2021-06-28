@@ -3,7 +3,7 @@ import getType from "../../../utils/type.js";
 const TypeMap = {
     RE: "",
     StringFunction(all, key, value, keyValue) {
-        if (this.RE.test(value + "")) all.push(keyValue);
+        if (this.RE.test(`${value}`)) all.push(keyValue);
         return all;
     },
 
@@ -48,16 +48,14 @@ function searchObj(arr, RE, keepUnknown = false) {
         // 判断 key 中是否有符合项
         if (RE.test(key)) {
             return [...all, keyValue];
-        } else {
-            // 判断数据类型 分类操作
-            TypeMap.RE = RE;
-            const type = getType(value);
-            if (TypeMap.hasOwnProperty(type)) {
-                return TypeMap[type](all, key, value, keyValue);
-            } else {
-                return keepUnknown ? [all, keyValue] : all;
-            }
         }
+        // 判断数据类型 分类操作
+        TypeMap.RE = RE;
+        const type = getType(value);
+        if (TypeMap.hasOwnProperty(type)) {
+            return TypeMap[type](all, key, value, keyValue);
+        }
+        return keepUnknown ? [all, keyValue] : all;
     }, []);
 }
 export { searchObj };

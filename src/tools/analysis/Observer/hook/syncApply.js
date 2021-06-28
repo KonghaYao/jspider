@@ -6,9 +6,11 @@
  * @param {Array} args 执行参数
  */
 import { Private } from "./createProperty.js";
+
 export function syncApply(target, thisArg, args) {
     const { before, after } = target[Private];
-    return [...before, target, ...after].reduce((a, b) => {
-        return b.call(thisArg, a);
-    }, args);
+    return [...before, target, ...after].reduce(
+        (a, b) => b.call(thisArg, a),
+        args
+    );
 }

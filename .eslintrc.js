@@ -5,11 +5,11 @@ module.exports = {
     },
     plugins: ["prettier"],
     extends: ["eslint:recommended", "google", "prettier"],
+    parser: "babel-eslint",
     parserOptions: {
         ecmaVersion: 12,
         sourceType: "module"
     },
-    parser: "babel-eslint",
     rules: {
         "prettier/prettier": ["error"],
         "no-console": "off",

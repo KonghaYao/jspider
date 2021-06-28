@@ -1,3 +1,6 @@
+// 尚未进行测试
+import { Plugin } from "../core/PluginSystem";
+
 const type = {
     svg: "image/svg+xml",
     html: "text/html",
@@ -8,9 +11,6 @@ const Parser = function (string, func, documentType = "text/html") {
     const dom = parser.parseFromString(string, type[documentType]);
     return func(dom);
 };
-
-// 尚未进行测试
-import { Plugin } from "../core/PluginSystem";
 export function HTMLParser(callback, options = {}) {
     return Plugin({
         options,

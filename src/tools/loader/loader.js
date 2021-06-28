@@ -5,6 +5,14 @@ import { loaderFunction } from "./loaderFunction.js";
 // 优先使用 scriptMap 中的命名，然后是使用 npm 命名
 import scriptMap from "./scriptStore.js";
 import { jsdelivr } from "./jsDelivr.js";
+/**
+ * $load 外部暴露的接口
+ * @date 2021-06-19
+ * @param {String|Object} Module :{}
+ * @returns {Promise}
+ */
+import { type } from "../../utils/type.js";
+
 const URLTest =
     /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/;
 
@@ -21,9 +29,8 @@ function fromName({ name, way, path, version }) {
     if (scriptMap.hasOwnProperty(name)) {
         // 优先使用自带的位置
         return scriptMap[name];
-    } else {
-        return jsdelivr(name, { version, store: way, path: path });
     }
+    return jsdelivr(name, { version, store: way, path });
 }
 
 const handle = {
@@ -54,13 +61,6 @@ const handle = {
         return Promise.all(arr.map((i) => $load(i)));
     }
 };
-/**
- * $load 外部暴露的接口
- * @date 2021-06-19
- * @param {String|Object} Module :{}
- * @returns {Promise}
- */
-import { type } from "../../utils/type.js";
 export async function $load(Module) {
     return handle[type(Module)](Module);
 }

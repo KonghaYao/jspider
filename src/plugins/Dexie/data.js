@@ -1,5 +1,6 @@
 import Consola from "consola";
 import { Dexie } from "./Dexie.js";
+
 const dbCache = {};
 function openDB(dbName) {
     let db = new Dexie(dbName);
