@@ -12,8 +12,9 @@
         "dev": "rollup  --config rollup.config.dev.js -w",
         "build": "rollup --config rollup.config.build.js",
         "lint": "eslint src",
-        "Lint": "eslint --fix src",
+        "Lint": "prettier --write src/**/*.{ts,json,md,yml,js} & eslint src",
         "prettier": "prettier --write src/**/*.{ts,json,md,yml,js}",
+        "patch":"npm version patch & npm publish",
         "format": "yarn prettier && yarn lint ",
         "docs": "docsify serve docs"
     },
