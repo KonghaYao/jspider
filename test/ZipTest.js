@@ -19,7 +19,7 @@ async function main() {
         //     }
         // )
         ZipFile({
-            chunk: 2,
+            chunk: 2
         }),
         Plugin((task) => {
             console.log(task);

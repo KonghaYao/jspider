@@ -1,3 +1,4 @@
+/* eslint-disable no-invalid-this */
 const handle = { get, set };
 const DEFAULT = (key, value) => value;
 
@@ -6,18 +7,20 @@ const DEFAULT = (key, value) => value;
  * @date 2020-09-17
  * @description 这个是主要的函数，下面的是用于代理的 get 和 set 函数
  * @param {Object} obj 被代理对象
- * @returns {Proxy} 返回代理的对象
+ * @return {Proxy} 返回代理的对象
  */
 function $watch(obj) {
-    let type = Object.prototype.toString.call(obj).match(/(?<=\[object\s+)\S+?(?=\])/)[0];
+    const type = Object.prototype.toString
+        .call(obj)
+        .match(/(?<=\[object\s+)\S+?(?=\])/)[0];
     if ((type === "Object" || type === "Array") && obj) {
-        let arr = Object.entries(obj);
+        const arr = Object.entries(obj);
         arr.forEach(([key, value]) => {
-            obj[key] = watch(value);
+            obj[key] = $watch(value);
         });
         obj.GETTER = { DEFAULT };
         obj.SETTER = { DEFAULT };
-        let proxy = new Proxy(obj, handle);
+        const proxy = new Proxy(obj, handle);
         console.log("%c 代理对象完成", "color:orange");
         return proxy;
     } else {
@@ -30,7 +33,7 @@ function $watch(obj) {
  * @date 2020-09-17
  * @param {Object} target 被代理对象
  * @param {any} key 输入的键
- * @returns {any} 返回需要返回的值
+ * @return {any} 返回需要返回的值
  */
 function get(target, key) {
     if (key === "length" && target instanceof Array) {
@@ -51,7 +54,7 @@ function get(target, key) {
  * @param {Object} target 被代理对象
  * @param {any} key 输入的键
  * @param {any} value 输入的值
- * @returns {Boolean} 返回是否成功替换
+ * @return {Boolean} 返回是否成功替换
  */
 function set(target, key, value) {
     if (key === "length" && target instanceof Array) {
@@ -63,15 +66,15 @@ function set(target, key, value) {
         return false;
     }
     if (target.SETTER.hasOwnProperty(key)) {
-        let last = target.SETTER[key].apply(this, [target[key], value]);
+        const last = target.SETTER[key].apply(this, [target[key], value]);
         if (last !== undefined) {
-            target[key] = watch(last);
+            target[key] = $watch(last);
         }
         return true;
     } else if (target.SETTER.hasOwnProperty("DEFAULT")) {
-        let last = target.SETTER.DEFAULT.apply(this, [target[key], value]);
+        const last = target.SETTER.DEFAULT.apply(this, [target[key], value]);
         if (last !== undefined) {
-            target[key] = watch(last);
+            target[key] = $watch(last);
             return true;
         } else {
             return false;

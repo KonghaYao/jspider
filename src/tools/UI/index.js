@@ -1,9 +1,10 @@
 import { v4 as uuid } from "uuid";
 import consola from "consola";
+
 // 这个是用于组织爬虫 UI 界面的一个部分
 // TODO 这里将会建立一个与 JSpider Core 的 UI 交互界面
-class UIManager {
-    $root;
+export class UIManager {
+    $root = null;
     constructor() {}
     init() {} // 用于初始化界面
     state() {}

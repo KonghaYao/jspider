@@ -13,13 +13,13 @@ function ArrayToSheet(sheetArray) {
 }
 
 function bookToFile(book, name, options) {
-    let ArrayBuffer = XLSX.write(book, options);
+    const ArrayBuffer = XLSX.write(book, options);
     return new File([ArrayBuffer], name + "." + options.bookType);
 }
 function ObjectToBook(input) {
-    let book = XLSX.utils.book_new();
+    const book = XLSX.utils.book_new();
     Object.entries(input).forEach(([sheetName, sheetArray]) => {
-        let sheet = ArrayToSheet(sheetArray);
+        const sheet = ArrayToSheet(sheetArray);
         XLSX.utils.book_append_sheet(book, sheet, sheetName);
     });
     return book;
@@ -27,11 +27,15 @@ function ObjectToBook(input) {
 
 // input: {sheetName1:[],sheetName2:[]}
 function createExcelFile(input, fileName, XLSXOptions) {
-    let { bookType = "xlsx", bookSST = true, type = "array" } = XLSXOptions || {};
+    const {
+        bookType = "xlsx",
+        bookSST = true,
+        type = "array"
+    } = XLSXOptions || {};
     return bookToFile(ObjectToBook(input), fileName, {
         bookType,
         bookSST,
-        type,
+        type
     });
 }
 export { createExcelFile as default };

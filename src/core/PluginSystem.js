@@ -18,7 +18,17 @@ import { EMPTY, from, Observable, of, pipe } from "rxjs";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { createUUID } from "./createUUID.js";
 class PLUGIN {
-    constructor({ forceRetry = true, name = null, main, init = null, error = null, complete = null, options = {}, saveMiddleResult = false, operator }) {
+    constructor({
+        forceRetry = true,
+        name = null,
+        main,
+        init = null,
+        error = null,
+        complete = null,
+        options = {},
+        saveMiddleResult = false,
+        operator
+    }) {
         const uuid = createUUID(main.toString());
         if (operator) this.operator = operator;
         // 写入自身中
@@ -31,7 +41,7 @@ class PLUGIN {
             complete, // 函数完成时的提示事件
             options, // main 函数接收的 options
             saveMiddleResult, // 是否保存结果到每一个 Task 中
-            forceRetry, // 是否强制重新使用 Plugin
+            forceRetry // 是否强制重新使用 Plugin
         });
     }
     // 对 main 函数外包一层，直接启动 main 函数的执行，返回一条流
@@ -41,14 +51,25 @@ class PLUGIN {
             switchMap((task) => {
                 if (task.$checkRepeat(this.uuid) || this.forceRetry) {
                     return of(task).pipe(
-                        map((task) => [task.$commit("start", this.uuid), task.originData]),
+                        map((task) => [
+                            task.$commit("start", this.uuid),
+                            task.originData
+                        ]),
 
                         switchMap(([data, originData]) => {
                             const result = this.main(data, originData);
-                            return result instanceof Promise || result instanceof Observable ? from(result) : of(result);
+                            return result instanceof Promise ||
+                                result instanceof Observable
+                                ? from(result)
+                                : of(result);
                         }),
                         map((result) => {
-                            task.$commit("success", result, this.uuid, this.saveMiddleResult);
+                            task.$commit(
+                                "success",
+                                result,
+                                this.uuid,
+                                this.saveMiddleResult
+                            );
                             return task;
                         })
                     );
@@ -74,7 +95,7 @@ class PLUGIN {
         );
     }
 
-    operator(context) {
+    operator() {
         // context 为上层的 JSpider 实例
         return pipe(switchMap((task) => this.TaskStarter(task)));
     }
@@ -82,7 +103,7 @@ class PLUGIN {
 export function Plugin(Process) {
     if (Process instanceof Function) {
         return new PLUGIN({
-            main: Process,
+            main: Process
         });
     } else if (Process instanceof Object) {
         return new PLUGIN(Process);

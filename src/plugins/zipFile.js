@@ -18,15 +18,17 @@ export const ZipFile = function (options = {}) {
             return zipper(files, zipFileName);
         },
         options,
-        operator(context) {
+        operator() {
             // 复写 operator
             const { chunk = 3 } = this.options;
             return (source) =>
                 source.pipe(
                     bufferCount(chunk),
 
-                    concatMap((tasks) => this.TaskStarter(new TaskGroup(tasks), this.uuid))
+                    concatMap((tasks) =>
+                        this.TaskStarter(new TaskGroup(tasks), this.uuid)
+                    )
                 );
-        },
+        }
     });
 };

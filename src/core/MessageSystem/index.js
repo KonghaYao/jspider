@@ -7,5 +7,7 @@ import consola from "consola";
     同时，将 API 集中于此处，可以方便后面对发布信息的插件进行更换
 */
 export const console = {
-    log() {},
+    log(...args) {
+        consola.log(...args);
+    }
 };

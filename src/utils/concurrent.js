@@ -1,8 +1,20 @@
 import { retryAndDelay } from "./retryAndDelay.js";
 import { pipe, of, EMPTY, timer, Observable, from } from "rxjs";
-import { bufferCount, concatMap, switchMap, catchError, delayWhen } from "rxjs/operators";
+import {
+    bufferCount,
+    concatMap,
+    switchMap,
+    catchError,
+    delayWhen
+} from "rxjs/operators";
 
-// 并发控制操作符
+/**
+ * 并发控制操作符
+ * @date 2021-06-28
+ * @param {any} promiseFunc
+ * @param {any} options
+ * @return {any}
+ */
 export function concurrent(
     promiseFunc, // 并发的异步函数用于接收上流来的数据
     {
@@ -12,8 +24,8 @@ export function concurrent(
         retryDelay = 300, // 每次延迟的次数；与 retryAndDelay 相同的一个函数
         handleError = function (err, err$) {
             // 重试错误时的操作
-            throw new Error(err);
-        },
+            throw new Error(err, err$);
+        }
     } = {}
 ) {
     const asyncSingle = (data) =>

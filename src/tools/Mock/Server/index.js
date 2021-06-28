@@ -4,8 +4,8 @@ const Server = {
     excel: {
         url: "/fake/excel",
         type: "get",
-        template: excelTemplate,
-    },
+        template: excelTemplate
+    }
 };
 
 export { Server };

@@ -1,10 +1,5 @@
 import { merge } from "lodash-es";
-class TaskError {
-    constructor(message) {
-        this.err = message;
-        this.errTime = new Date();
-    }
-}
+import { TaskError } from "./TaskError";
 
 // 这种写法借鉴了 Vue 的组件写法，所以叫做 components
 // 不能使用 $作为前缀
@@ -15,7 +10,7 @@ const components = {
         return {
             url: {},
             options: {},
-            result: null,
+            result: null
         };
     },
     format: {
@@ -35,7 +30,7 @@ const components = {
         // 是 Task Group 的类型
         Array(message) {
             this.originData = message;
-        },
+        }
     },
     commit: {
         // 对应 $commit(status,payload) 函数
@@ -59,7 +54,7 @@ const components = {
         error(payload) {
             this._errorList.push(new TaskError(payload));
             return true;
-        },
-    },
+        }
+    }
 };
 export default components;

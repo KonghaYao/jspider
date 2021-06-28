@@ -1,3 +1,5 @@
+/* eslint-disable no-invalid-this */
+
 import { Plugin } from "../core/PluginSystem.js";
 import { concurrent } from "../utils/concurrent.js";
 
@@ -5,7 +7,7 @@ import { concurrent } from "../utils/concurrent.js";
 
 // Format 是边缘的处理逻辑，用于自动化相应返回数据的格式处理，与 Plugin 关系较小
 const Format = function (res, returnType) {
-    let type = res.headers.get("content-type") || "";
+    const type = res.headers.get("content-type") || "";
     // 根据 returnType 强制返回
     if (!returnType || returnType === "auto") {
         // 自动判断类型并解析
@@ -29,10 +31,11 @@ const Format = function (res, returnType) {
 // Plugin 的核心函数 (this.main)，用于请求
 // 第一参数为 Task 内部使用 start 事件返回的参数，你可以看成是上一个 Plugin 返回给你的数据
 // 第二个为 Plugin 内部的 options, 可以调用这些数据进行操作
+
 const request = function ({ url, options = {} }) {
     const { returnType = "json" } = this.options;
-    //  获取数据为 request
 
+    //  获取数据为 request
     console.log("- 爬取 ", url);
     return fetch(url, options)
         .then((res) => {
@@ -51,7 +54,7 @@ const request = function ({ url, options = {} }) {
 };
 
 // 在超过重试次数时，进行的操作
-const HandleError = function (err, err$) {
+const HandleError = function (err) {
     throw err;
 };
 export const Request = function (options = {}) {
@@ -60,12 +63,17 @@ export const Request = function (options = {}) {
         main: request, // 功能性的核心函数
         options, // 接收所有的参数，提供给所有函数使用
 
-        operator(context) {
+        operator() {
             // 复写 operator 函数，属于高级操作，可以操作到最顶层的数据流环节
 
             // 通过 this.options 来获取传入的参数，这个参数解析都是由 Plugin 开发者来设置逻辑的
             // 所以灵活性很高
-            const { delay = 200, buffer = 3, retry = 3, handleError = null } = this.options;
+            const {
+                delay = 200,
+                buffer = 3,
+                retry = 3,
+                handleError = null
+            } = this.options;
 
             return ($source) =>
                 $source.pipe(
@@ -75,9 +83,14 @@ export const Request = function (options = {}) {
                             // 使得 Plugin 开发者 不用学 Task 相关知识，而只是调用一下这个形式就可以了
                             // this.TaskStarter 是用于间接调用 this.main 函数的 Wrapper 函数，主要是对 Task 进行一些操作
                             this.TaskStarter(task),
-                        { delay, buffer, retry, handleError: handleError || HandleError }
+                        {
+                            delay,
+                            buffer,
+                            retry,
+                            handleError: handleError || HandleError
+                        }
                     )
                 );
-        },
+        }
     });
 };

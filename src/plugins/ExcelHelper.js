@@ -9,9 +9,9 @@ export const ExcelHelper = function (formatter, options = {}) {
         init,
         options,
         main(data) {
-            let { fileName = "爬取结果", XLSXOptions = {} } = this.options;
+            const { fileName = "爬取结果", XLSXOptions = {} } = this.options;
             if (formatter instanceof Function) data = formatter(data);
             return createExcelFile(data, fileName, XLSXOptions);
-        },
+        }
     });
 };

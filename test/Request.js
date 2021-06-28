@@ -3,7 +3,7 @@ import JSpider from "../dist/JSpider.esm.min.js";
 const {
     Request, // 请求库
     Download, // 下载库
-    ExcelHelper, // 转换数据为表格数据的插件
+    ExcelHelper // 转换数据为表格数据的插件
 } = JSpider.plugins;
 const { Plugin } = JSpider;
 
@@ -22,8 +22,8 @@ export async function main() {
         }),
         ExcelHelper({
             XLSXOptions: {
-                bookType: "csv", // 可以指定为 csv 或者 xlsx
-            },
+                bookType: "csv" // 可以指定为 csv 或者 xlsx
+            }
         })
 
         // Download()

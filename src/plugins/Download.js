@@ -7,11 +7,11 @@ const DownloadQueue = {
         this.main.then(() => {
             return aDownload(file);
         });
-    },
+    }
 };
 // a 标签下载的方式貌似为同步模式（未验证）
 const aDownload = function (file) {
-    let a = document.createElement("a");
+    const a = document.createElement("a");
     a.href = URL.createObjectURL(file);
     a.download = file.name;
     a.click();
@@ -21,7 +21,13 @@ const aDownload = function (file) {
 };
 
 const download = (data, { DownloadFileName: name }, originData) => {
-    const file = toFile(data, name || (typeof url === "string" ? originData.url.replace(/[^\/]*?\//g, "") : ""));
+    const file = toFile(
+        data,
+        name ||
+            (typeof url === "string"
+                ? originData.url.replace(/[^\/]*?\//g, "")
+                : "")
+    );
     DownloadQueue.add(file);
     return null;
 };
@@ -30,6 +36,6 @@ import { Plugin } from "../core/PluginSystem.js";
 export const Download = function (options = {}) {
     return Plugin({
         main: download,
-        options,
+        options
     });
 };

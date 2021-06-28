@@ -4,9 +4,9 @@ export default {
             ID: "@increment()",
             name: "@cname()",
             description: "@csentence()",
-            avatar: '@dataImage("64x64")',
+            avatar: "@dataImage('64x64')",
             address: "@region()",
-            province: "@province()",
-        },
-    ],
+            province: "@province()"
+        }
+    ]
 };

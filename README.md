@@ -21,6 +21,7 @@ JSpider.simpleCrawl(["fake/excel","fake/excel"]);
 ```
 
 > 这里是通过 Mockjs 对 URL 进行了代理，所以接收得到数据
+
 ### 更加高级的自定义爬取
 
 ```js
@@ -60,7 +61,6 @@ spider.apply(urls);
 
 **CORS 和 CSP 是浏览器的安全策略**，与 JSpider 无关，我推荐您遵守。很多网站使用了这两种协议来防止 Javascript 语言在浏览器中为所欲为，所以如果您使用的是 Chrome，可以在 [Chrome 插件商店](https://chrome.google.com/webstore/category/extensions?hl=zh-CN) 中搜索 CORS 和 CSP，安装相应的插件即可解除这两个协议的报错。我无法保证这些插件的安全性，所以在此不推荐。
 
-
 ## JSpider 3 更新内容
 
 JSpider 相较于 2.0+ 版本：
@@ -97,7 +97,7 @@ JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm �
 
 7. dexie.js JSpider 得以链接 indexDB 进行储存操作的救星，说实话 indexDB 的 API 太乱了。
 
-8. zangodb.js 这个也是对 indexDB 的数据操作的一个库，API 简单易用，但是在项目中选择了更为活跃的 dexie.js 进行了indexDB 的链接。
+8. zangodb.js 这个也是对 indexDB 的数据操作的一个库，API 简单易用，但是在项目中选择了更为活跃的 dexie.js 进行了 indexDB 的链接。
 
 9. uuid 用于创建 UUID 的项目，可以生成唯一的标识，用于 JSpider 的底层逻辑中。
 
@@ -105,4 +105,4 @@ JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm �
 
 ## License
 
- Copyright © KonghaYao MIT licensed
+Copyright © KonghaYao MIT licensed

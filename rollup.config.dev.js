@@ -8,20 +8,20 @@ export default {
         {
             // 打包出口
             file: "./dist/JSpider.esm.min.js",
-            format: "es",
+            format: "es"
         },
         {
             // 打包出口
             file: "./dist/JSpider.min.js",
             format: "iife",
-            name: "JSpider",
-        },
+            name: "JSpider"
+        }
     ],
     plugins: [
         json(),
         resolve({
-            browser: true,
+            browser: true
         }),
-        commonjs(), // 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
-    ],
+        commonjs() // 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
+    ]
 };

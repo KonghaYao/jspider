@@ -1,11 +1,11 @@
 const type = {
     svg: "image/svg+xml",
     html: "text/html",
-    xml: "text/xml",
+    xml: "text/xml"
 };
 const Parser = function (string, func, documentType = "text/html") {
-    let parser = new DOMParser();
-    let dom = parser.parseFromString(string, type[documentType]);
+    const parser = new DOMParser();
+    const dom = parser.parseFromString(string, type[documentType]);
     return func(dom);
 };
 
@@ -18,6 +18,6 @@ export function HTMLParser(callback, options = {}) {
             const { formatter, documentType } = this.options;
             if (formatter) data = formatter(data);
             return Parser(data, callback, documentType);
-        },
+        }
     });
 }

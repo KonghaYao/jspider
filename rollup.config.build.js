@@ -7,17 +7,17 @@ import json from "@rollup/plugin-json";
 const plugins = [
     json(),
     resolve({
-        browser: true,
+        browser: true
     }),
     commonjs(), // 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
     terser(),
     license({
         banner: {
             content: {
-                file: "./LICENSE",
-            },
-        },
-    }),
+                file: "./LICENSE"
+            }
+        }
+    })
 ];
 export default [
     {
@@ -28,26 +28,26 @@ export default [
                 // 打包出口
                 file: "./dist/JSpider.min.js",
                 format: "iife",
-                name: "JSpider",
+                name: "JSpider"
             },
             {
                 // 打包出口
                 file: "./dist/JSpider.umd.min.js",
                 format: "umd",
-                name: "JSpider",
+                name: "JSpider"
             },
             {
                 // 打包出口
                 file: "./dist/JSpider.cjs.min.js",
                 format: "cjs",
-                exports: "default",
+                exports: "default"
             },
             {
                 // 打包出口
                 file: "./dist/JSpider.esm.min.js",
-                format: "es",
-            },
-        ],
+                format: "es"
+            }
+        ]
     },
     {
         input: "src/JSpider.esm.js", // 这是一个可以进行 TreeShake 的版本
@@ -56,8 +56,8 @@ export default [
             {
                 // 打包出口
                 file: "./dist/JSpider.js",
-                format: "es",
-            },
-        ],
-    },
+                format: "es"
+            }
+        ]
+    }
 ];

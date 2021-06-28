@@ -1,1 +1,1 @@
-[filename](../src/core/AboutCore.drawio ':include')
+[filename](../src/core/AboutCore.drawio ":include")

@@ -7,7 +7,7 @@ import { simpleCrawl } from "./simpleCrawl.js";
 Object.assign(JSpider, tools, {
     plugins,
     Plugin,
-    simpleCrawl,
+    simpleCrawl
 });
 
 export default JSpider;

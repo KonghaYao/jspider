@@ -14,22 +14,22 @@
 
 ```js
 // 从 jsDelivr 导入代码
-import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then(({default:JSpider})=>{
-    window.JSpider = JSpider;
-    // 放入您的 URL
-    JSpider.simpleCrawl(["fake/excel","fake/excel"]);
-});
+import("https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js").then(
+    ({ default: JSpider }) => {
+        window.JSpider = JSpider;
+        // 放入您的 URL
+        JSpider.simpleCrawl(["fake/excel", "fake/excel"]);
+    }
+);
 ```
-
 
 ### 更加高级的自定义爬取
 
 ```js
-
 const {
     Request, // 请求库
     Download, // 下载库
-    ExcelHelper, // 转换数据为表格数据的插件
+    ExcelHelper // 转换数据为表格数据的插件
 } = JSpider.plugins;
 const { Plugin } = JSpider;
 
@@ -48,13 +48,12 @@ const spider = new JSpider(
     }),
     ExcelHelper({
         XLSXOptions: {
-            bookType: "csv", // 可以指定为 csv 或者 xlsx
-        },
+            bookType: "csv" // 可以指定为 csv 或者 xlsx
+        }
     }),
     Download()
 );
 spider.apply(urls);
-
 ```
 
 > [更多自定义代码教程](/zh-cn/quickstart)
@@ -101,7 +100,7 @@ JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm �
 
 7. dexie.js JSpider 得以链接 indexDB 进行储存操作的救星，说实话 indexDB 的 API 太乱了。
 
-8. zangodb.js 这个也是对 indexDB 的数据操作的一个库，API 简单易用，但是在项目中选择了更为活跃的 dexie.js 进行了indexDB 的链接。
+8. zangodb.js 这个也是对 indexDB 的数据操作的一个库，API 简单易用，但是在项目中选择了更为活跃的 dexie.js 进行了 indexDB 的链接。
 
 9. uuid 用于创建 UUID 的项目，可以生成唯一的标识，用于 JSpider 的底层逻辑中。
 
@@ -113,4 +112,4 @@ JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm �
 
 ## License
 
- Copyright © KonghaYao 江夏尧 动中之动 MIT licensed
+Copyright © KonghaYao 江夏尧 动中之动 MIT licensed

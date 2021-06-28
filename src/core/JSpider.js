@@ -1,8 +1,7 @@
 import { createTask, skipSame } from "./coreOperators/index.js";
 import { createUUID } from "./createUUID.js";
-import { concurrent } from "../utils/concurrent.js";
 import { from } from "rxjs";
-import { filter, tap } from "rxjs/operators";
+import { tap } from "rxjs/operators";
 
 export class JSpider {
     _ready = false;
@@ -14,13 +13,16 @@ export class JSpider {
         this.Plugins = Plugins;
     }
     #createLineUUID(Plugins) {
-        this.uuid = createUUID(Plugins.reduce((string, plugin) => string + plugin.uuid, ""));
+        this.uuid = createUUID(
+            Plugins.reduce((string, plugin) => string + plugin.uuid, "")
+        );
     }
 
     #preparePlugins() {
         return this.Plugins.reduce((promise, plugin) => {
             this.#PluginLine.push(plugin.operator(this));
-            if (plugin.init instanceof Function) promise.then(() => plugin.init());
+            if (plugin.init instanceof Function)
+                promise.then(() => plugin.init());
             return promise;
         }, Promise.resolve()).then(() => (this._ready = true));
     }
@@ -42,7 +44,7 @@ export class JSpider {
                 })
             )
             .subscribe({
-                complete() {},
+                complete() {}
             });
     }
 }
