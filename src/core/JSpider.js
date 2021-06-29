@@ -1,8 +1,8 @@
 /*
  * @Author: KonghaYao
  * @Date: 2021-06-28 21:06:52
- * @Last Modified by:   KonghaYao
- * @Last Modified time: 2021-06-28 21:06:52
+ * @Last Modified by: KonghaYao
+ * @Last Modified time: 2021-06-29 15:56:22
  */
 import { createTask, skipSame } from "./coreOperators/index.js";
 import { createUUID } from "./createUUID.js";
@@ -32,8 +32,10 @@ export class JSpider {
         }, Promise.resolve()).then(() => (this._ready = true));
     }
 
+    // 用于使用一个不是工作流的插件
     use(plugin) {}
-    // 初始化未解决
+
+    // 开始工作流
     async apply(inputs) {
         if (!this._ready) {
             await this.#preparePlugins();

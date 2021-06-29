@@ -1,8 +1,8 @@
 /*
  * @Author: KonghaYao
  * @Date: 2021-06-28 21:06:34
- * @Last Modified by:   KonghaYao
- * @Last Modified time: 2021-06-28 21:06:34
+ * @Last Modified by: KonghaYao
+ * @Last Modified time: 2021-06-29 15:55:22
  */
 /*
 关于 PLUGIN 的参数
@@ -23,7 +23,7 @@
 import { EMPTY, from, Observable, of, pipe } from "rxjs";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { createUUID } from "./createUUID.js";
-
+import { PluginError } from "./Errors/errors.js";
 class PLUGIN {
     constructor({
         forceRetry = true,
@@ -82,10 +82,10 @@ class PLUGIN {
                 let afterError;
                 if (this.error instanceof Function) {
                     afterError = this.error(task, ...args);
-                    if (afterError) throw afterError;
+                    if (afterError) throw new PluginError(afterError);
                     return EMPTY;
                 }
-                throw args[0];
+                throw new PluginError(args[0]);
             }),
             // 完成 Plugin
             tap((task) => this.complete && this.complete(task)),
@@ -97,6 +97,7 @@ class PLUGIN {
         return pipe(switchMap((task) => this.TaskStarter(task)));
     }
 }
+
 export function Plugin(Process) {
     if (Process instanceof Function) {
         return new PLUGIN({
@@ -106,5 +107,5 @@ export function Plugin(Process) {
     if (Process instanceof Object) {
         return new PLUGIN(Process);
     }
-    throw new Error("Plugin must be input a function or Object");
+    throw new PluginError("Plugin 必须是一个函数或者是 Plugin 描述对象");
 }

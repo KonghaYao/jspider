@@ -1,8 +1,8 @@
 /*
  * @Author: KonghaYao
  * @Date: 2021-06-28 21:05:42
- * @Last Modified by:   KonghaYao
- * @Last Modified time: 2021-06-28 21:05:42
+ * @Last Modified by: KonghaYao
+ * @Last Modified time: 2021-06-29 16:25:37
  */
 import { JSpider, Plugin } from "./core/index.js";
 import * as plugins from "./plugins/index.js";

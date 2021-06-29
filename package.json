@@ -28,6 +28,7 @@
         "front-end"
     ],
     "dependencies": {
+        "chalk": "^4.1.1",
         "consola": "^2.15.3",
         "lodash-es": "^4.17.21",
         "mitt": "^3.0.0",

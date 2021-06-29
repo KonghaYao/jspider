@@ -1,3 +1,9 @@
+/*
+ * @Author: KonghaYao
+ * @Date: 2021-06-29 16:16:19
+ * @Last Modified by:   KonghaYao
+ * @Last Modified time: 2021-06-29 16:16:19
+ */
 import { isRegExp, isString } from "lodash-es";
 import { searchObj } from "./searchObj.js";
 /**

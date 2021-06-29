@@ -1,3 +1,9 @@
+/*
+ * @Author: KonghaYao
+ * @Date: 2021-06-29 16:16:08
+ * @Last Modified by:   KonghaYao
+ * @Last Modified time: 2021-06-29 16:16:08
+ */
 import { difference, pick } from "lodash-es";
 import iframe from "./window-default.json";
 // iframe 是所有的 window 对象下稳定的属性名

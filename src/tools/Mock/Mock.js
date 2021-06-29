@@ -1,20 +1,18 @@
-import consola from "consola";
 import { Server } from "./Server/index.js";
 import { $load } from "../loader/loader.js";
 
-const cache = {};
 async function Mock(MockSiteName) {
     // 导入 Mockjs
     if (!window.Mock) {
         await $load("mockjs");
-        consola.warn("Mockjs 载入并代理 Ajax 中");
+        console.warn("Mockjs 载入并代理 Ajax 中");
     }
-
-    if (!cache[MockSiteName]) {
-        consola.warn("mock 启动后台 ", MockSiteName);
-        const { url, type, template } = Server[MockSiteName];
-        window.Mock.mock(url, type, template);
-        cache[MockSiteName] = true;
-    }
+    console.warn("mock 启动后台 ", MockSiteName);
+    const { url, type, template } = Server[MockSiteName];
+    window.Mock.mock(url, type, template);
+    return true;
 }
-export { Mock as $Mock };
+
+// 缓存函数结果
+import { memoize } from "lodash-es";
+export const $Mock = memoize(Mock);

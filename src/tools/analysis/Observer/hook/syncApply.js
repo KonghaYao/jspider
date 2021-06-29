@@ -9,5 +9,6 @@ import { Private } from "./createProperty.js";
 
 export function syncApply(target, thisArg, args) {
     const { before, after } = target[Private];
+
     return [...before, target, ...after].reduce((a, b) => b.call(thisArg, a), args);
 }

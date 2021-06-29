@@ -1,4 +1,11 @@
+/*
+ * @Author: KonghaYao
+ * @Date: 2021-06-29 16:16:29
+ * @Last Modified by:   KonghaYao
+ * @Last Modified time: 2021-06-29 16:16:29
+ */
 /* eslint-disable no-extend-native */
+
 // 解决无限debugger的一种方式
 // 对于无限 debugger 不一定有效
 // TODO 验证有效性

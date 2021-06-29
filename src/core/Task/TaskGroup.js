@@ -1,10 +1,10 @@
 /*
  * @Author: KonghaYao
  * @Date: 2021-06-28 21:07:23
- * @Last Modified by:   KonghaYao
- * @Last Modified time: 2021-06-28 21:07:23
+ * @Last Modified by: KonghaYao
+ * @Last Modified time: 2021-06-29 15:58:08
  */
-import { TaskError } from "./TaskError";
+import { TaskError } from "../Errors/errors.js";
 import { Task } from "./Task.js";
 
 // Task 的结构借鉴于 Vue 的组件写法
@@ -50,7 +50,7 @@ export class TaskGroup extends Task {
                 return returnData;
             }
         } else {
-            throw new Error(`commit 状态错误${this._index}`);
+            throw new TaskError(`commit 状态错误${this._index}`);
         }
     }
 

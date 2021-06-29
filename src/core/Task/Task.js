@@ -1,14 +1,15 @@
 /*
  * @Author: KonghaYao
  * @Date: 2021-06-28 21:07:10
- * @Last Modified by:   KonghaYao
- * @Last Modified time: 2021-06-28 21:07:10
+ * @Last Modified by: KonghaYao
+ * @Last Modified time: 2021-06-29 16:16:59
  */
 import Components from "./TaskComponents.js";
 import type from "../../utils/type.js";
 import { v4 as uuidv4 } from "uuid";
 import { pick } from "lodash-es";
 const { format, commit } = Components;
+import { TaskError } from "../Errors/errors.js";
 // Task 的结构借鉴于 Vue 的组件写法
 
 export class Task {
@@ -33,7 +34,7 @@ export class Task {
         if (format[MessageType] instanceof Function) {
             format[MessageType].apply(this, [message]);
         } else {
-            throw new Error("format 状态错误" + this._index);
+            throw new TaskError("format 状态错误" + this._index);
         }
     }
     // 通过 commit 更改 Task 内部的status
@@ -46,7 +47,7 @@ export class Task {
                 return returnData;
             }
         } else {
-            throw new Error("commit 状态错误" + this._index);
+            throw new TaskError("commit 状态错误" + this._index);
         }
     }
     $checkRepeat(markUUID) {

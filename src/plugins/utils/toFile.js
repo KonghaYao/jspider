@@ -1,4 +1,4 @@
-function toFile(data, name) {
+export function toFile(data, name) {
     if (data instanceof File) return data;
     if (data instanceof Blob) {
         data.name = name;
@@ -6,4 +6,3 @@ function toFile(data, name) {
     }
     return new File([JSON.stringify(data)], name);
 }
-export { toFile };

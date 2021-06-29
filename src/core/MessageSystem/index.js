@@ -1,4 +1,3 @@
-import consola from "consola";
 // TODO 编写指定的信息发布端口
 
 /*
@@ -8,6 +7,6 @@ import consola from "consola";
 */
 export const console = {
     log(...args) {
-        consola.log(...args);
+        window.console.log(...args);
     },
 };

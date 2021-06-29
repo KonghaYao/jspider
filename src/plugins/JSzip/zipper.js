@@ -1,7 +1,7 @@
 import { JSZip } from "./JSzip.js";
 
 let index = 0;
-async function zipper(fileArray, zipName) {
+export async function zipper(fileArray, zipName) {
     // 启动压缩
     const zip = new JSZip();
     // 压入所有文件
@@ -14,4 +14,3 @@ async function zipper(fileArray, zipName) {
     content.name = `${zipName}-${index++}.zip`;
     return content;
 }
-export { zipper };

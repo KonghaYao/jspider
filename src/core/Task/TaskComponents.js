@@ -1,11 +1,11 @@
 /*
  * @Author: KonghaYao
  * @Date: 2021-06-28 21:07:14
- * @Last Modified by:   KonghaYao
- * @Last Modified time: 2021-06-28 21:07:14
+ * @Last Modified by: KonghaYao
+ * @Last Modified time: 2021-06-29 15:57:57
  */
 import { merge } from "lodash-es";
-import { TaskError } from "./TaskError";
+import { TaskError } from "../Errors/errors";
 
 // 这种写法借鉴了 Vue 的组件写法，所以叫做 components
 // 不能使用 $作为前缀

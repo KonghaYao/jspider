@@ -8,4 +8,3 @@ function init() {
 }
 
 export { JSZip, init };
-export default JSZip;

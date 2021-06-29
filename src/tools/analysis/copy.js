@@ -1,5 +1,3 @@
-import consola from "consola";
-
 /**
  * 这是清理copy的函数，目的是为了能够让用户进行复制
  * @date 2021-03-02
@@ -21,7 +19,7 @@ function clearCopyBarriers() {
             }
         });
     });
-    consola.success("copy 方式清理完成");
+    console.log("copy 方式清理完成");
 }
 /**
  * 复制函数
@@ -41,5 +39,5 @@ export function $copy(content, clearBarriers = false) {
     // 直接使用控制台的复制功能
     // ! 在开发者工具中可以调用这个函数
     window.copy(content);
-    consola.success("copy 完成，请您查看您的剪贴版");
+    console.log("copy 完成，请您查看您的剪贴版");
 }

@@ -1,3 +1,9 @@
+/*
+ * @Author: KonghaYao
+ * @Date: 2021-06-29 16:16:22
+ * @Last Modified by:   KonghaYao
+ * @Last Modified time: 2021-06-29 16:16:22
+ */
 import getType from "../../../utils/type.js";
 
 const TypeMap = {

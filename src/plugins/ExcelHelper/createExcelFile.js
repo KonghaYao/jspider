@@ -34,4 +34,4 @@ function createExcelFile(input, fileName, XLSXOptions) {
         type,
     });
 }
-export { createExcelFile as default };
+export { createExcelFile };
