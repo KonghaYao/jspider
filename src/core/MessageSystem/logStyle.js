@@ -1,6 +1,7 @@
-import chalk from "chalk";
+import consola from "consola";
+
 export default {
     error(str) {
-        return chalk.red(str);
+        return Consola;
     },
 };

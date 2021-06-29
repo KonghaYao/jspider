@@ -1,19 +1,3 @@
-// 事件统计中心
-const counter = {
-    error: 0,
-    retry: 0,
-    failed: 0,
-    success: 0,
-    Logger: {
-        // sourceFlag :[logger]
-    },
-};
-console.log(counter);
-
-export class Logger {
-    constructor(scope, sourceFlag, content) {}
-}
-
 // 数据的收发 API
 const consoleMap = {
     /**

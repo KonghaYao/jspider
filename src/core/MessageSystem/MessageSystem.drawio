@@ -1,0 +1,45 @@
+<mxfile>
+    <diagram id="GjEiPBBv63HPv-iuIJ8a" name="第 1 页">
+        <mxGraphModel dx="1082" dy="617" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="4" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=16;fontColor=#0000CC;rounded=1;sketch=1;" edge="1" parent="1" source="2" target="3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="A Plugin Report Something" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#ffe6cc;sketch=1;fontFamily=Comic Sans MS;fontStyle=1;fontSize=16;strokeColor=#d79b00;fontColor=#BF0000;spacingTop=0;" vertex="1" parent="1">
+                    <mxGeometry x="70" y="100" width="260" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=16;fontColor=#CC00CC;entryX=0;entryY=0.5;entryDx=0;entryDy=0;rounded=1;sketch=1;" edge="1" parent="1" source="3" target="5">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="550" y="280" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=16;fontColor=#CC0066;" edge="1" parent="1" source="3" target="10">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Fake&lt;font color=&quot;#cc0000&quot;&gt; console.log &lt;/font&gt;function" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#dae8fc;sketch=1;fontFamily=Comic Sans MS;fontStyle=1;fontSize=16;strokeColor=#6c8ebf;fontColor=#0000CC;" vertex="1" parent="1">
+                    <mxGeometry x="70" y="250" width="260" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Translate message to a &lt;font color=&quot;#cc0066&quot;&gt;Logger&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#e1d5e7;sketch=1;fontFamily=Comic Sans MS;fontStyle=1;fontSize=16;strokeColor=#CC99FF;fontColor=#7F00FF;" vertex="1" parent="1">
+                    <mxGeometry x="470" y="253.75" width="260" height="52.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;fontColor=#CC0066;dashed=1;" edge="1" parent="1" source="8" target="3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="It is just &lt;b&gt;convert a string to a logger&lt;/b&gt;, so that JSpider could easily manage all the message" style="points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[1,1,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];rounded=1;absoluteArcSize=1;arcSize=2;html=1;strokeColor=none;gradientColor=none;shadow=0;dashed=0;fontSize=12;fontColor=#9E9E9E;align=left;verticalAlign=top;spacing=10;spacingTop=-4;fillColor=#E0F2F1;fontFamily=Comic Sans MS;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry x="510" y="90" width="146" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" style="edgeStyle=orthogonalEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=16;fontColor=#CC0066;dashed=1;" edge="1" parent="1" source="9" target="5">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="&lt;b&gt;Logger&lt;/b&gt; is a class that can hold all the message in one Object." style="points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[1,1,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];rounded=1;absoluteArcSize=1;arcSize=2;html=1;strokeColor=none;gradientColor=none;shadow=0;dashed=0;fontSize=12;fontColor=#9E9E9E;align=left;verticalAlign=top;spacing=10;spacingTop=-4;fillColor=#FFF8E1;fontFamily=Comic Sans MS;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="380" width="130" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Fake&lt;font color=&quot;#cc0000&quot;&gt; console.log &lt;/font&gt;function" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#dae8fc;sketch=1;fontFamily=Comic Sans MS;fontStyle=1;fontSize=16;strokeColor=#6c8ebf;fontColor=#0000CC;" vertex="1" parent="1">
+                    <mxGeometry x="70" y="500" width="260" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
