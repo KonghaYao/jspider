@@ -4,8 +4,8 @@
  * @Last Modified by:   KonghaYao
  * @Last Modified time: 2021-06-29 16:16:08
  */
-import { difference, pick } from "lodash-es";
-import iframe from "./window-default.json";
+import { difference, pick } from 'lodash-es';
+import iframe from './window-default.json';
 // iframe 是所有的 window 对象下稳定的属性名
 // !若是使用 iframe 标签的属性来得到 window 的自带属性，遇到不能使用 iframe 的网站就会失效
 // ! 所以使用了这种方式。

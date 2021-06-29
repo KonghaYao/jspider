@@ -4,10 +4,10 @@
  * @Last Modified by:   KonghaYao
  * @Last Modified time: 2021-06-29 16:16:22
  */
-import getType from "../../../utils/type.js";
+import getType from '../../../utils/type.js';
 
 const TypeMap = {
-    RE: "",
+    RE: '',
     StringFunction(all, key, value, keyValue) {
         if (this.RE.test(`${value}`)) all.push(keyValue);
         return all;

@@ -1,12 +1,12 @@
 // 尚未进行测试
-import { Plugin } from "../core/PluginSystem";
+import { Plugin } from '../core/PluginSystem';
 
 const type = {
-    svg: "image/svg+xml",
-    html: "text/html",
-    xml: "text/xml",
+    svg: 'image/svg+xml',
+    html: 'text/html',
+    xml: 'text/xml',
 };
-const Parser = function (string, func, documentType = "text/html") {
+const Parser = function (string, func, documentType = 'text/html') {
     const parser = new DOMParser();
     const dom = parser.parseFromString(string, type[documentType]);
     return func(dom);

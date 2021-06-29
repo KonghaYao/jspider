@@ -5,7 +5,7 @@
  * @param {any} thisArg 执行上下文
  * @param {Array} args 执行参数
  */
-import { Private } from "./createProperty.js";
+import { Private } from './createProperty.js';
 
 export async function asyncApply(target, thisArg, args) {
     const { before, after } = target[Private];

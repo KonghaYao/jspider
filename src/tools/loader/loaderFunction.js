@@ -1,7 +1,7 @@
 const loaderFunction = {
     script(url) {
         return new Promise((resolve, reject) => {
-            const script = document.createElement("script");
+            const script = document.createElement('script');
             script.src = url;
 
             script.onload = () => {
@@ -15,8 +15,8 @@ const loaderFunction = {
     },
     css(url) {
         return new Promise((resolve, reject) => {
-            const style = document.createElement("style");
-            style.rel = "stylesheet";
+            const style = document.createElement('style');
+            style.rel = 'stylesheet';
             style.src = url;
             style.onload = () => {
                 console.log(`${url} 加载完成`);

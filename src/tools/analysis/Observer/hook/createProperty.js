@@ -1,14 +1,14 @@
 /* eslint-disable no-invalid-this */
 
 // 私有属性的调用值
-const Private = Symbol("hook property");
+const Private = Symbol('hook property');
 
 // 向私有属性进行函数事件挂载
 function $on(eventName, callback) {
     try {
         this[Private][eventName].push(callback);
     } catch {
-        throw Error("事件挂载失败");
+        throw Error('事件挂载失败');
     }
 }
 
@@ -17,7 +17,7 @@ function $off(eventName, callback) {
     try {
         this[Private][eventName] = this[Private][eventName].filter((element) => element !== callback);
     } catch {
-        throw new Error("事件删除失败");
+        throw new Error('事件删除失败');
     }
 }
 

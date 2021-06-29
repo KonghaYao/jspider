@@ -4,13 +4,13 @@
  * @Last Modified by: KonghaYao
  * @Last Modified time: 2021-06-29 19:26:00
  */
-import { Logger } from "./logger";
+import { Logger } from './logger';
 
 // 数据的收发 API
 const consoleMap = {
     log(...args) {
         const [type, scope, title] = args;
-        if (typeof type === "string" && type[0] == "$" && scope && title) {
+        if (typeof type === 'string' && type[0] == '$' && scope && title) {
             new Logger(...args).print();
         } else {
             window.console.log(...args);

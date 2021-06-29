@@ -4,8 +4,8 @@
  * @Last Modified by: KonghaYao
  * @Last Modified time: 2021-06-29 15:58:08
  */
-import { TaskError } from "../Errors/errors.js";
-import { Task } from "./Task.js";
+import { TaskError } from '../Errors/errors.js';
+import { Task } from './Task.js';
 
 // Task 的结构借鉴于 Vue 的组件写法
 const components = {
@@ -14,23 +14,23 @@ const components = {
         start(pluginUUID) {
             this._marks[pluginUUID] = null;
 
-            return this._result || this.originData.map((task) => task.$commit("start", pluginUUID));
+            return this._result || this.originData.map((task) => task.$commit('start', pluginUUID));
         },
         complete(UUID) {
             this._processUUID = UUID;
             this._complete = true;
-            this.originData.forEach((task) => task.$commit("complete", UUID));
+            this.originData.forEach((task) => task.$commit('complete', UUID));
             return true;
         },
         success(payload, UUID, saveResult = false) {
             this._marks[UUID] = saveResult ? this._result : true;
             this._result = payload;
-            this.originData.forEach((task) => task.$commit("success", payload, UUID, false));
+            this.originData.forEach((task) => task.$commit('success', payload, UUID, false));
             return true;
         },
         error(payload) {
             this._errorList.push(new TaskError(payload));
-            this.originData.forEach((task) => task.$commit("error", payload));
+            this.originData.forEach((task) => task.$commit('error', payload));
             return true;
         },
     },

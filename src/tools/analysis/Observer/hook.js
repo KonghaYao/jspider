@@ -6,9 +6,9 @@
  * @param {Boolean} async=false 是否需要返回值为 Promise
  * @returns {Proxy} 返回 Proxy 代理对象
  */
-import { createProperty } from "./hook/createProperty.js";
-import { syncApply } from "./hook/syncApply.js";
-import { asyncApply } from "./hook/asyncApply.js";
+import { createProperty } from './hook/createProperty.js';
+import { syncApply } from './hook/syncApply.js';
+import { asyncApply } from './hook/asyncApply.js';
 /**
  *
  * 注意 async 的布尔值

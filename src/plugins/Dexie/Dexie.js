@@ -1,8 +1,8 @@
-import { $load } from "../../tools/loader/loader.js";
+import { $load } from '../../tools/loader/loader.js';
 
 let Dexie;
 function init() {
-    return $load("dexie").then(() => {
+    return $load('dexie').then(() => {
         Dexie = window.Dexie;
     });
 }

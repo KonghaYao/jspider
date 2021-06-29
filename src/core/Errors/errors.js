@@ -2,7 +2,7 @@
 export class FlowError extends Error {
     constructor(message) {
         super(message);
-        this.name = "FlowError";
+        this.name = 'FlowError';
     }
 }
 
@@ -10,7 +10,7 @@ export class FlowError extends Error {
 export class PluginError extends Error {
     constructor(message) {
         super(message);
-        this.name = "PluginError";
+        this.name = 'PluginError';
     }
 }
 
@@ -18,12 +18,12 @@ export class PluginError extends Error {
 export class RetryError extends Error {
     constructor(message) {
         super(message);
-        this.name = "FlowError";
+        this.name = 'FlowError';
     }
 }
 export class TaskError extends Error {
     constructor(message) {
         super(message);
-        this.name = "TaskError";
+        this.name = 'TaskError';
     }
 }

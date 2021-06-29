@@ -31,7 +31,7 @@ class CounterCenter {
     register(name) {
         this[name] = new Counter(name);
     }
-    global = new Counter("global");
+    global = new Counter('global');
     reportLogger(Logger) {
         const counter = this?.[Logger.scope] || this.global;
         counter.record(Logger);

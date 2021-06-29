@@ -1,4 +1,4 @@
-import { XLSX } from "./xlsx.js";
+import { XLSX } from './xlsx.js';
 // XLSX 通过 script 导入
 function ArrayToSheet(sheetArray) {
     sheetArray.forEach((i) => {
@@ -27,7 +27,7 @@ function ObjectToBook(input) {
 
 // input: {sheetName1:[],sheetName2:[]}
 function createExcelFile(input, fileName, XLSXOptions) {
-    const { bookType = "xlsx", bookSST = true, type = "array" } = XLSXOptions || {};
+    const { bookType = 'xlsx', bookSST = true, type = 'array' } = XLSXOptions || {};
     return bookToFile(ObjectToBook(input), fileName, {
         bookType,
         bookSST,

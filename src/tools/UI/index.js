@@ -1,4 +1,4 @@
-import { v4 as uuid } from "uuid";
+import { v4 as uuid } from 'uuid';
 
 // 这个是用于组织爬虫 UI 界面的一个部分
 // TODO 这里将会建立一个与 JSpider Core 的 UI 交互界面
@@ -19,8 +19,8 @@ export class UIManager {
             left: 0;
             background-color: rgba(0, 0, 0, 0.3);
             z-index: 1000000000000;
-        `.replace(/\s/g, "");
+        `.replace(/\s/g, '');
         document.body.appendChild(this.$root);
-        console.log("向 dom 中 注入 ui 成功");
+        console.log('向 dom 中 注入 ui 成功');
     }
 }

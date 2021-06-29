@@ -1,8 +1,8 @@
-import { $load } from "../../tools/loader/loader.js";
+import { $load } from '../../tools/loader/loader.js';
 
 let XLSX;
 function init() {
-    return $load("xlsx").then(() => {
+    return $load('xlsx').then(() => {
         XLSX = window.XLSX;
     });
 }

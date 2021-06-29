@@ -4,7 +4,7 @@
  * @Last Modified by: KonghaYao
  * @Last Modified time: 2021-06-29 19:22:28
  */
-import { MessageCounter } from "./counterCenter";
+import { MessageCounter } from './counterCenter';
 /*
  *  $type:scope;title|description
  */

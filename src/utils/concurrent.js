@@ -4,9 +4,9 @@
  * @Last Modified by: KonghaYao
  * @Last Modified time: 2021-06-29 16:19:45
  */
-import { pipe, of, EMPTY, timer, Observable, from } from "rxjs";
-import { bufferCount, concatMap, switchMap, catchError, delayWhen } from "rxjs/operators";
-import { retryAndDelay } from "./retryAndDelay.js";
+import { pipe, of, EMPTY, timer, Observable, from } from 'rxjs';
+import { bufferCount, concatMap, switchMap, catchError, delayWhen } from 'rxjs/operators';
+import { retryAndDelay } from './retryAndDelay.js';
 
 /**
  * 并发控制操作符

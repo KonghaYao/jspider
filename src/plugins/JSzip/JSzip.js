@@ -1,8 +1,8 @@
-import { $load } from "../../tools/loader/loader.js";
+import { $load } from '../../tools/loader/loader.js';
 
 let JSZip;
 function init() {
-    return $load("jszip").then(() => {
+    return $load('jszip').then(() => {
         JSZip = window.JSZip;
     });
 }

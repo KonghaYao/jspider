@@ -20,10 +20,10 @@
 *这里提一件事情，如果是在 options 里面写了函数，然后在 Plugin 内部写了相应调用函数的逻辑，就可以实现针对每个输入进行不同的返回*
 
 */
-import { EMPTY, from, Observable, of, pipe } from "rxjs";
-import { catchError, map, switchMap, tap } from "rxjs/operators";
-import { createUUID } from "./createUUID.js";
-import { PluginError } from "./Errors/errors.js";
+import { EMPTY, from, Observable, of, pipe } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { createUUID } from './createUUID.js';
+import { PluginError } from './Errors/errors.js';
 class PLUGIN {
     constructor({
         forceRetry = true,
@@ -59,7 +59,7 @@ class PLUGIN {
             switchMap((task) => {
                 if (task.$checkRepeat(this.uuid) || this.forceRetry) {
                     return of(task).pipe(
-                        map((task) => [task.$commit("start", this.uuid), task.originData]),
+                        map((task) => [task.$commit('start', this.uuid), task.originData]),
 
                         switchMap(([data, originData]) => {
                             const result = this.main(data, originData);
@@ -68,12 +68,12 @@ class PLUGIN {
                                 : of(result);
                         }),
                         map((result) => {
-                            task.$commit("success", result, this.uuid, this.saveMiddleResult);
+                            task.$commit('success', result, this.uuid, this.saveMiddleResult);
                             return task;
                         }),
                     );
                 }
-                console.log("跳过一个目标");
+                console.log('跳过一个目标');
                 return of(task);
             }),
 
@@ -107,5 +107,5 @@ export function Plugin(Process) {
     if (Process instanceof Object) {
         return new PLUGIN(Process);
     }
-    throw new PluginError("Plugin 必须是一个函数或者是 Plugin 描述对象");
+    throw new PluginError('Plugin 必须是一个函数或者是 Plugin 描述对象');
 }

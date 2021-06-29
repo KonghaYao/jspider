@@ -1,15 +1,15 @@
 /* eslint-disable no-invalid-this */
 
-import { Plugin } from "../core/PluginSystem.js";
-import { concurrent } from "../utils/concurrent.js";
+import { Plugin } from '../core/PluginSystem.js';
+import { concurrent } from '../utils/concurrent.js';
 
 // ! 这个 Request 文件是标准的 Plugin 的高级注册示例
 
 // Format 是边缘的处理逻辑，用于自动化相应返回数据的格式处理，与 Plugin 关系较小
 function Format(res, returnType) {
-    const type = res.headers.get("content-type") || "";
+    const type = res.headers.get('content-type') || '';
     // 根据 returnType 强制返回
-    if (!returnType || returnType === "auto") {
+    if (!returnType || returnType === 'auto') {
         // 自动判断类型并解析
         if (/text|html|rtf|xml/.test(type)) {
             return res.text();
@@ -34,10 +34,10 @@ function Format(res, returnType) {
 // 第二个为 Plugin 内部的 options, 可以调用这些数据进行操作
 
 function request({ url, options = {} }) {
-    const { returnType = "json" } = this.options;
+    const { returnType = 'json' } = this.options;
 
     //  获取数据为 request
-    console.log("- 爬取 ", url);
+    console.log('- 爬取 ', url);
     return fetch(url, options)
         .then((res) => {
             if (!res.ok) {

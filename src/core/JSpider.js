@@ -4,14 +4,14 @@
  * @Last Modified by: KonghaYao
  * @Last Modified time: 2021-06-29 15:56:22
  */
-import { createTask, skipSame } from "./coreOperators/index.js";
-import { createUUID } from "./createUUID.js";
-import { from } from "rxjs";
-import { tap } from "rxjs/operators";
+import { createTask, skipSame } from './coreOperators/index.js';
+import { createUUID } from './createUUID.js';
+import { from } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 export class JSpider {
     _ready = false;
-    uuid = "";
+    uuid = '';
 
     #PluginLine = [];
     constructor(...Plugins) {
@@ -19,7 +19,7 @@ export class JSpider {
         this.Plugins = Plugins;
     }
     #createLineUUID(Plugins) {
-        this.uuid = createUUID(Plugins.reduce((string, plugin) => string + plugin.uuid, ""));
+        this.uuid = createUUID(Plugins.reduce((string, plugin) => string + plugin.uuid, ''));
     }
 
     #preparePlugins() {
@@ -47,7 +47,7 @@ export class JSpider {
                 ...this.#PluginLine,
                 tap((task) => {
                     // from(task).pipe(tap(console.log)).subscribe();
-                    task.$commit("complete", this.uuid);
+                    task.$commit('complete', this.uuid);
                 }),
             )
             .subscribe({
