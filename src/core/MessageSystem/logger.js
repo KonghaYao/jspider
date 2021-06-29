@@ -2,16 +2,26 @@
  * @Author: KonghaYao
  * @Date: 2021-06-29 16:49:44
  * @Last Modified by: KonghaYao
- * @Last Modified time: 2021-06-29 16:52:31
+ * @Last Modified time: 2021-06-29 18:57:30
  */
 
 /*
- * error Plugin-Request 这是一个错误的文本示例
- * 这些是辅助提示，用于描述发生的事件
+ * 输入字符串的格式: $type:scope;title|description
  */
-
+const LoggerRE = /^\$([^:]+?):([^;]+?);([^\|]+)\|?([\s\S]*)/;
 export class Logger {
-    constructor(scope, flag, title, content) {
-        Object.assign(this, { scope, flag, title, content, reportTime: new Date() });
+    constructor(str) {
+        this.convert(str);
+    }
+    convert(str) {
+        const items = LoggerRE.exec(str);
+        let type = "log";
+        let scope = "global";
+        let title = str;
+        let description = "";
+        if (items) {
+            [, type, scope, title, description] = items;
+        }
+        Object.assign(this, { scope, type, title, description, reportTime: new Date() });
     }
 }

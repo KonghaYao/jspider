@@ -1,43 +1,72 @@
 <mxfile>
     <diagram id="GjEiPBBv63HPv-iuIJ8a" name="第 1 页">
-        <mxGraphModel dx="1082" dy="617" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="990" dy="740" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
-                <mxCell id="1" parent="0"/>
-                <mxCell id="4" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=16;fontColor=#0000CC;rounded=1;sketch=1;" edge="1" parent="1" source="2" target="3">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="17" value="未命名图层" style="locked=1;" parent="0"/>
+                <mxCell id="18" value="&lt;b&gt;JSpider —— MessageSystem&lt;/b&gt;" style="fillColor=#F6F6F6;strokeColor=none;shadow=0;gradientColor=none;fontSize=14;align=left;spacing=10;fontColor=#717171;9E9E9E;verticalAlign=top;spacingTop=-4;fontStyle=0;spacingLeft=40;html=1;fontFamily=Comic Sans MS;" parent="17" vertex="1">
+                    <mxGeometry x="50" y="30" width="750" height="1100" as="geometry"/>
                 </mxCell>
-                <mxCell id="2" value="A Plugin Report Something" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#ffe6cc;sketch=1;fontFamily=Comic Sans MS;fontStyle=1;fontSize=16;strokeColor=#d79b00;fontColor=#BF0000;spacingTop=0;" vertex="1" parent="1">
-                    <mxGeometry x="70" y="100" width="260" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="6" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=16;fontColor=#CC00CC;entryX=0;entryY=0.5;entryDx=0;entryDy=0;rounded=1;sketch=1;" edge="1" parent="1" source="3" target="5">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="550" y="280" as="targetPoint"/>
+                <mxCell id="19" value="" style="shape=mxgraph.gcp2.google_cloud_platform;fillColor=#F6F6F6;strokeColor=none;shadow=0;gradientColor=none;" parent="18" vertex="1">
+                    <mxGeometry width="23" height="20" relative="1" as="geometry">
+                        <mxPoint x="20" y="10" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=16;fontColor=#CC0066;" edge="1" parent="1" source="3" target="10">
+                <mxCell id="1" style="" parent="0"/>
+                <mxCell id="4" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=20;fontColor=#0000CC;rounded=1;sketch=1;fontStyle=0;strokeWidth=3;" parent="1" source="2" target="3" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="Fake&lt;font color=&quot;#cc0000&quot;&gt; console.log &lt;/font&gt;function" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#dae8fc;sketch=1;fontFamily=Comic Sans MS;fontStyle=1;fontSize=16;strokeColor=#6c8ebf;fontColor=#0000CC;" vertex="1" parent="1">
-                    <mxGeometry x="70" y="250" width="260" height="60" as="geometry"/>
+                <mxCell id="2" value="A String" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#ffe6cc;sketch=1;fontFamily=Comic Sans MS;fontStyle=1;fontSize=16;strokeColor=#d79b00;spacingTop=0;fontColor=#FF0080;" parent="1" vertex="1">
+                    <mxGeometry x="105" y="120" width="260" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="Translate message to a &lt;font color=&quot;#cc0066&quot;&gt;Logger&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#e1d5e7;sketch=1;fontFamily=Comic Sans MS;fontStyle=1;fontSize=16;strokeColor=#CC99FF;fontColor=#7F00FF;" vertex="1" parent="1">
-                    <mxGeometry x="470" y="253.75" width="260" height="52.5" as="geometry"/>
+                <mxCell id="6" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=20;fontColor=#CC00CC;entryX=0;entryY=0.5;entryDx=0;entryDy=0;rounded=1;sketch=1;fontStyle=0;strokeWidth=3;" parent="1" source="3" target="5" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="578" y="300" as="targetPoint"/>
+                    </mxGeometry>
                 </mxCell>
-                <mxCell id="12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;fontColor=#CC0066;dashed=1;" edge="1" parent="1" source="8" target="3">
+                <mxCell id="3" value="Fake&lt;font color=&quot;#cc0000&quot;&gt; &lt;/font&gt;&lt;font color=&quot;#ff0080&quot;&gt;console.log&lt;/font&gt;&lt;font color=&quot;#cc0000&quot;&gt; &lt;/font&gt;function" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#dae8fc;sketch=1;fontFamily=Comic Sans MS;fontStyle=1;fontSize=16;strokeColor=#6c8ebf;fontColor=#0000CC;" parent="1" vertex="1">
+                    <mxGeometry x="105" y="270" width="260" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;sketch=1;jumpStyle=arc;fontSize=20;fontStyle=0;strokeWidth=3;" edge="1" parent="1" source="5" target="10">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="615" y="565"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="5" value="Translate message to a &lt;font color=&quot;#ff0080&quot;&gt;Logger&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#e1d5e7;sketch=1;fontFamily=Comic Sans MS;fontStyle=1;fontSize=16;strokeColor=#CC99FF;fontColor=#7F00FF;" parent="1" vertex="1">
+                    <mxGeometry x="475" y="340" width="260" height="52.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;fontColor=#CC0066;dashed=1;" parent="1" source="8" target="3" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="8" value="It is just &lt;b&gt;convert a string to a logger&lt;/b&gt;, so that JSpider could easily manage all the message" style="points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[1,1,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];rounded=1;absoluteArcSize=1;arcSize=2;html=1;strokeColor=none;gradientColor=none;shadow=0;dashed=0;fontSize=12;fontColor=#9E9E9E;align=left;verticalAlign=top;spacing=10;spacingTop=-4;fillColor=#E0F2F1;fontFamily=Comic Sans MS;whiteSpace=wrap;" vertex="1" parent="1">
-                    <mxGeometry x="510" y="90" width="146" height="100" as="geometry"/>
+                <mxCell id="8" value="It is just &lt;b&gt;&lt;font color=&quot;#ff0080&quot;&gt;convert a string to a logger&lt;/font&gt;&lt;/b&gt;, so that JSpider could easily manage all the message" style="points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[1,1,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];rounded=1;absoluteArcSize=1;arcSize=2;html=1;strokeColor=none;gradientColor=none;shadow=0;dashed=0;fontSize=12;fontColor=#9E9E9E;align=left;verticalAlign=top;spacing=10;spacingTop=-4;fillColor=#E0F2F1;fontFamily=Comic Sans MS;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="475" y="160" width="146" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="14" style="edgeStyle=orthogonalEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=16;fontColor=#CC0066;dashed=1;" edge="1" parent="1" source="9" target="5">
+                <mxCell id="14" style="edgeStyle=orthogonalEdgeStyle;rounded=1;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=16;fontColor=#CC0066;dashed=1;" parent="1" source="9" target="5" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="9" value="&lt;b&gt;Logger&lt;/b&gt; is a class that can hold all the message in one Object." style="points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[1,1,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];rounded=1;absoluteArcSize=1;arcSize=2;html=1;strokeColor=none;gradientColor=none;shadow=0;dashed=0;fontSize=12;fontColor=#9E9E9E;align=left;verticalAlign=top;spacing=10;spacingTop=-4;fillColor=#FFF8E1;fontFamily=Comic Sans MS;whiteSpace=wrap;" vertex="1" parent="1">
-                    <mxGeometry x="540" y="380" width="130" height="90" as="geometry"/>
+                <mxCell id="9" value="&lt;b&gt;&lt;font color=&quot;#ff0080&quot;&gt;Logger&lt;/font&gt;&lt;/b&gt; is a class that can hold all the message in one Object." style="points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[1,1,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];rounded=1;absoluteArcSize=1;arcSize=2;html=1;strokeColor=none;gradientColor=none;shadow=0;dashed=0;fontSize=12;fontColor=#9E9E9E;align=left;verticalAlign=top;spacing=10;spacingTop=-4;fillColor=#FFF8E1;fontFamily=Comic Sans MS;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="645" y="160" width="130" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="10" value="Fake&lt;font color=&quot;#cc0000&quot;&gt; console.log &lt;/font&gt;function" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#dae8fc;sketch=1;fontFamily=Comic Sans MS;fontStyle=1;fontSize=16;strokeColor=#6c8ebf;fontColor=#0000CC;" vertex="1" parent="1">
-                    <mxGeometry x="70" y="500" width="260" height="60" as="geometry"/>
+                <mxCell id="28" style="edgeStyle=orthogonalEdgeStyle;rounded=1;sketch=1;jumpStyle=arc;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=20;fontColor=#FF0080;strokeWidth=3;" edge="1" parent="1" source="10" target="27">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="235" y="860"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="10" value="&lt;font color=&quot;#ff0080&quot;&gt;Logger&lt;/font&gt; will be put into a &lt;font color=&quot;#ff0080&quot;&gt;Counter&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;sketch=1;fontFamily=Comic Sans MS;fontStyle=1;fontSize=16;strokeColor=#82b366;fillColor=#d5e8d4;fontColor=#00994D;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="535" width="290" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" style="edgeStyle=orthogonalEdgeStyle;rounded=1;sketch=1;jumpStyle=arc;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.999;entryY=0.869;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;fontFamily=Comic Sans MS;fontColor=#FF0080;" edge="1" parent="1" source="25" target="10">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="&lt;font color=&quot;#ff0080&quot; style=&quot;font-weight: bold&quot;&gt;Counter &lt;/font&gt;&lt;font color=&quot;#999999&quot;&gt;is a Reports Store of a Plugin or other system&lt;b&gt;&amp;nbsp;&lt;/b&gt;&lt;/font&gt;" style="points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[1,1,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];rounded=1;absoluteArcSize=1;arcSize=2;html=1;strokeColor=none;gradientColor=none;shadow=0;dashed=0;fontSize=12;fontColor=#9E9E9E;align=left;verticalAlign=top;spacing=10;spacingTop=-4;fillColor=#E1F5FE;fontFamily=Comic Sans MS;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry x="585" y="630" width="150" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="&lt;font color=&quot;#ff0080&quot;&gt;Counter &lt;/font&gt;&lt;font color=&quot;#666666&quot;&gt;will give a Report to &lt;/font&gt;&lt;font color=&quot;#ff0080&quot;&gt;Console&lt;/font&gt;&lt;font color=&quot;#666666&quot;&gt; to express the meaning of message with vivid style.&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;sketch=1;fontFamily=Comic Sans MS;fontStyle=1;fontSize=16;strokeColor=#666666;fontColor=#333333;fillColor=#E6E6E6;" vertex="1" parent="1">
+                    <mxGeometry x="310" y="820" width="340" height="90" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
