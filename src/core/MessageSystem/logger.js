@@ -2,26 +2,18 @@
  * @Author: KonghaYao
  * @Date: 2021-06-29 16:49:44
  * @Last Modified by: KonghaYao
- * @Last Modified time: 2021-06-29 18:57:30
+ * @Last Modified time: 2021-06-29 19:22:28
  */
-
+import { MessageCounter } from "./counterCenter";
 /*
- * 输入字符串的格式: $type:scope;title|description
+ *  $type:scope;title|description
  */
-const LoggerRE = /^\$([^:]+?):([^;]+?);([^\|]+)\|?([\s\S]*)/;
 export class Logger {
-    constructor(str) {
-        this.convert(str);
-    }
-    convert(str) {
-        const items = LoggerRE.exec(str);
-        let type = "log";
-        let scope = "global";
-        let title = str;
-        let description = "";
-        if (items) {
-            [, type, scope, title, description] = items;
-        }
+    constructor(type, scope, title, description) {
         Object.assign(this, { scope, type, title, description, reportTime: new Date() });
+        MessageCounter.reportLogger(this); // 直接派送到 MessageCounter
     }
+
+    // 根据内容渲染数据并打印在控制台
+    print() {}
 }
