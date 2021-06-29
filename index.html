@@ -2,84 +2,100 @@
 <html lang="zh-cn">
 
 <head>
-  <meta charset="UTF-8">
-  <title>JSpider 3</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Description">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  <link rel="stylesheet" href="./docs/fonts.css">
-  <link rel="stylesheet" href="//unpkg.com/docsify-gifcontrol/dist/docsify-gifcontrol.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes/themes/prism-material-light.css">
-  <link rel="stylesheet" href="./docs/googleIcon.css">
-  <link rel="stylesheet" href="./docs/index.css">
+    <meta charset="UTF-8">
+    <title>JSpider 3</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Description">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+    <link rel="stylesheet" href="./docs/fonts.css">
+    <link rel="stylesheet" href="//unpkg.com/docsify-gifcontrol/dist/docsify-gifcontrol.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes/themes/prism-material-light.css">
+    <link rel="stylesheet" href="./docs/googleIcon.css">
+    <link rel="stylesheet" href="./docs/index.css">
 
 </head>
 
 <body>
-  <div id="app"></div>
+    <div id="app"></div>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/docsify.min.js"></script>
 
 <script>
-  window.app = document.getElementById("app");
-  window.$docsify = {
-    name: "JSpider",
-    repo: "https://github.com/Konghayao/JSpider",
-    coverpage: true,
-    basePath: './docs/',
-    homepage: "./zh-cn/README.md",
-    loadNavbar: true,
-    auto2top: true,
-    maxLevel: 3,
-    count: {
-      countable: true,
-      fontsize: "0.9em",
-      color: "rgb(90,90,90)",
-      language: "chinese",
-    }, pagination: {
-      previousText: '上一章节',
-      nextText: '下一章节',
-      crossChapter: true,
-      crossChapterText: true,
-    },
-    markdown: {
-      smartypants: true,
-      renderer: {
-        code: function (code, lang) {
+    window.app = document.getElementById("app");
+    window.$docsify = {
+        name: "JSpider",
+        repo: "https://github.com/Konghayao/JSpider",
+        coverpage: true,
+        basePath: './docs/',
+        homepage: "./zh-cn/README.md",
+        loadNavbar: true,
+        auto2top: true,
+        maxLevel: 3,
+        prettier: {
+            "printWidth": 80,
+            "tabWidth": 4,
+            "useTabs": false,
+            "endOfLine": "auto",
+            "singleQuote": true,
+            "semi": true,
+            "trailingComma": "all",
+            "bracketSpacing": true
+        },
+        count: {
+            countable: true,
+            fontsize: "0.9em",
+            color: "rgb(90,90,90)",
+            language: "chinese",
+        }, pagination: {
+            previousText: '上一章节',
+            nextText: '下一章节',
+            crossChapter: true,
+            crossChapterText: true,
+        },
+        markdown: {
+            smartypants: true,
+            renderer: {
+                code: function (code, lang, ...args) {
 
-          if (lang === 'drawio') {
-            if (window.drawioConverter) {
-              console.log('drawio 转化中')
-              return window.drawioConverter(code)
-            } else {
-              return `<div class='drawio-code'>${code}</div>`
+                    if (lang === 'drawio') {
+                        if (window.drawioConverter) {
+                            console.log('drawio 转化中')
+                            return window.drawioConverter(code)
+                        } else {
+                            return `<div class='drawio-code'>${code}</div>`
+                        }
+
+                    } else {
+                        return this.origin.code.call(this, window.codeFormatter(code, lang), lang, ...args);
+                    }
+                }
             }
-
-          } else {
-            return this.origin.code.apply(this, arguments);
-          }
-        }
-      }
-    },
-    plugins: [
-      function (hook, vm) {
-        // parse twemoji
-        hook.doneEach(function () {
-          twemoji.parse(app);
-        });
-      }
-    ],
-  };
+        },
+        plugins: [
+            function (hook, vm) {
+                // parse twemoji
+                hook.doneEach(function () {
+                    twemoji.parse(app);
+                });
+            }
+        ],
+    };
 </script>
 
 <!-- drawio 的插件 -->
 <script src="https://cdn.jsdelivr.net/npm/docsify-drawio/viewer.min.js"></script>
 <script src='https://cdn.jsdelivr.net/npm/docsify-drawio/drawio.js'></script>
 
-<script type='module' src='https://cdn.jsdelivr.net/npm/docsify-prettier/prettier.js'></script>
+<!-- prettier 的插件 -->
+<script src="https://cdn.jsdelivr.net/npm/prettier/standalone.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prettier@2.3.2/parser-postcss.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prettier@2.3.2/parser-babel.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prettier@2.3.2/parser-html.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsify-prettier/prettier.js"></script>
 
+<!-- 其他插件 -->
 <script src="https://unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
@@ -91,5 +107,7 @@
 <script src="https://cdn.jsdelivr.net/gh/TaQini/docsify-twemoji@master/twemoji.min.js"></script>
 
 <script type='module' src='./docs/index.js'></script>
+
+
 
 </html>
