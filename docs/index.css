@@ -4,7 +4,7 @@ html {
 article > p {
     text-indent: 2em;
 }
-[class^="drawio-viewer-index-"] {
+[class^='drawio-viewer-index-'] {
     display: flex;
     justify-content: center;
 }
@@ -46,11 +46,11 @@ article > p {
     border-radius: 0 30% 0 0;
 }
 .input-wrap:before {
-    font-family: "Material Icons Round";
+    font-family: 'Material Icons Round';
     color: #000;
     font-size: 1.7em;
     margin: 0 0.5em;
-    content: "search";
+    content: 'search';
 }
 .app-nav ul {
     opacity: 0.5;
@@ -63,8 +63,8 @@ article > p {
     border: 0 !important;
 }
 .clear-button::before {
-    content: "close";
-    font-family: "Material Icons Round";
+    content: 'close';
+    font-family: 'Material Icons Round';
     color: #000;
     font-size: 1.7em;
 }
@@ -87,8 +87,8 @@ article > p {
     display: none;
 }
 .docsify-copy-code-button:before {
-    content: "content_copy";
-    font-family: "Material Icons Round";
+    content: 'content_copy';
+    font-family: 'Material Icons Round';
     color: #fff;
     font-size: 1.4rem;
 }
@@ -96,7 +96,8 @@ article > p {
 .markdown-section {
     color: #000000c9;
 
-    background-image: linear-gradient(90deg, rgba(60, 10, 30, 0.04) 3%, transparent 0), linear-gradient(1turn, rgba(60, 10, 30, 0.04) 3%, transparent 0);
+    background-image: linear-gradient(90deg, rgba(60, 10, 30, 0.04) 3%, transparent 0),
+        linear-gradient(1turn, rgba(60, 10, 30, 0.04) 3%, transparent 0);
     background-size: 20px 20px;
     background-position: 50%;
 }
@@ -114,7 +115,7 @@ article > p {
     position: absolute;
     top: 0.5rem;
     left: 0.5rem;
-    content: "";
+    content: '';
     height: 1em;
     width: 20%;
     background-color: transparent;
@@ -124,8 +125,9 @@ article > p {
 .markdown-section code,
 .markdown-section output:after,
 .markdown-section pre {
-    font-family: Roboto Mono, Monaco, courier, monospace, -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC",
-        "Hiragino Sans GB", "Microsoft YaHei", Arial;
+    font-family: Roboto Mono, Monaco, courier, monospace, -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell,
+        Noto Sans, sans-serif, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB',
+        'Microsoft YaHei', Arial;
 }
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 ::-webkit-scrollbar {
