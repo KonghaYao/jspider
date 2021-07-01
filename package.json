@@ -17,7 +17,8 @@
         "lint": "eslint src",
         "Lint": "prettier --write src/**/*.{ts,json,md,yml,js} & eslint src",
         "prettier": "prettier --write src/**/*.{ts,json,md,yml,js}",
-        "docs": "docsify serve docs"
+        "docs": "docsify serve docs",
+        "graph": "madge --image docs/assets/dependencies.svg src/JSpider.js"
     },
     "keywords": [
         "spider",
@@ -52,6 +53,7 @@
         "eslint-plugin-prettier": "^3.4.0",
         "prettier": "^2.3.2",
         "rollup": "^2.50.5",
+        "madge": "^5.0.1",
         "rollup-plugin-babel": "^4.4.0",
         "rollup-plugin-commonjs": "^10.1.0",
         "rollup-plugin-delete": "^2.0.0",
