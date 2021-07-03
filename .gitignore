@@ -7,7 +7,6 @@ bin-release/
 node_modules/*
 # Other files and folders
 .settings/
-dist/esm
 
 
 # Executables
