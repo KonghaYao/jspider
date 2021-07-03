@@ -19,7 +19,9 @@
         "prettier": "prettier --write src/**/*.{ts,json,md,yml,js}",
         "docs": "docsify serve docs",
         "graph": "madge --image docs/assets/dependencies.svg src/JSpider.js",
-        "release": "standard-version"
+        "release": "standard-version",
+        "lint-staged": "lint-staged",
+        "commitlint": "commitlint --config commitlint.config.js -e -V"
     },
     "keywords": [
         "spider",
@@ -29,6 +31,23 @@
         "browser",
         "front-end"
     ],
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged",
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+    },
+    "lint-staged": {
+        "*.{js,md,css,html}": [
+            "prettier --write",
+            "git add"
+        ]
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-customizable"
+        }
+    },
     "dependencies": {
         "chalk": "^4.1.1",
         "consola": "^2.15.3",
@@ -52,7 +71,6 @@
         "eslint-config-google": "^0.14.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^3.4.0",
-        "madge": "^5.0.1",
         "prettier": "^2.3.2",
         "rollup": "^2.50.5",
         "rollup-plugin-delete": "^2.0.0",

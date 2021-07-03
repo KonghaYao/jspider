@@ -3,6 +3,7 @@ module.exports = {
         browser: true,
         es2021: true,
         node: true,
+        commonjs: true,
     },
     plugins: ['prettier'],
     extends: ['eslint:recommended', 'prettier', 'google'],
