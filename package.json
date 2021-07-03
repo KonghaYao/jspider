@@ -3,7 +3,6 @@
     "version": "3.1.7",
     "main": "dist/JSpider.esm.min.js",
     "unpkg": "dist/JSpider.esm.min.js",
-    "jsdelivr": "dist/JSpider.esm.min.js",
     "author": "KonghaYao <20192831006@m.scnu.edu.cn>",
     "homepage": "http://dongzhongzhidong.gitee.io/jspider/",
     "license": "MIT",
