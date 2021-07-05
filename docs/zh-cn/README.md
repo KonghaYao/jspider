@@ -14,13 +14,11 @@
 
 ```js
 // 从 jsDelivr 导入代码
-import("https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js").then(
-    ({ default: JSpider }) => {
-        window.JSpider = JSpider;
-        // 放入您的 URL
-        JSpider.simpleCrawl(["fake/excel", "fake/excel"]);
-    }
-);
+import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then(({ default: JSpider }) => {
+    window.JSpider = JSpider;
+    // 放入您的 URL
+    JSpider.simpleCrawl(['fake/excel', 'fake/excel']);
+});
 ```
 
 ### 更加高级的自定义爬取
@@ -29,13 +27,13 @@ import("https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js").then(
 const {
     Request, // 请求库
     Download, // 下载库
-    ExcelHelper // 转换数据为表格数据的插件
+    ExcelHelper, // 转换数据为表格数据的插件
 } = JSpider.plugins;
 const { Plugin } = JSpider;
 
 // 您的爬取路径代码
 let urls = [...Array(5).keys()].map((i, index) => {
-    return { url: "/fake/excel" };
+    return { url: '/fake/excel' };
 });
 
 //! 这些是主要代码
@@ -48,10 +46,10 @@ const spider = new JSpider(
     }),
     ExcelHelper({
         XLSXOptions: {
-            bookType: "csv" // 可以指定为 csv 或者 xlsx
-        }
+            bookType: 'csv', // 可以指定为 csv 或者 xlsx
+        },
     }),
-    Download()
+    Download(),
 );
 spider.apply(urls);
 ```
@@ -92,21 +90,34 @@ JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm �
 
 3. Mockjs 很有想法的一个前端数据代理库，很可惜的是没有提供 fetch 的代理，所以我自己重做了这个库。
 
-4. lodash-es 无敌的工具库，在一些比较常用的底层代码中有使用。
+4. Mockjs-esm 我自己制作的 Mockjs esm 重构版本，并添加了新功能，JSpider 使用的也是这个版本的 Mockjs。
 
-5. xlsx ExcelHelper 的核心插件，用于从对象数据直接构建 Excel 常用文件的操作，十分好用的一个插件。
+5. lodash-es 无敌的工具库，在一些比较常用的底层代码中有使用。
 
-6. jszip 用于制作压缩文件的插件，十分好用
+6. xlsx ExcelHelper 的核心插件，用于从对象数据直接构建 Excel 文件的操作，用于科研爬虫需要下载 Excel 可以处理的文件就很方便。
 
-7. dexie.js JSpider 得以链接 indexDB 进行储存操作的救星，说实话 indexDB 的 API 太乱了。
+7. jszip 用于制作压缩文件的插件，十分好用。
 
-8. zangodb.js 这个也是对 indexDB 的数据操作的一个库，API 简单易用，但是在项目中选择了更为活跃的 dexie.js 进行了 indexDB 的链接。
+8. dexie.js JSpider 得以链接 indexedDB 进行储存操作的救星，说实话 indexedDB 的 API 很专业，可以进行很多的操作。
 
-9. uuid 用于创建 UUID 的项目，可以生成唯一的标识，用于 JSpider 的底层逻辑中。
+9. zangodb.js 这个也是对 indexedDB 的数据操作的一个库，API 简单易用，但是在项目中选择了更为活跃的 dexie.js 进行了 indexedDB 的链接。
 
-10. consola 用于控制台的输出美化
+10. uuid 用于创建 UUID 的项目，可以生成唯一的标识，用于 JSpider 的底层逻辑中。
 
-11. docsify 基于 Vue 的很好用的前端文档网页生成工具，由于本身的扩展性较好，所以添加了一些功能。
+11. consola 用于控制台的输出美化，用在 JSpider 的历史记录器中，用于打印信息。
+
+12. docsify 基于 Vue 的很好用的前端文档网页生成工具，由于本身的扩展性较好，所以添加了一些功能。
+
+    1. docsify-drawio 在 JSpider 文档里面的那些流程图都是使用 drawio 现场绘制的，也是我的一个开源项目。
+    2. docsify-prettier 也是我的一个开源项目，用于格式化文档中的代码块中的代码格式的插件
+    3. docsify-copy-code 在代码块旁边添加复制代码按钮
+    4. docsify-count 显示文章文字数目的插件
+    5. docsify-pangu 格式化常规网页文本的插件
+    6. docsify-twemoji 用于显示 emoji 的插件。
+
+13. draw.io 是我用来绘制流程图的一个工具库，很好用，配合 docsify-drawio 可以直接在仓库中引用 drawio 文件，并展示。
+
+14.
 
 **感谢上面的项目为 JSpider 的丰富功能提供了众多的帮助！**
 
