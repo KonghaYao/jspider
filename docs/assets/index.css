@@ -10,6 +10,7 @@ article > p {
 }
 .token.comment {
     color: #d73a49;
+    font-style: italic;
     font-family: system-ui;
 }
 ::marker {
@@ -100,6 +101,7 @@ article > p {
         linear-gradient(1turn, rgba(60, 10, 30, 0.04) 3%, transparent 0);
     background-size: 20px 20px;
     background-position: 50%;
+    font-family: Robot Mono;
 }
 
 .markdown-section code,
@@ -125,9 +127,9 @@ article > p {
 .markdown-section code,
 .markdown-section output:after,
 .markdown-section pre {
-    font-family: Roboto Mono, Monaco, courier, monospace, -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell,
-        Noto Sans, sans-serif, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB',
-        'Microsoft YaHei', Arial;
+    font-family: Robot Mono, Roboto Mono, Monaco, courier, monospace, -apple-system, system-ui, Segoe UI, Roboto,
+        Robot Mono, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC',
+        'Hiragino Sans GB', 'Microsoft YaHei', Arial;
 }
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 ::-webkit-scrollbar {
