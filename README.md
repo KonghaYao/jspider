@@ -1,5 +1,7 @@
 # JSpider 3 BETA
 
+[![](https://data.jsdelivr.com/v1/package/npm/js-spider/badge)](https://www.jsdelivr.com/package/npm/js-spider) ![npm](https://img.shields.io/npm/v/js-spider?style=flat-square) ![NPM](https://img.shields.io/npm/l/js-spider?style=flat-square) ![GitHub top language](https://img.shields.io/github/languages/top/konghayao/jspider) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/konghayao/jspider) ![Website](https://img.shields.io/website?style=flat-square&up_color=green&up_message=online&url=http%3A%2F%2Fdongzhongzhidong.gitee.io%2Fjspider%2F)
+
 > JSpider 3 是在 Chrome Devtools 中进行爬虫的爬虫框架, 这个框架包括了完整的爬虫支持。如果您具有前端基础，那么可以在三分钟内入门哦！
 
 [官方教程链接](http://dongzhongzhidong.gitee.io/jspider/)

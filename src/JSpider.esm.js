@@ -1,8 +1,8 @@
 /*
  * @Author: KonghaYao
  * @Date: 2021-06-28 21:05:59
- * @Last Modified by:   KonghaYao
- * @Last Modified time: 2021-06-28 21:05:59
+ * @Last Modified by: KonghaYao
+ * @Last Modified time: 2021-07-06 14:56:10
  */
 export { JSpider, Task, TaskGroup, Plugin } from './core/index.js';
 export * as plugins from './plugins/index.js';

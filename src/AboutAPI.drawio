@@ -1,6 +1,6 @@
 <mxfile>
     <diagram id="GZQI3QZnvFwZNke9cP7p" name="第 1 页">
-        <mxGraphModel dx="1004" dy="433" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="892" dy="433" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -73,7 +73,7 @@
                 </UserObject>
                 <UserObject label="Plugin can create a plugin" placeholders="1" name="Variable" id="17">
                     <mxCell style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;shadow=0;glass=0;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontColor=none;fontSize=15;" parent="1" vertex="1">
-                        <mxGeometry x="680" y="90" width="90" height="60" as="geometry"/>
+                        <mxGeometry x="680" y="90" width="110" height="80" as="geometry"/>
                     </mxCell>
                 </UserObject>
                 <UserObject label="$toolsName are a template that have many useful function help you to break some rules in the front end" placeholders="1" name="Variable" id="20">
