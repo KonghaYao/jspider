@@ -1,8 +1,8 @@
 # JSpider 3 BETA
 
-[![](https://data.jsdelivr.com/v1/package/npm/js-spider/badge)](https://www.jsdelivr.com/package/npm/js-spider) ![npm](https://img.shields.io/npm/v/js-spider?style=flat-square) ![NPM](https://img.shields.io/npm/l/js-spider?style=flat-square) ![GitHub top language](https://img.shields.io/github/languages/top/konghayao/jspider) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/konghayao/jspider) ![Website](https://img.shields.io/website?style=flat-square&up_color=green&up_message=online&url=http%3A%2F%2Fdongzhongzhidong.gitee.io%2Fjspider%2F)
+[![](https://data.jsdelivr.com/v1/package/npm/js-spider/badge)](https://www.jsdelivr.com/package/npm/js-spider) ![npm](https://img.shields.io/npm/v/js-spider?style=flat-square) ![NPM](https://img.shields.io/npm/l/js-spider?style=flat-square) ![GitHub top language](https://img.shields.io/github/languages/top/konghayao/jspider) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/konghayao/jspider) ![Website](https://img.shields.io/website?style=flat-square&up_color=green&up_message=online&url=http%3A%2F%2Fdongzhongzhidong.gitee.io%2Fjspider%2F) [![](https://gitee.com/dongzhongzhidong/jspider/badge/star.svg?theme=white)](https://gitee.com/dongzhongzhidong/jspider/)
 
-> JSpider 3 是在 Chrome Devtools 中进行爬虫的爬虫框架, 这个框架包括了完整的爬虫支持。如果您具有前端基础，那么可以在三分钟内入门哦！
+> JSpider 3 是在 Chrome Devtools 中进行爬虫的爬虫框架，这个框架包括了完整的爬虫支持。如果您具有前端基础，那么可以在三分钟内入门哦！
 
 [官方教程链接](http://dongzhongzhidong.gitee.io/jspider/)
 
@@ -10,7 +10,7 @@
 
 ### 极速爬取
 
-只有简单的几行, 适用于极速操作，这会直接将这些 URL 中的内容下载到本地。
+只有简单的几行，适用于极速操作，这会直接将这些 URL 中的内容下载到本地。
 
 > 右键 -> 检查，打开浏览器 Devtools，在 Console 中即可使用这些代码哦！
 
@@ -80,27 +80,27 @@ JSpider 未来的目标是兼容 NodeJS 平台和浏览器，让一套代码运�
 
 JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm 和 jsDelivr 网站两个来源载入。排名不分先后，只是记录个人对于这些库的使用体验。
 
-1. Rxjs 十分好用的响应式编程库，以至于 JSpider 的主要构架就是使用它写出来的。
+1. [Rxjs]() 十分好用的响应式编程库，以至于 JSpider 的主要构架就是使用它写出来的。
 
-2. Rollup 代码打包库，使用 Rollup 打包的库为我的项目节省了很多时间。
+2. [Rollup]() 代码打包库，使用 Rollup 打包的库为我的项目节省了很多时间。
 
-3. Mockjs 很有想法的一个前端数据代理库，很可惜的是没有提供 fetch 的代理，所以我自己重做了这个库。
+3. [Mockjs]() 很有想法的一个前端数据代理库，很可惜的是没有提供 fetch 的代理，所以我自己重做了这个库。
 
-4. lodash-es 无敌的工具库，在一些比较常用的底层代码中有使用。
+4. [lodash-es]() 无敌的工具库，在一些比较常用的底层代码中有使用。
 
-5. xlsx ExcelHelper 的核心插件，用于从对象数据直接构建 Excel 常用文件的操作，十分好用的一个插件。
+5. [xlsx]() ExcelHelper 的核心插件，用于从对象数据直接构建 Excel 常用文件的操作，十分好用的一个插件。
 
-6. jszip 用于制作压缩文件的插件，十分好用
+6. [jszip]() 用于制作压缩文件的插件，十分好用
 
-7. dexie.js JSpider 得以链接 indexDB 进行储存操作的救星，说实话 indexDB 的 API 太乱了。
+7. [dexie.js]() JSpider 得以链接 indexDB 进行储存操作的救星，说实话 indexDB 的 API 太乱了。
 
-8. zangodb.js 这个也是对 indexDB 的数据操作的一个库，API 简单易用，但是在项目中选择了更为活跃的 dexie.js 进行了 indexDB 的链接。
+8. [zangodb.js]() 这个也是对 indexDB 的数据操作的一个库，API 简单易用，但是在项目中选择了更为活跃的 dexie.js 进行了 indexDB 的链接。
 
-9. uuid 用于创建 UUID 的项目，可以生成唯一的标识，用于 JSpider 的底层逻辑中。
+9. [uuid]() 用于创建 UUID 的项目，可以生成唯一的标识，用于 JSpider 的底层逻辑中。
 
-10. consola 用于控制台的输出美化
+10. [consola]() 用于控制台的输出美化
 
-11. docsify 基于 Vue 的很好用的前端文档网页生成工具，由于本身的扩展性较好，所以添加了一些功能。
+11. [docsify]() 基于 Vue 的很好用的前端文档网页生成工具，由于本身的扩展性较好，所以添加了一些功能。
 
 **感谢上面的项目为 JSpider 提供了众多的帮助！**
 
