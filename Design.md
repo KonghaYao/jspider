@@ -16,9 +16,9 @@ _这是一个关于 JSpider 的结构设计文件_
 
 2. 对数据进行初步的 **格式转换**。
 
-### 2. Data Processing
+### 2. Data Pipeline
 
-**_Data Processing_** 是 JSpider 中用于处理数据格式的各种数据
+**_Data Pipeline_** 是 JSpider 中用于处理数据格式的各种数据
 
 职能：
 
