@@ -4,7 +4,7 @@ _这是一个关于 JSpider 的结构设计文件_
 
 ## System 总体结构
 
-**_下面的部分都称为 System，是 JSpider 流程中的一环_**
+**_下面的部分都称为 System，是 JSpider 流程中的一环，但是为了方便开发者使用，这些系统有可能不会被开发者看到，或者是以其他形式被开发者所使用。_**
 
 ### 1. Spider
 
@@ -26,9 +26,9 @@ _这是一个关于 JSpider 的结构设计文件_
 
 2.  删减无用数据项。
 
-### 3. Data Manager
+### 3. Recorder
 
-**_Data Manager_** 是 JSpider 用来管理数据的方式，可以认为是 JSpider 和数据库的中间人，所有的数据通过 JSpider 中的 **_Data Manager_** 来间接修改数据库中的数据。
+**_Recorder_** 是 JSpider 用来管理数据的方式，可以认为是 JSpider 和数据库的中间人，所有的数据通过 JSpider 中的 **_Recorder_** 来间接修改数据库中的数据。
 
 职能：
 
@@ -50,9 +50,13 @@ _这是一个关于 JSpider 的结构设计文件_
 
 **_Event Center_** 是管理全局事件的 **system**。 用于同意管辖事件内容，方便进行 **JSpider** 事件的注册与销毁。
 
+### 6. Task
+
+**_Task_** 是 workflow 中封装的最小单位。也就是对数据封装一层，以便有可以调用的 API。
+
 ## Plugin 机制
 
-**_所有的 System 都应该是和平台无关的，独立的；而 Plugin 是对接每一个平台实现具体功能的东西_**
+**_所有的 System 都应该是和平台无关的，独立的；而 Plugin 是对接每一个平台实现具体功能的函数插件。_**
 
 **_Plugin 机制_** 在 JSpider 中是对每一个 **System** 进行功能扩充的函数插件。
 
