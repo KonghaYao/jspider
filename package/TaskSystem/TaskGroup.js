@@ -6,14 +6,22 @@ export class TaskGroup extends Task {
         this.#linkTask();
     }
     #linkTask() {
-        this._output.forEach((task) => (task._belongTo = this));
+        this._originData.forEach((task) => (task._belongTo = this));
     }
+    // Plugin 的汇报口
+    $commit(type, ...payload) {
+        const result = this.#EventHub.emit(type, ...payload);
+        // 扩散事件
+        this._originData.forEach((task) => task.$commit(type, ...payload));
+        return result;
+    }
+    // 删除所有的 link
     $breakLink() {
-        this._output.clear();
+        this._originData.clear();
         this.$destroy();
     }
     // 单独删除一个连接
     $removeLink(task) {
-        this._output.delete(task);
+        this._originData.delete(task);
     }
 }
