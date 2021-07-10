@@ -1,3 +1,5 @@
+// 每个 Task 拥有的静态事件
+// 这些事件一般通过 $commit(eventName,payload) 进行执行
 // ! this 被绑定为 Task 的实例
 export const staticEvent = {
     start(UUID) {

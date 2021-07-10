@@ -1,3 +1,2 @@
-import { Task } from './Task';
-import { TaskGroup } from './TaskGroup';
-export { Task, TaskGroup };
+export { Task } from './Task';
+export { TaskGroup } from './TaskGroup';

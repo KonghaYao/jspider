@@ -24,4 +24,7 @@ export class TaskGroup extends Task {
     $removeLink(task) {
         this._originData.delete(task);
     }
+    get [Symbol.toStringTag]() {
+        return 'TaskGroup';
+    }
 }

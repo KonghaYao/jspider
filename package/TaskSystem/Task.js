@@ -2,21 +2,17 @@ import { EventHub } from '../EventCenter/eventHub';
 import { staticEvent } from './StaticEvent';
 import { Data } from './Data'; // 属性信息归属于 Data
 
+// 这个 Task 是模板类，如果需要进行业务功能的实现，必须先继承它，然后 super 相应的东西
 export class Task extends Data {
     _belongTo = null; // 当有 TaskGroup 时，指向 Group
-    constructor(data, spiderUUID, { formatter } = {}) {
-        super();
+    constructor(data, spiderUUID) {
+        super(data);
 
         this.#EventHub = new EventHub(staticEvent, this);
 
         // UUID 信息
         if (spiderUUID) throw new Error('没有指定的spider UUID');
         this._spiderUUID = spiderUUID;
-
-        // 当输入初始数据需要formatter时
-        data = formatter ? formatter(data) : data;
-        this._originData = data;
-        this._output = data;
     }
 
     // Plugin 的汇报口
@@ -43,5 +39,8 @@ export class Task extends Data {
         // 从上级删除本身记录
         if (this._belongTo instanceof Task) this._belongTo.removeLink(this);
         this._belongTo = null;
+    }
+    get [Symbol.toStringTag]() {
+        return 'Task';
     }
 }
