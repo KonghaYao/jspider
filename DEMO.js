@@ -23,6 +23,7 @@ spider.pipeline(
 // 爬虫启动
 spider.crawl(string);
 spider.crawl([string, string]);
+spider.crawl(string1, string2);
 
 // 模拟中断爬虫
 const paused = new Promise((resolve) => setTimeout(() => spider.stop().then(() => resolve()), 5000));
