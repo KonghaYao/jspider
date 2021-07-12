@@ -1,12 +1,11 @@
 // JSpider 是一个完整的类，支持链式调用
 
-// 定义爬取的数据
-const spider = new JSpider(URLArray, {
-    buffer: 3,
-});
+// 申明一些 JSpider 实例的 config
+const spider = new JSpider({});
 
 // 定义处理数据的方法
 spider.pipeline(
+    Request(function preprocess() {}),
     ExcelHelper((data) => {
         return data.message;
     }),
@@ -14,29 +13,16 @@ spider.pipeline(
         console.log(data);
         return data;
     }),
-    // Download(),
+    // Download()
+    Memory({
+        connect: 'indexedDB', // 选择存储的位置
+        storageName: 'default', // 存储区域的名称
+    }),
 );
 
-// 连接数据持久化装置
-const manager = new Recorder({
-    link: spider,
-    connect: 'indexedDB',
-    // 触发保存的事件
-    saveTrigger: {
-        // Trigger 的名称统一是 Where:EventName
-        'workflow:success'() {},
-        'request:success': {
-            main() {},
-            throttleTime: 100,
-        },
-        'plugin:success'() {},
-    },
-});
-
 // 爬虫启动
-const doing = spider.start();
+spider.crawl(string);
+spider.crawl([string, string]);
 
 // 模拟中断爬虫
-const done = new Promise((resolve) => setTimeout(() => spider.stop().then(() => resolve()), 5000));
-
-//
+const paused = new Promise((resolve) => setTimeout(() => spider.stop().then(() => resolve()), 5000));

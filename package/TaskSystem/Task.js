@@ -1,4 +1,4 @@
-import { EventHub } from '../EventCenter/eventHub';
+import { EventHub } from '../Radio/eventHub';
 import { staticEvent } from './StaticEvent';
 import { Data } from './Data'; // 属性信息归属于 Data
 
@@ -27,12 +27,12 @@ export class Task extends Data {
     $off(...args) {
         return this.#EventHub.off(...args);
     }
-    $isSameTask(Task) {
-        return Task._spiderUUID === this._spiderUUID && Task._uuid === this._uuid;
+    $isSameTask(task) {
+        return task._spiderUUID === this._spiderUUID && task._uuid === this._uuid;
     }
 
     $destroy() {
-        this._dataChunk = [];
+        this._process = [];
         this.$off('*');
         this._output = null;
 

@@ -6,29 +6,39 @@ _这是一个关于 JSpider 的结构设计文件_
 
 **_下面的部分都称为 System，是 JSpider 流程中的一环，但是为了方便开发者使用，这些系统有可能不会被开发者看到，或者是以其他形式被开发者所使用。_**
 
-### 1. Spider
+### 1 Spider
 
-**_Spider_** 是 JSpider 的爬虫流程工具，主要目的是爬取文件，负责如何爬取文件与数据。
-
-职能：
-
-1. **发送 Request ，接收 response**。
-
-2. 对数据进行初步的 **格式转换**。
-
-### 2. Data Pipeline
-
-**_Data Pipeline_** 是 JSpider 中用于处理数据格式的各种数据
+**_Spider_** 是 JSpider 的爬虫流程的外部 API。
 
 职能：
 
-1.  实现各种各样的数据类型转换，如 JSON 转 xlsx Blob
+1. 主要是为用户交互提供方式
 
-2.  删减无用数据项。
+### 2. Task
 
-### 3. Recorder
+**_Task_** 是 JSpider 的 Data flow 中封装的最小单位。也就是对数据封装一层，以便有可以调用的 API。
 
-**_Recorder_** 是 JSpider 用来管理数据的方式，可以认为是 JSpider 和数据库的中间人，所有的数据通过 JSpider 中的 **_Recorder_** 来间接修改数据库中的数据。
+### 3. Pipeline
+
+**_Pipeline_** 是 JSpider 中用于将各种操作合成为一个函数步骤的快捷方式，也是 Data flow 流动的地方。
+
+职能：
+
+1. 实现 Request
+
+2. 实现各种各样的数据类型转换，如 JSON 转 xlsx Blob
+
+3. 删减无用数据项
+
+### 4. Schedule
+
+**_Schedule_** 是用于调控数据的流量的一个 system。
+
+职能：
+
+### 5. Memory
+
+**_Memory_** 是 JSpider 用来管理数据的方式，可以认为是 JSpider 和数据库的中间人，所有的数据通过 JSpider 中的 **_Memory_** 来间接修改数据库中的数据。
 
 职能：
 
@@ -36,7 +46,7 @@ _这是一个关于 JSpider 的结构设计文件_
 
 2. 在需要的时候执行 **下载文件** 的功能。
 
-### 4. Fake Server
+### 5. Fake Server
 
 **_Fake Server_** 是 JSpider 中的 ajax 拦截代理系统。
 
@@ -45,14 +55,6 @@ _这是一个关于 JSpider 的结构设计文件_
 1. 通过制造 **虚假数据** 来迷惑前端的函数执行相应的步骤，
 
 2. 创建一个 **虚拟服务器** 给前端的爬虫学习者提供相应的练习，这样就可以直接在网站上进行爬虫练习而不用后端服务器了。
-
-### 5. Event Center
-
-**_Event Center_** 是管理全局事件的 **system**。 用于同意管辖事件内容，方便进行 **JSpider** 事件的注册与销毁。
-
-### 6. Task
-
-**_Task_** 是 workflow 中封装的最小单位。也就是对数据封装一层，以便有可以调用的 API。
 
 ## Plugin 机制
 
