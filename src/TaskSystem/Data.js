@@ -3,8 +3,8 @@ import { pick, key } from 'lodash-es';
 
 // 装载信息的最小单元
 
-//! 需要进行 backup 的属性都放置在 Super 里面
-//! 不需要的直接在类的内部申明
+// ! 需要进行 backup 的属性都放置在 Super 里面
+// ! 不需要的直接在类的内部申明
 export class Data {
     static backupProperty = []; // 备份数组
     static Super() {

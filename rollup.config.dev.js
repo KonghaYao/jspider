@@ -3,7 +3,7 @@ import commonjs from '@rollup/plugin-commonjs'; // 将非ES6语法的包转为ES
 import json from '@rollup/plugin-json';
 
 export default {
-    input: 'src/JSpider.js', // 打包入口
+    input: 'src/index.js', // 打包入口
     output: [
         {
             // 打包出口

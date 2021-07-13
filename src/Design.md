@@ -8,7 +8,7 @@ _这是一个关于 JSpider 的结构设计文件_
 
 ### 1 Spider
 
-**_Spider_** 是 JSpider 的爬虫流程的外部 API。
+**_Spider_** 是 JSpider 的爬虫流程的外部 API，是 ControlPanel 的 Console 版本。
 
 职能：
 
@@ -30,9 +30,9 @@ _这是一个关于 JSpider 的结构设计文件_
 
 3. 删减无用数据项
 
-### 4. Schedule
+### 4. ControlPanel
 
-**_Schedule_** 是用于调控数据的流量的一个 system。
+**_ControlPanel_** 是用于调控数据的流量的一个总 system。
 
 职能：
 

@@ -14,13 +14,13 @@ export class EventHub {
         } else {
             const handlers = this.all.get(type);
             if (handlers) {
-                return handler ? handlers.splice(handlers.indexOf(handler) >>> 0, 1) : all.set(type, []);
+                return handler ? handlers.splice(handlers.indexOf(handler) >>> 0, 1) : this.all.set(type, []);
             }
             return false;
         }
     }
     emit(type, ...eventParams) {
-        let handlers = this.all.get(type);
+        const handlers = this.all.get(type);
         return handlers
             ? handlers.map((handler) => {
                   return handler.apply(this.bindThis, eventParams);

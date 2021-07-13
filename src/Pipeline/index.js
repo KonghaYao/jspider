@@ -3,7 +3,7 @@ import { createUUID } from '../utils/createUUID';
 import { functionQueue } from '../utils/functionQueue';
 // Pipeline 是组合 Plugin 实例的工具类，用于创建一个可以不断提供 source 进行固定操作的功能对象。
 export class Pipeline {
-    constructor(...Plugins) {
+    constructor(Plugins) {
         this.Plugins = Plugins;
     }
     UUID = null; // 唯一的标识
@@ -26,6 +26,6 @@ export class Pipeline {
 
         this.UUID = createUUID(uuidString);
 
-        return this.#PluginQueue.#QueuePromise;
+        return this.#PluginQueue.QueuePromise;
     }
 }

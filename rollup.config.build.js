@@ -21,7 +21,7 @@ const plugins = [
 ];
 export default [
     {
-        input: 'src/JSpider.js', // 通用版本打包
+        input: 'src/index.js', // 通用版本打包
         plugins: [del({ targets: 'dist/*' }), ...plugins],
         output: [
             {

@@ -1,4 +1,4 @@
-import { EventHub } from '../Radio/eventHub';
+import { EventHub } from '../ControlPanel/EventHub';
 import { staticEvent } from './StaticEvent';
 import { Data } from './Data'; // 属性信息归属于 Data
 
@@ -8,7 +8,7 @@ export class Task extends Data {
     constructor(data, spiderUUID) {
         super(data);
 
-        this.#EventHub = new EventHub(staticEvent, this);
+        this.$EventHub = new EventHub(staticEvent, this);
 
         // UUID 信息
         if (spiderUUID) throw new Error('没有指定的spider UUID');
@@ -17,15 +17,15 @@ export class Task extends Data {
 
     // Plugin 的汇报口
     $commit(type, ...payload) {
-        return this.#EventHub.emit(type, ...payload);
+        return this.$EventHub.emit(type, ...payload);
     }
 
     // 外部系统的监控口
     $on(...args) {
-        return this.#EventHub.on(...args);
+        return this.$EventHub.on(...args);
     }
     $off(...args) {
-        return this.#EventHub.off(...args);
+        return this.$EventHub.off(...args);
     }
     $isSameTask(task) {
         return task._spiderUUID === this._spiderUUID && task._uuid === this._uuid;

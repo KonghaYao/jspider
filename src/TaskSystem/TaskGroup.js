@@ -10,7 +10,7 @@ export class TaskGroup extends Task {
     }
     // Plugin 的汇报口
     $commit(type, ...payload) {
-        const result = this.#EventHub.emit(type, ...payload);
+        const result = this.$EventHub.emit(type, ...payload);
         // 扩散事件
         this._originData.forEach((task) => task.$commit(type, ...payload));
         return result;
