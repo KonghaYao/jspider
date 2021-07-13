@@ -2,7 +2,7 @@
  * @Author: KonghaYao
  * @Date: 2021-06-28 21:06:34
  * @Last Modified by: KonghaYao
- * @Last Modified time: 2021-07-13 15:51:45
+ * @Last Modified time: 2021-07-13 20:05:39
  */
 /*
 关于 PLUGIN 的参数
@@ -23,7 +23,7 @@
 import { EMPTY, from, Observable, of, pipe } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { createUUID } from '../utils/createUUID.js';
-import { PluginError } from './Errors/errors.js.js';
+import { PluginError } from '../Errors/errors.js';
 
 class PLUGIN {
     constructor({
@@ -60,7 +60,7 @@ class PLUGIN {
             switchMap((task) => {
                 if (task.$checkRepeat(this.uuid) || this.forceRetry) {
                     return of(task).pipe(
-                        map((task) => [task.$commit('start', this.uuid), task.originData]),
+                        map((task) => [task.$commit('start', this.uuid), task._originData]),
 
                         switchMap(([data, originData]) => {
                             const result = this.main(data, originData);

@@ -1,6 +1,6 @@
 /* eslint-disable no-invalid-this */
 
-import { Plugin } from '../core/PluginSystem.js';
+import { Plugin } from '../Pipeline/PluginSystem.js';
 import { concurrent } from '../utils/concurrent.js';
 
 // ! 这个 Request 文件是标准的 Plugin 的高级注册示例

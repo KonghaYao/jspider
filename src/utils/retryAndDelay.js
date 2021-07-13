@@ -2,11 +2,11 @@
  * @Author: KonghaYao
  * @Date: 2021-06-28 21:06:13
  * @Last Modified by: KonghaYao
- * @Last Modified time: 2021-06-29 12:20:30
+ * @Last Modified time: 2021-07-13 19:33:35
  */
 import { pipe, timer } from 'rxjs';
 import { delayWhen, scan, retryWhen } from 'rxjs/operators';
-import { RetryError } from '../core/Errors/errors';
+import { RetryError } from '../Errors/errors';
 
 // delay 可以是一个函数用于产生数字
 export const retryAndDelay = (count, delay) =>

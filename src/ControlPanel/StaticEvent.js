@@ -3,7 +3,7 @@ export default {
     stateChange(state) {
         this.state = state;
     },
-    // runPipeline() {},// 这个函数没有必要监听是因为 rxjs 代理了这个事件
+    // runPipeline() {}, // 这个函数没有必要监听是因为 rxjs 代理了这个事件
     // 'Task:success'(task) {},
     // 'Task:error'(error){}
     // 'Task:complete'(){}

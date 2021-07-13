@@ -24,6 +24,8 @@ module.exports = {
         'max-len': ['error', 120],
         'operator-linebreak': ['error', 'before'],
         'quote-props': ['error', 'as-needed'],
+        'operator-linebreak': 0,
+        'no-unused-vars': 1,
         'space-before-function-paren': 0, // 交由 prettier 管理
     },
 };

@@ -2,7 +2,10 @@ export class EventHub {
     all = null;
     constructor(eventMap = {}, bindThis = null) {
         this.bindThis = bindThis || globalThis;
-        this.all = eventMap instanceof Map ? eventMap : new Map(Object.entries(eventMap));
+        this.all =
+            eventMap instanceof Map
+                ? eventMap
+                : new Map(Object.entries(eventMap).map(([key, value]) => [key, [value]]));
     }
     on(type, handler) {
         const handlers = this.all.get(type);
@@ -20,6 +23,7 @@ export class EventHub {
         }
     }
     emit(type, ...eventParams) {
+        console.log(type);
         const handlers = this.all.get(type);
         return handlers
             ? handlers.map((handler) => {

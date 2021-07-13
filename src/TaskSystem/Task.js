@@ -11,13 +11,15 @@ export class Task extends Data {
         this.$EventHub = new EventHub(staticEvent, this);
 
         // UUID 信息
-        if (spiderUUID) throw new Error('没有指定的spider UUID');
+        if (!spiderUUID) throw new Error('没有指定的spider UUID');
         this._spiderUUID = spiderUUID;
     }
 
     // Plugin 的汇报口
     $commit(type, ...payload) {
-        return this.$EventHub.emit(type, ...payload);
+        const [result] = this.$EventHub.emit(type, ...payload);
+
+        return result;
     }
 
     // 外部系统的监控口
@@ -30,7 +32,9 @@ export class Task extends Data {
     $isSameTask(task) {
         return task._spiderUUID === this._spiderUUID && task._uuid === this._uuid;
     }
-
+    $checkRepeat(uuid) {
+        return this._progress.has(uuid);
+    }
     $destroy() {
         this._process = [];
         this.$off('*');

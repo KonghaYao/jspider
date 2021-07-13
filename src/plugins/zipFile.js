@@ -1,12 +1,12 @@
 import { bufferCount, concatMap } from 'rxjs/operators';
 
-import { Plugin } from '../core/PluginSystem.js';
+import { Plugin } from '../Pipeline/PluginSystem.js';
 
 import { init } from './JSzip/JSzip.js';
 import { zipper } from './JSzip/zipper.js';
 
 import { toFile } from './utils/toFile.js';
-import { TaskGroup } from '../core/Task/TaskGroup.js';
+import { TaskGroup } from '../TaskSystem/TaskGroup.js';
 
 export const ZipFile = function (options = {}) {
     if (!options.zipFileName) options.zipFileName = new Date().getTime();

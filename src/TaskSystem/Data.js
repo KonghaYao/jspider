@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { pick, key } from 'lodash-es';
+import { pick, keys } from 'lodash-es';
 
 // 装载信息的最小单元
 
@@ -22,7 +22,7 @@ export class Data {
         };
 
         // 初始化 property 字符串 数组
-        if (Data.backupProperty.length !== 0) Data.backupProperty = key(result);
+        if (Data.backupProperty.length !== 0) Data.backupProperty = keys(result);
         return result;
     }
     constructor(data) {

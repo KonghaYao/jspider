@@ -1,5 +1,5 @@
 import { createExcelFile } from './ExcelHelper/createExcelFile.js';
-import { Plugin } from '../core/PluginSystem.js';
+import { Plugin } from '../Pipeline/PluginSystem.js';
 import { init } from './ExcelHelper/xlsx.js';
 // 未完成 导入 XLSX 的 Promise 到流的转变
 
