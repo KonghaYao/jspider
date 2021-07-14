@@ -1,6 +1,6 @@
 import { of } from 'rxjs';
 import { fromEventPattern } from 'rxjs';
-import { share, switchMap } from 'rxjs/operators';
+import { mergeMap, share, switchMap } from 'rxjs/operators';
 import staticEvent from './StaticEvent';
 import { Task } from '../TaskSystem/Task';
 import { functionQueue } from '../utils/functionQueue';
@@ -18,25 +18,17 @@ export class ControlPanel {
 
     constructor() {
         this.$EventHub = new EventHub(staticEvent, this);
-        this._createLogicLine();
     }
     // 这是一个完整的流控
     _createLogicLine() {
         this.spiderSource$ = fromEventPattern(
             (handle) => this.$EventHub.on('runPipeline', handle),
             (handle) => this.$EventHub.off('runPipeline', handle),
-        ).pipe(
-            // ! 这里采用 switchMap 的方式引用动态的 operator
-
-            switchMap((task) => of(task).pipe(this._pipeline.operator)),
-            share(),
-        );
+        ).pipe(this._pipeline.operator);
         this.spiderSource$.subscribe(
+            // 所有的事件分配到 staticEvent 中去写
             (task) => this.$EventHub.emit('Task:success', task),
-            (error) => {
-                console.log(error);
-                this.$EventHub.emit('Task:error', error);
-            },
+            (error) => this.$EventHub.emit('Task:error', error),
             () => this.$EventHub.emit('Task:complete'),
         );
     }
@@ -47,6 +39,8 @@ export class ControlPanel {
             this._pipeline = value;
             this.#runningQueue.enQueue(async () => {
                 await this._pipeline.preparePipeline();
+                this.spiderSource$?.unsubscribe(); // 先注销流
+                this._createLogicLine(); // 创建新流
                 this.$EventHub.emit('stateChange', 'free');
             });
         } else {

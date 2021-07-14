@@ -24,7 +24,6 @@ export const ZipFile = function (options = {}) {
             return (source) =>
                 source.pipe(
                     bufferCount(chunk),
-
                     concatMap((tasks) => this.TaskStarter(new TaskGroup(tasks), this.uuid)),
                 );
         },

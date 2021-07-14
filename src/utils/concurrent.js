@@ -2,10 +2,10 @@
  * @Author: KonghaYao
  * @Date: 2021-06-28 21:06:08
  * @Last Modified by: KonghaYao
- * @Last Modified time: 2021-06-29 16:19:45
+ * @Last Modified time: 2021-07-14 19:29:59
  */
-import { pipe, of, EMPTY, timer, Observable, from } from 'rxjs';
-import { bufferCount, concatMap, switchMap, catchError, delayWhen } from 'rxjs/operators';
+import { pipe, of, EMPTY, timer, from } from 'rxjs';
+import { bufferCount, concatMap, catchError, delayWhen, switchMap, mergeMap } from 'rxjs/operators';
 import { retryAndDelay } from './retryAndDelay.js';
 
 /**
@@ -15,6 +15,8 @@ import { retryAndDelay } from './retryAndDelay.js';
  * @param {any} options
  * @return {any}
  */
+
+// TODO concurrent 在额没有达到 buffer 数目的时候，会无限延迟
 export function concurrent(
     promiseFunc, // 并发的异步函数用于接收上流来的数据
     {
@@ -28,24 +30,28 @@ export function concurrent(
         },
     } = {},
 ) {
+    // 异步函数的处理工作
     const asyncSingle = (data) =>
         of(data).pipe(
-            switchMap((res) => {
-                // 当 promiseFunc 返回一个 Observable 时可以通过下面的方式进行统一
-                const result = promiseFunc(res);
-                return result instanceof Observable ? from(result) : of(result);
+            mergeMap((res) => {
+                // mergeMap 可以直接将 Observable 或者是 Promise 转化为正常流
+                return promiseFunc(res);
             }),
             retryAndDelay(retry, retryDelay),
             catchError((...args) => {
-                const clear = handleError(...args); // 自定义错误处理
+                // 自定义错误处理
+                const clear = handleError instanceof Function ? handleError(...args) : handleError;
+
                 return clear || EMPTY; // 通过 EMPTY 取消掉这个订阅
             }),
         );
+
+    // 这是 concurrent 的核心逻辑
     return pipe(
         bufferCount(buffer),
         // 无论如何每一组都会被推迟的时间量
         delayWhen((_, index) => timer(index * delay)),
-        switchMap((array) => of(...array)),
+        mergeMap((array) => from(array)),
         concatMap(asyncSingle),
     );
 }

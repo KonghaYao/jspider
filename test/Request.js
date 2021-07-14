@@ -4,6 +4,7 @@ const {
     Request, // 请求库
     Download, // 下载库
     ExcelHelper, // 转换数据为表格数据的插件
+    ZipFile,
 } = JSpider.plugins;
 const { Plugin } = JSpider;
 
@@ -16,12 +17,11 @@ export async function main() {
     // 初始化需要初始化的插件
     const spider = new JSpider();
     spider.pipeline(
+        Request({ delay: 2000, buffer: 2, retry: 3, handleError: null }),
         Plugin((data) => {
             console.log(data);
             return data;
         }),
-        Request(),
-
         ExcelHelper({
             XLSXOptions: {
                 bookType: 'csv', // 可以指定为 csv 或者 xlsx

@@ -2,7 +2,7 @@
  * @Author: KonghaYao
  * @Date: 2021-06-28 21:06:34
  * @Last Modified by: KonghaYao
- * @Last Modified time: 2021-07-13 20:05:39
+ * @Last Modified time: 2021-07-14 15:50:31
  */
 /*
 关于 PLUGIN 的参数
@@ -28,13 +28,13 @@ import { PluginError } from '../Errors/errors.js';
 class PLUGIN {
     constructor({
         forceRetry = true,
+        saveResult = false,
         name = null,
         main,
         init = null,
         error = null,
         complete = null,
         options = {},
-        saveResult = false,
         operator,
     }) {
         const uuid = createUUID(main.toString());
@@ -79,10 +79,10 @@ class PLUGIN {
             }),
             // 捕获到异常
             catchError((...args) => {
-                let afterError;
                 if (this.error instanceof Function) {
-                    afterError = this.error(task, ...args);
+                    const afterError = this.error(task, ...args);
                     if (afterError) throw new PluginError(afterError);
+
                     return EMPTY;
                 }
                 throw new PluginError(args[0]);
