@@ -7,10 +7,11 @@ module.exports = {
     },
     plugins: ['prettier'],
     extends: ['eslint:recommended', 'prettier', 'google'],
-    parser: 'babel-eslint',
+    parser: '@babel/eslint-parser',
     parserOptions: {
         ecmaVersion: 12,
         sourceType: 'module',
+        requireConfigFile: false,
     },
     rules: {
         'prettier/prettier': ['error'],

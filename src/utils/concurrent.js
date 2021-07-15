@@ -2,10 +2,10 @@
  * @Author: KonghaYao
  * @Date: 2021-06-28 21:06:08
  * @Last Modified by: KonghaYao
- * @Last Modified time: 2021-07-14 19:29:59
+ * @Last Modified time: 2021-07-15 10:28:11
  */
 import { pipe, of, EMPTY, timer, from } from 'rxjs';
-import { bufferCount, concatMap, catchError, delayWhen, switchMap, mergeMap } from 'rxjs/operators';
+import { concatMap, catchError, delayWhen, mergeMap, bufferTime } from 'rxjs/operators';
 import { retryAndDelay } from './retryAndDelay.js';
 
 /**
@@ -16,13 +16,12 @@ import { retryAndDelay } from './retryAndDelay.js';
  * @return {any}
  */
 
-// TODO concurrent 在额没有达到 buffer 数目的时候，会无限延迟
 export function concurrent(
     promiseFunc, // 并发的异步函数用于接收上流来的数据
     {
         retry = 3, // 若发生失败时最大重试次数
         buffer = 3, // 每次并发处理的次数
-        delay = 0, // 每个分组之间的间隔
+        delay = 1000, // 每个分组之间的间隔
         retryDelay = 300, // 每次延迟的次数；与 retryAndDelay 相同的一个函数
         handleError = function handleError(err, err$) {
             // 重试错误时的操作
@@ -48,7 +47,9 @@ export function concurrent(
 
     // 这是 concurrent 的核心逻辑
     return pipe(
-        bufferCount(buffer),
+        // ! 这里的 bufferTime 的第二个参数保持 undefined 即可
+        bufferTime(1000, undefined, buffer),
+
         // 无论如何每一组都会被推迟的时间量
         delayWhen((_, index) => timer(index * delay)),
         mergeMap((array) => from(array)),

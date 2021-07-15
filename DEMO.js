@@ -1,23 +1,22 @@
 // JSpider 是一个完整的类，支持链式调用
 
 // 申明一些 JSpider 实例的 config
-const spider = new JSpider({});
-
+const spider = new JSpider();
+JSpider.Memory({
+    connect: 'indexedDB', // 选择存储的位置
+    storageName: 'default', // 存储区域的名称
+});
 // 定义处理数据的方法
 spider.pipeline(
-    Request(function preprocess() {}),
-    ExcelHelper((data) => {
-        return data.message;
+    Request(),
+    ExcelHelper(function preprocess(data) {
+        return data;
     }),
     Plugin((data) => {
         console.log(data);
         return data;
     }),
     // Download()
-    Memory({
-        connect: 'indexedDB', // 选择存储的位置
-        storageName: 'default', // 存储区域的名称
-    }),
 );
 
 // 爬虫启动

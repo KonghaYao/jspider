@@ -18,7 +18,7 @@
         "Lint": "prettier --write src/**/*.{ts,json,md,yml,js} & eslint src",
         "prettier": "prettier --write src/**/*.{ts,json,md,yml,js}",
         "docs": "docsify serve docs",
-        "graph": "madge --image docs/assets/dependencies.svg src/JSpider.js",
+        "graph": "madge --image docs/assets/dependencies.svg src/index.js",
         "release": "standard-version",
         "lint-staged": "lint-staged",
         "commitlint": "commitlint --config commitlint.config.js -e -V",
@@ -50,11 +50,9 @@
         }
     },
     "dependencies": {
-        "babel-eslint": "^10.1.0",
         "chalk": "^4.1.1",
         "consola": "^2.15.3",
         "lodash-es": "^4.17.21",
-        "mitt": "^3.0.0",
         "mockjs": "^1.1.0",
         "rxjs": "6.6.6",
         "uuid": "^8.3.2"

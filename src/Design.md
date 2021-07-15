@@ -20,7 +20,7 @@ _这是一个关于 JSpider 的结构设计文件_
 
 ### 3. Pipeline
 
-**_Pipeline_** 是 JSpider 中用于将各种操作合成为一个函数步骤的快捷方式，也是 Data flow 流动的地方。
+**_Pipeline_** 是 JSpider 中用于将各种操作合成为一个函数步骤的快捷方式，本质为一个 rxjs operator 的生成工厂。
 
 职能：
 
@@ -32,9 +32,7 @@ _这是一个关于 JSpider 的结构设计文件_
 
 ### 4. ControlPanel
 
-**_ControlPanel_** 是用于调控数据的流量的一个总 system。
-
-职能：
+**_ControlPanel_** 是用于调控数据的流量的一个总 system，全局唯一，主要担当中央控制器的作用。
 
 ### 5. Memory
 

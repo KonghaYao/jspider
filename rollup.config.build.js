@@ -49,15 +49,4 @@ export default [
             },
         ],
     },
-    {
-        input: 'src/JSpider.esm.js', // 这是一个可以进行 TreeShake 的版本
-        plugins,
-        output: [
-            {
-                // 打包出口
-                file: './dist/JSpider.js',
-                format: 'es',
-            },
-        ],
-    },
 ];

@@ -1,3 +1,5 @@
+import { fromEventPattern } from 'rxjs';
+
 export class EventHub {
     all = null;
     constructor(eventMap = {}, bindThis = null) {
@@ -30,5 +32,11 @@ export class EventHub {
                   return handler.apply(this.bindThis, eventParams);
               })
             : [];
+    }
+    createSource$(eventName) {
+        return fromEventPattern(
+            (handle) => this.on(eventName, handle),
+            (handle) => this.off(eventName, handle),
+        );
     }
 }

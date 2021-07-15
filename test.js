@@ -18,11 +18,21 @@ const {
     bufferWhen,
     buffer,
     bufferToggle,
+    bufferTime,
+    takeUntil,
 } = require('rxjs/operators');
 const emitter = mitt();
 const lastTime = 0;
-const source$ = fromEventPattern((handle) => emitter.on('start', handle)).pipe(bufferCount(3));
+const stopFlow = fromEventPattern((handle) => emitter.on('stopFlow', handle));
+const source$ = fromEventPattern((handle) => emitter.on('start', handle)).pipe(
+    bufferTime(1000, undefined, 3),
+    takeUntil(stopFlow),
+);
 
 source$.subscribe((i) => console.log(new Date().getTime(), i));
 
 [...Array(10).keys()].forEach((i) => emitter.emit('start', i * 100));
+
+setTimeout(() => {
+    emitter.emit('stopFlow');
+}, 4000);

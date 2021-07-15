@@ -4,7 +4,9 @@ export default {
         this.state = state;
     },
     // runPipeline() {}, // 这个函数没有必要监听是因为 rxjs 代理了这个事件
-    // 'Task:success'(task) {},
-    // 'Task:error'(error){}
-    // 'Task:complete'(){}
+    'Task:success'(task) {},
+    'Task:error'(error) {
+        console.log(error);
+    },
+    'Task:complete'() {},
 };
