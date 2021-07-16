@@ -21,4 +21,11 @@ export const staticEvent = {
         this._status = 'error';
         this._progress.set(UUID, { process: 'error', err });
     },
+    destroy() {
+        this._process = [];
+        this._output = null;
+        this._belongTo = null;
+        this._originData = null;
+        this.$off('*');
+    },
 };

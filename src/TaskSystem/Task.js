@@ -36,13 +36,7 @@ export class Task extends Data {
         return this._progress.has(uuid);
     }
     $destroy() {
-        this._process = [];
-        this.$off('*');
-        this._output = null;
-
-        // 从上级删除本身记录
-        if (this._belongTo instanceof Task) this._belongTo.removeLink(this);
-        this._belongTo = null;
+        this.$commit('destroy'); // 通知外部，该 Task 被销毁
     }
     get [Symbol.toStringTag]() {
         return 'Task';

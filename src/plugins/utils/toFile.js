@@ -4,5 +4,6 @@ export function toFile(data, name) {
         data.name = name;
         return data;
     }
+
     return new File([JSON.stringify(data)], name);
 }

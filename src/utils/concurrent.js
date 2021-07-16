@@ -2,10 +2,10 @@
  * @Author: KonghaYao
  * @Date: 2021-06-28 21:06:08
  * @Last Modified by: KonghaYao
- * @Last Modified time: 2021-07-15 10:28:11
+ * @Last Modified time: 2021-07-16 10:11:11
  */
 import { pipe, of, EMPTY, timer, from } from 'rxjs';
-import { concatMap, catchError, delayWhen, mergeMap, bufferTime } from 'rxjs/operators';
+import { concatMap, catchError, delayWhen, mergeMap, bufferTime, filter } from 'rxjs/operators';
 import { retryAndDelay } from './retryAndDelay.js';
 
 /**
@@ -49,7 +49,7 @@ export function concurrent(
     return pipe(
         // ! 这里的 bufferTime 的第二个参数保持 undefined 即可
         bufferTime(1000, undefined, buffer),
-
+        filter((i) => i.length),
         // 无论如何每一组都会被推迟的时间量
         delayWhen((_, index) => timer(index * delay)),
         mergeMap((array) => from(array)),

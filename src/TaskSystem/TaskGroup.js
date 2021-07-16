@@ -1,24 +1,30 @@
 import { Task } from './Task';
 export class TaskGroup extends Task {
-    constructor(TaskArray) {
+    constructor(TaskArray, _spiderUUID = '00000') {
         const output = new Set(TaskArray);
-        super(output, TaskArray[0]._spiderUUID);
+        super(output, TaskArray?.[0]?._spiderUUID || _spiderUUID);
         this.#linkTask();
     }
     #linkTask() {
-        this._originData.forEach((task) => (task._belongTo = this));
+        this._originData.forEach((task) => {
+            task._belongTo = this;
+            task.$on('destroy', () => this.$removeLink(task));
+        });
     }
     // Plugin 的汇报口
     $commit(type, ...payload) {
-        const result = this.$EventHub.emit(type, ...payload);
+        const result = [];
+        this.$EventHub.emit(type, ...payload);
         // 扩散事件
-        this._originData.forEach((task) => task.$commit(type, ...payload));
+        this._originData.forEach((task) => result.push(task.$commit(type, ...payload)));
         return result;
     }
     // 删除所有的 link
-    $breakLink() {
-        this._originData.clear();
-        this.$destroy();
+    $destroy() {
+        const copy = [...this._originData];
+        // 不进行事件的扩散
+        this.$EventHub.emit('destroy');
+        return copy;
     }
     // 单独删除一个连接
     $removeLink(task) {

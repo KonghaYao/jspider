@@ -18,16 +18,17 @@ export async function main() {
     const spider = new JSpider();
     spider.pipeline(
         Request({ delay: 2000, buffer: 2, retry: 3, handleError: null }),
-        Plugin((data) => {
-            console.log(data);
-            return data;
-        }),
+
         ExcelHelper({
             XLSXOptions: {
                 bookType: 'csv', // 可以指定为 csv 或者 xlsx
             },
         }),
-
+        ZipFile({ chunk: 2 }),
+        Plugin((data) => {
+            console.log(data);
+            return data;
+        }),
         // Download(),
     );
     spider.crawl(urls);
