@@ -1,3 +1,5 @@
+import { TaskGroup } from '../TaskSystem/TaskGroup';
+
 export default {
     // ! 即使这些函数不会被使用，也必须使用注释的方式写下
     stateChange(state) {
@@ -8,5 +10,11 @@ export default {
     'Task:error'(error) {
         console.log(error);
     },
-    'Task:complete'() {},
+    'Task:complete'() {
+        task.$commit('complete');
+        if (task instanceof TaskGroup) {
+            task.$destroy();
+        }
+        console.log('所有情况完成');
+    },
 };

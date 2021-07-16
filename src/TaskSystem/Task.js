@@ -17,9 +17,8 @@ export class Task extends Data {
 
     // Plugin 的汇报口
     $commit(type, ...payload) {
-        const [result] = this.$EventHub.emit(type, ...payload);
-
-        return result;
+        const result = this.$EventHub.emit(type, ...payload);
+        return result[result.length - 1]; // 由于触发的顺序是函数堆栈，所以最后一个才是定义函数
     }
 
     // 外部系统的监控口

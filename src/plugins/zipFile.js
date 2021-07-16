@@ -1,4 +1,4 @@
-import { bufferTime, concatMap, filter, mergeMap, tap } from 'rxjs/operators';
+import { bufferTime, concatMap, filter } from 'rxjs/operators';
 
 import { Plugin } from '../Pipeline/PluginSystem.js';
 
@@ -7,7 +7,6 @@ import { zipper } from './JSzip/zipper.js';
 
 import { toFile } from './utils/toFile.js';
 import { TaskGroup } from '../TaskSystem/TaskGroup.js';
-import { EMPTY } from 'rxjs';
 
 export const ZipFile = function (options = {}) {
     if (!options.zipFileName) options.zipFileName = new Date().getTime();
@@ -24,7 +23,7 @@ export const ZipFile = function (options = {}) {
             const { chunk = 3 } = this.options;
             return (source) =>
                 source.pipe(
-                    bufferTime(1000, undefined, chunk),
+                    bufferTime(5000, undefined, chunk),
                     filter((i) => i.length), // 必须要进行检测是否为空
                     concatMap((tasks) =>
                         this.TaskStarter(
@@ -33,7 +32,6 @@ export const ZipFile = function (options = {}) {
                             this.uuid,
                         ),
                     ),
-                    concatMap((i) => i.$destroy()),
                 );
         },
     });

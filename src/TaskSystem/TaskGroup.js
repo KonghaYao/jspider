@@ -13,10 +13,12 @@ export class TaskGroup extends Task {
     }
     // Plugin 的汇报口
     $commit(type, ...payload) {
-        const result = [];
-        this.$EventHub.emit(type, ...payload);
         // 扩散事件
+        const result = [];
         this._originData.forEach((task) => result.push(task.$commit(type, ...payload)));
+        const selfOutput = this.$EventHub.emit(type, ...payload);
+
+        if (type === 'start' && this._output) return selfOutput[0];
         return result;
     }
     // 删除所有的 link

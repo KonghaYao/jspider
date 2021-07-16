@@ -1,5 +1,5 @@
 import staticEvent from './StaticEvent';
-import { Task } from '../TaskSystem/Task';
+import { TaskManager } from './TaskManager';
 import { functionQueue } from '../utils/functionQueue';
 import { EventHub } from './EventHub';
 import { takeUntil } from 'rxjs/operators';
@@ -13,7 +13,7 @@ export class ControlPanel {
     #runningQueue = new functionQueue(); // 准备阶段的 Queue 队列
     #stopFlow = null;
     _pipeline = null;
-
+    TaskManager = new TaskManager();
     constructor() {
         this.$EventHub = new EventHub(staticEvent, this);
         this.#stopFlow = this.$EventHub.createSource$('stopFlow');
@@ -48,12 +48,12 @@ export class ControlPanel {
         }
     }
 
-    // startInfo -> Task -> Flow
+    // startInfo --TaskManager.createTask--> Task --emit--EventHub--> Flow
     createFlow(infos) {
         this.#runningQueue.enQueue(() => {
             infos.forEach((info) => {
                 if (!this._pipeline) throw new Error('没有创建pipeline');
-                const task = new Task(info, this._pipeline.UUID);
+                const task = this.TaskManager.createTask(info, this._pipeline.UUID);
                 this.$EventHub.emit('runPipeline', task);
             });
         });

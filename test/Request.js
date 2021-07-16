@@ -9,7 +9,7 @@ const {
 const { Plugin } = JSpider;
 
 // 您的爬取路径代码
-const urls = [...Array(5).keys()].map((i, index) => {
+const urls = [...Array(2).keys()].map((i, index) => {
     return { url: '/fake/excel' };
 });
 
@@ -29,6 +29,7 @@ export async function main() {
             console.log(data);
             return data;
         }),
+
         // Download(),
     );
     spider.crawl(urls);

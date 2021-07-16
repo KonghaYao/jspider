@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { pick, keys } from 'lodash-es';
+import { pick } from 'lodash-es';
 
 // 装载信息的最小单元
 
@@ -22,14 +22,13 @@ export class Data {
         };
 
         // 初始化 property 字符串 数组
-        if (Data.backupProperty.length !== 0) Data.backupProperty = keys(result);
+        if (Data.backupProperty.length === 0) Data.backupProperty = Object.keys(result);
         return result;
     }
     constructor(data) {
         Object.assign(this, Data.Super());
         // ! formatter 功能不属于 Task 需要兼容的事情，而是外部需要兼容好数据的格式
         this._originData = data;
-        this._output = data;
     }
 
     // 导入外部信息包
