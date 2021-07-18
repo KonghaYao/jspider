@@ -2,7 +2,7 @@
  * @Author: KonghaYao
  * @Date: 2021-07-13 15:33:08
  * @Last Modified by: KonghaYao
- * @Last Modified time: 2021-07-13 19:45:15
+ * @Last Modified time: 2021-07-18 09:43:40
  */
 // Spider 是 JSpider 的爬虫流程工具，主要目的是爬取文件，负责如何爬取文件与数据。
 import { EventHub } from '../ControlPanel/EventHub.js';
@@ -19,11 +19,12 @@ export class Spider {
     }
     crawl(...args) {
         this.infoList.push(...args.flat());
+        return this;
     }
     pipeline(...plugins) {
         ControlPanel.pipeline = new Pipeline(plugins);
     }
-    play() {
+    start() {
         ControlPanel.createFlow(this.infoList);
     }
     stop() {}

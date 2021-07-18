@@ -4,7 +4,13 @@ import { terser } from 'rollup-plugin-terser';
 import license from 'rollup-plugin-license';
 import del from 'rollup-plugin-delete';
 import json from '@rollup/plugin-json';
+import replace from '@rollup/plugin-replace';
+import CONFIG from './package.json';
 const plugins = [
+    replace({
+        preventAssignment: true,
+        values: { __version__: JSON.stringify(CONFIG.version), __buildDate__: new Date().getTime() },
+    }),
     json(),
     resolve({
         browser: true,

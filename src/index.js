@@ -8,4 +8,6 @@ export default Object.assign(Spider, tools, {
     Plugin,
     Task,
     TaskGroup,
+    version: __version__,
+    buildDate: new Date(__buildDate__),
 });

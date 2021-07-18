@@ -32,6 +32,5 @@ export async function main() {
 
         // Download(),
     );
-    spider.crawl(urls);
-    spider.play();
+    spider.crawl(urls).start();
 }

@@ -18,12 +18,13 @@ specifiers:
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^3.4.0
   lodash-es: ^4.17.21
+  mitt: ^3.0.0
   mockjs: ^1.1.0
   prettier: ^2.3.2
   rollup: ^2.50.5
   rollup-plugin-delete: ^2.0.0
   rollup-plugin-license: ^2.4.0
-  rollup-plugin-livereload: ^2.0.0
+  rollup-plugin-livereload: ^2.0.5
   rollup-plugin-multi-input: ^1.3.1
   rollup-plugin-serve: ^1.1.0
   rollup-plugin-terser: ^7.0.2
@@ -54,6 +55,7 @@ devDependencies:
   eslint-config-google: 0.14.0_eslint@7.30.0
   eslint-config-prettier: 8.3.0_eslint@7.30.0
   eslint-plugin-prettier: 3.4.0_0470f3bcd018a045da11d0bbb868d6c6
+  mitt: 3.0.0
   prettier: 2.3.2
   rollup: 2.52.7
   rollup-plugin-delete: 2.0.0
@@ -3028,7 +3030,7 @@ packages:
       chokidar: 3.5.2
       livereload-js: 3.3.2
       opts: 2.0.2
-      ws: 7.5.1
+      ws: 7.5.3
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -3230,6 +3232,10 @@ packages:
 
   /minimist/1.2.5:
     resolution: {integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==}
+    dev: true
+
+  /mitt/3.0.0:
+    resolution: {integrity: sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==}
     dev: true
 
   /mkdirp/1.0.4:
@@ -4324,8 +4330,8 @@ packages:
     resolution: {integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=}
     dev: true
 
-  /ws/7.5.1:
-    resolution: {integrity: sha512-2c6faOUH/nhoQN6abwMloF7Iyl0ZS2E9HGtsiLrWn0zOOMWlhtDmdf/uihDt6jnuCxgtwGBNy6Onsoy2s2O2Ow==}
+  /ws/7.5.3:
+    resolution: {integrity: sha512-kQ/dHIzuLrS6Je9+uv81ueZomEwH0qVYstcAQ4/Z93K8zeko9gtAbttJWzoC5ukqXY1PpoouV3+VSOqEAFt5wg==}
     engines: {node: '>=8.3.0'}
     peerDependencies:
       bufferutil: ^4.0.1

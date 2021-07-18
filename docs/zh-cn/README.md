@@ -1,12 +1,14 @@
 # JSpider 3 BETA
 
-> JSpider 3 是在 Chrome Devtools 中进行爬虫的爬虫框架, 这个框架包括了完整的爬虫支持。
+> JSpider 3 是在 Chrome Devtools 中进行爬虫的爬虫框架，这个框架包括了完整的爬虫支持。
 
 ## 快速入门
 
 ### 极速爬取
 
-只有简单的几行, 适用于极速操作，这会直接将这些 URL 中的内容下载到本地。
+> 3.2.0 版本后开始使用
+
+只有简单的几行，适用于极速操作，这会直接将这些 URL 中的内容下载到本地。
 
 > 右键 -> 检查，打开浏览器 Devtools，在 Console 中即可使用这些代码哦！
 > **请打开浏览器开发者工具，网页已经载入了 JSpider，并创建了虚拟后台。**
@@ -37,7 +39,8 @@ let urls = [...Array(5).keys()].map((i, index) => {
 });
 
 //! 这些是主要代码
-const spider = new JSpider(
+const spider = new JSpider();
+spider.pipeline(
     Request(),
     // 您可以使用这种方式进行自定义插件代码
     Plugin((data) => {
@@ -51,7 +54,7 @@ const spider = new JSpider(
     }),
     Download(),
 );
-spider.apply(urls);
+spider.crawl(urls).start();
 ```
 
 > [更多自定义代码教程](/zh-cn/quickstart)
@@ -84,40 +87,40 @@ JSpider 未来的目标是兼容 NodeJS 平台和浏览器，让一套代码运�
 
 JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm 和 jsDelivr 网站两个来源载入。排名不分先后，只是记录个人对于这些库的使用体验。
 
-1. Rxjs 十分好用的响应式编程库，以至于 JSpider 的主要构架就是使用它写出来的。
+1. [Rxjs](https://github.com/ReactiveX/rxjs) 十分好用的响应式编程库，以至于 JSpider 的主要构架就是使用它写出来的。
 
-2. Rollup 代码打包库，使用 Rollup 打包的库为我的项目节省了很多时间。
+2. [Rollup](https://github.com/rollup/rollup) 代码打包库，使用 Rollup 打包的库为我的项目节省了很多时间。
 
-3. Mockjs 很有想法的一个前端数据代理库，很可惜的是没有提供 fetch 的代理，所以我自己重做了这个库。
+3. [Mockjs](https://github.com/nuysoft/Mock) 很有想法的一个前端数据代理库，很可惜的是没有提供 fetch 的代理，所以我自己重做了这个库 ——[ Mockjs-esm](https://www.npmjs.com/package/mockjs-esm)。
 
-4. Mockjs-esm 我自己制作的 Mockjs esm 重构版本，并添加了新功能，JSpider 使用的也是这个版本的 Mockjs。
+4. [Mockjs-esm](https://www.npmjs.com/package/mockjs-esm) 我自己制作的 Mockjs esm 重构版本，并添加了新功能，JSpider 使用的也是这个版本的 Mockjs。
 
-5. lodash-es 无敌的工具库，在一些比较常用的底层代码中有使用。
+5. [lodash-es](https://github.com/lodash/lodash) 无敌的工具库，在一些比较常用的底层代码中有使用。
 
-6. xlsx ExcelHelper 的核心插件，用于从对象数据直接构建 Excel 文件的操作，用于科研爬虫需要下载 Excel 可以处理的文件就很方便。
+6. [xlsx](https://www.npmjs.com/package/xlsx) ExcelHelper 的核心插件，用于从对象数据直接构建 Excel 文件的操作，用于科研爬虫需要下载 Excel 可以处理的文件就很方便。
 
-7. jszip 用于制作压缩文件的插件，十分好用。
+7. [jszip](https://www.npmjs.com/package/jszip) 用于制作压缩文件的插件，十分好用。
 
-8. dexie.js JSpider 得以链接 indexedDB 进行储存操作的救星，说实话 indexedDB 的 API 很专业，可以进行很多的操作。
+8. [dexie](https://www.npmjs.com/package/dexie) JSpider 得以链接 indexedDB 进行储存操作的救星，说实话 indexedDB 的 API 很专业，可以进行很多的操作。
 
-9. zangodb.js 这个也是对 indexedDB 的数据操作的一个库，API 简单易用，但是在项目中选择了更为活跃的 dexie.js 进行了 indexedDB 的链接。
+9. [zangodb](https://www.npmjs.com/package/zangodb) 这个也是对 indexedDB 的数据操作的一个库，API 简单易用，但是在项目中选择了更为活跃的 dexie.js 进行了 indexedDB 的链接。
 
-10. uuid 用于创建 UUID 的项目，可以生成唯一的标识，用于 JSpider 的底层逻辑中。
+10. [uuid](https://www.npmjs.com/package/uuid) 用于创建 UUID 的项目，可以生成唯一的标识，用于 JSpider 的底层逻辑中。
 
-11. consola 用于控制台的输出美化，用在 JSpider 的历史记录器中，用于打印信息。
+11. [consola](https://www.npmjs.com/package/consola) 用于控制台的输出美化，用在 JSpider 的历史记录器中，用于打印信息。
 
-12. docsify 基于 Vue 的很好用的前端文档网页生成工具，由于本身的扩展性较好，所以添加了一些功能。
+12. [docsify](https://www.npmjs.com/package/docsify) 基于 Vue 的很好用的前端文档网页生成工具，由于本身的扩展性较好，所以添加了一些功能。
 
-    1. docsify-drawio 在 JSpider 文档里面的那些流程图都是使用 drawio 现场绘制的，也是我的一个开源项目。
-    2. docsify-prettier 也是我的一个开源项目，用于格式化文档中的代码块中的代码格式的插件
-    3. docsify-copy-code 在代码块旁边添加复制代码按钮
-    4. docsify-count 显示文章文字数目的插件
-    5. docsify-pangu 格式化常规网页文本的插件
-    6. docsify-twemoji 用于显示 emoji 的插件。
+    1. [docsify-drawio](https://www.npmjs.com/package/docsify-drawio) 在 JSpider 文档里面的那些流程图都是使用 drawio 现场绘制的，也是我的一个开源项目。
+    2. [docsify-prettier](https://www.npmjs.com/package/docsify-prettier) 也是我的一个开源项目，用于格式化文档中的代码块中的代码格式的插件。
+    3. [docsify-copy-code](https://www.npmjs.com/package/docsify-copy-code) 在代码块旁边添加复制代码按钮。
+    4. [docsify-count](https://www.npmjs.com/package/docsify-count) 显示文章文字数目的插件。
+    5. [docsify-pangu](https://www.npmjs.com/package/docsify-pangu) 格式化常规网页文本的插件。
+    6. [docsify-cc-license](https://www.npmjs.com/package/docsify-cc-license) 用于显示知识共享标识的文件。
 
-13. draw.io 是我用来绘制流程图的一个工具库，很好用，配合 docsify-drawio 可以直接在仓库中引用 drawio 文件，并展示。
+13. [draw.io](https://github.com/jgraph/drawio) 是我用来绘制流程图的一个工具库，很好用，配合 docsify-drawio 可以直接在仓库中引用 drawio 文件，并展示。
 
-14.
+14. [mitt](https://github.com/developit/mitt) EventHub 的思想借鉴了 mitt 的设计，JSpider 做出了相应的改动。
 
 **感谢上面的项目为 JSpider 的丰富功能提供了众多的帮助！**
 
