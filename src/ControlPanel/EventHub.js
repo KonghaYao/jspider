@@ -1,10 +1,18 @@
 import { fromEventPattern } from 'rxjs';
-
+import { memoize } from 'lodash-es';
 export class EventHub {
     all = new Map();
     constructor(eventMap = {}, bindThis = null) {
         this.bindThis = bindThis || globalThis;
         this.on(eventMap);
+
+        // 创建一个 rxjs 流源头
+        this.createSource$ = memoize((eventName) => {
+            return fromEventPattern(
+                (handle) => this.on(eventName, handle),
+                (handle) => this.off(eventName, handle),
+            );
+        });
     }
     #on(type, handler) {
         const handlers = this.all.get(type);
@@ -46,11 +54,9 @@ export class EventHub {
               })
             : [];
     }
-    // 创建一个 rxjs 流源头
-    createSource$(eventName) {
-        return fromEventPattern(
-            (handle) => this.on(eventName, handle),
-            (handle) => this.off(eventName, handle),
-        );
-    }
+
+    operators = {
+        // TODO EventHub 中对于 rxjs 流的支持
+        EmitWhen(config) {},
+    };
 }

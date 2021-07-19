@@ -10,5 +10,6 @@ export class functionQueue {
         this.QueuePromise = args.reduce((promise, current) => {
             return promise.then(current);
         }, this.QueuePromise);
+        return this;
     }
 }

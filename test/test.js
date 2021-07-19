@@ -1,4 +1,5 @@
 const mitt = require('mitt');
+const { iif } = require('rxjs');
 const { EMPTY } = require('rxjs');
 const { of, from, pipe, fromEventPattern, timer, interval } = require('rxjs');
 const {
@@ -20,19 +21,33 @@ const {
     bufferToggle,
     bufferTime,
     takeUntil,
+    switchMapTo,
+    exhaustMap,
 } = require('rxjs/operators');
 const emitter = mitt();
-const lastTime = 0;
-const stopFlow = fromEventPattern((handle) => emitter.on('stopFlow', handle));
-const source$ = fromEventPattern((handle) => emitter.on('start', handle)).pipe(
-    bufferTime(1000, undefined, 3),
-    takeUntil(stopFlow),
+const pause$ = fromEventPattern((handle) => emitter.on('pause', handle));
+const pauseWhile = (pauseFunc) => {
+    const cache = [];
+    return (source) =>
+        source.pipe(
+            switchMap((value) => {
+                if (pauseFunc(value)) {
+                    cache.push(value);
+                    console.log('save ', value);
+                    return EMPTY;
+                } else {
+                    return from([...cache, value]).pipe(tap(() => (cache.length = 0)));
+                }
+            }),
+        );
+};
+
+const source$ = interval(300).pipe(
+    pauseWhile((val) => {
+        return val % 5;
+    }),
+    take(14),
 );
-
-source$.subscribe((i) => console.log(new Date().getTime(), i));
-
-[...Array(10).keys()].forEach((i) => emitter.emit('start', i * 100));
-
-setTimeout(() => {
-    emitter.emit('stopFlow');
-}, 4000);
+const startTime = new Date().getTime();
+const compare = () => Math.ceil((new Date().getTime() - startTime) / 100);
+source$.subscribe((val) => console.log(compare(), val));
