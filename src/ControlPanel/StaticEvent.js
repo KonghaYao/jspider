@@ -6,21 +6,22 @@ export default {
         this.state = state;
     },
     'Flow:stop'() {
-        this.#stop = true;
+        this._stop = true;
     },
     'Flow:start'() {
-        this.#stop = false;
+        this._stop = false;
     },
-    // runPipeline() {}, // 这个函数没有必要监听是因为 rxjs 代理了这个事件
-    'Task:success'(task) {},
-    'Task:error'(error) {
-        console.log(error);
-    },
-    'Task:complete'() {
+
+    // 'Flow:input'() {}
+    // 'Spider:clearFlow'(){}
+    'Task:success'(task) {
         task.$commit('complete');
         if (task instanceof TaskGroup) {
             task.$destroy();
         }
-        console.log('所有情况完成');
     },
+    'Task:error'(error) {
+        console.log(error);
+    },
+    'Task:complete'() {},
 };

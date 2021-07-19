@@ -9,7 +9,7 @@ const {
 const { Plugin } = JSpider;
 
 // 您的爬取路径代码
-const urls = [...Array(2).keys()].map((i, index) => {
+const urls = [...Array(5).keys()].map((i, index) => {
     return { url: '/fake/excel' };
 });
 
@@ -19,12 +19,12 @@ export async function main() {
     spider.pipeline(
         Request({ delay: 2000, buffer: 2, retry: 3, handleError: null }),
 
-        ExcelHelper({
-            XLSXOptions: {
-                bookType: 'csv', // 可以指定为 csv 或者 xlsx
-            },
-        }),
-        ZipFile({ chunk: 2 }),
+        // ExcelHelper({
+        //     XLSXOptions: {
+        //         bookType: 'csv', // 可以指定为 csv 或者 xlsx
+        //     },
+        // }),
+        // ZipFile({ chunk: 2 }),
         Plugin((data) => {
             console.log(data);
             return data;
@@ -32,5 +32,6 @@ export async function main() {
 
         // Download(),
     );
-    spider.crawl(urls).start();
+    spider.crawl(urls);
+    window.spider = spider;
 }

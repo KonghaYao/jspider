@@ -1,35 +1,6 @@
-const mitt = require('mitt');
-const { EMPTY, iif, of, from, pipe, fromEventPattern, timer, interval, Observable } = require('rxjs');
-const { Subscription } = require('rxjs');
+import { noop, Observable } from 'rxjs';
 
-const { noop } = require('rxjs');
-const {
-    map,
-    switchMap,
-    mergeAll,
-    take,
-    shareReplay,
-    share,
-    delay,
-    delayWhen,
-    bufferCount,
-    tap,
-    concatAll,
-    concatMap,
-    mergeMap,
-    bufferWhen,
-    buffer,
-    bufferToggle,
-    bufferTime,
-    takeUntil,
-    switchMapTo,
-    exhaustMap,
-    concat,
-} = require('rxjs/operators');
-const emitter = mitt();
-const pause$ = fromEventPattern((handle) => emitter.on('pause', handle));
-
-function pauseToggle(openings, closings) {
+export function pauseToggle(openings, closings) {
     return (observable) =>
         new Observable((subscriber) => {
             const buffers = new Set();
@@ -44,8 +15,8 @@ function pauseToggle(openings, closings) {
                     subscriber.complete();
                 },
             );
-
             const openingSubscription = openings.subscribe(() => {
+                // 输出所有的 buffer
                 const emitBuffer = () => {
                     buffers.forEach((item) => subscriber.next(item));
                     buffers.clear();
@@ -62,8 +33,3 @@ function pauseToggle(openings, closings) {
             };
         });
 }
-const source$ = interval(100).pipe(take(14), pauseToggle(interval(500), interval(200)));
-
-const startTime = new Date().getTime();
-const compare = () => Math.ceil((new Date().getTime() - startTime) / 100);
-source$.subscribe((val) => console.log(compare(), val));

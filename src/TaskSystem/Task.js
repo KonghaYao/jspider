@@ -1,4 +1,4 @@
-import { EventHub } from '../ControlPanel/EventHub';
+import { EventHub } from '../utils/EventHub';
 import { staticEvent } from './StaticEvent';
 import { Data } from './Data'; // 属性信息归属于 Data
 

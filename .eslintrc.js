@@ -13,6 +13,10 @@ module.exports = {
         sourceType: 'module',
         requireConfigFile: false,
     },
+    globals: {
+        __version__: true,
+        __buildDate__: true,
+    },
     rules: {
         'prettier/prettier': ['error'],
         'no-console': 0,

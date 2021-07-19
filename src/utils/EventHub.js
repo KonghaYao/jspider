@@ -1,5 +1,6 @@
 import { fromEventPattern } from 'rxjs';
 import { memoize } from 'lodash-es';
+
 export class EventHub {
     all = new Map();
     constructor(eventMap = {}, bindThis = null) {
@@ -47,6 +48,7 @@ export class EventHub {
         }
     }
     emit(type, ...eventParams) {
+        console.log(type);
         const handlers = this.all.get(type);
         return handlers
             ? handlers.map((handler) => {
