@@ -1,5 +1,14 @@
 import { noop, Observable } from 'rxjs';
 
+/**
+ * pauseToggle
+ * @date 2021-07-20
+ * @author KonghaYao
+ * @description 用于暂停的 operator, 改编自 bufferToggle 但也不同
+ * @param {Observable} openings 发出时触发主流缓存
+ * @param {Observable} closings 发出时放出缓存到主流
+ * @return {function}
+ */
 export function pauseToggle(openings, closings) {
     return (observable) =>
         new Observable((subscriber) => {

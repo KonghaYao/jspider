@@ -106,4 +106,6 @@ JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm �
 
 ## License
 
-Copyright © KonghaYao MIT licensed
+自 3.2 版本之后的版本都设置为 Apache-2.0, 3.2 之前版本均为 MIT License
+
+Copyright © KonghaYao Apache-2.0 licensed

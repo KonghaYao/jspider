@@ -3,10 +3,10 @@
     "version": "3.1.8",
     "main": "dist/JSpider.esm.min.js",
     "unpkg": "dist/JSpider.esm.min.js",
-    "author": "KonghaYao <20192831006@m.scnu.edu.cn>",
+    "author": "KonghaYao <dongzhongzhidong@qq.com>",
     "description": "JSpider 3 is a Chrome DevTools crawler framework that includes full crawler support.\nJSpider 3 是在 Chrome Devtools 中进行爬虫的爬虫框架, 这个框架包括了完整的爬虫支持。",
     "homepage": "http://dongzhongzhidong.gitee.io/jspider/",
-    "license": "MIT",
+    "license": "Apache-2.0",
     "repository": {
         "type": "git",
         "url": "https://gitee.com/dongzhongzhidong/jspider.git"

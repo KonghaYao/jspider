@@ -1,20 +1,6 @@
-/*
- * @Author: KonghaYao
- * @Date: 2021-06-28 21:06:08
- * @Last Modified by: KonghaYao
- * @Last Modified time: 2021-07-16 10:11:11
- */
 import { pipe, of, EMPTY, timer, from } from 'rxjs';
 import { concatMap, catchError, delayWhen, mergeMap, bufferTime, filter } from 'rxjs/operators';
 import { retryAndDelay } from './retryAndDelay.js';
-
-/**
- * 并发控制操作符
- * @date 2021-06-28
- * @param {any} promiseFunc
- * @param {any} options
- * @return {any}
- */
 
 export function concurrent(
     promiseFunc, // 并发的异步函数用于接收上流来的数据
