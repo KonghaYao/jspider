@@ -5,8 +5,8 @@
  */
 /* eslint-disable no-invalid-this */
 
-import { Plugin } from '../Pipeline/PluginSystem.js';
-import { concurrent } from '../utils/concurrent.js';
+import { Plugin } from '../src/Pipeline/PluginSystem.js';
+import { concurrent } from '../src/utils/concurrent.js';
 
 // ! 这个 Request 文件是标准的 Plugin 的高级注册示例
 

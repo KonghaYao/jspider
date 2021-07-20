@@ -18,12 +18,11 @@
 
 -   重构所有的核心代码
 
-    -   [ ] Control Panel 暂停功能
+    -   [x] Control Panel 暂停功能
 
     -   [ ] Control Panel 重试功能（非流内自动重试）
 
 -   重构 plugins
     -   [ ] plugins 分包导入
-    -   [ ] Request 多平台
 
 > 因为是 3.2 版本才更新这个文件，所以以前的版本都丢失了。

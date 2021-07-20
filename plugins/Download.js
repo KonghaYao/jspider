@@ -5,7 +5,7 @@
  */
 import { toFile } from './utils/toFile.js';
 
-import { Plugin } from '../Pipeline/PluginSystem.js';
+import { Plugin } from '../src/Pipeline/PluginSystem.js';
 // 在 浏览器中下载是不能够同时进行的，也就是说，如果前面的没有下载完，后面的又提交
 // 会导致后面的全部失效，所以设置 Promise 下载队列
 const DownloadQueue = {

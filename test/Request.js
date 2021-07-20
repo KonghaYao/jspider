@@ -33,5 +33,5 @@ export async function main() {
         // Download(),
     );
     spider.crawl(urls);
-    window.spider = spider;
+    spider.start();
 }

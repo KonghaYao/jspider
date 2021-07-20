@@ -1,32 +1,22 @@
-# JSpider 3 BETA
+# JSpider 3.2 BETA
 
-[![](https://data.jsdelivr.com/v1/package/npm/js-spider/badge)](https://www.jsdelivr.com/package/npm/js-spider) ![npm](https://img.shields.io/npm/v/js-spider?style=flat-square) ![NPM](https://img.shields.io/npm/l/js-spider?style=flat-square) ![GitHub top language](https://img.shields.io/github/languages/top/konghayao/jspider) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/konghayao/jspider) ![Website](https://img.shields.io/website?style=flat-square&up_color=green&up_message=online&url=http%3A%2F%2Fdongzhongzhidong.gitee.io%2Fjspider%2F) [![](https://gitee.com/dongzhongzhidong/jspider/badge/star.svg?theme=white)](https://gitee.com/dongzhongzhidong/jspider/)
+[![](https://data.jsdelivr.com/v1/package/npm/js-spider/badge)](https://www.jsdelivr.com/package/npm/js-spider) ![npm](https://img.shields.io/npm/v/js-spider?style=flat-square) ![NPM](https://img.shields.io/npm/l/js-spider?style=flat-square) ![GitHub top language](https://img.shields.io/github/languages/top/konghayao/jspider) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/konghayao/jspider) [![](https://gitee.com/dongzhongzhidong/jspider/badge/star.svg?theme=white)](https://gitee.com/dongzhongzhidong/jspider/)
 
 > JSpider 3 是在 Chrome Devtools 中进行爬虫的爬虫框架，这个框架包括了完整的爬虫支持。如果您具有前端基础，那么可以在三分钟内入门哦！
+
+> JSpider 3 is a Chrome DevTools crawler framework that includes full crawler support. If you have a front-end foundation, you can get up and running in three minutes!
+
+-   **高效率工具：JSpider 自带并发控制，提供多种方便的数据处理插件。**
+-   **爬虫高度复用：JSpider 的代码可以重复使用，随时添加新任务。**
 
 [官方教程链接](http://dongzhongzhidong.gitee.io/jspider/)
 
 ## 快速入门
 
-### 极速爬取
-
-只有简单的几行，适用于极速操作，这会直接将这些 URL 中的内容下载到本地。
-
-> 右键 -> 检查，打开浏览器 Devtools，在 Console 中即可使用这些代码哦！
+### 自定义爬取
 
 ```js
-import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then({JSpider}=>{
-    window.JSpider = JSpider;
-});// 从 jsDelivr 导入代码
-// 放入您的 URL
-JSpider.simpleCrawl(["fake/excel","fake/excel"]);
-// 等待文件下载完成！
-```
-
-### 更加高级的自定义爬取
-
-```js
-import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then({JSpider}=>{
+await import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then({JSpider}=>{
     window.JSpider = JSpider;
 });
 
@@ -36,7 +26,7 @@ const {
     Download, // 下载库
 } = JSpider.plugins;
 
-let urls = ['']// 您的爬取路径数组
+let urls = ['https://.....']// 您的爬取路径数组
 
 const spider = new JSpider(
     Request(),
