@@ -14,10 +14,9 @@
     "scripts": {
         "dev": "rollup  --config rollup.config.dev.js -w",
         "build": "rollup --config rollup.config.build.js",
-        "lint": "eslint src",
-        "Lint": "prettier --write src/**/*.{ts,json,md,yml,js} & eslint src",
-        "prettier": "prettier --write src/**/*.{ts,json,md,yml,js}",
-        "docs": "docsify serve docs",
+        "lint": "eslint src plugins",
+        "Lint": "prettier --write src/**/*.{ts,json,md,yml,js} plugins/**/*.{ts,json,md,yml,js} && eslint src plugins",
+        "prettier": "prettier --write src/**/*.{ts,json,md,yml,js} plugins/**/*.{ts,json,md,yml,js}",
         "graph": "madge --image docs/assets/dependencies.svg src/index.js",
         "release": "standard-version",
         "lint-staged": "lint-staged",

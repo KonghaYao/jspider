@@ -74,7 +74,7 @@ export class ControlPanel {
     startFlow() {
         this.$EventHub.emit('Flow:start');
     }
-    // TODO 测试暂停功能
+
     stopFlow() {
         this.$EventHub.emit('Flow:stop');
     }

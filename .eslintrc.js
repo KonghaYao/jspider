@@ -32,5 +32,6 @@ module.exports = {
         'operator-linebreak': 0,
         'no-unused-vars': 1,
         'space-before-function-paren': 0, // 交由 prettier 管理
+        'valid-jsdoc': 0,
     },
 };
