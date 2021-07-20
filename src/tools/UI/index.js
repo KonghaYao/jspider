@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Copyright 2021 KonghaYao 江夏尧 <dongzhongzhidong@qq.com>
+ * SPDX-License-Identifier: Apache-2.0
+ */
 import { v4 as uuid } from 'uuid';
 
 // 这个是用于组织爬虫 UI 界面的一个部分

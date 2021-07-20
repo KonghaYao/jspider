@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Copyright 2021 KonghaYao 江夏尧 <dongzhongzhidong@qq.com>
+ * SPDX-License-Identifier: Apache-2.0
+ */
 // 使用下面的 名称可以直接导入相应的包
 // 同时，如果需要导入其他数据的时候也可以使用
 import { loaderFunction } from './loaderFunction.js';

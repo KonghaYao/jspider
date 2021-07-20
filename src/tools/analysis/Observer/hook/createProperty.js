@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Copyright 2021 KonghaYao 江夏尧 <dongzhongzhidong@qq.com>
+ * SPDX-License-Identifier: Apache-2.0
+ */
 /* eslint-disable no-invalid-this */
 
 // 私有属性的调用值

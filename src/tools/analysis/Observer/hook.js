@@ -1,4 +1,9 @@
 /**
+ * @license
+ * Copyright 2021 KonghaYao 江夏尧 <dongzhongzhidong@qq.com>
+ * SPDX-License-Identifier: Apache-2.0
+ */
+/**
  * hook 主函数
  * @description 通过 hook 函数 监控一个函数的触发
  * @date 2020-09-17

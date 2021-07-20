@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Copyright 2021 KonghaYao 江夏尧 <dongzhongzhidong@qq.com>
+ * SPDX-License-Identifier: Apache-2.0
+ */
 export default {
     zangodb: 'https://cdn.jsdelivr.net/gh/erikolson186/zangodb/dist/zangodb.min.js',
     dexie: 'https://cdn.jsdelivr.net/npm/dexie@3.0.3/dist/dexie.min.js',

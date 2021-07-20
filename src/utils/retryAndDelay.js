@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Copyright 2021 KonghaYao 江夏尧 <dongzhongzhidong@qq.com>
+ * SPDX-License-Identifier: Apache-2.0
+ */
 import { pipe, timer } from 'rxjs';
 import { delayWhen, scan, retryWhen } from 'rxjs/operators';
 import { RetryError } from '../Errors/errors';
