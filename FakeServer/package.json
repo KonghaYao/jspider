@@ -1,0 +1,15 @@
+{
+    "name": "@konghayao/fake-server",
+    "version": "0.0.1",
+    "description": "",
+    "main": "parseURL.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "path-to-regexp": "^6.2.0"
+    }
+}
