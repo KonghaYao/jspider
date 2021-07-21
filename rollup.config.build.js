@@ -6,6 +6,7 @@ import del from 'rollup-plugin-delete';
 import json from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
 import CONFIG from './package.json';
+import alias from '@rollup/plugin-alias';
 const plugins = [
     replace({
         preventAssignment: true,

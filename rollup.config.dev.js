@@ -5,7 +5,7 @@ import replace from '@rollup/plugin-replace';
 import CONFIG from './package.json';
 import livereload from 'rollup-plugin-livereload';
 import serve from 'rollup-plugin-serve';
-
+import alias from '@rollup/plugin-alias';
 export default {
     input: 'src/index.js', // 打包入口
     output: [
@@ -22,6 +22,14 @@ export default {
         },
     ],
     plugins: [
+        alias({
+            entries: {
+                '@tools': './tools',
+                '@src': './src',
+                '@plugins': './plugins',
+                '@FakeServer':'./FakeServer'
+            },
+        }),
         replace({
             preventAssignment: true,
             values: { __version__: JSON.stringify(CONFIG.version), __buildDate__: new Date().getTime() },

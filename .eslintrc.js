@@ -26,7 +26,7 @@ module.exports = {
         'new-cap': 0, // 函数首字母不能大写
         indent: 0, // prettier 已经处理好了
         'object-curly-spacing': 0, // prettier 自动格式化这个部分
-        'max-len': ['error', 120],
+        'max-len': 0,
         'operator-linebreak': ['error', 'before'],
         'quote-props': ['error', 'as-needed'],
         'operator-linebreak': 0,

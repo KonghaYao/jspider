@@ -16,7 +16,7 @@ import { jsdelivr } from './jsDelivr.js';
  * @param {String|Object} Module :{}
  * @returns {Promise}
  */
-import { type } from '../../utils/type.js';
+import { type } from '@src/utils/type.js';
 
 const URLTest = /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/;
 
