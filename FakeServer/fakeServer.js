@@ -1,64 +1,12 @@
 import { pathToRegexp } from 'path-to-regexp/dist.es2015';
-import { parseURL } from './parseURL.js';
-
+import { Request, Response } from './src/Server.js';
+import { Route, RouteMap } from './src/Route.js';
 function createRegexp(path, config = {}) {
     return pathToRegexp(path, [], config);
 }
-class Request {
-    constructor(path, options) {
-        Object.assign(this, parseURL(path), {
-            headers: options.headers,
-        });
-    }
-}
-class Response {
-    constructor(path, options = {}) {}
-    send() {}
-    setHeaders() {}
-}
 
-// 每一个 Route 只有一个 main 函数进行数据的返回
-class Route {
-    constructor({ matcher, name, path, callback, redirect = '' }) {
-        Object.assign(this, {
-            matcher,
-            name,
-            path,
-            callback,
-            redirect,
-        });
-    }
-    async request(req, res) {
-        const response = await this.callback(req, res);
-        if (response instanceof Response) return response;
-        return res;
-    }
-}
-
-class RouteMap extends Map {
-    constructor(...args) {
-        super(...args);
-    }
-    #RouteMatchers = [];
-    addRoute(Route) {
-        this.#RouteMatchers.push(Route.matcher);
-        return this.set(Route.matcher, Route);
-    }
-    matchRoute(path) {
-        let target;
-        this.#RouteMatchers.some((reg) => {
-            let result = path.match(reg);
-            if (result) {
-                target = this.#RouteMap.get(reg);
-                return true;
-            }
-            return false;
-        });
-        return target;
-    }
-}
 export class FakeServer {
-    constructor(Routers) {
+    constructor(Routers, {} = {}) {
         this.#initRouteMap(Routers);
     }
     #RouteMap = new RouteMap();

@@ -8,6 +8,7 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
+
     "vetur.validation.template": false,
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",

@@ -3,7 +3,7 @@ import commonjs from '@rollup/plugin-commonjs'; // 将非ES6语法的包转为ES
 import livereload from 'rollup-plugin-livereload';
 import serve from 'rollup-plugin-serve';
 export default {
-    input: './router.js', // 打包入口
+    input: './fakeServer.js', // 打包入口
     output: [
         {
             // 打包出口

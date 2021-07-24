@@ -1,12 +1,18 @@
 lockfileVersion: 5.3
 
 specifiers:
+  lodash-es: ^4.17.21
   path-to-regexp: ^6.2.0
 
 dependencies:
+  lodash-es: 4.17.21
   path-to-regexp: 6.2.0
 
 packages:
+
+  /lodash-es/4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
 
   /path-to-regexp/6.2.0:
     resolution: {integrity: sha512-f66KywYG6+43afgE/8j/GoiNyygk/bnoCbps++3ErRKsIYkGGupyv07R2Ok5m9i67Iqc+T2g1eAUGUPzWhYTyg==}
