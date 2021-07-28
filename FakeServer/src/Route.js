@@ -11,8 +11,8 @@ export class Route {
     }
     async request(req, res) {
         const response = await this.callback(req, res);
-        if (response instanceof Response) return response;
-        return res;
+        if (response instanceof Response && response.data) return response;
+        return null;
     }
 }
 
@@ -30,11 +30,13 @@ export class RouteMap extends Map {
         this.#RouteMatchers.some((reg) => {
             let result = path.match(reg);
             if (result) {
-                target = this.#RouteMap.get(reg);
+                target = this.get(reg);
+
                 return true;
             }
             return false;
         });
+        if (target?.redirect) return this.matchRoute(target.redirect);
         return target;
     }
 }

@@ -6,18 +6,22 @@
 export function defineGetAndSet(XHR) {
     // 将这些 键值对 映射到 $data 属性对象的对应值上去
     const array = ['readyState', 'status', 'response', 'responseText', 'statusText'];
-    Object.defineProperties(
-        XHR,
-        array.reduce((col, cur) => {
-            col[cur] = {
-                get() {
-                    return this.$data[cur];
-                },
-                set(state) {
-                    this.$data[cur] = state;
-                },
-            };
-            return col;
-        }, {}),
-    );
+    const auto = array.reduce((col, cur) => {
+        col[cur] = {
+            get() {
+                return this.$data[cur];
+            },
+            set(state) {
+                this.$data[cur] = state;
+            },
+        };
+        return col;
+    }, {});
+    Object.defineProperties(XHR, Object.assign(auto));
+    XHR.getResponseHeader = function (name) {
+        return this._responseHeaders[name];
+    };
+    XHR.getAllResponseHeaders = function () {
+        return this._responseHeaders;
+    };
 }

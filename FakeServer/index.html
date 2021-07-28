@@ -12,16 +12,19 @@
 
 </body>
 <script type='module'>
-    import { FakeServer } from './fakeServer.js'
-    const router = new Router([
-        {
-            path: '/src/:name',
-            name: 'SourceServer',
-            callback(req, res) {
-                console.log(req, res)
-            },
-        }])
-    router.getServerResult('/src/fejife')
+    import { FakeServer, mockFetch, mockXHR } from './dist/index.js'
+    const router = new FakeServer({
+        Routers: [
+            {
+                path: '/src/:name',
+                name: 'SourceServer',
+                callback(req, res) {
+                    console.log(req, res)
+                    return { body, headers }
+                },
+            }],
+        plugins: [mockFetch, mockXHR]
+    })
 </script>
 
 </html>
