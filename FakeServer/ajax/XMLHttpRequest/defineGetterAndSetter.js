@@ -22,6 +22,8 @@ export function defineGetAndSet(XHR) {
         return this._responseHeaders[name];
     };
     XHR.getAllResponseHeaders = function () {
-        return this._responseHeaders;
+        return Object.entries(this._responseHeaders)
+            .map(([key, value]) => `${key}: ${value}`)
+            .join('\n');
     };
 }

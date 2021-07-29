@@ -25,18 +25,23 @@ export class RouteMap extends Map {
         this.#RouteMatchers.push(Route.matcher);
         return this.set(Route.matcher, Route);
     }
-    matchRoute(path) {
-        let target;
-        this.#RouteMatchers.some((reg) => {
-            const result = path.match(reg);
+    matchRoute(req) {
+        const path = req.path;
+        let target = null;
+        this.#RouteMatchers.some((matcher) => {
+            const result = matcher(path);
             if (result) {
-                target = this.get(reg);
-
+                target = this.get(matcher);
+                // 传入解析后的 path
+                req.pathParsed = result;
                 return true;
             }
             return false;
         });
-        if (target?.redirect) return this.matchRoute(target.redirect);
+        if (target?.redirect) {
+            req.path = target.redirect;
+            return this.matchRoute(req);
+        }
         return target;
     }
 }

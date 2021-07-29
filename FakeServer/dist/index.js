@@ -1,11 +1,5 @@
-(function (l, r) {
-    if (!l || l.getElementById('livereloadscript')) return;
-    r = l.createElement('script');
-    r.async = 1;
-    r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1';
-    r.id = 'livereloadscript';
-    l.getElementsByTagName('head')[0].appendChild(r);
-})(self.document);
+
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 /**
  * Tokenize input string.
  */
@@ -14,188 +8,229 @@ function lexer(str) {
     var i = 0;
     while (i < str.length) {
         var char = str[i];
-        if (char === '*' || char === '+' || char === '?') {
-            tokens.push({ type: 'MODIFIER', index: i, value: str[i++] });
+        if (char === "*" || char === "+" || char === "?") {
+            tokens.push({ type: "MODIFIER", index: i, value: str[i++] });
             continue;
         }
-        if (char === '\\') {
-            tokens.push({ type: 'ESCAPED_CHAR', index: i++, value: str[i++] });
+        if (char === "\\") {
+            tokens.push({ type: "ESCAPED_CHAR", index: i++, value: str[i++] });
             continue;
         }
-        if (char === '{') {
-            tokens.push({ type: 'OPEN', index: i, value: str[i++] });
+        if (char === "{") {
+            tokens.push({ type: "OPEN", index: i, value: str[i++] });
             continue;
         }
-        if (char === '}') {
-            tokens.push({ type: 'CLOSE', index: i, value: str[i++] });
+        if (char === "}") {
+            tokens.push({ type: "CLOSE", index: i, value: str[i++] });
             continue;
         }
-        if (char === ':') {
-            var name = '';
+        if (char === ":") {
+            var name = "";
             var j = i + 1;
             while (j < str.length) {
                 var code = str.charCodeAt(j);
                 if (
-                    // `0-9`
-                    (code >= 48 && code <= 57) ||
+                // `0-9`
+                (code >= 48 && code <= 57) ||
                     // `A-Z`
                     (code >= 65 && code <= 90) ||
                     // `a-z`
                     (code >= 97 && code <= 122) ||
                     // `_`
-                    code === 95
-                ) {
+                    code === 95) {
                     name += str[j++];
                     continue;
                 }
                 break;
             }
-            if (!name) throw new TypeError('Missing parameter name at ' + i);
-            tokens.push({ type: 'NAME', index: i, value: name });
+            if (!name)
+                throw new TypeError("Missing parameter name at " + i);
+            tokens.push({ type: "NAME", index: i, value: name });
             i = j;
             continue;
         }
-        if (char === '(') {
+        if (char === "(") {
             var count = 1;
-            var pattern = '';
+            var pattern = "";
             var j = i + 1;
-            if (str[j] === '?') {
-                throw new TypeError('Pattern cannot start with "?" at ' + j);
+            if (str[j] === "?") {
+                throw new TypeError("Pattern cannot start with \"?\" at " + j);
             }
             while (j < str.length) {
-                if (str[j] === '\\') {
+                if (str[j] === "\\") {
                     pattern += str[j++] + str[j++];
                     continue;
                 }
-                if (str[j] === ')') {
+                if (str[j] === ")") {
                     count--;
                     if (count === 0) {
                         j++;
                         break;
                     }
-                } else if (str[j] === '(') {
+                }
+                else if (str[j] === "(") {
                     count++;
-                    if (str[j + 1] !== '?') {
-                        throw new TypeError('Capturing groups are not allowed at ' + j);
+                    if (str[j + 1] !== "?") {
+                        throw new TypeError("Capturing groups are not allowed at " + j);
                     }
                 }
                 pattern += str[j++];
             }
-            if (count) throw new TypeError('Unbalanced pattern at ' + i);
-            if (!pattern) throw new TypeError('Missing pattern at ' + i);
-            tokens.push({ type: 'PATTERN', index: i, value: pattern });
+            if (count)
+                throw new TypeError("Unbalanced pattern at " + i);
+            if (!pattern)
+                throw new TypeError("Missing pattern at " + i);
+            tokens.push({ type: "PATTERN", index: i, value: pattern });
             i = j;
             continue;
         }
-        tokens.push({ type: 'CHAR', index: i, value: str[i++] });
+        tokens.push({ type: "CHAR", index: i, value: str[i++] });
     }
-    tokens.push({ type: 'END', index: i, value: '' });
+    tokens.push({ type: "END", index: i, value: "" });
     return tokens;
 }
 /**
  * Parse a string for the raw tokens.
  */
 function parse(str, options) {
-    if (options === void 0) {
-        options = {};
-    }
+    if (options === void 0) { options = {}; }
     var tokens = lexer(str);
-    var _a = options.prefixes,
-        prefixes = _a === void 0 ? './' : _a;
-    var defaultPattern = '[^' + escapeString(options.delimiter || '/#?') + ']+?';
+    var _a = options.prefixes, prefixes = _a === void 0 ? "./" : _a;
+    var defaultPattern = "[^" + escapeString(options.delimiter || "/#?") + "]+?";
     var result = [];
     var key = 0;
     var i = 0;
-    var path = '';
+    var path = "";
     var tryConsume = function (type) {
-        if (i < tokens.length && tokens[i].type === type) return tokens[i++].value;
+        if (i < tokens.length && tokens[i].type === type)
+            return tokens[i++].value;
     };
     var mustConsume = function (type) {
         var value = tryConsume(type);
-        if (value !== undefined) return value;
-        var _a = tokens[i],
-            nextType = _a.type,
-            index = _a.index;
-        throw new TypeError('Unexpected ' + nextType + ' at ' + index + ', expected ' + type);
+        if (value !== undefined)
+            return value;
+        var _a = tokens[i], nextType = _a.type, index = _a.index;
+        throw new TypeError("Unexpected " + nextType + " at " + index + ", expected " + type);
     };
     var consumeText = function () {
-        var result = '';
+        var result = "";
         var value;
         // tslint:disable-next-line
-        while ((value = tryConsume('CHAR') || tryConsume('ESCAPED_CHAR'))) {
+        while ((value = tryConsume("CHAR") || tryConsume("ESCAPED_CHAR"))) {
             result += value;
         }
         return result;
     };
     while (i < tokens.length) {
-        var char = tryConsume('CHAR');
-        var name = tryConsume('NAME');
-        var pattern = tryConsume('PATTERN');
+        var char = tryConsume("CHAR");
+        var name = tryConsume("NAME");
+        var pattern = tryConsume("PATTERN");
         if (name || pattern) {
-            var prefix = char || '';
+            var prefix = char || "";
             if (prefixes.indexOf(prefix) === -1) {
                 path += prefix;
-                prefix = '';
+                prefix = "";
             }
             if (path) {
                 result.push(path);
-                path = '';
+                path = "";
             }
             result.push({
                 name: name || key++,
                 prefix: prefix,
-                suffix: '',
+                suffix: "",
                 pattern: pattern || defaultPattern,
-                modifier: tryConsume('MODIFIER') || '',
+                modifier: tryConsume("MODIFIER") || ""
             });
             continue;
         }
-        var value = char || tryConsume('ESCAPED_CHAR');
+        var value = char || tryConsume("ESCAPED_CHAR");
         if (value) {
             path += value;
             continue;
         }
         if (path) {
             result.push(path);
-            path = '';
+            path = "";
         }
-        var open = tryConsume('OPEN');
+        var open = tryConsume("OPEN");
         if (open) {
             var prefix = consumeText();
-            var name_1 = tryConsume('NAME') || '';
-            var pattern_1 = tryConsume('PATTERN') || '';
+            var name_1 = tryConsume("NAME") || "";
+            var pattern_1 = tryConsume("PATTERN") || "";
             var suffix = consumeText();
-            mustConsume('CLOSE');
+            mustConsume("CLOSE");
             result.push({
-                name: name_1 || (pattern_1 ? key++ : ''),
+                name: name_1 || (pattern_1 ? key++ : ""),
                 pattern: name_1 && !pattern_1 ? defaultPattern : pattern_1,
                 prefix: prefix,
                 suffix: suffix,
-                modifier: tryConsume('MODIFIER') || '',
+                modifier: tryConsume("MODIFIER") || ""
             });
             continue;
         }
-        mustConsume('END');
+        mustConsume("END");
     }
     return result;
+}
+/**
+ * Create path match function from `path-to-regexp` spec.
+ */
+function match(str, options) {
+    var keys = [];
+    var re = pathToRegexp(str, keys, options);
+    return regexpToFunction(re, keys, options);
+}
+/**
+ * Create a path match function from `path-to-regexp` output.
+ */
+function regexpToFunction(re, keys, options) {
+    if (options === void 0) { options = {}; }
+    var _a = options.decode, decode = _a === void 0 ? function (x) { return x; } : _a;
+    return function (pathname) {
+        var m = re.exec(pathname);
+        if (!m)
+            return false;
+        var path = m[0], index = m.index;
+        var params = Object.create(null);
+        var _loop_1 = function (i) {
+            // tslint:disable-next-line
+            if (m[i] === undefined)
+                return "continue";
+            var key = keys[i - 1];
+            if (key.modifier === "*" || key.modifier === "+") {
+                params[key.name] = m[i].split(key.prefix + key.suffix).map(function (value) {
+                    return decode(value, key);
+                });
+            }
+            else {
+                params[key.name] = decode(m[i], key);
+            }
+        };
+        for (var i = 1; i < m.length; i++) {
+            _loop_1(i);
+        }
+        return { path: path, index: index, params: params };
+    };
 }
 /**
  * Escape a regular expression string.
  */
 function escapeString(str) {
-    return str.replace(/([.+*?=^!:${}()[\]|/\\])/g, '\\$1');
+    return str.replace(/([.+*?=^!:${}()[\]|/\\])/g, "\\$1");
 }
 /**
  * Get the flags for a regexp from the options.
  */
 function flags(options) {
-    return options && options.sensitive ? '' : 'i';
+    return options && options.sensitive ? "" : "i";
 }
 /**
  * Pull out keys from a regexp.
  */
 function regexpToRegexp(path, keys) {
-    if (!keys) return path;
+    if (!keys)
+        return path;
     var groupsRegex = /\((?:\?<(.*?)>)?(?!\?)/g;
     var index = 0;
     var execResult = groupsRegex.exec(path.source);
@@ -203,10 +238,10 @@ function regexpToRegexp(path, keys) {
         keys.push({
             // Use parenthesized substring match if available, index otherwise
             name: execResult[1] || index++,
-            prefix: '',
-            suffix: '',
-            modifier: '',
-            pattern: '',
+            prefix: "",
+            suffix: "",
+            modifier: "",
+            pattern: ""
         });
         execResult = groupsRegex.exec(path.source);
     }
@@ -216,10 +251,8 @@ function regexpToRegexp(path, keys) {
  * Transform an array into a regexp.
  */
 function arrayToRegexp(paths, keys, options) {
-    var parts = paths.map(function (path) {
-        return pathToRegexp(path, keys, options).source;
-    });
-    return new RegExp('(?:' + parts.join('|') + ')', flags(options));
+    var parts = paths.map(function (path) { return pathToRegexp(path, keys, options).source; });
+    return new RegExp("(?:" + parts.join("|") + ")", flags(options));
 }
 /**
  * Create a path regexp from string input.
@@ -231,78 +264,57 @@ function stringToRegexp(path, keys, options) {
  * Expose a function for taking tokens and returning a RegExp.
  */
 function tokensToRegexp(tokens, keys, options) {
-    if (options === void 0) {
-        options = {};
-    }
-    var _a = options.strict,
-        strict = _a === void 0 ? false : _a,
-        _b = options.start,
-        start = _b === void 0 ? true : _b,
-        _c = options.end,
-        end = _c === void 0 ? true : _c,
-        _d = options.encode,
-        encode =
-            _d === void 0
-                ? function (x) {
-                      return x;
-                  }
-                : _d;
-    var endsWith = '[' + escapeString(options.endsWith || '') + ']|$';
-    var delimiter = '[' + escapeString(options.delimiter || '/#?') + ']';
-    var route = start ? '^' : '';
+    if (options === void 0) { options = {}; }
+    var _a = options.strict, strict = _a === void 0 ? false : _a, _b = options.start, start = _b === void 0 ? true : _b, _c = options.end, end = _c === void 0 ? true : _c, _d = options.encode, encode = _d === void 0 ? function (x) { return x; } : _d;
+    var endsWith = "[" + escapeString(options.endsWith || "") + "]|$";
+    var delimiter = "[" + escapeString(options.delimiter || "/#?") + "]";
+    var route = start ? "^" : "";
     // Iterate over the tokens and create our regexp string.
     for (var _i = 0, tokens_1 = tokens; _i < tokens_1.length; _i++) {
         var token = tokens_1[_i];
-        if (typeof token === 'string') {
+        if (typeof token === "string") {
             route += escapeString(encode(token));
-        } else {
+        }
+        else {
             var prefix = escapeString(encode(token.prefix));
             var suffix = escapeString(encode(token.suffix));
             if (token.pattern) {
-                if (keys) keys.push(token);
+                if (keys)
+                    keys.push(token);
                 if (prefix || suffix) {
-                    if (token.modifier === '+' || token.modifier === '*') {
-                        var mod = token.modifier === '*' ? '?' : '';
-                        route +=
-                            '(?:' +
-                            prefix +
-                            '((?:' +
-                            token.pattern +
-                            ')(?:' +
-                            suffix +
-                            prefix +
-                            '(?:' +
-                            token.pattern +
-                            '))*)' +
-                            suffix +
-                            ')' +
-                            mod;
-                    } else {
-                        route += '(?:' + prefix + '(' + token.pattern + ')' + suffix + ')' + token.modifier;
+                    if (token.modifier === "+" || token.modifier === "*") {
+                        var mod = token.modifier === "*" ? "?" : "";
+                        route += "(?:" + prefix + "((?:" + token.pattern + ")(?:" + suffix + prefix + "(?:" + token.pattern + "))*)" + suffix + ")" + mod;
                     }
-                } else {
-                    route += '(' + token.pattern + ')' + token.modifier;
+                    else {
+                        route += "(?:" + prefix + "(" + token.pattern + ")" + suffix + ")" + token.modifier;
+                    }
                 }
-            } else {
-                route += '(?:' + prefix + suffix + ')' + token.modifier;
+                else {
+                    route += "(" + token.pattern + ")" + token.modifier;
+                }
+            }
+            else {
+                route += "(?:" + prefix + suffix + ")" + token.modifier;
             }
         }
     }
     if (end) {
-        if (!strict) route += delimiter + '?';
-        route += !options.endsWith ? '$' : '(?=' + endsWith + ')';
-    } else {
+        if (!strict)
+            route += delimiter + "?";
+        route += !options.endsWith ? "$" : "(?=" + endsWith + ")";
+    }
+    else {
         var endToken = tokens[tokens.length - 1];
-        var isEndDelimited =
-            typeof endToken === 'string'
-                ? delimiter.indexOf(endToken[endToken.length - 1]) > -1
-                : // tslint:disable-next-line
-                  endToken === undefined;
+        var isEndDelimited = typeof endToken === "string"
+            ? delimiter.indexOf(endToken[endToken.length - 1]) > -1
+            : // tslint:disable-next-line
+                endToken === undefined;
         if (!strict) {
-            route += '(?:' + delimiter + '(?=' + endsWith + '))?';
+            route += "(?:" + delimiter + "(?=" + endsWith + "))?";
         }
         if (!isEndDelimited) {
-            route += '(?=' + delimiter + '|' + endsWith + ')';
+            route += "(?=" + delimiter + "|" + endsWith + ")";
         }
     }
     return new RegExp(route, flags(options));
@@ -315,8 +327,10 @@ function tokensToRegexp(tokens, keys, options) {
  * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
  */
 function pathToRegexp(path, keys, options) {
-    if (path instanceof RegExp) return regexpToRegexp(path, keys);
-    if (Array.isArray(path)) return arrayToRegexp(path, keys, options);
+    if (path instanceof RegExp)
+        return regexpToRegexp(path, keys);
+    if (Array.isArray(path))
+        return arrayToRegexp(path, keys, options);
     return stringToRegexp(path, keys, options);
 }
 
@@ -446,18 +460,23 @@ class RouteMap extends Map {
         this.#RouteMatchers.push(Route.matcher);
         return this.set(Route.matcher, Route);
     }
-    matchRoute(path) {
-        let target;
-        this.#RouteMatchers.some((reg) => {
-            let result = path.match(reg);
+    matchRoute(req) {
+        const path = req.path;
+        let target = null;
+        this.#RouteMatchers.some((matcher) => {
+            const result = matcher(path);
             if (result) {
-                target = this.get(reg);
-
+                target = this.get(matcher);
+                // 传入解析后的 path
+                req.pathParsed = result;
                 return true;
             }
             return false;
         });
-        if (target?.redirect) return this.matchRoute(target.redirect);
+        if (target?.redirect) {
+            req.path = target.redirect;
+            return this.matchRoute(req);
+        }
         return target;
     }
 }
@@ -859,23 +878,23 @@ var symToStringTag$1 = Symbol$1 ? Symbol$1.toStringTag : undefined;
  * @returns {string} Returns the raw `toStringTag`.
  */
 function getRawTag(value) {
-    var isOwn = hasOwnProperty$5.call(value, symToStringTag$1),
-        tag = value[symToStringTag$1];
+  var isOwn = hasOwnProperty$5.call(value, symToStringTag$1),
+      tag = value[symToStringTag$1];
 
-    try {
-        value[symToStringTag$1] = undefined;
-        var unmasked = true;
-    } catch (e) {}
+  try {
+    value[symToStringTag$1] = undefined;
+    var unmasked = true;
+  } catch (e) {}
 
-    var result = nativeObjectToString$1.call(value);
-    if (unmasked) {
-        if (isOwn) {
-            value[symToStringTag$1] = tag;
-        } else {
-            delete value[symToStringTag$1];
-        }
+  var result = nativeObjectToString$1.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag$1] = tag;
+    } else {
+      delete value[symToStringTag$1];
     }
-    return result;
+  }
+  return result;
 }
 
 /** Used for built-in method references. */
@@ -896,7 +915,7 @@ var nativeObjectToString = objectProto$5.toString;
  * @returns {string} Returns the converted string.
  */
 function objectToString(value) {
-    return nativeObjectToString.call(value);
+  return nativeObjectToString.call(value);
 }
 
 /** `Object#toString` result references. */
@@ -914,10 +933,12 @@ var symToStringTag = Symbol$1 ? Symbol$1.toStringTag : undefined;
  * @returns {string} Returns the `toStringTag`.
  */
 function baseGetTag(value) {
-    if (value == null) {
-        return value === undefined ? undefinedTag : nullTag;
-    }
-    return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+  return (symToStringTag && symToStringTag in Object(value))
+    ? getRawTag(value)
+    : objectToString(value);
 }
 
 /**
@@ -945,7 +966,7 @@ function baseGetTag(value) {
  * // => false
  */
 function isObjectLike(value) {
-    return value != null && typeof value == 'object';
+  return value != null && typeof value == 'object';
 }
 
 /** `Object#toString` result references. */
@@ -969,7 +990,8 @@ var symbolTag = '[object Symbol]';
  * // => false
  */
 function isSymbol(value) {
-    return typeof value == 'symbol' || (isObjectLike(value) && baseGetTag(value) == symbolTag);
+  return typeof value == 'symbol' ||
+    (isObjectLike(value) && baseGetTag(value) == symbolTag);
 }
 
 /**
@@ -982,14 +1004,14 @@ function isSymbol(value) {
  * @returns {Array} Returns the new mapped array.
  */
 function arrayMap(array, iteratee) {
-    var index = -1,
-        length = array == null ? 0 : array.length,
-        result = Array(length);
+  var index = -1,
+      length = array == null ? 0 : array.length,
+      result = Array(length);
 
-    while (++index < length) {
-        result[index] = iteratee(array[index], index, array);
-    }
-    return result;
+  while (++index < length) {
+    result[index] = iteratee(array[index], index, array);
+  }
+  return result;
 }
 
 /**
@@ -1033,19 +1055,19 @@ var symbolProto = Symbol$1 ? Symbol$1.prototype : undefined,
  * @returns {string} Returns the string.
  */
 function baseToString(value) {
-    // Exit early for strings to avoid a performance hit in some environments.
-    if (typeof value == 'string') {
-        return value;
-    }
-    if (isArray(value)) {
-        // Recursively convert values (susceptible to call stack limits).
-        return arrayMap(value, baseToString) + '';
-    }
-    if (isSymbol(value)) {
-        return symbolToString ? symbolToString.call(value) : '';
-    }
-    var result = value + '';
-    return result == '0' && 1 / value == -INFINITY$1 ? '-0' : result;
+  // Exit early for strings to avoid a performance hit in some environments.
+  if (typeof value == 'string') {
+    return value;
+  }
+  if (isArray(value)) {
+    // Recursively convert values (susceptible to call stack limits).
+    return arrayMap(value, baseToString) + '';
+  }
+  if (isSymbol(value)) {
+    return symbolToString ? symbolToString.call(value) : '';
+  }
+  var result = (value + '');
+  return (result == '0' && (1 / value) == -INFINITY$1) ? '-0' : result;
 }
 
 /**
@@ -1074,8 +1096,8 @@ function baseToString(value) {
  * // => false
  */
 function isObject(value) {
-    var type = typeof value;
-    return value != null && (type == 'object' || type == 'function');
+  var type = typeof value;
+  return value != null && (type == 'object' || type == 'function');
 }
 
 /**
@@ -1095,7 +1117,7 @@ function isObject(value) {
  * // => true
  */
 function identity(value) {
-    return value;
+  return value;
 }
 
 /** `Object#toString` result references. */
@@ -1122,23 +1144,23 @@ var asyncTag = '[object AsyncFunction]',
  * // => false
  */
 function isFunction(value) {
-    if (!isObject(value)) {
-        return false;
-    }
-    // The use of `Object#toString` avoids issues with the `typeof` operator
-    // in Safari 9 which returns 'object' for typed arrays and other constructors.
-    var tag = baseGetTag(value);
-    return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
+  if (!isObject(value)) {
+    return false;
+  }
+  // The use of `Object#toString` avoids issues with the `typeof` operator
+  // in Safari 9 which returns 'object' for typed arrays and other constructors.
+  var tag = baseGetTag(value);
+  return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
 }
 
 /** Used to detect overreaching core-js shims. */
 var coreJsData = root['__core-js_shared__'];
 
 /** Used to detect methods masquerading as native. */
-var maskSrcKey = (function () {
-    var uid = /[^.]+$/.exec((coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO) || '');
-    return uid ? 'Symbol(src)_1.' + uid : '';
-})();
+var maskSrcKey = (function() {
+  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
+  return uid ? ('Symbol(src)_1.' + uid) : '';
+}());
 
 /**
  * Checks if `func` has its source masked.
@@ -1148,7 +1170,7 @@ var maskSrcKey = (function () {
  * @returns {boolean} Returns `true` if `func` is masked, else `false`.
  */
 function isMasked(func) {
-    return !!maskSrcKey && maskSrcKey in func;
+  return !!maskSrcKey && (maskSrcKey in func);
 }
 
 /** Used for built-in method references. */
@@ -1165,15 +1187,15 @@ var funcToString$1 = funcProto$1.toString;
  * @returns {string} Returns the source code.
  */
 function toSource(func) {
-    if (func != null) {
-        try {
-            return funcToString$1.call(func);
-        } catch (e) {}
-        try {
-            return func + '';
-        } catch (e) {}
-    }
-    return '';
+  if (func != null) {
+    try {
+      return funcToString$1.call(func);
+    } catch (e) {}
+    try {
+      return (func + '');
+    } catch (e) {}
+  }
+  return '';
 }
 
 /**
@@ -1196,13 +1218,9 @@ var funcToString = funcProto.toString;
 var hasOwnProperty$4 = objectProto$4.hasOwnProperty;
 
 /** Used to detect if a method is native. */
-var reIsNative = RegExp(
-    '^' +
-        funcToString
-            .call(hasOwnProperty$4)
-            .replace(reRegExpChar, '\\$&')
-            .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') +
-        '$',
+var reIsNative = RegExp('^' +
+  funcToString.call(hasOwnProperty$4).replace(reRegExpChar, '\\$&')
+  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
 );
 
 /**
@@ -1214,11 +1232,11 @@ var reIsNative = RegExp(
  *  else `false`.
  */
 function baseIsNative(value) {
-    if (!isObject(value) || isMasked(value)) {
-        return false;
-    }
-    var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
-    return pattern.test(toSource(value));
+  if (!isObject(value) || isMasked(value)) {
+    return false;
+  }
+  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource(value));
 }
 
 /**
@@ -1230,7 +1248,7 @@ function baseIsNative(value) {
  * @returns {*} Returns the property value.
  */
 function getValue(object, key) {
-    return object == null ? undefined : object[key];
+  return object == null ? undefined : object[key];
 }
 
 /**
@@ -1242,8 +1260,8 @@ function getValue(object, key) {
  * @returns {*} Returns the function if it's native, else `undefined`.
  */
 function getNative(object, key) {
-    var value = getValue(object, key);
-    return baseIsNative(value) ? value : undefined;
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : undefined;
 }
 
 /**
@@ -1257,17 +1275,13 @@ function getNative(object, key) {
  * @returns {*} Returns the result of `func`.
  */
 function apply(func, thisArg, args) {
-    switch (args.length) {
-        case 0:
-            return func.call(thisArg);
-        case 1:
-            return func.call(thisArg, args[0]);
-        case 2:
-            return func.call(thisArg, args[0], args[1]);
-        case 3:
-            return func.call(thisArg, args[0], args[1], args[2]);
-    }
-    return func.apply(thisArg, args);
+  switch (args.length) {
+    case 0: return func.call(thisArg);
+    case 1: return func.call(thisArg, args[0]);
+    case 2: return func.call(thisArg, args[0], args[1]);
+    case 3: return func.call(thisArg, args[0], args[1], args[2]);
+  }
+  return func.apply(thisArg, args);
 }
 
 /** Used to detect hot functions by number of calls within a span of milliseconds. */
@@ -1287,23 +1301,23 @@ var nativeNow = Date.now;
  * @returns {Function} Returns the new shortable function.
  */
 function shortOut(func) {
-    var count = 0,
-        lastCalled = 0;
+  var count = 0,
+      lastCalled = 0;
 
-    return function () {
-        var stamp = nativeNow(),
-            remaining = HOT_SPAN - (stamp - lastCalled);
+  return function() {
+    var stamp = nativeNow(),
+        remaining = HOT_SPAN - (stamp - lastCalled);
 
-        lastCalled = stamp;
-        if (remaining > 0) {
-            if (++count >= HOT_COUNT) {
-                return arguments[0];
-            }
-        } else {
-            count = 0;
-        }
-        return func.apply(undefined, arguments);
-    };
+    lastCalled = stamp;
+    if (remaining > 0) {
+      if (++count >= HOT_COUNT) {
+        return arguments[0];
+      }
+    } else {
+      count = 0;
+    }
+    return func.apply(undefined, arguments);
+  };
 }
 
 /**
@@ -1326,18 +1340,18 @@ function shortOut(func) {
  * // => true
  */
 function constant(value) {
-    return function () {
-        return value;
-    };
+  return function() {
+    return value;
+  };
 }
 
-var defineProperty = (function () {
-    try {
-        var func = getNative(Object, 'defineProperty');
-        func({}, '', {});
-        return func;
-    } catch (e) {}
-})();
+var defineProperty = (function() {
+  try {
+    var func = getNative(Object, 'defineProperty');
+    func({}, '', {});
+    return func;
+  } catch (e) {}
+}());
 
 /**
  * The base implementation of `setToString` without support for hot loop shorting.
@@ -1347,16 +1361,14 @@ var defineProperty = (function () {
  * @param {Function} string The `toString` result.
  * @returns {Function} Returns `func`.
  */
-var baseSetToString = !defineProperty
-    ? identity
-    : function (func, string) {
-          return defineProperty(func, 'toString', {
-              configurable: true,
-              enumerable: false,
-              value: constant(string),
-              writable: true,
-          });
-      };
+var baseSetToString = !defineProperty ? identity : function(func, string) {
+  return defineProperty(func, 'toString', {
+    'configurable': true,
+    'enumerable': false,
+    'value': constant(string),
+    'writable': true
+  });
+};
 
 /**
  * Sets the `toString` method of `func` to return `string`.
@@ -1383,16 +1395,13 @@ var reIsUint = /^(?:0|[1-9]\d*)$/;
  * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
  */
 function isIndex(value, length) {
-    var type = typeof value;
-    length = length == null ? MAX_SAFE_INTEGER$1 : length;
+  var type = typeof value;
+  length = length == null ? MAX_SAFE_INTEGER$1 : length;
 
-    return (
-        !!length &&
-        (type == 'number' || (type != 'symbol' && reIsUint.test(value))) &&
-        value > -1 &&
-        value % 1 == 0 &&
-        value < length
-    );
+  return !!length &&
+    (type == 'number' ||
+      (type != 'symbol' && reIsUint.test(value))) &&
+        (value > -1 && value % 1 == 0 && value < length);
 }
 
 /**
@@ -1405,16 +1414,16 @@ function isIndex(value, length) {
  * @param {*} value The value to assign.
  */
 function baseAssignValue(object, key, value) {
-    if (key == '__proto__' && defineProperty) {
-        defineProperty(object, key, {
-            configurable: true,
-            enumerable: true,
-            value: value,
-            writable: true,
-        });
-    } else {
-        object[key] = value;
-    }
+  if (key == '__proto__' && defineProperty) {
+    defineProperty(object, key, {
+      'configurable': true,
+      'enumerable': true,
+      'value': value,
+      'writable': true
+    });
+  } else {
+    object[key] = value;
+  }
 }
 
 /**
@@ -1450,7 +1459,7 @@ function baseAssignValue(object, key, value) {
  * // => true
  */
 function eq(value, other) {
-    return value === other || (value !== value && other !== other);
+  return value === other || (value !== value && other !== other);
 }
 
 /** Used for built-in method references. */
@@ -1470,10 +1479,11 @@ var hasOwnProperty$3 = objectProto$3.hasOwnProperty;
  * @param {*} value The value to assign.
  */
 function assignValue(object, key, value) {
-    var objValue = object[key];
-    if (!(hasOwnProperty$3.call(object, key) && eq(objValue, value)) || (value === undefined && !(key in object))) {
-        baseAssignValue(object, key, value);
-    }
+  var objValue = object[key];
+  if (!(hasOwnProperty$3.call(object, key) && eq(objValue, value)) ||
+      (value === undefined && !(key in object))) {
+    baseAssignValue(object, key, value);
+  }
 }
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
@@ -1489,24 +1499,24 @@ var nativeMax = Math.max;
  * @returns {Function} Returns the new function.
  */
 function overRest(func, start, transform) {
-    start = nativeMax(start === undefined ? func.length - 1 : start, 0);
-    return function () {
-        var args = arguments,
-            index = -1,
-            length = nativeMax(args.length - start, 0),
-            array = Array(length);
+  start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
+  return function() {
+    var args = arguments,
+        index = -1,
+        length = nativeMax(args.length - start, 0),
+        array = Array(length);
 
-        while (++index < length) {
-            array[index] = args[start + index];
-        }
-        index = -1;
-        var otherArgs = Array(start + 1);
-        while (++index < start) {
-            otherArgs[index] = args[index];
-        }
-        otherArgs[start] = transform(array);
-        return apply(func, this, otherArgs);
-    };
+    while (++index < length) {
+      array[index] = args[start + index];
+    }
+    index = -1;
+    var otherArgs = Array(start + 1);
+    while (++index < start) {
+      otherArgs[index] = args[index];
+    }
+    otherArgs[start] = transform(array);
+    return apply(func, this, otherArgs);
+  };
 }
 
 /** Used as references for various `Number` constants. */
@@ -1539,7 +1549,8 @@ var MAX_SAFE_INTEGER = 9007199254740991;
  * // => false
  */
 function isLength(value) {
-    return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+  return typeof value == 'number' &&
+    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
 }
 
 /** `Object#toString` result references. */
@@ -1553,7 +1564,7 @@ var argsTag = '[object Arguments]';
  * @returns {boolean} Returns `true` if `value` is an `arguments` object,
  */
 function baseIsArguments(value) {
-    return isObjectLike(value) && baseGetTag(value) == argsTag;
+  return isObjectLike(value) && baseGetTag(value) == argsTag;
 }
 
 /** Used for built-in method references. */
@@ -1583,19 +1594,10 @@ var propertyIsEnumerable = objectProto$2.propertyIsEnumerable;
  * _.isArguments([1, 2, 3]);
  * // => false
  */
-var isArguments = baseIsArguments(
-    (function () {
-        return arguments;
-    })(),
-)
-    ? baseIsArguments
-    : function (value) {
-          return (
-              isObjectLike(value) &&
-              hasOwnProperty$2.call(value, 'callee') &&
-              !propertyIsEnumerable.call(value, 'callee')
-          );
-      };
+var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsArguments : function(value) {
+  return isObjectLike(value) && hasOwnProperty$2.call(value, 'callee') &&
+    !propertyIsEnumerable.call(value, 'callee');
+};
 
 /** Used to match property names within property paths. */
 var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
@@ -1610,14 +1612,16 @@ var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
  * @returns {boolean} Returns `true` if `value` is a property name, else `false`.
  */
 function isKey(value, object) {
-    if (isArray(value)) {
-        return false;
-    }
-    var type = typeof value;
-    if (type == 'number' || type == 'symbol' || type == 'boolean' || value == null || isSymbol(value)) {
-        return true;
-    }
-    return reIsPlainProp.test(value) || !reIsDeepProp.test(value) || (object != null && value in Object(object));
+  if (isArray(value)) {
+    return false;
+  }
+  var type = typeof value;
+  if (type == 'number' || type == 'symbol' || type == 'boolean' ||
+      value == null || isSymbol(value)) {
+    return true;
+  }
+  return reIsPlainProp.test(value) || !reIsDeepProp.test(value) ||
+    (object != null && value in Object(object));
 }
 
 /* Built-in method references that are verified to be native. */
@@ -1631,8 +1635,8 @@ var nativeCreate = getNative(Object, 'create');
  * @memberOf Hash
  */
 function hashClear() {
-    this.__data__ = nativeCreate ? nativeCreate(null) : {};
-    this.size = 0;
+  this.__data__ = nativeCreate ? nativeCreate(null) : {};
+  this.size = 0;
 }
 
 /**
@@ -1646,9 +1650,9 @@ function hashClear() {
  * @returns {boolean} Returns `true` if the entry was removed, else `false`.
  */
 function hashDelete(key) {
-    var result = this.has(key) && delete this.__data__[key];
-    this.size -= result ? 1 : 0;
-    return result;
+  var result = this.has(key) && delete this.__data__[key];
+  this.size -= result ? 1 : 0;
+  return result;
 }
 
 /** Used to stand-in for `undefined` hash values. */
@@ -1670,12 +1674,12 @@ var hasOwnProperty$1 = objectProto$1.hasOwnProperty;
  * @returns {*} Returns the entry value.
  */
 function hashGet(key) {
-    var data = this.__data__;
-    if (nativeCreate) {
-        var result = data[key];
-        return result === HASH_UNDEFINED$1 ? undefined : result;
-    }
-    return hasOwnProperty$1.call(data, key) ? data[key] : undefined;
+  var data = this.__data__;
+  if (nativeCreate) {
+    var result = data[key];
+    return result === HASH_UNDEFINED$1 ? undefined : result;
+  }
+  return hasOwnProperty$1.call(data, key) ? data[key] : undefined;
 }
 
 /** Used for built-in method references. */
@@ -1694,8 +1698,8 @@ var hasOwnProperty = objectProto.hasOwnProperty;
  * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
  */
 function hashHas(key) {
-    var data = this.__data__;
-    return nativeCreate ? data[key] !== undefined : hasOwnProperty.call(data, key);
+  var data = this.__data__;
+  return nativeCreate ? (data[key] !== undefined) : hasOwnProperty.call(data, key);
 }
 
 /** Used to stand-in for `undefined` hash values. */
@@ -1712,10 +1716,10 @@ var HASH_UNDEFINED = '__lodash_hash_undefined__';
  * @returns {Object} Returns the hash instance.
  */
 function hashSet(key, value) {
-    var data = this.__data__;
-    this.size += this.has(key) ? 0 : 1;
-    data[key] = nativeCreate && value === undefined ? HASH_UNDEFINED : value;
-    return this;
+  var data = this.__data__;
+  this.size += this.has(key) ? 0 : 1;
+  data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
+  return this;
 }
 
 /**
@@ -1726,14 +1730,14 @@ function hashSet(key, value) {
  * @param {Array} [entries] The key-value pairs to cache.
  */
 function Hash(entries) {
-    var index = -1,
-        length = entries == null ? 0 : entries.length;
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
 
-    this.clear();
-    while (++index < length) {
-        var entry = entries[index];
-        this.set(entry[0], entry[1]);
-    }
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
 }
 
 // Add methods to `Hash`.
@@ -1751,8 +1755,8 @@ Hash.prototype.set = hashSet;
  * @memberOf ListCache
  */
 function listCacheClear() {
-    this.__data__ = [];
-    this.size = 0;
+  this.__data__ = [];
+  this.size = 0;
 }
 
 /**
@@ -1764,13 +1768,13 @@ function listCacheClear() {
  * @returns {number} Returns the index of the matched value, else `-1`.
  */
 function assocIndexOf(array, key) {
-    var length = array.length;
-    while (length--) {
-        if (eq(array[length][0], key)) {
-            return length;
-        }
+  var length = array.length;
+  while (length--) {
+    if (eq(array[length][0], key)) {
+      return length;
     }
-    return -1;
+  }
+  return -1;
 }
 
 /** Used for built-in method references. */
@@ -1789,20 +1793,20 @@ var splice = arrayProto.splice;
  * @returns {boolean} Returns `true` if the entry was removed, else `false`.
  */
 function listCacheDelete(key) {
-    var data = this.__data__,
-        index = assocIndexOf(data, key);
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
 
-    if (index < 0) {
-        return false;
-    }
-    var lastIndex = data.length - 1;
-    if (index == lastIndex) {
-        data.pop();
-    } else {
-        splice.call(data, index, 1);
-    }
-    --this.size;
-    return true;
+  if (index < 0) {
+    return false;
+  }
+  var lastIndex = data.length - 1;
+  if (index == lastIndex) {
+    data.pop();
+  } else {
+    splice.call(data, index, 1);
+  }
+  --this.size;
+  return true;
 }
 
 /**
@@ -1815,10 +1819,10 @@ function listCacheDelete(key) {
  * @returns {*} Returns the entry value.
  */
 function listCacheGet(key) {
-    var data = this.__data__,
-        index = assocIndexOf(data, key);
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
 
-    return index < 0 ? undefined : data[index][1];
+  return index < 0 ? undefined : data[index][1];
 }
 
 /**
@@ -1831,7 +1835,7 @@ function listCacheGet(key) {
  * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
  */
 function listCacheHas(key) {
-    return assocIndexOf(this.__data__, key) > -1;
+  return assocIndexOf(this.__data__, key) > -1;
 }
 
 /**
@@ -1845,16 +1849,16 @@ function listCacheHas(key) {
  * @returns {Object} Returns the list cache instance.
  */
 function listCacheSet(key, value) {
-    var data = this.__data__,
-        index = assocIndexOf(data, key);
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
 
-    if (index < 0) {
-        ++this.size;
-        data.push([key, value]);
-    } else {
-        data[index][1] = value;
-    }
-    return this;
+  if (index < 0) {
+    ++this.size;
+    data.push([key, value]);
+  } else {
+    data[index][1] = value;
+  }
+  return this;
 }
 
 /**
@@ -1865,14 +1869,14 @@ function listCacheSet(key, value) {
  * @param {Array} [entries] The key-value pairs to cache.
  */
 function ListCache(entries) {
-    var index = -1,
-        length = entries == null ? 0 : entries.length;
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
 
-    this.clear();
-    while (++index < length) {
-        var entry = entries[index];
-        this.set(entry[0], entry[1]);
-    }
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
 }
 
 // Add methods to `ListCache`.
@@ -1893,12 +1897,12 @@ var Map$1 = getNative(root, 'Map');
  * @memberOf MapCache
  */
 function mapCacheClear() {
-    this.size = 0;
-    this.__data__ = {
-        hash: new Hash(),
-        map: new (Map$1 || ListCache)(),
-        string: new Hash(),
-    };
+  this.size = 0;
+  this.__data__ = {
+    'hash': new Hash,
+    'map': new (Map$1 || ListCache),
+    'string': new Hash
+  };
 }
 
 /**
@@ -1909,10 +1913,10 @@ function mapCacheClear() {
  * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
  */
 function isKeyable(value) {
-    var type = typeof value;
-    return type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean'
-        ? value !== '__proto__'
-        : value === null;
+  var type = typeof value;
+  return (type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean')
+    ? (value !== '__proto__')
+    : (value === null);
 }
 
 /**
@@ -1924,8 +1928,10 @@ function isKeyable(value) {
  * @returns {*} Returns the map data.
  */
 function getMapData(map, key) {
-    var data = map.__data__;
-    return isKeyable(key) ? data[typeof key == 'string' ? 'string' : 'hash'] : data.map;
+  var data = map.__data__;
+  return isKeyable(key)
+    ? data[typeof key == 'string' ? 'string' : 'hash']
+    : data.map;
 }
 
 /**
@@ -1938,9 +1944,9 @@ function getMapData(map, key) {
  * @returns {boolean} Returns `true` if the entry was removed, else `false`.
  */
 function mapCacheDelete(key) {
-    var result = getMapData(this, key)['delete'](key);
-    this.size -= result ? 1 : 0;
-    return result;
+  var result = getMapData(this, key)['delete'](key);
+  this.size -= result ? 1 : 0;
+  return result;
 }
 
 /**
@@ -1953,7 +1959,7 @@ function mapCacheDelete(key) {
  * @returns {*} Returns the entry value.
  */
 function mapCacheGet(key) {
-    return getMapData(this, key).get(key);
+  return getMapData(this, key).get(key);
 }
 
 /**
@@ -1966,7 +1972,7 @@ function mapCacheGet(key) {
  * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
  */
 function mapCacheHas(key) {
-    return getMapData(this, key).has(key);
+  return getMapData(this, key).has(key);
 }
 
 /**
@@ -1980,12 +1986,12 @@ function mapCacheHas(key) {
  * @returns {Object} Returns the map cache instance.
  */
 function mapCacheSet(key, value) {
-    var data = getMapData(this, key),
-        size = data.size;
+  var data = getMapData(this, key),
+      size = data.size;
 
-    data.set(key, value);
-    this.size += data.size == size ? 0 : 1;
-    return this;
+  data.set(key, value);
+  this.size += data.size == size ? 0 : 1;
+  return this;
 }
 
 /**
@@ -1996,14 +2002,14 @@ function mapCacheSet(key, value) {
  * @param {Array} [entries] The key-value pairs to cache.
  */
 function MapCache(entries) {
-    var index = -1,
-        length = entries == null ? 0 : entries.length;
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
 
-    this.clear();
-    while (++index < length) {
-        var entry = entries[index];
-        this.set(entry[0], entry[1]);
-    }
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
 }
 
 // Add methods to `MapCache`.
@@ -2061,23 +2067,23 @@ var FUNC_ERROR_TEXT = 'Expected a function';
  * _.memoize.Cache = WeakMap;
  */
 function memoize(func, resolver) {
-    if (typeof func != 'function' || (resolver != null && typeof resolver != 'function')) {
-        throw new TypeError(FUNC_ERROR_TEXT);
-    }
-    var memoized = function () {
-        var args = arguments,
-            key = resolver ? resolver.apply(this, args) : args[0],
-            cache = memoized.cache;
+  if (typeof func != 'function' || (resolver != null && typeof resolver != 'function')) {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  var memoized = function() {
+    var args = arguments,
+        key = resolver ? resolver.apply(this, args) : args[0],
+        cache = memoized.cache;
 
-        if (cache.has(key)) {
-            return cache.get(key);
-        }
-        var result = func.apply(this, args);
-        memoized.cache = cache.set(key, result) || cache;
-        return result;
-    };
-    memoized.cache = new (memoize.Cache || MapCache)();
-    return memoized;
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    var result = func.apply(this, args);
+    memoized.cache = cache.set(key, result) || cache;
+    return result;
+  };
+  memoized.cache = new (memoize.Cache || MapCache);
+  return memoized;
 }
 
 // Expose `MapCache`.
@@ -2095,15 +2101,15 @@ var MAX_MEMOIZE_SIZE = 500;
  * @returns {Function} Returns the new memoized function.
  */
 function memoizeCapped(func) {
-    var result = memoize(func, function (key) {
-        if (cache.size === MAX_MEMOIZE_SIZE) {
-            cache.clear();
-        }
-        return key;
-    });
+  var result = memoize(func, function(key) {
+    if (cache.size === MAX_MEMOIZE_SIZE) {
+      cache.clear();
+    }
+    return key;
+  });
 
-    var cache = result.cache;
-    return result;
+  var cache = result.cache;
+  return result;
 }
 
 /** Used to match property names within property paths. */
@@ -2119,15 +2125,15 @@ var reEscapeChar = /\\(\\)?/g;
  * @param {string} string The string to convert.
  * @returns {Array} Returns the property path array.
  */
-var stringToPath = memoizeCapped(function (string) {
-    var result = [];
-    if (string.charCodeAt(0) === 46 /* . */) {
-        result.push('');
-    }
-    string.replace(rePropName, function (match, number, quote, subString) {
-        result.push(quote ? subString.replace(reEscapeChar, '$1') : number || match);
-    });
-    return result;
+var stringToPath = memoizeCapped(function(string) {
+  var result = [];
+  if (string.charCodeAt(0) === 46 /* . */) {
+    result.push('');
+  }
+  string.replace(rePropName, function(match, number, quote, subString) {
+    result.push(quote ? subString.replace(reEscapeChar, '$1') : (number || match));
+  });
+  return result;
 });
 
 /**
@@ -2152,7 +2158,7 @@ var stringToPath = memoizeCapped(function (string) {
  * // => '1,2,3'
  */
 function toString(value) {
-    return value == null ? '' : baseToString(value);
+  return value == null ? '' : baseToString(value);
 }
 
 /**
@@ -2164,10 +2170,10 @@ function toString(value) {
  * @returns {Array} Returns the cast property path array.
  */
 function castPath(value, object) {
-    if (isArray(value)) {
-        return value;
-    }
-    return isKey(value, object) ? [value] : stringToPath(toString(value));
+  if (isArray(value)) {
+    return value;
+  }
+  return isKey(value, object) ? [value] : stringToPath(toString(value));
 }
 
 /** Used as references for various `Number` constants. */
@@ -2181,11 +2187,11 @@ var INFINITY = 1 / 0;
  * @returns {string|symbol} Returns the key.
  */
 function toKey(value) {
-    if (typeof value == 'string' || isSymbol(value)) {
-        return value;
-    }
-    var result = value + '';
-    return result == '0' && 1 / value == -INFINITY ? '-0' : result;
+  if (typeof value == 'string' || isSymbol(value)) {
+    return value;
+  }
+  var result = (value + '');
+  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
 }
 
 /**
@@ -2197,15 +2203,15 @@ function toKey(value) {
  * @returns {*} Returns the resolved value.
  */
 function baseGet(object, path) {
-    path = castPath(path, object);
+  path = castPath(path, object);
 
-    var index = 0,
-        length = path.length;
+  var index = 0,
+      length = path.length;
 
-    while (object != null && index < length) {
-        object = object[toKey(path[index++])];
-    }
-    return index && index == length ? object : undefined;
+  while (object != null && index < length) {
+    object = object[toKey(path[index++])];
+  }
+  return (index && index == length) ? object : undefined;
 }
 
 /**
@@ -2217,14 +2223,14 @@ function baseGet(object, path) {
  * @returns {Array} Returns `array`.
  */
 function arrayPush(array, values) {
-    var index = -1,
-        length = values.length,
-        offset = array.length;
+  var index = -1,
+      length = values.length,
+      offset = array.length;
 
-    while (++index < length) {
-        array[offset + index] = values[index];
-    }
-    return array;
+  while (++index < length) {
+    array[offset + index] = values[index];
+  }
+  return array;
 }
 
 /** Built-in value references. */
@@ -2238,7 +2244,8 @@ var spreadableSymbol = Symbol$1 ? Symbol$1.isConcatSpreadable : undefined;
  * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
  */
 function isFlattenable(value) {
-    return isArray(value) || isArguments(value) || !!(spreadableSymbol && value && value[spreadableSymbol]);
+  return isArray(value) || isArguments(value) ||
+    !!(spreadableSymbol && value && value[spreadableSymbol]);
 }
 
 /**
@@ -2253,26 +2260,26 @@ function isFlattenable(value) {
  * @returns {Array} Returns the new flattened array.
  */
 function baseFlatten(array, depth, predicate, isStrict, result) {
-    var index = -1,
-        length = array.length;
+  var index = -1,
+      length = array.length;
 
-    predicate || (predicate = isFlattenable);
-    result || (result = []);
+  predicate || (predicate = isFlattenable);
+  result || (result = []);
 
-    while (++index < length) {
-        var value = array[index];
-        if (depth > 0 && predicate(value)) {
-            if (depth > 1) {
-                // Recursively flatten arrays (susceptible to call stack limits).
-                baseFlatten(value, depth - 1, predicate, isStrict, result);
-            } else {
-                arrayPush(result, value);
-            }
-        } else if (!isStrict) {
-            result[result.length] = value;
-        }
+  while (++index < length) {
+    var value = array[index];
+    if (depth > 0 && predicate(value)) {
+      if (depth > 1) {
+        // Recursively flatten arrays (susceptible to call stack limits).
+        baseFlatten(value, depth - 1, predicate, isStrict, result);
+      } else {
+        arrayPush(result, value);
+      }
+    } else if (!isStrict) {
+      result[result.length] = value;
     }
-    return result;
+  }
+  return result;
 }
 
 /**
@@ -2290,8 +2297,8 @@ function baseFlatten(array, depth, predicate, isStrict, result) {
  * // => [1, 2, [3, [4]], 5]
  */
 function flatten(array) {
-    var length = array == null ? 0 : array.length;
-    return length ? baseFlatten(array, 1) : [];
+  var length = array == null ? 0 : array.length;
+  return length ? baseFlatten(array, 1) : [];
 }
 
 /**
@@ -2302,7 +2309,7 @@ function flatten(array) {
  * @returns {Function} Returns the new function.
  */
 function flatRest(func) {
-    return setToString(overRest(func, undefined, flatten), func + '');
+  return setToString(overRest(func, undefined, flatten), func + '');
 }
 
 /**
@@ -2314,7 +2321,7 @@ function flatRest(func) {
  * @returns {boolean} Returns `true` if `key` exists, else `false`.
  */
 function baseHasIn(object, key) {
-    return object != null && key in Object(object);
+  return object != null && key in Object(object);
 }
 
 /**
@@ -2327,24 +2334,25 @@ function baseHasIn(object, key) {
  * @returns {boolean} Returns `true` if `path` exists, else `false`.
  */
 function hasPath(object, path, hasFunc) {
-    path = castPath(path, object);
+  path = castPath(path, object);
 
-    var index = -1,
-        length = path.length,
-        result = false;
+  var index = -1,
+      length = path.length,
+      result = false;
 
-    while (++index < length) {
-        var key = toKey(path[index]);
-        if (!(result = object != null && hasFunc(object, key))) {
-            break;
-        }
-        object = object[key];
+  while (++index < length) {
+    var key = toKey(path[index]);
+    if (!(result = object != null && hasFunc(object, key))) {
+      break;
     }
-    if (result || ++index != length) {
-        return result;
-    }
-    length = object == null ? 0 : object.length;
-    return !!length && isLength(length) && isIndex(key, length) && (isArray(object) || isArguments(object));
+    object = object[key];
+  }
+  if (result || ++index != length) {
+    return result;
+  }
+  length = object == null ? 0 : object.length;
+  return !!length && isLength(length) && isIndex(key, length) &&
+    (isArray(object) || isArguments(object));
 }
 
 /**
@@ -2374,7 +2382,7 @@ function hasPath(object, path, hasFunc) {
  * // => false
  */
 function hasIn(object, path) {
-    return object != null && hasPath(object, path, baseHasIn);
+  return object != null && hasPath(object, path, baseHasIn);
 }
 
 /**
@@ -2388,35 +2396,37 @@ function hasIn(object, path) {
  * @returns {Object} Returns `object`.
  */
 function baseSet(object, path, value, customizer) {
-    if (!isObject(object)) {
-        return object;
-    }
-    path = castPath(path, object);
-
-    var index = -1,
-        length = path.length,
-        lastIndex = length - 1,
-        nested = object;
-
-    while (nested != null && ++index < length) {
-        var key = toKey(path[index]),
-            newValue = value;
-
-        if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
-            return object;
-        }
-
-        if (index != lastIndex) {
-            var objValue = nested[key];
-            newValue = customizer ? customizer(objValue, key, nested) : undefined;
-            if (newValue === undefined) {
-                newValue = isObject(objValue) ? objValue : isIndex(path[index + 1]) ? [] : {};
-            }
-        }
-        assignValue(nested, key, newValue);
-        nested = nested[key];
-    }
+  if (!isObject(object)) {
     return object;
+  }
+  path = castPath(path, object);
+
+  var index = -1,
+      length = path.length,
+      lastIndex = length - 1,
+      nested = object;
+
+  while (nested != null && ++index < length) {
+    var key = toKey(path[index]),
+        newValue = value;
+
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+      return object;
+    }
+
+    if (index != lastIndex) {
+      var objValue = nested[key];
+      newValue = customizer ? customizer(objValue, key, nested) : undefined;
+      if (newValue === undefined) {
+        newValue = isObject(objValue)
+          ? objValue
+          : (isIndex(path[index + 1]) ? [] : {});
+      }
+    }
+    assignValue(nested, key, newValue);
+    nested = nested[key];
+  }
+  return object;
 }
 
 /**
@@ -2429,19 +2439,19 @@ function baseSet(object, path, value, customizer) {
  * @returns {Object} Returns the new object.
  */
 function basePickBy(object, paths, predicate) {
-    var index = -1,
-        length = paths.length,
-        result = {};
+  var index = -1,
+      length = paths.length,
+      result = {};
 
-    while (++index < length) {
-        var path = paths[index],
-            value = baseGet(object, path);
+  while (++index < length) {
+    var path = paths[index],
+        value = baseGet(object, path);
 
-        if (predicate(value, path)) {
-            baseSet(result, castPath(path, object), value);
-        }
+    if (predicate(value, path)) {
+      baseSet(result, castPath(path, object), value);
     }
-    return result;
+  }
+  return result;
 }
 
 /**
@@ -2454,9 +2464,9 @@ function basePickBy(object, paths, predicate) {
  * @returns {Object} Returns the new object.
  */
 function basePick(object, paths) {
-    return basePickBy(object, paths, function (value, path) {
-        return hasIn(object, path);
-    });
+  return basePickBy(object, paths, function(value, path) {
+    return hasIn(object, path);
+  });
 }
 
 /**
@@ -2476,8 +2486,8 @@ function basePick(object, paths) {
  * _.pick(object, ['a', 'c']);
  * // => { 'a': 1, 'c': 3 }
  */
-var pick = flatRest(function (object, paths) {
-    return object == null ? {} : basePick(object, paths);
+var pick = flatRest(function(object, paths) {
+  return object == null ? {} : basePick(object, paths);
 });
 
 // 不可以在原生的 XMLHttpRequest 上直接定义 getter 和 setter，
@@ -2504,7 +2514,9 @@ function defineGetAndSet(XHR) {
         return this._responseHeaders[name];
     };
     XHR.getAllResponseHeaders = function () {
-        return this._responseHeaders;
+        return Object.entries(this._responseHeaders)
+            .map(([key, value]) => `${key}: ${value}`)
+            .join('\n');
     };
 }
 
@@ -2555,8 +2567,8 @@ var HTTP_STATUS_CODES = {
 // 使用不完全覆盖的方式，使用继承方式继承所有的属性
 let XHR;
 const config = {
-    request: null,
-    response: null,
+    proxy: null,
+
     silent: false,
 };
 
@@ -2580,10 +2592,10 @@ class MockXMLHttpRequest extends window.XMLHttpRequest {
             // ! 这里的 proxy 中的参数固定为 fetch 中的标准。
             const result = config.proxy(this.$data.url, options);
 
-            if (result.body) {
+            if (result) {
                 defineGetAndSet(this);
                 this.dispatchEvent(new Event('loadstart'));
-                setTimeout(() => this.$done.bind(this)(result), this.timeout || 100);
+                setTimeout(() => this.$done.bind(this)(result), 0);
                 return null;
             }
             // 这里穿透下去
@@ -2594,7 +2606,6 @@ class MockXMLHttpRequest extends window.XMLHttpRequest {
         this.$data.headers[key] = value;
         return XHR.prototype.setRequestHeader.call(this, key, value);
     }
-
     $data = {
         // 原生属性的 getter 和 setter
         readyState: 0,
@@ -2606,26 +2617,40 @@ class MockXMLHttpRequest extends window.XMLHttpRequest {
         url: '',
         method: 'get',
     };
-
-    $done({ body, headers, status }) {
+    #useResponseType(body) {
+        switch (this.responseType) {
+            case 'blob':
+                return new Blob([body]);
+            case 'json':
+                return typeof body === 'string' ? JSON.parse(body) : body;
+            case 'text':
+            default:
+                return JSON.stringify(body);
+        }
+    }
+    $done(res) {
+        console.warn('XHR 代理中');
         // 伪造 XHR 返回事件
-        this.readyState = this.HEADERS_RECEIVED;
+        this.$data.readyState = this.HEADERS_RECEIVED;
         this.dispatchEvent(new Event('readystatechange'));
-        this.readyState = this.LOADING;
+        this.$data.readyState = this.LOADING;
         this.dispatchEvent(new Event('readystatechange'));
-        this._responseHeaders = headers;
-        this.status = status;
-        this.statusText = HTTP_STATUS_CODES[status];
-        this.response = body;
-        this.responseText = typeof this.response === 'string' ? this.response : JSON.stringify(this.response);
-        this.readyState = this.DONE;
+
+        this._responseHeaders = res.headers;
+        this.$data.status = res.status;
+        this.$data.statusText = HTTP_STATUS_CODES[res.status];
+
+        this.$data.response = this.#useResponseType(res.body);
+        this.$data.responseText = this.response;
+
+        this.$data.readyState = this.DONE;
         this.dispatchEvent(new Event('readystatechange'));
         this.dispatchEvent(new Event('load'));
         this.dispatchEvent(new Event('loadend'));
     }
 }
 function mockXHR({ proxy, silent = false }) {
-    if (proxy instanceof Function) config.request = proxy;
+    if (proxy instanceof Function) config.proxy = proxy;
 
     config.silent = silent;
 
@@ -2639,35 +2664,35 @@ function mockXHR({ proxy, silent = false }) {
     }
 }
 
-function createRegexp(path, config = {}) {
-    return pathToRegexp(path, [], config);
+function createRegexp(path) {
+    return match(path, { decode: decodeURIComponent });
 }
 class FakeServer {
     constructor({ Routers, plugins = [] }) {
-        this.#initRouteMap(Routers);
+        this.addRoutes(Routers);
         if (plugins.length) this.#initAjaxProxy(plugins);
     }
     #RouteMap = new RouteMap();
-    #initRouteMap(Routers) {
+    #initAjaxProxy(plugins) {
+        plugins.forEach((func) => func({ proxy: this.getServerResult.bind(this) }));
+    }
+
+    addRoutes(Routers) {
         Routers.forEach((item) => {
             item.matcher = createRegexp(item.path);
             const route = new Route(item);
             this.#RouteMap.addRoute(route);
         });
     }
-    #initAjaxProxy(plugins) {
-        plugins.forEach((func) => func({ proxy: this.getServerResult.bind(this) }));
-    }
     // 传入的参数为 fetch 的传入参数
     // 返回的数据为 Response
     getServerResult(path, options = {}) {
         const req = new Request(path, options);
         const res = new Response$2(path, options);
-        const target = this.#RouteMap.matchRoute(path);
+        const route = this.#RouteMap.matchRoute(req);
         // target 为一个 router
-        if (target) {
-            console.log(target);
-            target.request(req, res);
+        if (route) {
+            route.request(req, res);
             return res;
         } else {
             return null;

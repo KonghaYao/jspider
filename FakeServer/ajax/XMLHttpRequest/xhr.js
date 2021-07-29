@@ -5,8 +5,8 @@ import { defineGetAndSet } from './defineGetterAndSetter.js';
 import HTTP_STATUS_CODES from './constant.js';
 let XHR;
 const config = {
-    request: null,
-    response: null,
+    proxy: null,
+
     silent: false,
 };
 
@@ -30,10 +30,10 @@ class MockXMLHttpRequest extends window.XMLHttpRequest {
             // ! 这里的 proxy 中的参数固定为 fetch 中的标准。
             const result = config.proxy(this.$data.url, options);
 
-            if (result.body) {
+            if (result) {
                 defineGetAndSet(this);
                 this.dispatchEvent(new Event('loadstart'));
-                setTimeout(() => this.$done.bind(this)(result), this.timeout || 100);
+                setTimeout(() => this.$done.bind(this)(result), 0);
                 return null;
             }
             // 这里穿透下去
@@ -44,7 +44,6 @@ class MockXMLHttpRequest extends window.XMLHttpRequest {
         this.$data.headers[key] = value;
         return XHR.prototype.setRequestHeader.call(this, key, value);
     }
-
     $data = {
         // 原生属性的 getter 和 setter
         readyState: 0,
@@ -56,26 +55,40 @@ class MockXMLHttpRequest extends window.XMLHttpRequest {
         url: '',
         method: 'get',
     };
-
-    $done({ body, headers, status }) {
+    #useResponseType(body) {
+        switch (this.responseType) {
+            case 'blob':
+                return new Blob([body]);
+            case 'json':
+                return typeof body === 'string' ? JSON.parse(body) : body;
+            case 'text':
+            default:
+                return JSON.stringify(body);
+        }
+    }
+    $done(res) {
+        console.warn('XHR 代理中');
         // 伪造 XHR 返回事件
-        this.readyState = this.HEADERS_RECEIVED;
+        this.$data.readyState = this.HEADERS_RECEIVED;
         this.dispatchEvent(new Event('readystatechange'));
-        this.readyState = this.LOADING;
+        this.$data.readyState = this.LOADING;
         this.dispatchEvent(new Event('readystatechange'));
-        this._responseHeaders = headers;
-        this.status = status;
-        this.statusText = HTTP_STATUS_CODES[status];
-        this.response = body;
-        this.responseText = typeof this.response === 'string' ? this.response : JSON.stringify(this.response);
-        this.readyState = this.DONE;
+
+        this._responseHeaders = res.headers;
+        this.$data.status = res.status;
+        this.$data.statusText = HTTP_STATUS_CODES[res.status];
+
+        this.$data.response = this.#useResponseType(res.body);
+        this.$data.responseText = this.response;
+
+        this.$data.readyState = this.DONE;
         this.dispatchEvent(new Event('readystatechange'));
         this.dispatchEvent(new Event('load'));
         this.dispatchEvent(new Event('loadend'));
     }
 }
 export function mockXHR({ proxy, silent = false }) {
-    if (proxy instanceof Function) config.request = proxy;
+    if (proxy instanceof Function) config.proxy = proxy;
 
     config.silent = silent;
 

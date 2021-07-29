@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-    </head>
 
-    <body></body>
-    <script type="module">
-        import { FakeServer, mockFetch, mockXHR } from './dist/index.js';
-        const router = new FakeServer({
-            Routers: [
-                {
-                    path: '/src/:name',
-                    name: 'SourceServer',
-                    callback(req, res) {
-                        console.log(req, res);
-                        res.send(1111);
-                        return res;
-                    },
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body></body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script type="module">
+    import { FakeServer, mockFetch, mockXHR } from './dist/index.js';
+    // FakeServer 本身是全平台的
+    const router = new FakeServer({
+        Routers: [
+            {
+                path: '/src/:name',
+                name: 'SourceServer',
+                callback(req, res) {
+                    // req.queryParams //
+                    // req.pathParsed  // path 的解析数据
+                    console.log(req, res);
+                    res.send({ result: 1111 }); // 这个就是返回值
+
+                    // ! 无需返回任何参数
                 },
-            ],
-            plugins: [mockFetch, mockXHR],
-        });
-        await fetch('/src/see').then((res) => res.text());
-    </script>
+                // TODO redirect 不可以重定向到 RouteMap 之外的东西
+                // redirect: '/', // 优先进行redirect 操作将会导致 callback 失效
+            },
+
+        ],
+        plugins: [mockFetch, mockXHR],// 通过 plugins 来进行代理具体的 API
+    });
+    await fetch('/src/see?1=2&2=3').then((res) => res.text()).then(res => console.log(res));
+    axios.get('/src/see?1=2&2=3').then(res => console.log(res))
+</script>
+
 </html>
