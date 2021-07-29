@@ -28,7 +28,7 @@ export class RouteMap extends Map {
     matchRoute(path) {
         let target;
         this.#RouteMatchers.some((reg) => {
-            let result = path.match(reg);
+            const result = path.match(reg);
             if (result) {
                 target = this.get(reg);
 

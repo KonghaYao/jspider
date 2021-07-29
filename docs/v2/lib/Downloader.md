@@ -26,9 +26,7 @@ Downloader 模块是用来批量下载 Blob 或者是 String 格式的数据的�
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 
 // 动态载入
-import("https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/Downloader.js").then(
-    (res) => (window.Downloader = res)
-);
+import('https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/Downloader.js').then((res) => (window.Downloader = res));
 
 // ES5 可以直接在 script 标签中引入
 ```
@@ -66,18 +64,14 @@ import("https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/Downloader.js").then(
 ```js
 let spider = new JSpider();
 spider.Downloader([file1, file2], [], true);
-spider.Downloader(
-    [file1, "中", { 0: 1, 2: 2 }],
-    { 2: "这是一个JSON.json" },
-    true
-);
+spider.Downloader([file1, '中', { 0: 1, 2: 2 }], { 2: '这是一个JSON.json' }, true);
 ```
 
 :beetle: 注意, File 类型的文件是不能直接修改 name 属性的，所以需要使用下面的方法。
 
 ```js
-let file1 = new File(["11111"], "1.txt");
+let file1 = new File(['11111'], '1.txt');
 
-file1.name = "2.txt"; // 无效
-file1 = new File([file1], "2.txt"); //有效
+file1.name = '2.txt'; // 无效
+file1 = new File([file1], '2.txt'); //有效
 ```

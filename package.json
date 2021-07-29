@@ -14,9 +14,9 @@
     "scripts": {
         "dev": "rollup  --config rollup.config.dev.js -w",
         "build": "rollup --config rollup.config.build.js",
-        "lint": "eslint src plugins",
-        "Lint": "prettier --write src/**/*.{ts,json,md,yml,js} plugins/**/*.{ts,json,md,yml,js} FakeServer/**/*.{ts,json,md,yml,js} && eslint src plugins FakeServer",
-        "prettier": "prettier --write src/**/*.{ts,json,md,yml,js} plugins/**/*.{ts,json,md,yml,js} FakeServer/**/*.{ts,json,md,yml,js}",
+        "lint": "eslint src plugins FakeServer tools",
+        "Lint": "npm run Prettier && npm run lint",
+        "Prettier": "prettier -w FakeServer/**/*.{ts,json,md,yml,js} plugins/**/*.{ts,json,md,yml,js} src/**/*.{ts,json,md,yml,js} tools/**/*.{ts,json,md,yml,js} docs/**/*.md",
         "graph": "madge --image docs/assets/dependencies.svg src/index.js",
         "release": "standard-version",
         "lint-staged": "lint-staged",
@@ -39,7 +39,7 @@
     },
     "lint-staged": {
         "*.{js,md,css,html}": [
-            "prettier --write",
+            "prettier -w",
             "git add"
         ]
     },

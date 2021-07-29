@@ -27,7 +27,7 @@ export default {
                 '@tools': './tools',
                 '@src': './src',
                 '@plugins': './plugins',
-                '@FakeServer':'./FakeServer'
+                '@FakeServer': './FakeServer',
             },
         }),
         replace({

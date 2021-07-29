@@ -52,9 +52,7 @@
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 
-import("https://cdn.jsdelivr.net/gh/KonghaYao/jspider/JSpider.js").then(
-    (res) => (window.JSpider = res.default)
-);
+import('https://cdn.jsdelivr.net/gh/KonghaYao/jspider/JSpider.js').then((res) => (window.JSpider = res.default));
 
 // ES5 可以直接在 script 标签中引入
 ```
@@ -71,20 +69,20 @@ import("https://cdn.jsdelivr.net/gh/KonghaYao/jspider/JSpider.js").then(
 let spider = new JSpider();
 
 // 所有需要请求的　URL
-let urls = ["/", "1.html", "2.html"];
+let urls = ['/', '1.html', '2.html'];
 
 let result = await spider.Ajax({
     urls,
     // 这些 options 会应用到所有的 url 请求中
     options: {
         headers: {
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json',
         },
-        method: "post"
+        method: 'post',
     },
-    returnType: "json",
+    returnType: 'json',
     // type 是控制请求方式的字符串
-    type: "start"
+    type: 'start',
 });
 
 //请求完成之后就会在 result 中有结果

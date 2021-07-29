@@ -28,9 +28,7 @@
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 //动态载入
-import("https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/Ajax.js").then(
-    (res) => (window.Ajax = res)
-);
+import('https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/Ajax.js').then((res) => (window.Ajax = res));
 
 // ES5 可以直接在 script 标签中引入
 ```
@@ -46,20 +44,20 @@ let spider = new JSpider();
 
 //let urls = ['1.html','2.html','3.html']
 let urls = [
-    "/",
+    '/',
     ...[...Array(10).keys()].map((i) => {
         return {
-            url: "/",
+            url: '/',
             //这里的 options复盖了后面 Ajax config 中的 options 的对应项
             options: {
                 headers: {
-                    "content-type": "text/plain; charset=utf"
+                    'content-type': 'text/plain; charset=utf',
                 },
-                body: JSON.stringify({ index: i })
-            }
+                body: JSON.stringify({ index: i }),
+            },
         };
     }),
-    "/"
+    '/',
 ];
 
 //发动请求
@@ -67,14 +65,14 @@ let result = await spider.Ajax({
     urls,
     options: {
         headers: {
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json',
         },
-        method: "post"
+        method: 'post',
     },
     limits: 1, //并发数
     time: 0, //每次并发请求间隔时间
-    type: "start", //发动请求的类型
-    returnType: "blob" // 强制返回数据为 Blob 对象
+    type: 'start', //发动请求的类型
+    returnType: 'blob', // 强制返回数据为 Blob 对象
 });
 ```
 
@@ -128,16 +126,16 @@ pipe 在 JSpider 2.0.4 加入，用于爬取那些每次请求使用了上一次
 ```js
 let spider = new JSpider();
 await spider.Ajax({
-    urls: "http://*",
+    urls: 'http://*',
     options: {
         headers: {
             //填入初始的headers
-        }
+        },
     },
-    type: "pipe",
+    type: 'pipe',
     func: function (res, args) {
         let index = args[0];
-        let nextURL = "";
+        let nextURL = '';
         // 返回结构 :
         // [boolean,[url,options]] 详细情况参考下文
         return [
@@ -146,12 +144,12 @@ await spider.Ajax({
                 nextURL,
                 {
                     headers: {
-                        "x-zse-86": ""
-                    }
-                }
-            ]
+                        'x-zse-86': '',
+                    },
+                },
+            ],
         ];
-    }
+    },
 });
 ```
 

@@ -10,7 +10,7 @@ async function fakeFetch(url, options = {}) {
         // ! 传入初始参数
         const result = await config.proxy(url, options);
         if (result) {
-            if (!silent) console.warn('fetch: mock代理中');
+            if (!config.silent) console.warn('fetch: mock代理中');
             const { body, options = {} } = result;
             return new fakeResponse(body, options);
         }

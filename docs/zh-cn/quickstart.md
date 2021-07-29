@@ -4,7 +4,7 @@
 
 ## 如果你只想快速爬取文件
 
-[](../../src/AboutAPI.drawio ":include")
+[](../../src/AboutAPI.drawio ':include')
 
 ### 0. 打开开发者工具
 
@@ -19,11 +19,9 @@
 !> 注意： 本网站的开发者工具中，已经直接帮您导入 JSpider 到 window 对象了，不用再重复这一步骤。
 
 ```js
-import("https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js").then(
-    ({ default: JSpider }) => {
-        window.JSpider = JSpider;
-    }
-); // 这个步骤是异步的，也就是说，您需要等待它完成，或者直接在 then 内部写代码
+import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then(({ default: JSpider }) => {
+    window.JSpider = JSpider;
+}); // 这个步骤是异步的，也就是说，您需要等待它完成，或者直接在 then 内部写代码
 ```
 
 ### 2. 载入插件
@@ -32,7 +30,7 @@ import("https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js").then(
 // 导入插件，JSpider 还有很多功能插件，全部放置在 plugins 属性下
 const {
     Request, // 请求库
-    Download // 下载库
+    Download, // 下载库
 } = JSpider.plugins;
 ```
 
@@ -42,16 +40,16 @@ const {
 // 您的爬取路径代码, 这里是直接构建出数组
 // 实际情况中，您可以直接构建字符串数组
 let urls = [...Array(5).keys()].map((i, index) => {
-    return { url: "/fake/excel" };
+    return { url: '/fake/excel' };
 });
 
 // 下面这些形式都是可以被 JSpider 识别的。
-urls = ["/fake/excel", "/fake/excel"];
+urls = ['/fake/excel', '/fake/excel'];
 urls = [
     {
-        url: "/fake/excel",
-        options: {} // 这里的 options 属性是用于fetch 的 options 属性
-    }
+        url: '/fake/excel',
+        options: {}, // 这里的 options 属性是用于fetch 的 options 属性
+    },
 ];
 ```
 
@@ -62,7 +60,7 @@ urls = [
 const spider = new JSpider(
     // 内部写入 JSpider.plugins 中的插件代码
     Request(), // 这些都是 Plugin，后面会重复提及这个东西
-    Download()
+    Download(),
 );
 
 // 载入您的 URLS 将会进行爬取
@@ -82,7 +80,7 @@ const spider = new JSpider(
     Plugin((data) => {
         console.log(data);
         return data;
-    })
+    }),
     // Download()
 );
 ```
@@ -97,8 +95,8 @@ const {
     plugins: {
         Request, // 请求库
         Download, // 下载库
-        ExcelHelper // 转换数据为表格数据的插件
-    }
+        ExcelHelper, // 转换数据为表格数据的插件
+    },
 } = JSpider;
 
 const spider = new JSpider(
@@ -111,13 +109,13 @@ const spider = new JSpider(
         },
         {
             XLSXOptions: {
-                bookType: "csv" // 可以指定为 csv 或者 xlsx
-            }
-        }
+                bookType: 'csv', // 可以指定为 csv 或者 xlsx
+            },
+        },
     ),
     //! 如果使用了 Download, 会使用 a 标签的方式下载文件，Chrome 会弹窗提示是否下载多个文件，确认即可。
     // 如果您的数据过多的话，下载文件会比较多。
-    Download()
+    Download(),
 );
 ```
 

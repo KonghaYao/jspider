@@ -28,9 +28,7 @@ Observer 模块是用于监视某些在浏览器中的变量的模块。
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 
 // 动态载入
-import("https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/Observer.js").then(
-    (res) => (window.Observer = res)
-);
+import('https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/Observer.js').then((res) => (window.Observer = res));
 
 // ES5 可以直接在 script 标签中引入
 ```
@@ -63,7 +61,7 @@ Array.prototype.pop = jspider.hook(Array.prototype.pop);
 // Func 是在被代理函数执行之前，会拦截并处理参数
 // 传入参数为数组，输出也要为数组
 Array.prototype.pop.Func.push((args) => {
-    console.log("输入参数数组", args);
+    console.log('输入参数数组', args);
     // 可以修改参数...
     return args; // 返回必须是数组
 });
@@ -71,7 +69,7 @@ Array.prototype.pop.Func.push((args) => {
 // afterFunc 是触发在被代理函数返回数据后，将处理数据，然后输出
 //传入参数数量为 1 ，输出也为1
 Array.prototype.pop.afterFunc.push((res) => {
-    console.log("返回数据数组", res);
+    console.log('返回数据数组', res);
     // 可以修改参数...
     return res + 1;
 });
@@ -98,18 +96,18 @@ let jspider = new JSpider();
 fetch = jspider.hook(fetch, true);
 
 fetch.Func.push((args) => {
-    console.log("输入参数数组", args);
+    console.log('输入参数数组', args);
     // 可以修改参数...
     return args; // 返回必须是数组
 });
 
 // afterFunc 是触发在被代理函数返回数据后，将处理数据，然后输出
 fetch.afterFunc.push((res) => {
-    console.log("返回数据数组", res);
+    console.log('返回数据数组', res);
     // 可以修改参数...
     return res; // 返回必须是数组
 });
-fetch("/");
+fetch('/');
 ```
 
 ### [Hook 例子](./Observer/Hook扩展操作.md)
@@ -130,19 +128,19 @@ watch 是用来控制 js 对象的，多层对象也可以控制。
 ```js
 let a = {
     name: [
-        "张三",
-        "李四",
+        '张三',
+        '李四',
         {
-            name: "王五"
-        }
+            name: '王五',
+        },
     ],
     age: 30,
     sex: undefined,
     work: {
         java: false,
         php: true,
-        java: false
-    }
+        java: false,
+    },
 };
 let jspider = new JSpider();
 
@@ -152,17 +150,17 @@ a = jspider.Observer.watch(a);
 // 被设置 sex 属性的时候会触发
 a.SETTER.sex = (oldValue, value) => {
     console.log(oldValue, value);
-    console.log("你确定？");
+    console.log('你确定？');
     return value; // 这个数据是最终赋值的数据
 };
 
 // 读取 name 属性的时候触发
 a.GETTER.name = (value) => {
-    console.log("你偷看");
+    console.log('你偷看');
     return value; // 这个是最终返回的数据
 };
 
-a.sex = "男";
+a.sex = '男';
 a.name;
 ```
 
@@ -176,11 +174,11 @@ a.name;
 
 ```js
 a.name.SETTER.DEFAULT = (key, value) => {
-    console.log("触发set检查 " + value);
+    console.log('触发set检查 ' + value);
     return value;
 };
 a.name.GETTER.DEFAULT = (key, value) => {
-    console.log("触发get检查 " + value);
+    console.log('触发get检查 ' + value);
     return value;
 };
 ```
@@ -191,13 +189,13 @@ a.name.GETTER.DEFAULT = (key, value) => {
 // 被设置 sex 属性的时候会触发
 a.SETTER.sex = (oldValue, value) => {
     console.log(oldValue, value);
-    console.log("你确定？");
+    console.log('你确定？');
     return value; //这个数据是最终赋值的数据
 };
 
 // 读取 name 属性的时候触发
 a.GETTER.name = (value) => {
-    console.log("你偷看");
+    console.log('你偷看');
     return value; //这个是最终返回的数据
 };
 ```

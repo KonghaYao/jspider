@@ -19,14 +19,15 @@ limitations under the License. */
 
 /* fallback */
 @font-face {
-    font-family: "Material Icons Round";
+    font-family: 'Material Icons Round';
     font-style: normal;
     font-weight: 400;
-    src: url(https://fonts.gstatic.com/s/materialiconsround/v55/LDItaoyNOAY6Uewc665JcIzCKsKc_M9flwmP.woff2) format("woff2");
+    src: url(https://fonts.gstatic.com/s/materialiconsround/v55/LDItaoyNOAY6Uewc665JcIzCKsKc_M9flwmP.woff2)
+        format('woff2');
 }
 
 .ICON {
-    font-family: "Material Icons Round";
+    font-family: 'Material Icons Round';
     font-weight: normal;
     font-style: normal;
     user-select: none;

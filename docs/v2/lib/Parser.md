@@ -37,9 +37,7 @@ XMLParser 除了 core 版本外都已经自带了。
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 //动态载入
-import("https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/HTMLParser.js").then(
-    (res) => (window.HTMLParser = res)
-);
+import('https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/HTMLParser.js').then((res) => (window.HTMLParser = res));
 
 // ES5 可以直接在 script 标签中引入
 ```
@@ -76,10 +74,10 @@ let spider = new JSpider();
 let res = spider.Ajax({
     urls,
     options,
-    type: "start"
+    type: 'start',
 });
 let parseResult = spider.HTMLParser(res, (dom) => {
-    dom.querySelectorAll("a").forEach((i) => i.remove());
+    dom.querySelectorAll('a').forEach((i) => i.remove());
     return dom.innerText;
 });
 ```

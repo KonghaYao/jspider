@@ -17,8 +17,8 @@ console.log(jspider.Cookies);
 
 ```js
 let jspider = new JSpider();
-jspider.Cookies["key"] = "value1";
-jspider.Cookies.keys = "vals";
+jspider.Cookies['key'] = 'value1';
+jspider.Cookies.keys = 'vals';
 ```
 
 ## 删除 cookies
@@ -27,8 +27,8 @@ jspider.Cookies.keys = "vals";
 
 ```js
 let jspider = new JSpider();
-jspider.Cookies["key"] = "";
-jspider.Cookies.keys = "";
+jspider.Cookies['key'] = '';
+jspider.Cookies.keys = '';
 ```
 
 ## 缺陷

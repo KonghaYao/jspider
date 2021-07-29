@@ -1,11 +1,11 @@
-import JSpider from "https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js";
+import JSpider from 'https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js';
 // import JSpider from "../dist/JSpider.esm.min.js";
 async function main() {
     window.JSpider = JSpider;
-    console.log("JSpider 载入");
+    console.log('JSpider 载入');
 
     const { $Mock } = JSpider;
 
-    await $Mock("excel");
+    await $Mock('excel');
 }
 main();

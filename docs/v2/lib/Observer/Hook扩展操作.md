@@ -24,7 +24,7 @@ temp1 = add; // temp1就是那个藏在立即执行函数中的函数
 
 //添加监控 测试是否被 Hook 住
 temp1.Func.push((args) => {
-    console.log("通过参数  ", args);
+    console.log('通过参数  ', args);
     return args;
 });
 plus(21);
@@ -37,7 +37,7 @@ plus(21);
 debugger 之后就可以直接对调用栈进行查看，从而找到原来的请求位置，方便分析 Ajax 参数加密。
 
 ```js
-async function XHRwatch(urlReg, method = "get") {
+async function XHRwatch(urlReg, method = 'get') {
     // Hook XHR函数
 
     let Hook = JSpider.prototype.Observer.hook;
@@ -55,11 +55,9 @@ async function XHRwatch(urlReg, method = "get") {
 
             let params = Object.fromEntries(
                 url
-                    .split("?")[1]
-                    .split("&")
-                    .map((i) =>
-                        i.split("=").map((pair) => decodeURIComponent(pair))
-                    )
+                    .split('?')[1]
+                    .split('&')
+                    .map((i) => i.split('=').map((pair) => decodeURIComponent(pair))),
             );
             console.log(params);
             debugger;

@@ -20,9 +20,7 @@ Copy 模块是用来处理复制的一个函数。
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 
 //动态载入
-import("https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/Copy.js").then(
-    (res) => (window.Copy = res)
-);
+import('https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/Copy.js').then((res) => (window.Copy = res));
 
 // ES5 可以直接在 script 标签中引入
 ```
@@ -49,5 +47,5 @@ spider.clearUnCopy();
 
 spider.copy(123);
 spider.copy({ 1: 2, 2: 3 });
-spider.copy(document.querySelector("body"));
+spider.copy(document.querySelector('body'));
 ```

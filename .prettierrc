@@ -6,5 +6,16 @@
     "singleQuote": true,
     "semi": true,
     "trailingComma": "all",
-    "bracketSpacing": true
+    "bracketSpacing": true,
+    "overrides": [
+        {
+            "files": [
+                "FakeServer/**/*.{ts,json,md,yml,js}",
+                "plugins/**/*.{ts,json,md,yml,js}",
+                "src/**/*.{ts,json,md,yml,js}",
+                "tools/**/*.{ts,json,md,yml,js}",
+                "docs/**/*.{md}"
+            ]
+        }
+    ]
 }

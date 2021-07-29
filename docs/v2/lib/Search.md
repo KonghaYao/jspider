@@ -35,9 +35,7 @@ Search 模块包含在常用类型中，
 ```js
 // js文件遵循 ES6 的 import 方式，所以要用下面的方式导入
 // 动态载入
-import("https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/Search.js").then(
-    (res) => (window.Search = res)
-);
+import('https://cdn.jsdelivr.net/gh/KonghaYao/jspider/src/Search.js').then((res) => (window.Search = res));
 
 // ES5 可以直接在 script 标签中引入
 ```
@@ -62,19 +60,19 @@ spider.Globals();
 ```js
 let obj = {
     name: [
-        "张三",
-        "李四",
+        '张三',
+        '李四',
         {
-            name: "王五"
-        }
+            name: '王五',
+        },
     ],
     age: 30,
     sex: undefined,
     work: {
-        java: "张六",
-        php: "李六",
-        java: "目录"
-    }
+        java: '张六',
+        php: '李六',
+        java: '目录',
+    },
 };
 
 let spider = new JSpider();
@@ -91,8 +89,8 @@ searchWindow 在 1.0.0 版本中可以使用，但是在 2.0.0 版本中删除�
 
 ```js
 var si = 11;
-var s2 = "中文s";
-var i = ["ss", "ssr", "vv", "sssr"];
+var s2 = '中文s';
+var i = ['ss', 'ssr', 'vv', 'sssr'];
 var spider = new JSpider();
 
 // 不推荐的方式
