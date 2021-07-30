@@ -11,8 +11,8 @@ async function fakeFetch(url, options = {}) {
         const result = await config.proxy(url, options);
         if (result) {
             if (!config.silent) console.warn('fetch: mock代理中');
-            const { body, options = {} } = result;
-            return new fakeResponse(body, options);
+            const { body, headers } = result;
+            return new fakeResponse(body, { headers });
         }
     }
 

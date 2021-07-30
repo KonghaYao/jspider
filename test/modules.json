@@ -1,0 +1,24 @@
+{
+    "imports": {
+        "mobx": "https://ga.jspm.io/npm:mobx@6.3.2/dist/mobx.esm.js",
+        "lodash": "https://ga.jspm.io/npm:lodash@4.17.21/lodash.js",
+        "mitt": "https://ga.jspm.io/npm:mitt@3.0.0/dist/mitt.mjs",
+        "redux": "https://ga.jspm.io/npm:redux@4.1.0/lib/dev.redux.js",
+        "rxjs": "https://ga.jspm.io/npm:rxjs@6.6.6/index.js",
+        "rxjs/operators": "https://ga.jspm.io/npm:rxjs@6.6.6/operators/index.js",
+        "redux-saga": "https://ga.jspm.io/npm:redux-saga@1.1.3/dist/redux-saga-core-npm-proxy.cjs.js",
+        "redux-thunk": "https://ga.jspm.io/npm:redux-thunk@2.3.0/lib/index.js"
+    },
+    "scopes": {
+        "https://ga.jspm.io/": {
+            "@babel/runtime/helpers/extends": "https://ga.jspm.io/npm:@babel/runtime@7.14.8/helpers/extends.js",
+            "@babel/runtime/helpers/objectSpread2": "https://ga.jspm.io/npm:@babel/runtime@7.14.8/helpers/objectSpread2.js",
+            "@babel/runtime/helpers/objectWithoutPropertiesLoose": "https://ga.jspm.io/npm:@babel/runtime@7.14.8/helpers/objectWithoutPropertiesLoose.js",
+            "@redux-saga/core": "https://ga.jspm.io/npm:@redux-saga/core@1.1.3/dist/dev.redux-saga-core.cjs.js",
+            "@redux-saga/deferred": "https://ga.jspm.io/npm:@redux-saga/deferred@1.1.2/dist/redux-saga-deferred.cjs.js",
+            "@redux-saga/delay-p": "https://ga.jspm.io/npm:@redux-saga/delay-p@1.1.2/dist/redux-saga-delay-p.cjs.js",
+            "@redux-saga/is": "https://ga.jspm.io/npm:@redux-saga/is@1.1.2/dist/redux-saga-is.cjs.js",
+            "@redux-saga/symbols": "https://ga.jspm.io/npm:@redux-saga/symbols@1.1.2/dist/redux-saga-symbols.cjs.js"
+        }
+    }
+}

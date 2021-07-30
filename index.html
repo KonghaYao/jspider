@@ -1,103 +1,109 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-    <head>
-        <meta charset="UTF-8" />
-        <title>JSpider 3</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta name="description" content="Description" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/combine/npm/docsify@4/lib/themes/vue.css,npm/prism-themes/themes/prism-material-light.min.css"
-        />
-        <link rel="stylesheet" href="./docs/assets/fonts.css" />
-        <link rel="stylesheet" href="https://unpkg.com/docsify-gifcontrol/dist/docsify-gifcontrol.css" />
-        <link rel="stylesheet" href="./docs/assets/googleIcon.css" />
-        <link rel="stylesheet" href="./docs/assets/index.css" />
-    </head>
 
-    <body>
-        <div id="app"></div>
-    </body>
+<head>
+    <meta charset="UTF-8" />
+    <title>JSpider 3</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/combine/npm/docsify@4/lib/themes/vue.css,npm/prism-themes/themes/prism-material-light.min.css" />
+    <link rel="stylesheet" href="./docs/assets/fonts.css" />
+    <link rel="stylesheet" href="https://unpkg.com/docsify-gifcontrol/dist/docsify-gifcontrol.css" />
+    <link rel="stylesheet" href="./docs/assets/googleIcon.css" />
+    <link rel="stylesheet" href="./docs/assets/index.css" />
 
-    <script src="https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/docsify.min.js"></script>
 
-    <script>
-        window.app = document.getElementById('app');
-        window.$docsify = {
-            name: 'JSpider',
-            repo: 'https://github.com/Konghayao/JSpider',
-            coverpage: true,
-            basePath: './docs/',
-            homepage: './zh-cn/README.md',
 
-            auto2top: true,
-            maxLevel: 3,
-            prettier: {
-                config: {
-                    printWidth: 80,
-                    tabWidth: 4,
-                    useTabs: false,
-                    endOfLine: 'auto',
-                    singleQuote: true,
-                    semi: true,
-                    trailingComma: 'all',
-                    bracketSpacing: true,
-                },
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/docsify.min.js"></script>
+
+<script>
+    window.app = document.getElementById('app');
+    window.$docsify = {
+        name: 'JSpider',
+        repo: 'https://github.com/Konghayao/JSpider',
+        coverpage: true,
+        basePath: './docs/',
+        homepage: './zh-cn/README.md',
+
+        loadSidebar: true,
+        alias: {
+            '/.*/_sidebar.md': '/_sidebar.md',
+        },
+        subMaxLevel: 3,
+
+        sidebarDisplayLevel: 1,
+        auto2top: true,
+        maxLevel: 3,
+        prettier: {
+            config: {
+                printWidth: 80,
+                tabWidth: 4,
+                useTabs: false,
+                endOfLine: 'auto',
+                singleQuote: true,
+                semi: true,
+                trailingComma: 'all',
+                bracketSpacing: true,
             },
-            'cc-license': {
-                lang: 'zh', //zh en ja
-                commercial: 'y', // y or n 允许对您的作品进行商业性使用吗？
-                derivatives: 'y', // y or n or sa 允许您的作品的演绎作品被共享吗？ sa 表示 是的，只要他人以相同方式共享
-            },
-            count: {
-                countable: true,
-                fontsize: '0.9em',
-                color: 'rgb(90,90,90)',
-                language: 'chinese',
-            },
+        },
+        'cc-license': {
+            lang: 'zh', //zh en ja
+            commercial: 'y', // y or n 允许对您的作品进行商业性使用吗？
+            derivatives: 'y', // y or n or sa 允许您的作品的演绎作品被共享吗？ sa 表示 是的，只要他人以相同方式共享
+        },
+        count: {
+            countable: true,
+            fontsize: '0.9em',
+            color: 'rgb(90,90,90)',
+            language: 'chinese',
+        },
 
-            markdown: {
-                smartypants: true,
-                renderer: {
-                    code: function (code, lang, ...args) {
-                        if (lang === 'drawio') {
-                            if (window.drawioConverter) {
-                                console.log('drawio 转化中');
-                                return window.drawioConverter(code);
-                            } else {
-                                return `<div class='drawio-code'>${code}</div>`;
-                            }
+        markdown: {
+            smartypants: true,
+            renderer: {
+                code: function (code, lang, ...args) {
+                    if (lang === 'drawio') {
+                        if (window.drawioConverter) {
+                            console.log('drawio 转化中');
+                            return window.drawioConverter(code);
                         } else {
-                            const prettyCode = window.codeFormatter(code, lang);
-                            return this.origin.code.call(this, prettyCode, lang, ...args);
+                            return `<div class='drawio-code'>${code}</div>`;
                         }
-                    },
+                    } else {
+                        const prettyCode = window.codeFormatter(code, lang);
+                        return this.origin.code.call(this, prettyCode, lang, ...args);
+                    }
                 },
             },
-            plugins: [
-                function (hook, vm) {
-                    // parse twemoji
-                    hook.doneEach(function () {
-                        twemoji.parse(app);
-                    });
-                },
-            ],
-        };
-    </script>
+        },
+        plugins: [
+        ],
+    };
+</script>
 
-    <script type="module" src="https://cdn.jsdelivr.net/npm/docsify-cc-license/docsify-cc-license.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/docsify-cc-license/docsify-cc-license.min.js"></script>
 
-    <!-- drawio 的插件 -->
-    <script src="https://cdn.jsdelivr.net/combine/npm/docsify-drawio/viewer.min.js,npm/docsify-drawio/drawio.min.js"></script>
+<!-- drawio 的插件 -->
+<script
+    src="https://cdn.jsdelivr.net/combine/npm/docsify-drawio/viewer.min.js,npm/docsify-drawio/drawio.min.js"></script>
 
-    <!-- prettier 的插件 -->
-    <script src="https://cdn.jsdelivr.net/combine/npm/prettier/standalone.js,npm/prettier@2.3.2/parser-postcss.js,npm/prettier@2.3.2/parser-babel.js,npm/prettier@2.3.2/parser-html.js,npm/docsify-prettier/prettier.min.js"></script>
+<!-- prettier 的插件 -->
+<script
+    src="https://cdn.jsdelivr.net/combine/npm/prettier/standalone.js,npm/prettier@2.3.2/parser-postcss.js,npm/prettier@2.3.2/parser-babel.js,npm/prettier@2.3.2/parser-html.js,npm/docsify-prettier/prettier.min.js"></script>
 
-    <!-- 其他插件 -->
-    <script src="https://cdn.jsdelivr.net/combine/npm/docsify/lib/plugins/search.min.js,npm/docsify/lib/plugins/emoji.min.js,npm/docsify/lib/plugins/zoom-image.min.js,npm/docsify-copy-code/dist/docsify-copy-code.min.js,npm/docsify-pangu/lib/pangu.min.js"></script>
-    <script src="https://unpkg.com/docsify-count/dist/countable.js"></script>
-    <script src="https://unpkg.com/docsify-gifcontrol/dist/docsify-gifcontrol.js"></script>
+<!-- 其他插件 -->
+<script
+    src="https://cdn.jsdelivr.net/combine/npm/docsify/lib/plugins/search.min.js,npm/docsify/lib/plugins/emoji.min.js,npm/docsify/lib/plugins/zoom-image.min.js,npm/docsify-copy-code/dist/docsify-copy-code.min.js,npm/docsify-pangu/lib/pangu.min.js,npm/docsify-count/dist/countable.js"></script>
+<script src="https://unpkg.com/docsify-gifcontrol/dist/docsify-gifcontrol.js"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+<script type="module" src="./docs/assets/index.js"></script>
 
-    <script type="module" src="./docs/assets/index.js"></script>
 </html>

@@ -1,9 +1,7 @@
-const mitt = require('mitt');
-const { EMPTY, iif, of, from, pipe, fromEventPattern, timer, interval, Observable } = require('rxjs');
-const { Subscription } = require('rxjs');
-
-const { noop } = require('rxjs');
-const {
+// 使用 deno 测试一些 rxjs 相关的东西
+import mitt from 'mitt';
+import { EMPTY, iif, of, from, pipe, fromEventPattern, timer, interval, Observable, noop, Subscription } from 'rxjs';
+import {
     map,
     switchMap,
     mergeAll,
@@ -24,8 +22,7 @@ const {
     takeUntil,
     switchMapTo,
     exhaustMap,
-    concat,
-} = require('rxjs/operators');
+} from 'rxjs/operators';
 const emitter = mitt();
 const pause$ = fromEventPattern((handle) => emitter.on('pause', handle));
 

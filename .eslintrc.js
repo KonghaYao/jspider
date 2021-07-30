@@ -9,9 +9,12 @@ module.exports = {
     extends: ['eslint:recommended', 'prettier', 'google'],
     parser: '@babel/eslint-parser',
     parserOptions: {
-        ecmaVersion: 12,
+        ecmaVersion: latest,
         sourceType: 'module',
         requireConfigFile: false,
+        ecmaFeatures: {
+            experimentalDecorators: true,
+        },
     },
     globals: {
         __version__: true,
