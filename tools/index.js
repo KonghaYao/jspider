@@ -6,4 +6,4 @@
 export * from './analysis/index.js';
 export * from './loader/loader.js';
 export * from './Mock/Mock.js';
-export * from '@FakeServer/parseURL.js';
+export * from '@FakeServer/src/parseURL.js';

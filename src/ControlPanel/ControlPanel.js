@@ -72,10 +72,14 @@ export class ControlPanel {
         });
     }
     startFlow() {
-        this.$EventHub.emit('Flow:start');
+        // 开始流必须要等待其他事件完成
+        this.#runningQueue.enQueue(() => {
+            this.$EventHub.emit('Flow:start');
+        });
     }
 
     stopFlow() {
+        // 关闭流不需要等待其他事件完成
         this.$EventHub.emit('Flow:stop');
     }
 }

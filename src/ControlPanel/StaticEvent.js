@@ -14,6 +14,7 @@ export default {
         this._stop = true;
     },
     'Flow:start'() {
+        console.log('start');
         this._stop = false;
     },
 

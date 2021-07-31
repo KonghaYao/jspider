@@ -4,6 +4,7 @@ import json from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
 import CONFIG from './package.json';
 import livereload from 'rollup-plugin-livereload';
+import babel from '@rollup/plugin-babel';
 import serve from 'rollup-plugin-serve';
 import alias from '@rollup/plugin-alias';
 export default {
@@ -38,6 +39,10 @@ export default {
         resolve({
             browser: true,
         }),
+        // babel({
+        //     exclude: 'node_modules/**', // 仅仅转译我们的源码
+        //     include: 'src',
+        // }),
         commonjs(), // 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
         livereload({ watch: 'dist' }),
         serve({
