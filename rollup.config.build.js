@@ -18,13 +18,19 @@ const plugins = [
     }),
     replace({
         preventAssignment: true,
-        values: { __version__: JSON.stringify(CONFIG.version), __buildDate__: new Date().getTime() },
+        values: {
+            __version__: JSON.stringify(CONFIG.version),
+            __buildDate__: new Date().getTime(),
+            'process.env.NODE_ENV': JSON.stringify(env),
+        },
     }),
     json(),
     resolve({
+        jsnext: true,
         browser: true,
     }),
     commonjs(), // 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
+
     terser(),
     license({
         banner: {

@@ -1,7 +1,7 @@
 /**
- * Response.js
- *
- * Response class provides content decoding
+ * @license
+ * Copyright 2021 KonghaYao 江夏尧 <dongzhongzhidong@qq.com>
+ * SPDX-License-Identifier: Apache-2.0
  */
 
 import Body from './body.js';
@@ -9,13 +9,6 @@ import { extractContentType } from './body/exactContentType.js';
 import { isRedirect } from './utils/is-redirect.js';
 import { RESPONSE as INTERNALS } from './INTERNALS.js';
 const Response = (globalThis.window && globalThis.window.Response) || class Null {};
-/**
- * Response class
- *
- * @param   Stream  body  Readable stream
- * @param   Object  opts  Response options
- * @return  Void
- */
 export default class fakeResponse extends Body {
     constructor(body = null, options = {}) {
         super(body, options);
@@ -48,10 +41,6 @@ export default class fakeResponse extends Body {
     get status() {
         return this[INTERNALS].status;
     }
-
-    /**
-     * Convenience property representing if the request ended normally
-     */
     get ok() {
         return this[INTERNALS].status >= 200 && this[INTERNALS].status < 300;
     }
@@ -90,11 +79,6 @@ export default class fakeResponse extends Body {
         });
     }
 
-    /**
-     * @param {string} url    The URL that the new response is to originate from.
-     * @param {number} status An optional status code for the response (e.g., 302.)
-     * @return {Response}    A Response object.
-     */
     static redirect(url, status = 302) {
         if (!isRedirect(status)) {
             throw new RangeError('Failed to execute "redirect" on "response": Invalid status code');

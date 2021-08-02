@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import staticEvent from './StaticEvent';
-import { TaskManager } from './TaskManager';
+import { TaskManager } from '../Mirror/TaskManager';
 import { functionQueue } from '../utils/functionQueue';
 import { EventHub } from '../utils/EventHub';
 import { pauseToggle } from '../utils/pauseToggle';

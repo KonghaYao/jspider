@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Copyright 2021 KonghaYao 江夏尧 <dongzhongzhidong@qq.com>
+ * SPDX-License-Identifier: Apache-2.0
+ */
 // 每一个 Route 只有一个 main 函数进行数据的返回
 export class Route {
     constructor({ matcher, name, path, callback, redirect = '' }) {

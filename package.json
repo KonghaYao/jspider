@@ -17,7 +17,7 @@
         "lint": "eslint src plugins FakeServer tools",
         "Lint": "npm run Prettier && npm run lint",
         "Prettier": "prettier -w FakeServer/**/*.{ts,json,md,yml,js} plugins/**/*.{ts,json,md,yml,js} src/**/*.{ts,json,md,yml,js} tools/**/*.{ts,json,md,yml,js} docs/**/*.md",
-        "graph": "madge --image docs/assets/dependencies.svg src/index.js",
+        "graph": "madge --image docs/assets/dependencies.svg ./index.js",
         "release": "standard-version",
         "lint-staged": "lint-staged",
         "commitlint": "commitlint --config commitlint.config.js -e -V",
@@ -31,6 +31,16 @@
         "browser",
         "front-end"
     ],
+    "madge": {
+        "webpackConfig": "./script/webpack.config.js",
+        "fileExtensions": [
+            "js",
+            "jsx",
+            "ts",
+            "tsx",
+            "json"
+        ]
+    },
     "husky": {
         "hooks": {
             "pre-commit": "lint-staged",

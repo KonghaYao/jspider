@@ -5,7 +5,7 @@
  */
 /* eslint-disable no-invalid-this */
 import { Task } from '../TaskSystem/Task';
-import { MessageHub } from '../Mirror/Mirror.js';
+import { MessageHub } from './Mirror.js';
 
 // ! 用于维护全局 Task 数据的中心
 export class TaskManager {

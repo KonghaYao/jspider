@@ -21,10 +21,11 @@ export class Spider {
         this.config = {
             logEvery,
         };
-        if (logEvery)
+        if (logEvery) {
             TaskUpdate.subscribe((data) => {
                 console.log(data);
             });
+        }
     }
     crawl(...args) {
         ControlPanel.createFlow(args.flat());

@@ -1,22 +1,13 @@
 /**
- * Body.js
- *
- * Body interface provides common methods for Request and Response
+ * @license
+ * Copyright 2021 KonghaYao 江夏尧 <dongzhongzhidong@qq.com>
+ * SPDX-License-Identifier: Apache-2.0
  */
-
 import { isURLSearchParameters } from './utils/is.js';
 import { BODY as INTERNALS } from './INTERNALS.js';
 
 import { consumeBody } from './body/consumeBody.js';
-/**
- * Body mixin
- *
- * Ref: https://fetch.spec.whatwg.org/#body
- *
- * @param   Stream  body  Readable stream
- * @param   Object  opts  Response options
- * @return  Void
- */
+
 export default class Body {
     constructor(body, { size = 0 } = {}) {
         if (body === null) {
@@ -49,53 +40,26 @@ export default class Body {
         return this[INTERNALS].disturbed;
     }
 
-    /**
-     * Decode response as ArrayBuffer
-     *
-     * @return  Promise
-     */
     async arrayBuffer() {
         const blob = await consumeBody(this[INTERNALS]);
         return blob.arrayBuffer();
     }
 
-    /**
-     * Return raw response as Blob
-     *
-     * @return Promise
-     */
     async blob() {
         return consumeBody(this[INTERNALS]);
     }
 
-    /**
-     * Decode response as json
-     *
-     * @return  Promise
-     */
     async json() {
         const text = await this.text();
         return JSON.parse(text || '{}');
     }
 
-    /**
-     * Decode response as text
-     *
-     * @return  Promise
-     */
     async text() {
         const blob = await consumeBody(this[INTERNALS]);
         return blob.text();
     }
-
-    /**
-     * Decode response as buffer (non-spec api)
-     *
-     * @return  Promise
-     */
 }
 
-// In browsers, all properties are enumerable.
 Object.defineProperties(Body.prototype, {
     body: { enumerable: true },
     bodyUsed: { enumerable: true },
