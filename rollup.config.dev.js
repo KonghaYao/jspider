@@ -7,8 +7,10 @@ import livereload from 'rollup-plugin-livereload';
 import babel from '@rollup/plugin-babel';
 import serve from 'rollup-plugin-serve';
 import alias from '@rollup/plugin-alias';
+
+const env = process.env.NODE_ENV;
 export default {
-    input: 'src/index.js', // 打包入口
+    input: 'index.js', // 打包入口
     output: [
         {
             // 打包出口
@@ -33,18 +35,19 @@ export default {
         }),
         replace({
             preventAssignment: true,
-            values: { __version__: JSON.stringify(CONFIG.version), __buildDate__: new Date().getTime() },
+            values: {
+                __version__: JSON.stringify(CONFIG.version),
+                __buildDate__: new Date().getTime(),
+                'process.env.NODE_ENV': JSON.stringify(env),
+            },
         }),
         json(),
         resolve({
+            jsnext: true,
             browser: true,
         }),
-        babel({
-            exclude: 'node_modules/**', // 仅仅转译我们的源码
-            include: 'src',
-            babelHelpers: 'bundled',
-        }),
         commonjs(), // 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
+
         livereload({ watch: 'dist' }),
         serve({
             openPage: '/test.html',

@@ -2,7 +2,7 @@ import { staticEvent } from './TaskEvent.js';
 import { createTaskStore } from './TaskState.js';
 export class Task {
     _belongTo = null; // 当有 TaskGroup 时，指向 Group
-    constructor(_originData, _spiderUUID) {
+    constructor(originData, spiderUUID) {
         this.$EventHub = new EventHub(staticEvent, this);
 
         // 由 store 验证相关的正确性

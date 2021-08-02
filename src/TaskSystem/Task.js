@@ -1,29 +1,18 @@
-/**
- * @license
- * Copyright 2021 KonghaYao 江夏尧 <dongzhongzhidong@qq.com>
- * SPDX-License-Identifier: Apache-2.0
- */
-import { EventHub } from '../utils/EventHub';
-import { staticEvent } from './StaticEvent';
-import { Data } from './Data'; // 属性信息归属于 Data
-
-// 这个 Task 是模板类，如果需要进行业务功能的实现，必须先继承它，然后 super 相应的东西
-export class Task extends Data {
+import { createTaskStore } from './TaskState.js';
+import { EventHub } from '../utils/EventHub.js';
+export class Task {
     _belongTo = null; // 当有 TaskGroup 时，指向 Group
-    constructor(data, spiderUUID) {
-        super(data);
-
-        this.$EventHub = new EventHub(staticEvent, this);
-
-        // UUID 信息
-        if (!spiderUUID) throw new Error('没有指定的spider UUID');
-        this._spiderUUID = spiderUUID;
+    constructor(originData, spiderUUID) {
+        this.$EventHub = new EventHub({}, this);
+        // 由 store 验证相关的正确性
+        this.$store = createTaskStore({ spiderUUID, originData });
     }
 
     // Plugin 的汇报口
     $commit(type, ...payload) {
-        const result = this.$EventHub.emit(type, ...payload);
-        return result[result.length - 1]; // 由于触发的顺序是函数堆栈，所以最后一个才是定义函数
+        const result = this.$store[type](...payload);
+        this.$EventHub.emit(type, ...payload);
+        return result;
     }
 
     // 外部系统的监控口
@@ -34,12 +23,14 @@ export class Task extends Data {
         return this.$EventHub.off(...args);
     }
     $isSameTask(task) {
-        return task._spiderUUID === this._spiderUUID && task._uuid === this._uuid;
+        return task.$store.spiderUUID === this.$store.spiderUUID && task.$store.uuid === this.$store.uuid;
     }
     $checkRepeat(uuid) {
-        return this._progress.has(uuid);
+        return this.$store.dataSlide.includes(uuid);
     }
     $destroy() {
+        this._belongTo = null;
+        this.$off('*');
         this.$commit('destroy'); // 通知外部，该 Task 被销毁
     }
     get [Symbol.toStringTag]() {

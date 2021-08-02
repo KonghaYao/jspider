@@ -8,6 +8,14 @@ import replace from '@rollup/plugin-replace';
 import CONFIG from './package.json';
 import alias from '@rollup/plugin-alias';
 const plugins = [
+    alias({
+        entries: {
+            '@tools': './tools',
+            '@src': './src',
+            '@plugins': './plugins',
+            '@FakeServer': './FakeServer',
+        },
+    }),
     replace({
         preventAssignment: true,
         values: { __version__: JSON.stringify(CONFIG.version), __buildDate__: new Date().getTime() },
@@ -28,7 +36,7 @@ const plugins = [
 ];
 export default [
     {
-        input: 'src/index.js', // 通用版本打包
+        input: 'index.js', // 通用版本打包
         plugins: [del({ targets: 'dist/*' }), ...plugins],
         output: [
             {
