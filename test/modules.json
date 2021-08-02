@@ -1,6 +1,6 @@
 {
     "imports": {
-        "mobx": "https://ga.jspm.io/npm:mobx@6.3.2/dist/mobx.esm.js",
+        "mobx": "https://ga.jspm.io/npm:mobx@6.3.2/dist/mobx.esm.production.min.js",
         "lodash": "https://ga.jspm.io/npm:lodash@4.17.21/lodash.js",
         "mitt": "https://ga.jspm.io/npm:mitt@3.0.0/dist/mitt.mjs",
         "redux": "https://ga.jspm.io/npm:redux@4.1.0/lib/dev.redux.js",

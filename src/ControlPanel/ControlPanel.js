@@ -16,7 +16,7 @@ import { pauseToggle } from '../utils/pauseToggle';
 
 export class ControlPanel {
     state = 'free'; // 'free' 'preparing'
-    #runningQueue = new functionQueue(); // init 阶段的 Queue 队列
+    #runningQueue = new functionQueue(); // 异步 Queue 队列
     _stop = false; // 用于直接切断 spiderSource$ 的流
     spiderSource$ = null;
     _pipeline = null;
@@ -61,7 +61,7 @@ export class ControlPanel {
         }
     }
 
-    // startInfo --TaskManager.createTask--> Task --emit--EventHub--> Flow
+    // |startInfo| - TaskManager.createTask -> |Task| - emit EventHub -> |Flow|
     createFlow(infos) {
         return this.#runningQueue.enQueue(() => {
             infos.forEach((info) => {

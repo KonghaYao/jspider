@@ -39,10 +39,11 @@ export default {
         resolve({
             browser: true,
         }),
-        // babel({
-        //     exclude: 'node_modules/**', // 仅仅转译我们的源码
-        //     include: 'src',
-        // }),
+        babel({
+            exclude: 'node_modules/**', // 仅仅转译我们的源码
+            include: 'src',
+            babelHelpers: 'bundled',
+        }),
         commonjs(), // 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
         livereload({ watch: 'dist' }),
         serve({

@@ -10,9 +10,9 @@
 
 -   完整的 JSpider 编程逻辑框架出图
 
-    -   [ ] JSpider 中的数据流系统
+    -   [x] JSpider 中的数据流系统
 
-    -   [ ] JSpider 中的事件系统
+    -   [x] JSpider 中的事件系统
 
     -   [ ] JSpider 需要实现 MVVM 模型来实现爬虫系统的可视化
 
@@ -20,7 +20,7 @@
 
     -   [x] Control Panel 暂停功能
 
-    -   [ ] Control Panel 重试功能（非流内自动重试）
+    -   [x] Control Panel 重试功能（非流内自动重试）
 
 -   重构 plugins
     -   [ ] plugins 分包导入
