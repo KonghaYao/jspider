@@ -10,16 +10,21 @@
  * @Last Modified time: 2021-07-19 16:34:32
  */
 // Spider 是 JSpider 的爬虫流程工具，主要目的是爬取文件，负责如何爬取文件与数据。
-import { EventHub } from '../utils/EventHub.js';
-import { staticEvent } from './staticEvent';
+
 import { Pipeline } from '../Pipeline/index';
 import ControlPanel from '../ControlPanel/index.js';
+import { TaskUpdate } from '../Mirror/Mirror.js';
 
-// TODO 未完成接口的接入
+// Spider 是 Console 的数据放送
 export class Spider {
-    constructor(config = {}) {
-        this.config = config;
-        this.$EventHub = new EventHub(staticEvent, this); // 注册静态事件
+    constructor({ logEvery = false } = {}) {
+        this.config = {
+            logEvery,
+        };
+        if (logEvery)
+            TaskUpdate.subscribe((data) => {
+                console.log(data);
+            });
     }
     crawl(...args) {
         ControlPanel.createFlow(args.flat());

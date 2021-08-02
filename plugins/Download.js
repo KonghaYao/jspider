@@ -32,6 +32,7 @@ const download = (data, { DownloadFileName: name }, originData) => {
 };
 export const Download = function (options = {}) {
     return Plugin({
+        name: 'Download',
         main: download,
         options,
     });

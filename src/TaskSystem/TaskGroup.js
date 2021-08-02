@@ -29,8 +29,7 @@ export class TaskGroup extends Task {
     // 删除所有的 link
     $destroy() {
         const copy = [...this._originData];
-        // 不进行事件的扩散
-        this.$EventHub.emit('destroy');
+        this.$EventHub.emit('destroy'); // 不进行事件的扩散, 只是自身的报销
         return copy;
     }
     // 单独删除一个连接

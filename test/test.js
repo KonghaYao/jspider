@@ -23,43 +23,14 @@ import {
     switchMapTo,
     exhaustMap,
 } from 'rxjs/operators';
-const emitter = mitt();
-const pause$ = fromEventPattern((handle) => emitter.on('pause', handle));
 
-function pauseToggle(openings, closings) {
-    return (observable) =>
-        new Observable((subscriber) => {
-            const buffers = new Set();
-            let closingSubscription = false;
-            const subscription = observable.subscribe(
-                (value) => {
-                    closingSubscription ? buffers.add(value) : subscriber.next(value);
-                },
-                noop,
-                () => {
-                    buffers.forEach((item) => subscriber.next(item));
-                    subscriber.complete();
-                },
-            );
-
-            const openingSubscription = openings.subscribe(() => {
-                const emitBuffer = () => {
-                    buffers.forEach((item) => subscriber.next(item));
-                    buffers.clear();
-                    closingSubscription.unsubscribe();
-                    closingSubscription = false;
-                };
-                closingSubscription = closings.subscribe(emitBuffer);
-            });
-            return () => {
-                buffers.clear();
-                subscription.unsubscribe();
-                openingSubscription.unsubscribe();
-                if (closingSubscription) closingSubscription.unsubscribe();
-            };
-        });
-}
-const source$ = interval(100).pipe(take(14), pauseToggle(interval(500), interval(200)));
+function a() {}
+const source$ = fromEventPattern(
+    (handle) => {
+        a(handle);
+    },
+    () => {},
+);
 
 const startTime = new Date().getTime();
 const compare = () => Math.ceil((new Date().getTime() - startTime) / 100);

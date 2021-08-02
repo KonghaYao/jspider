@@ -11,6 +11,7 @@ import { init } from './ExcelHelper/xlsx.js';
 // ExcelHelper 是将 Object => Book => File 用于下载的一个库
 export const ExcelHelper = function (formatter, options = {}) {
     return Plugin({
+        name: 'ExcelHelper',
         init,
         options,
         main(data) {

@@ -17,6 +17,7 @@ export const ZipFile = function (options = {}) {
     if (!options.zipFileName) options.zipFileName = new Date().getTime();
     return Plugin({
         init,
+        name: 'zipFile',
         main(data) {
             const { zipFileName } = this.options;
             const files = data.map((blob) => toFile(blob, zipFileName));

@@ -66,6 +66,7 @@ function HandleError(err) {
 export function Request(options = {}) {
     return Plugin({
         init() {}, // 在所有工作开始前会启动的函数，可以用于 Promise 加载一些 js 插件
+        name: 'Request', // 这个 name 是负责进行监控的标志符号
         main: request, // 功能性的核心函数
         options, // 接收所有的参数，提供给所有函数使用
 

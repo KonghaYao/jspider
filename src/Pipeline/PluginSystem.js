@@ -42,12 +42,10 @@ class PLUGIN {
         options = {},
         operator,
     }) {
-        const uuid = createUUID(main.toString());
         if (operator) this.operator = operator;
         // 写入自身中
         Object.assign(this, {
-            name: name || uuid, // 名称，一般用作提示标记
-            uuid, // 唯一标识
+            name, // 名称，一般用作提示标记
             main, // Plugin 中的功能性函数
             init, // 初始化整个 Plugin 的函数
             error, // 函数错误时的事件
@@ -57,7 +55,9 @@ class PLUGIN {
             forceRetry, // 是否强制重新使用 Plugin
         });
     }
-
+    initUUID(index) {
+        this.uuid = createUUID(this.main.toString() + index);
+    }
     // 对 main 函数外包一层，直接启动 main 函数的执行，返回一条流
     TaskStarter(task) {
         return of(task).pipe(

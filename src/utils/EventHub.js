@@ -5,6 +5,7 @@
  */
 import { fromEventPattern } from 'rxjs';
 import { memoize } from 'lodash-es';
+import { share } from 'rxjs/operators';
 
 /**
  *  EventHub 是一个事件处理中心，用于事件的接收与派发
@@ -21,7 +22,7 @@ export class EventHub {
             return fromEventPattern(
                 (handle) => this.on(eventName, handle),
                 (handle) => this.off(eventName, handle),
-            );
+            ).pipe(share());
         });
     }
 
@@ -72,7 +73,6 @@ export class EventHub {
         }
     }
     emit(type, ...eventParams) {
-        console.log(type);
         const handlers = this.all.get(type);
         return handlers
             ? handlers.map((handler) => {

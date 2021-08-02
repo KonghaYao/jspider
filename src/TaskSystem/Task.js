@@ -10,6 +10,8 @@ export class Task {
 
     // Plugin 的汇报口
     $commit(type, ...payload) {
+        // 遵循内先外后的函数触发
+
         const result = this.$store[type](...payload);
         this.$EventHub.emit(type, ...payload);
         return result;
@@ -30,8 +32,8 @@ export class Task {
     }
     $destroy() {
         this._belongTo = null;
-        this.$off('*');
-        this.$commit('destroy'); // 通知外部，该 Task 被销毁
+        this.$commit('destroy'); // 先通知外部，该 Task 被销毁
+        this.$EventHub.off('*'); // 后进行自身销毁
     }
     get [Symbol.toStringTag]() {
         return 'Task';

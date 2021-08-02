@@ -18,6 +18,7 @@ const Parser = function (string, func, documentType = 'text/html') {
 };
 export function HTMLParser(callback, options = {}) {
     return Plugin({
+        name: 'HTMLParser',
         options,
         main(data) {
             const { formatter, documentType } = this.options;

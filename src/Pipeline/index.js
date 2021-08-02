@@ -12,18 +12,26 @@ export class Pipeline {
         this.Plugins = Plugins;
     }
     UUID = null; // 唯一的标识
-    operator = null; // 主要被引用的 operator
+    operator = null; // 组合起来的最终的 operator
+    pluginUUIDMap = new Map();
 
     #PluginQueue = new functionQueue(); // 准备 Plugin 中的异步 init 事件
     preparePipeline() {
         let uuidString = '';
         // ! 一次遍历实现取出 operator 和 导出 plugin init 函数的 promise 链，并延长 uuidString 用于创建 UUID
-        const pipeline = this.Plugins.map((plugin) => {
-            uuidString += plugin.operator.toString();
+        const pipeline = this.Plugins.map((plugin, index) => {
+            uuidString += plugin.main.toString();
 
             if (plugin.init instanceof Function) {
                 this.#PluginQueue.enQueue(plugin.init);
             }
+
+            // 需要注入 index 表示这个程序的位置
+            plugin.initUUID(index);
+
+            // 保存 uuid 的映射
+            this.pluginUUIDMap.set(plugin.uuid, plugin?.name || plugin.uuid);
+
             // 将 plugin 中的 operator 注入 pipeline 中
             return plugin.operator(this);
         });
