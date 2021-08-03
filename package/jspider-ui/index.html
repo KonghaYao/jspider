@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>jspider-vue</title>
+</head>
+
+<body>
+    <div id="app">
+        <js-spider></js-spider>
+    </div>
+
+</body>
+<script src="./lib/vue.min.js"></script>
+<script type='module'>
+    import App from './dist/jspider-user-interface.js'
+    import Mock from './lib/mock.esm.js'
+    const Mirror = Mock.mock({
+        "tasks|10": [{
+
+        }]
+    })
+    new Vue({
+        el: '#app',
+        components: {
+            "js-spider": App
+        },
+        data: {
+            views: Mirror
+        }
+    })
+</script>
+
+</html>
