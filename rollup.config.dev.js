@@ -4,11 +4,9 @@ import json from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
 import CONFIG from './package.json';
 import livereload from 'rollup-plugin-livereload';
-import babel from '@rollup/plugin-babel';
 import serve from 'rollup-plugin-serve';
 import alias from '@rollup/plugin-alias';
 
-const env = process.env.NODE_ENV;
 export default {
     input: 'index.js', // 打包入口
     output: [
@@ -38,7 +36,7 @@ export default {
             values: {
                 __version__: JSON.stringify(CONFIG.version),
                 __buildDate__: new Date().getTime(),
-                'process.env.NODE_ENV': JSON.stringify(env),
+                'process.env.NODE_ENV': JSON.stringify('production'),
             },
         }),
         json(),

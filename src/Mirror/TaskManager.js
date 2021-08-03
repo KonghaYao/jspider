@@ -26,7 +26,9 @@ export class TaskManager {
         });
         ['start', 'success', 'complete', 'error'].forEach((name) => {
             task.$on(name, function () {
-                MessageHub.emit('TaskUpdate', this.$store.$backup());
+                const backup = this.$store.$backup();
+
+                MessageHub.emit('TaskUpdate', backup);
             });
         });
         this.viewModel.push(task.$store);

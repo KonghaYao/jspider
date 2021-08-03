@@ -15,7 +15,9 @@ const urls = [...Array(5).keys()].map((i, index) => {
 
 export async function main() {
     // 初始化需要初始化的插件
-    const spider = new JSpider();
+    const spider = new JSpider({
+        logEvery: true,
+    });
     spider.pipeline(
         Request({ delay: 2000, buffer: 2, retry: 3, handleError: null }),
 
@@ -34,4 +36,5 @@ export async function main() {
     );
     spider.crawl(urls);
     spider.start();
+    return spider;
 }

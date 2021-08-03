@@ -14,7 +14,21 @@
 import { Pipeline } from '../Pipeline/index';
 import ControlPanel from '../ControlPanel/index.js';
 import { TaskUpdate } from '../Mirror/Mirror.js';
-
+class View {
+    constructor() {}
+    tasks = [];
+    #uuidArray = [];
+    _update(data) {
+        const index = this.#uuidArray.indexOf(data.uuid);
+        if (index === -1) {
+            this.#uuidArray.push(data.uuid);
+            this.tasks.push(data);
+        } else {
+            // 并不是直接赋值，而是通过数组的 splice 方式进行数组的更新，这样可以方便 Vue 渲染
+            this.tasks.splice(index, 1, data);
+        }
+    }
+}
 // Spider 是 Console 的数据放送
 export class Spider {
     constructor({ logEvery = false } = {}) {
@@ -23,10 +37,11 @@ export class Spider {
         };
         if (logEvery) {
             TaskUpdate.subscribe((data) => {
-                console.log(data);
+                this.views._update(data);
             });
         }
     }
+    views = new View();
     crawl(...args) {
         ControlPanel.createFlow(args.flat());
         return this;

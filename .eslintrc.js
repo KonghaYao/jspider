@@ -19,6 +19,7 @@ module.exports = {
     globals: {
         __version__: true,
         __buildDate__: true,
+        process: true,
     },
     rules: {
         'prettier/prettier': ['error'],

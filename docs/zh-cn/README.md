@@ -1,4 +1,4 @@
-# JSpider 3 BETA
+# JSpider 3
 
 > JSpider 3 是在 Chrome Devtools 中进行爬虫的爬虫框架，这个框架包括了完整的爬虫支持。
 
@@ -6,55 +6,40 @@
 
 ### 极速爬取
 
-> 3.2.0 版本后开始使用
-
 只有简单的几行，适用于极速操作，这会直接将这些 URL 中的内容下载到本地。
 
 > 右键 -> 检查，打开浏览器 Devtools，在 Console 中即可使用这些代码哦！
 > **请打开浏览器开发者工具，网页已经载入了 JSpider，并创建了虚拟后台。**
 > 这里是通过 Mockjs 对 URL 进行了代理，所以接收得到数据。
 
+## 快速入门
+
+### 自定义爬取
+
 ```js
-// 从 jsDelivr 导入代码
-import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then(({ default: JSpider }) => {
+await import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then({JSpider}=>{
     window.JSpider = JSpider;
-    // 放入您的 URL
-    JSpider.simpleCrawl(['fake/excel', 'fake/excel']);
 });
-```
 
-### 更加高级的自定义爬取
-
-```js
+// 导入插件，JSpider 还有很多功能插件
 const {
     Request, // 请求库
     Download, // 下载库
-    ExcelHelper, // 转换数据为表格数据的插件
 } = JSpider.plugins;
-const { Plugin } = JSpider;
 
-// 您的爬取路径代码
-let urls = [...Array(5).keys()].map((i, index) => {
-    return { url: '/fake/excel' };
-});
+let urls = ['https://.....']// 您的爬取路径数组
 
-//! 这些是主要代码
-const spider = new JSpider();
-spider.pipeline(
+const spider = new JSpider(
     Request(),
-    // 您可以使用这种方式进行自定义插件代码
     Plugin((data) => {
-        console.log(data);
+        data
         return data;
     }),
-    ExcelHelper({
-        XLSXOptions: {
-            bookType: 'csv', // 可以指定为 csv 或者 xlsx
-        },
-    }),
-    Download(),
+    Download()
 );
-spider.crawl(urls).start();
+spider.crawl(urls);
+spider.start();
+// 等待下载完成！
 ```
 
 > [更多自定义代码教程](/zh-cn/quickstart)
@@ -85,15 +70,15 @@ JSpider 未来的目标是兼容 NodeJS 平台和浏览器，让一套代码运�
 
 ## **对于 JSpider 使用的库的感谢声明**
 
-JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm 和 jsDelivr 网站两个来源载入。排名不分先后，只是记录个人对于这些库的使用体验。
+JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm 和 jsDelivr 网站两个来源载入。排序为乱序 :) 。
 
 1. [Rxjs](https://github.com/ReactiveX/rxjs) 十分好用的响应式编程库，以至于 JSpider 的主要构架就是使用它写出来的。
 
 2. [Rollup](https://github.com/rollup/rollup) 代码打包库，使用 Rollup 打包的库为我的项目节省了很多时间。
 
-3. [Mockjs](https://github.com/nuysoft/Mock) 很有想法的一个前端数据代理库，很可惜的是没有提供 fetch 的代理，所以我自己重做了这个库 ——[ Mockjs-esm](https://www.npmjs.com/package/mockjs-esm)。
+3. [mobx](https://cn.mobx.js.org/) 和 [mobx-state-tree](https://mobx-state-tree.js.org/intro/welcome) JSpider 在底层使用了 mobx-state-tree 作为数据的状态管理，实现了十分良好的数据管理。
 
-4. [Mockjs-esm](https://www.npmjs.com/package/mockjs-esm) 我自己制作的 Mockjs esm 重构版本，并添加了新功能，JSpider 使用的也是这个版本的 Mockjs。
+4. [Mockjs](https://github.com/nuysoft/Mock) 很有想法的一个前端数据代理库，很可惜的是没有提供 fetch 的代理，所以我自己重做了这个库 ——[ Mockjs-esm](https://www.npmjs.com/package/mockjs-esm)。
 
 5. [lodash-es](https://github.com/lodash/lodash) 无敌的工具库，在一些比较常用的底层代码中有使用。
 
@@ -101,7 +86,7 @@ JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm �
 
 7. [jszip](https://www.npmjs.com/package/jszip) 用于制作压缩文件的插件，十分好用。
 
-8. [dexie](https://www.npmjs.com/package/dexie) JSpider 得以链接 indexedDB 进行储存操作的救星，说实话 indexedDB 的 API 很专业，可以进行很多的操作。
+8. [dexie.js](https://www.npmjs.com/package/dexie) JSpider 得以链接 indexedDB 进行储存操作的救星，说实话 indexedDB 的 API 很专业，可以进行很多的操作。
 
 9. [zangodb](https://www.npmjs.com/package/zangodb) 这个也是对 indexedDB 的数据操作的一个库，API 简单易用，但是在项目中选择了更为活跃的 dexie.js 进行了 indexedDB 的链接。
 
@@ -111,16 +96,16 @@ JSpider 项目研究过程中使用到了这些库。源代码文件通过 npm �
 
 12. [docsify](https://www.npmjs.com/package/docsify) 基于 Vue 的很好用的前端文档网页生成工具，由于本身的扩展性较好，所以添加了一些功能。
 
-    1. [docsify-drawio](https://www.npmjs.com/package/docsify-drawio) 在 JSpider 文档里面的那些流程图都是使用 drawio 现场绘制的，也是我的一个开源项目。
+    1. [docsify-drawio](https://www.npmjs.com/package/docsify-drawio) 在 JSpider 文档里面的那些流程图都是使用 [draw.io](https://github.com/jgraph/drawio) 现场绘制的，也是我的一个开源项目。
     2. [docsify-prettier](https://www.npmjs.com/package/docsify-prettier) 也是我的一个开源项目，用于格式化文档中的代码块中的代码格式的插件。
     3. [docsify-copy-code](https://www.npmjs.com/package/docsify-copy-code) 在代码块旁边添加复制代码按钮。
     4. [docsify-count](https://www.npmjs.com/package/docsify-count) 显示文章文字数目的插件。
     5. [docsify-pangu](https://www.npmjs.com/package/docsify-pangu) 格式化常规网页文本的插件。
     6. [docsify-cc-license](https://www.npmjs.com/package/docsify-cc-license) 用于显示知识共享标识的文件。
 
-13. [draw.io](https://github.com/jgraph/drawio) 是我用来绘制流程图的一个工具库，很好用，配合 docsify-drawio 可以直接在仓库中引用 drawio 文件，并展示。
+13. [mitt](https://github.com/developit/mitt) JSpider 中的 EventHub 的思想借鉴了 mitt 的设计。
 
-14. [mitt](https://github.com/developit/mitt) EventHub 的思想借鉴了 mitt 的设计，JSpider 做出了相应的改动。
+14. [madge](https://github.com/pahen/madge/) madge 用于绘制 JSpider 代码的依赖关系。
 
 **感谢上面的项目为 JSpider 的丰富功能提供了众多的帮助！**
 
