@@ -2,7 +2,7 @@
     "name": "@js-spider/user-interface",
     "description": "A Vue.js project",
     "version": "1.0.0",
-    "author": "KonghaYao <20192831006@m.scnu.edu.cn>",
+    "author": "KonghaYao <dongzhongzhidong@qq.com>",
     "license": "MIT",
     "private": true,
     "main": "dist/jspider-user-interface.js",

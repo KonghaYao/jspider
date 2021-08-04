@@ -5,29 +5,32 @@ import replace from '@rollup/plugin-replace';
 import CONFIG from './package.json';
 import livereload from 'rollup-plugin-livereload';
 import serve from 'rollup-plugin-serve';
-import vue from 'rollup-plugin-vue'
-import postcss from 'rollup-plugin-postcss'
+import vue from 'rollup-plugin-vue';
+import postcss from 'rollup-plugin-postcss';
 export default {
     input: 'src/index.js', // 打包入口
-    output:
-        {
-            // 打包出口
-            file: './dist/jspider-user-interface.js',
-            format: 'es',
-        },
+    output: {
+        // 打包出口
+        file: './dist/jspider-user-interface.js',
+        format: 'es',
+    },
+    global: {
+        Vue: 'Vue',
+        Vuex: 'Vuex',
+    },
     plugins: [
         vue({
             // 把单文件组件中的样式，插入到html中的style标签
             css: true,
             // 把组件转换成 render 函数
-            compileTemplate: true
-          }),
-          postcss({
+            compileTemplate: true,
+        }),
+        postcss({
             // 把 css 插入到 style 中
             // inject: true,
             // 把 css 放到和js同一目录
-            extract: true
-          }),
+            extract: true,
+        }),
         replace({
             preventAssignment: true,
             values: { __version__: JSON.stringify(CONFIG.version), __buildDate__: new Date().getTime() },

@@ -4,28 +4,63 @@
 <head>
     <meta charset="utf-8">
     <title>jspider-vue</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            border: 0;
+            padding: 0;
+        }
+
+        #app {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
-        <js-spider></js-spider>
+        <js-spider :view='views'></js-spider>
     </div>
 
 </body>
-<script src="./lib/vue.min.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/combine/npm/vue@2.6.14/dist/vue.min.js,npm/vuex@3.6.2/dist/vuex.min.js,npm/animejs@3.2.1/lib/anime.min.js,npm/vant@2.12/lib/vant.min.js"></script>
 <script type='module'>
     import App from './dist/jspider-user-interface.js'
     import Mock from './lib/mock.esm.js'
     const Mirror = Mock.mock({
         "tasks|10": [{
-
+            uuid: "@guid()",
+            spiderUUID: "0000000000",
+            createdAt: '@date()',
+            errorMessage: '',
+            'status|1': ['free', 'pending', 'success'],
+            updatedAt: '@date()',
+            dataSlideUUID: "0000000000",
+            dataSlide: [],
+            originData: {
+                url: '@url()'
+            },
+            output: {
+                title: '@ctitle()',
+                paragraph: '@cparagraph()'
+            }, // 每个中间件传出的数据
         }]
     })
+    console.log(Mirror)
+    Vue.use(App)
     new Vue({
         el: '#app',
-        components: {
-            "js-spider": App
-        },
+
         data: {
             views: Mirror
         }
