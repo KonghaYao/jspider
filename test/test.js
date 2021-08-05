@@ -1,5 +1,7 @@
 // 使用 deno 测试一些 rxjs 相关的东西
 import mitt from 'mitt';
+import { AsyncSubject } from 'rxjs';
+import { bindCallback } from 'rxjs';
 import { EMPTY, iif, of, from, pipe, fromEventPattern, timer, interval, Observable, noop, Subscription } from 'rxjs';
 import {
     map,
@@ -24,14 +26,10 @@ import {
     exhaustMap,
 } from 'rxjs/operators';
 
-function a() {}
-const source$ = fromEventPattern(
-    (handle) => {
-        a(handle);
-    },
-    () => {},
-);
-
+function a(callback) {
+    callback(a);
+}
+const source$ = bindCallback(a);
 const startTime = new Date().getTime();
 const compare = () => Math.ceil((new Date().getTime() - startTime) / 100);
 source$.subscribe((val) => console.log(compare(), val));

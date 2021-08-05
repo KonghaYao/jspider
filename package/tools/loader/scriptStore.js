@@ -22,4 +22,8 @@ export default {
         'https://unpkg.com/react@16/umd/react.production.min.js',
         'https://unpkg.com/react-dom@16/umd/react-dom.production.min.js',
     ],
+    vue: [
+        'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js',
+        'https://cdn.jsdelivr.net/npm/vuex@3.6.2/dist/vuex.min.js',
+    ],
 };

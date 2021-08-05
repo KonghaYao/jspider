@@ -34,6 +34,9 @@ const TaskStore = types
             },
 
             start() {
+                if (self.status === 'pending') throw new Error('Task 处在 pending 状态');
+                self.dataSlide = [];
+                self.dataSlideUUID = '';
                 self.status = 'pending';
                 return self.output || self.originData;
             },

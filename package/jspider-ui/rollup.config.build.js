@@ -6,37 +6,44 @@ import del from 'rollup-plugin-delete';
 import json from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
 import CONFIG from './package.json';
-
+import vue from 'rollup-plugin-vue';
 export default [
     {
         input: 'src/index.js', // 通用版本打包
-        plugins: [del({ targets: 'dist/*' }),  vue({
-            // 把单文件组件中的样式，插入到html中的style标签
-            css: true,
-            // 把组件转换成 render 函数
-            compileTemplate: true
-          }),
-        replace({
-            preventAssignment: true,
-            values: { __version__: JSON.stringify(CONFIG.version), __buildDate__: new Date().getTime() },
-        }),
-        json(),
-        resolve({
-            browser: true,
-        }),
-        commonjs(), // 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
-        terser(),
-        license({
-            banner: {
-                content: {
-                    file: './LICENSE',
+        plugins: [
+            del({ targets: 'dist/*' }),
+            vue({
+                // 把单文件组件中的样式，插入到html中的style标签
+                css: true,
+                // 把组件转换成 render 函数
+                compileTemplate: true,
+            }),
+            replace({
+                preventAssignment: true,
+                values: {
+                    __version__: JSON.stringify(CONFIG.version),
+                    __buildDate__: new Date().getTime(),
+                    'process.env.NODE_ENV': JSON.stringify('production'),
                 },
-            },
-        }),],
-        output:{
+            }),
+            json(),
+            resolve({
+                browser: true,
+            }),
+            commonjs(), // 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
+            terser(),
+            license({
+                banner: {
+                    content: {
+                        file: './LICENSE',
+                    },
+                },
+            }),
+        ],
+        output: {
             // 打包出口
             file: './dist/jspider-user-interface.js',
             format: 'es',
-        }
+        },
     },
 ];

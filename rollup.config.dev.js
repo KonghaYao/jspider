@@ -25,10 +25,10 @@ export default {
     plugins: [
         alias({
             entries: {
-                '@tools': './tools',
+                '@tools': './package/tools',
                 '@src': './src',
-                '@plugins': './plugins',
-                '@FakeServer': './FakeServer',
+                '@plugins': './package/plugins',
+                '@FakeServer': './package/FakeServer',
             },
         }),
         replace({

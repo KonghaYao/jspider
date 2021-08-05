@@ -6,7 +6,11 @@
 /* eslint-disable no-invalid-this */
 import { Task } from '../TaskSystem/Task';
 import { MessageHub } from './Mirror.js';
+function bindUpdate() {
+    const backup = this.$store.$backup();
 
+    MessageHub.emit('TaskUpdate', backup);
+}
 // ! 用于维护全局 Task 数据的中心
 export class TaskManager {
     #Tasks = new Map(); // 用于维护所有的 Task
@@ -19,18 +23,16 @@ export class TaskManager {
         this.#Tasks.set(task.uuid, task);
         const that = this;
         task.$on({
+            start: bindUpdate,
+            success: bindUpdate,
+            complete: bindUpdate,
+            error: bindUpdate,
             // 监听事件，并更新响应的 viewModel
             destroy() {
                 that.#Tasks.delete(this.uuid); // this 绑定的是 task
             },
         });
-        ['start', 'success', 'complete', 'error'].forEach((name) => {
-            task.$on(name, function () {
-                const backup = this.$store.$backup();
 
-                MessageHub.emit('TaskUpdate', backup);
-            });
-        });
         this.viewModel.push(task.$store);
         return task;
     }

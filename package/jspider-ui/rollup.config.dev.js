@@ -4,7 +4,6 @@ import json from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
 import CONFIG from './package.json';
 import livereload from 'rollup-plugin-livereload';
-import serve from 'rollup-plugin-serve';
 import vue from 'rollup-plugin-vue';
 import postcss from 'rollup-plugin-postcss';
 export default {
@@ -33,7 +32,11 @@ export default {
         }),
         replace({
             preventAssignment: true,
-            values: { __version__: JSON.stringify(CONFIG.version), __buildDate__: new Date().getTime() },
+            values: {
+                __version__: JSON.stringify(CONFIG.version),
+                __buildDate__: new Date().getTime(),
+                'process.env.NODE_ENV': JSON.stringify('production'),
+            },
         }),
         json(),
         resolve({
@@ -41,9 +44,5 @@ export default {
         }),
         commonjs(), // 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
         livereload({ watch: 'dist' }),
-        serve({
-            open: 'true',
-            port: '8888',
-        }),
     ],
 };

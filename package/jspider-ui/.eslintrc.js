@@ -23,7 +23,6 @@ module.exports = {
         indent: 0, // prettier 已经处理好了
         'object-curly-spacing': 0, // prettier 自动格式化这个部分
         'max-len': ['error', 120],
-        'operator-linebreak': ['error', 'before'],
         'quote-props': ['error', 'as-needed'],
         'operator-linebreak': 0,
         'no-unused-vars': 1,

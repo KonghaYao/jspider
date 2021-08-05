@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const loaderFunction = {
+    // 加载 js 文件到 html 文档中
     script(url) {
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');
@@ -18,6 +19,7 @@ const loaderFunction = {
             document.body.append(script);
         });
     },
+    // 加载 css 文件到 html 文档中
     css(url) {
         return new Promise((resolve, reject) => {
             const style = document.createElement('style');

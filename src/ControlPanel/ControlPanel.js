@@ -8,14 +8,13 @@ import { TaskManager } from '../Mirror/TaskManager';
 import { functionQueue } from '../utils/functionQueue';
 import { EventHub } from '../utils/EventHub';
 import { pauseToggle } from '../utils/pauseToggle';
-
 // ControlPanel 是 JSpider 内部的事件和数据中心。
 // 全部 JSpider 涉及到的边界中，ControlPanel 只有一个，但是 View 可以有多个，而 Spider 就是 View 中的一个
 // 用于分发数据流，提供 Task 的状态变更。
 // TODO 并且可以提供数据的响应给类似于 UI 界面形成可视化
 
 export class ControlPanel {
-    state = 'free'; // 'free' 'preparing'
+    status = 'free'; // 'free' 'preparing'
     #runningQueue = new functionQueue(); // 异步 Queue 队列
     _stop = false; // 用于直接切断 spiderSource$ 的流
     spiderSource$ = null;
@@ -39,13 +38,13 @@ export class ControlPanel {
             // 所有的事件分配到 staticEvent 中去写
             (task) => this.$EventHub.emit('Task:success', task),
             (error) => this.$EventHub.emit('Task:error', error),
-            () => this.$EventHub.emit('Task:complete'),
+            () => this.$EventHub.emit('Flow:complete'),
         );
         this.$EventHub.emit('Flow:stop');
     }
 
     set pipeline(value) {
-        if (this.state === 'free') {
+        if (this.status === 'free') {
             this.$EventHub.emit('stateChange', 'preparing');
             this._pipeline = value;
             this.#runningQueue.enQueue(

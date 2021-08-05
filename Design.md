@@ -2,57 +2,47 @@
 
 _这是一个关于 JSpider 的结构设计文件_
 
-## System 总体结构
+## 总体结构
 
 **_下面的部分都称为 System，是 JSpider 流程中的一环，但是为了方便开发者使用，这些系统有可能不会被开发者看到，或者是以其他形式被开发者所使用。_**
 
-### 1 Spider
+### 1. Task
 
-**_Spider_** 是 JSpider 的爬虫流程的外部 API，是 ControlPanel 的 Console 版本。
+> **Task** 是独立的最小单元，是初始信息（originData）的封装。
 
-职能：
+**_Task_** 是 JSpider 的 Data flow 中封装的最小单位。也就是对数据的封装的一层，以便有统一可以调用的 API。
 
-1. 主要是为用户交互提供方式
+**_TaskGroup_** 是 Task 的合成型，在遇到某些 plugin 的时候需要使用。
 
-### 2. Task
+同时，在 **Task** 的组成中使用了 **mobx-state-tree** 和 **EventBus** 进行信息更新的发布和传播。
 
-**_Task_** 是 JSpider 的 Data flow 中封装的最小单位。也就是对数据封装一层，以便有可以调用的 API。
+### 2. Pipeline
 
-### 3. Pipeline
+> **Task** 像是水滴，流动在水管（**Pipeline**）中，最后流出。
 
 **_Pipeline_** 是 JSpider 中用于将各种操作合成为一个函数步骤的快捷方式，本质为一个 rxjs operator 的生成工厂。
 
-职能：
+**_Pipeline_** 通过将 **Task** 传递给 plugin 来实现数据的迭代处理。
 
-1. 实现 Request
-
-2. 实现各种各样的数据类型转换，如 JSON 转 xlsx Blob
-
-3. 删减无用数据项
-
-### 4. ControlPanel
+### 3. ControlPanel
 
 **_ControlPanel_** 是用于调控数据的流量的一个总 system，全局唯一，主要担当中央控制器的作用。
 
-### 5. Memory
+**_ControlPanel_** 负责处理用户输入的信息，**_Mirror_** 负责信息的传播
 
-**_Memory_** 是 JSpider 用来管理数据的方式，可以认为是 JSpider 和数据库的中间人，所有的数据通过 JSpider 中的 **_Memory_** 来间接修改数据库中的数据。
+### 4. Mirror
 
-职能：
+> **镜子（Mirror）只是反射光**
 
-1. 在传入数据的时候，进行相应的 **数据库的调度**。
+**_Mirror_** 只是对数据更新进行传播，保证可以渲染到指定的 View 中。
 
-2. 在需要的时候执行 **下载文件** 的功能。
+### 5. View
 
-### 5. Fake Server
+View 是从 Mirror 订阅过来的数据的自定义接口，可供开发者自行进行信息的订阅，方便进行 View 的扩充。
+
+### 6. Fake Server
 
 **_Fake Server_** 是 JSpider 中的 ajax 拦截代理系统。
-
-职能：
-
-1. 通过制造 **虚假数据** 来迷惑前端的函数执行相应的步骤，
-
-2. 创建一个 **虚拟服务器** 给前端的爬虫学习者提供相应的练习，这样就可以直接在网站上进行爬虫练习而不用后端服务器了。
 
 ## Plugin 机制
 
@@ -62,7 +52,7 @@ _这是一个关于 JSpider 的结构设计文件_
 
 ## 项目的代码结构
 
-### 1. src 主要代码
+### 1. src 为主要代码
 
 ### 2. package 文件夹下的分代码库
 

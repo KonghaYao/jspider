@@ -46,12 +46,15 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-
+    box-sizing: border-box;
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
+}
+.JSpider-UI * {
+    box-sizing: border-box;
 }
 .card {
     font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto,

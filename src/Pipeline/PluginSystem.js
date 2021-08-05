@@ -48,7 +48,7 @@ class PLUGIN {
             name, // 名称，一般用作提示标记
             main, // Plugin 中的功能性函数
             init, // 初始化整个 Plugin 的函数
-            error, // 函数错误时的事件
+            error, // operator 错误时的事件，若返回 false 类的数据，将会中断流，返回正常数据会继续流
             complete, // 函数完成时的提示事件
             options, // main 函数接收的 options
             saveResult, // 是否保存结果到每一个 Task 中
@@ -63,24 +63,18 @@ class PLUGIN {
         return of(task).pipe(
             // 设置跳过 Plugin 的逻辑
             switchMap((task) => {
-                if (task.$checkRepeat(this.uuid) || this.forceRetry) {
-                    return of(task).pipe(
-                        map((task) => [task.$commit('start', this.uuid), task._originData]),
+                return of(task).pipe(
+                    map((task) => [task.$commit('start', this.uuid), task._originData]),
 
-                        switchMap(([data, originData]) => {
-                            const result = this.main(data, originData);
-                            return result instanceof Promise || result instanceof Observable
-                                ? from(result)
-                                : of(result);
-                        }),
-                        map((result) => {
-                            task.$commit('success', result, this.uuid, this.saveResult);
-                            return task;
-                        }),
-                    );
-                }
-                console.log('跳过一个目标');
-                return of(task);
+                    switchMap(([data, originData]) => {
+                        const result = this.main(data, originData);
+                        return result instanceof Promise || result instanceof Observable ? from(result) : of(result);
+                    }),
+                    map((result) => {
+                        task.$commit('success', result, this.uuid, this.saveResult);
+                        return task;
+                    }),
+                );
             }),
             // 捕获到异常
             catchError((...args) => {
@@ -104,11 +98,13 @@ class PLUGIN {
     }
 }
 
-export function Plugin(Process) {
+export function Plugin(Process, otherOptions = {}) {
     if (Process instanceof Function) {
-        return new PLUGIN({
-            main: Process,
-        });
+        return new PLUGIN(
+            Object.assign(otherOptions, {
+                main: Process,
+            }),
+        );
     }
     if (Process instanceof Object) {
         return new PLUGIN(Process);

@@ -27,9 +27,7 @@ export class Task {
     $isSameTask(task) {
         return task.$store.spiderUUID === this.$store.spiderUUID && task.$store.uuid === this.$store.uuid;
     }
-    $checkRepeat(uuid) {
-        return this.$store.dataSlide.includes(uuid);
-    }
+
     $destroy() {
         this._belongTo = null;
         this.$commit('destroy'); // 先通知外部，该 Task 被销毁

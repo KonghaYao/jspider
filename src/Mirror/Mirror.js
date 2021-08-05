@@ -3,6 +3,7 @@
  * Copyright 2021 KonghaYao 江夏尧 <dongzhongzhidong@qq.com>
  * SPDX-License-Identifier: Apache-2.0
  */
+import { filter } from 'rxjs/operators';
 import { EventHub } from '../utils/EventHub';
 
 /**
@@ -15,7 +16,24 @@ import { EventHub } from '../utils/EventHub';
 
 const MessageHub = new EventHub();
 
-// Task 数据发生改变时
+// 任何一个 Task 数据发生改变时
 const TaskUpdate = MessageHub.createSource$('TaskUpdate');
+const watchTasks = function (uuidArray) {
+    return TaskUpdate.pipe(filter((task) => uuidArray.includes(task.uuid)));
+};
 
-export { MessageHub, TaskUpdate };
+// ControlPanel 的状态发生改变
+/**
+ * ControlUpdate
+ *
+ * MessageHub.emit('ControlUpdate', payload);
+ * payload: {
+ *   name:'your message token',// stateChange flowStart flowStop
+ *   value:any,
+ * }
+ *
+ */
+
+const ControlUpdate = MessageHub.createSource$('ControlUpdate');
+
+export { MessageHub, TaskUpdate, ControlUpdate, watchTasks };
