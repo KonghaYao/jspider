@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="3kprJKTUizeKL1AJmphI" name="第 1 页">
-        <mxGraphModel dx="1695" dy="835" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+        <mxGraphModel dx="1645" dy="815" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="22" value="底层" style="" parent="0"/>
@@ -8,7 +8,7 @@
                     <mxGeometry x="595" y="490" width="450" height="310" as="geometry"/>
                 </mxCell>
                 <mxCell id="175" value="" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;sketch=1;fontSize=13;strokeWidth=1;align=center;verticalAlign=middle;opacity=40;perimeterSpacing=1;fillColor=none;" parent="22" vertex="1">
-                    <mxGeometry x="80" y="510" width="330" height="290" as="geometry"/>
+                    <mxGeometry x="80" y="500" width="330" height="290" as="geometry"/>
                 </mxCell>
                 <mxCell id="106" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;sketch=1;fontSize=13;opacity=60;perimeterSpacing=1;fillColor=none;" parent="22" vertex="1">
                     <mxGeometry x="580" y="40" width="490" height="320" as="geometry"/>
@@ -16,11 +16,11 @@
                 <mxCell id="93" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;opacity=60;sketch=1;perimeterSpacing=1;fillColor=none;" parent="22" vertex="1">
                     <mxGeometry x="60" y="30" width="440" height="340" as="geometry"/>
                 </mxCell>
-                <mxCell id="52" value="&amp;nbsp;Visualization" style="whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#d5e8d4;fontFamily=Comic Sans MS;fontSize=21;sketch=0;rounded=1;strokeColor=none;" parent="22" vertex="1">
+                <mxCell id="52" value="&amp;nbsp;RemoteView" style="whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#d5e8d4;fontFamily=Comic Sans MS;fontSize=21;sketch=0;rounded=1;strokeColor=none;" parent="22" vertex="1">
                     <mxGeometry x="880" y="200" width="160" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="69" value="Online Server" style="whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#d5e8d4;fontFamily=Comic Sans MS;fontSize=21;sketch=0;rounded=1;strokeColor=none;" parent="22" vertex="1">
-                    <mxGeometry x="880" y="280" width="160" height="40" as="geometry"/>
+                <mxCell id="69" value="MemoryView" style="whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#d5e8d4;fontFamily=Comic Sans MS;fontSize=21;sketch=0;rounded=1;strokeColor=none;" parent="22" vertex="1">
+                    <mxGeometry x="880" y="270" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="103" style="edgeStyle=none;rounded=0;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;startArrow=block;startFill=1;endSize=6;strokeColor=#000000;strokeWidth=1;" parent="22" source="96" target="10" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -28,7 +28,7 @@
                 <mxCell id="104" style="edgeStyle=none;rounded=0;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endSize=6;strokeColor=#000000;strokeWidth=1;" parent="22" source="96" target="52" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="105" style="edgeStyle=none;rounded=0;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endSize=6;strokeColor=#000000;strokeWidth=1;" parent="22" source="96" target="69" edge="1">
+                <mxCell id="105" style="edgeStyle=none;rounded=0;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endSize=6;strokeColor=#000000;strokeWidth=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="22" source="96" target="69" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="227" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.32;exitY=1.007;exitDx=0;exitDy=0;exitPerimeter=0;" parent="22" source="96" target="203" edge="1">
@@ -40,10 +40,10 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="96" value="Viewers" style="whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#ffe6cc;fontFamily=Comic Sans MS;fontSize=21;sketch=0;rounded=1;fontStyle=1;strokeColor=none;" parent="22" vertex="1">
+                <mxCell id="96" value="View" style="whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#ffe6cc;fontFamily=Comic Sans MS;fontSize=21;sketch=0;rounded=1;fontStyle=1;strokeColor=none;" parent="22" vertex="1">
                     <mxGeometry x="664" y="190" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <UserObject label="Mirror —— Viewer of state" placeholders="1" name="Variable" id="107">
+                <UserObject label="Mirror —— View of state" placeholders="1" name="Variable" id="107">
                     <mxCell style="text;html=1;fillColor=#b1ddf0;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;rounded=0;dashed=1;sketch=1;fontFamily=Comic Sans MS;fontSize=20;fontStyle=1;strokeWidth=2;direction=west;hachureAngle=41;" parent="22" vertex="1">
                         <mxGeometry x="610" y="60" width="340" height="40" as="geometry"/>
                     </mxCell>
@@ -128,7 +128,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="199" value="Task" style="whiteSpace=wrap;html=1;strokeWidth=1;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#ffe6cc;fontFamily=Comic Sans MS;fontSize=19;sketch=0;rounded=1;fontStyle=5;strokeColor=none;align=center;" parent="22" vertex="1">
-                    <mxGeometry x="652" y="627.5" width="94" height="90" as="geometry"/>
+                    <mxGeometry x="652" y="633.75" width="94" height="77.5" as="geometry"/>
                 </mxCell>
                 <mxCell id="220" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;dashed=1;" parent="22" source="203" target="218" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -142,7 +142,7 @@
                 <mxCell id="207" value="Subscribe" style="triangle;whiteSpace=wrap;html=1;sketch=0;strokeWidth=1;fillColor=#f8cecc;rounded=1;fontFamily=Comic Sans MS;fontSize=14;fontStyle=1;fillWeight=2;hachureGap=8;fillStyle=dots;strokeColor=none;direction=east;" parent="22" vertex="1">
                     <mxGeometry x="380" y="547.5" width="70" height="65" as="geometry"/>
                 </mxCell>
-                <mxCell id="223" style="edgeStyle=orthogonalEdgeStyle;rounded=0;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;shadow=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;" parent="22" source="208" target="151" edge="1">
+                <mxCell id="229" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="22" source="208" target="228">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="208" value="init flow" style="triangle;whiteSpace=wrap;html=1;sketch=0;strokeWidth=1;fillColor=#f8cecc;rounded=1;fontFamily=Comic Sans MS;fontSize=14;fontStyle=1;fillWeight=2;hachureGap=8;fillStyle=dots;strokeColor=none;direction=west;" parent="22" vertex="1">
@@ -154,9 +154,15 @@
                 <mxCell id="218" value="createTask" style="rhombus;whiteSpace=wrap;html=1;fillColor=#dae8fc;rounded=1;fontFamily=Comic Sans MS;fontSize=17;fontStyle=1;strokeWidth=1;sketch=0;fillWeight=2;hachureGap=8;fillStyle=dots;strokeColor=none;" parent="22" vertex="1">
                     <mxGeometry x="639" y="537.5" width="120" height="65" as="geometry"/>
                 </mxCell>
+                <mxCell id="230" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="22" source="228" target="151">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="228" value="runningQueue" style="rhombus;whiteSpace=wrap;html=1;fillColor=#dae8fc;rounded=1;fontFamily=Comic Sans MS;fontSize=17;fontStyle=1;strokeWidth=1;sketch=0;fillWeight=2;hachureGap=8;fillStyle=dots;strokeColor=none;" vertex="1" parent="22">
+                    <mxGeometry x="185" y="570" width="120" height="65" as="geometry"/>
+                </mxCell>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="10" value="Console" style="whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#d5e8d4;fontFamily=Comic Sans MS;fontSize=21;sketch=0;rounded=1;strokeColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="900" y="130" width="110" height="40" as="geometry"/>
+                <mxCell id="10" value="ConsoleView" style="whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#d5e8d4;fontFamily=Comic Sans MS;fontSize=21;sketch=0;rounded=1;strokeColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="130" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <UserObject label="Pipeline -- Workflow" placeholders="1" name="Variable" id="33">
                     <mxCell style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;rounded=0;dashed=1;sketch=1;fontFamily=Comic Sans MS;fontSize=20;fontStyle=1;fillColor=#f8cecc;strokeWidth=2;direction=west;hachureAngle=41;" parent="1" vertex="1">

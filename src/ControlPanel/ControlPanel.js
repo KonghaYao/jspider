@@ -8,6 +8,7 @@ import { TaskManager } from '../Mirror/TaskManager';
 import { functionQueue } from '../utils/functionQueue';
 import { EventHub } from '../utils/EventHub';
 import { pauseToggle } from '../utils/pauseToggle';
+import { Pipeline } from '../Pipeline';
 // ControlPanel 是 JSpider 内部的事件和数据中心。
 // 全部 JSpider 涉及到的边界中，ControlPanel 只有一个，但是 View 可以有多个，而 Spider 就是 View 中的一个
 // 用于分发数据流，提供 Task 的状态变更。
@@ -43,10 +44,11 @@ export class ControlPanel {
         this.$EventHub.emit('Flow:stop');
     }
 
-    set pipeline(value) {
+    pipeline(...plugins) {
+        const pipeline = new Pipeline(plugins);
         if (this.status === 'free') {
             this.$EventHub.emit('stateChange', 'preparing');
-            this._pipeline = value;
+            this._pipeline = pipeline;
             this.#runningQueue.enQueue(
                 () => this._pipeline.preparePipeline(),
                 () => {
@@ -61,15 +63,17 @@ export class ControlPanel {
     }
 
     // |startInfo| - TaskManager.createTask -> |Task| - emit EventHub -> |Flow|
-    createFlow(infos) {
+    createFlow(infos, { fromBackup = false } = {}) {
         return this.#runningQueue.enQueue(() => {
             infos.forEach((info) => {
                 if (!this._pipeline) throw new Error('没有创建pipeline');
                 const task = this.TaskManager.createTask(info, this._pipeline.UUID);
+                if (fromBackup) task.$store.$import(info);
                 this.$EventHub.emit('Flow:input', task);
             });
         });
     }
+
     startFlow() {
         // 开始流必须要等待其他事件完成
         this.#runningQueue.enQueue(() => {

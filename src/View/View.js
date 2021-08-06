@@ -9,12 +9,10 @@ export class View {
         };
 
         if (tasks) {
-            const a = TaskUpdate.subscribe((data) => this._update(data));
-            this.#subscriber.push(a);
+            this.#subscriber.push(TaskUpdate.subscribe((data) => this._update(data)));
         }
         if (controlPanel) {
-            const b = ControlUpdate.subscribe((data) => this._change(data));
-            this.#subscriber.push(b);
+            this.#subscriber.push(ControlUpdate.subscribe((data) => this._change(data)));
         }
     }
     config = {};

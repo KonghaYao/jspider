@@ -28,7 +28,8 @@ const {
 
 let urls = ['https://.....']// 您的爬取路径数组
 
-const spider = new JSpider(
+const spider = new JSpider()
+spider.pipeline(
     Request(),
     Plugin((data) => {
         data

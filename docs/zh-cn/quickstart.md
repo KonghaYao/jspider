@@ -1,6 +1,6 @@
 # JSpider 快速开始
 
-!> 接下来的文章您可以阅读到您想要的部分，但是推荐您从头开始看，看到您需要的部分就可以了。越往后的部分越专业，很多词汇和概念可能看不懂，所以请耐心观看。
+> 接下来的文章您可以阅读到您想要的部分，但是推荐您从头开始看，看到您需要的部分就可以了。越往后的部分越专业，很多词汇和概念可能看不懂，所以请耐心观看。
 
 ## 如果你只想快速爬取文件
 
@@ -24,13 +24,14 @@ import('https://cdn.jsdelivr.net/npm/js-spider/dist/JSpider.esm.min.js').then(({
 }); // 这个步骤是异步的，也就是说，您需要等待它完成，或者直接在 then 内部写代码
 ```
 
-### 2. 载入插件
+### 2. 载入 JSpider 自带的插件
 
 ```js
 // 导入插件，JSpider 还有很多功能插件，全部放置在 plugins 属性下
 const {
     Request, // 请求库
     Download, // 下载库
+    ExcelHelper, // JSON 转 Excel 的库
 } = JSpider.plugins;
 ```
 
@@ -53,18 +54,39 @@ urls = [
 ];
 ```
 
-### 4. 构建爬虫本体，并输入 URLS 数组
+### 4. 构建爬虫实例，并输入 URLS 数组
+
+**_常规方式_**
 
 ```js
 // 这里构建出一个爬虫类，可以在后面重复使用
-const spider = new JSpider(
-    // 内部写入 JSpider.plugins 中的插件代码
-    Request(), // 这些都是 Plugin，后面会重复提及这个东西
+const spider = new JSpider();
+spider.pipeline(
+    Request(),
+    Plugin((data) => {
+        data;
+        return data;
+    }),
     Download(),
 );
+spider.crawl(urls);
+spider.start();
+```
 
-// 载入您的 URLS 将会进行爬取
-spider.apply(urls);
+**_链式调用_**
+
+```js
+const spider = new JSpider()
+    .pipeline(
+        Request(),
+        Plugin((data) => {
+            data;
+            return data;
+        }),
+        Download(),
+    )
+    .crawl(urls)
+    .start();
 ```
 
 ## 如果你想自定义多一点
@@ -74,12 +96,12 @@ spider.apply(urls);
 !> 下面的方式生成的 Plugin 是非专业，只是临时用途的。
 
 ```js
-const Plugin = JSpider.Plugin;
-const spider = new JSpider(
+const Plugin = JSpider.Plugin; // 注意这个是大写开头
+const spider = new JSpider().pipeline(
     Request(),
     Plugin((data) => {
-        console.log(data);
-        return data;
+        console.log(data); // 了可以进行数据的修改
+        return data; // 必须要进行返回一个数据
     }),
     // Download()
 );
