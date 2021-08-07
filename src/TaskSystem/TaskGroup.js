@@ -5,13 +5,13 @@
  */
 import { Task } from './Task';
 export class TaskGroup extends Task {
-    constructor(TaskArray, _spiderUUID = '00000') {
+    constructor(TaskArray, spiderUUID = '00000') {
         const output = new Set(TaskArray);
-        super(output, TaskArray?.[0]?._spiderUUID || _spiderUUID);
+        super(output, TaskArray?.[0]?.spiderUUID || spiderUUID);
         this.#linkTask();
     }
     #linkTask() {
-        this._originData.forEach((task) => {
+        this.originData.forEach((task) => {
             task._belongTo = this;
             task.$on('destroy', () => this.$removeLink(task));
         });
@@ -20,7 +20,7 @@ export class TaskGroup extends Task {
     $commit(type, ...payload) {
         // 扩散事件
         const result = [];
-        this._originData.forEach((task) => result.push(task.$commit(type, ...payload)));
+        this.originData.forEach((task) => result.push(task.$commit(type, ...payload)));
         const selfOutput = this.$EventHub.emit(type, ...payload);
 
         if (type === 'start' && this._output) return selfOutput[0];
@@ -28,13 +28,13 @@ export class TaskGroup extends Task {
     }
     // 删除所有的 link
     $destroy() {
-        const copy = [...this._originData];
+        const copy = [...this.originData];
         this.$EventHub.emit('destroy'); // 不进行事件的扩散, 只是自身的报销
         return copy;
     }
     // 单独删除一个连接
     $removeLink(task) {
-        this._originData.delete(task);
+        this.originData.delete(task);
     }
     get [Symbol.toStringTag]() {
         return 'TaskGroup';
