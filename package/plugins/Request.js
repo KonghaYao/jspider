@@ -43,7 +43,7 @@ function request({ url, options = {} }) {
 
     //  获取数据为 request
     console.log('- 爬取 ', url);
-    return fetch(url, options)
+    return fetch(url, Object.assign({ cache: 'force-cache' }, options))
         .then((res) => {
             if (!res.ok) {
                 throw Error(res.statusText);
@@ -75,7 +75,7 @@ export function Request(options = {}) {
 
             // 通过 this.options 来获取传入的参数，这个参数解析都是由 Plugin 开发者来设置逻辑的
             // 所以灵活性很高
-            const { delay = 200, buffer = 3, retry = 3, handleError = null } = this.options;
+            const { delay = 200, buffer = 1, retry = 3, handleError = null } = this.options;
 
             return ($source) =>
                 $source.pipe(

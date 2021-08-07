@@ -1,8 +1,8 @@
-import('https://cdn.jsdelivr.net/npm/js-spider@3.2.1/dist/JSpider.esm.min.js').then(async (res) => {
+import('https://cdn.jsdelivr.net/npm/js-spider@3.2.2/dist/JSpider.esm.min.js').then(async (res) => {
     let JSpider = res.default;
     let {
         Plugin,
-        plugins: { ExcelHelper, Request, Download, ZipFile },
+        plugins: { ExcelHelper, Request, Download, ZipFile, Combine },
     } = JSpider;
     await JSpider.$load('xlsx');
     await JSpider.$load('jszip');
@@ -14,7 +14,10 @@ import('https://cdn.jsdelivr.net/npm/js-spider@3.2.1/dist/JSpider.esm.min.js').t
             method: 'GET',
         },
     ).then((res) => res.json());
-    let urls = [...Array(first.data.numPages).keys()].map((i) => {
+
+    let number = first.data.numPages;
+
+    let urls = [...Array(number).keys()].map((i) => {
         return {
             url: `https://api.bilibili.com/x/web-interface/search/type?context=&page=${
                 i + 1
@@ -25,14 +28,28 @@ import('https://cdn.jsdelivr.net/npm/js-spider@3.2.1/dist/JSpider.esm.min.js').t
             },
         };
     });
-    window.Result = [];
     let spider = new JSpider()
         .pipeline(
-            Request(),
-            Plugin((data) => {
-                data.data.result.forEach((item) => ['hit_columns', 'new_rec_tags'].forEach((ii) => (item[ii] = '')));
-                window.Result.push(data.data.result);
+            Request({
+                buffer: 1,
             }),
+            Combine(50, 5000),
+            Plugin((data) => {
+                return data
+                    .map((i) => {
+                        i.data.result.forEach((item) => {
+                            ['hit_columns', 'new_rec_tags'].forEach((ii) => (item[ii] = ''));
+                            item.pubdate = new Date(Number(item.pubdate + '000')).toLocaleDateString();
+                        });
+                        return i.data.result;
+                    })
+                    .flat()
+                    .flat();
+            }),
+            ExcelHelper((dataset) => {
+                return { a: dataset };
+            }),
+            Download(),
         )
         .crawl(urls)
         .start();
