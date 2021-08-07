@@ -10,10 +10,10 @@ import alias from '@rollup/plugin-alias';
 const plugins = [
     alias({
         entries: {
-            '@tools': './tools',
+            '@tools': './package/tools',
             '@src': './src',
-            '@plugins': './plugins',
-            '@FakeServer': './FakeServer',
+            '@plugins': './package/plugins',
+            '@FakeServer': './package/FakeServer',
         },
     }),
     replace({
@@ -21,7 +21,7 @@ const plugins = [
         values: {
             __version__: JSON.stringify(CONFIG.version),
             __buildDate__: new Date().getTime(),
-            'process.env.NODE_ENV': JSON.stringify(env),
+            'process.env.NODE_ENV': JSON.stringify('production'),
         },
     }),
     json(),
