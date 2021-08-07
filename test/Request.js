@@ -5,6 +5,7 @@ const {
     Download, // 下载库
     ExcelHelper, // 转换数据为表格数据的插件
     ZipFile,
+    Combine,
 } = JSpider.plugins;
 const { Plugin } = JSpider;
 
@@ -19,20 +20,28 @@ export async function main() {
         logEvery: true,
     });
     spider.pipeline(
-        Request({ delay: 2000, buffer: 2, retry: 3, handleError: null }),
+        Request({ delay: 100, buffer: 2, retry: 3, handleError: null }),
 
-        // ExcelHelper({
-        //     XLSXOptions: {
-        //         bookType: 'csv', // 可以指定为 csv 或者 xlsx
-        //     },
-        // }),
+        Combine(3, 1000),
+        ExcelHelper(
+            (data) => {
+                return {
+                    [new Date().getTime()]: data
+                        .map((i) => i.data)
+                        .flat()
+                        .flat()
+                        .flat(),
+                };
+            },
+            {
+                XLSXOptions: {
+                    bookType: 'csv', // 可以指定为 csv 或者 xlsx
+                },
+            },
+        ),
         // ZipFile({ chunk: 2 }),
-        Plugin((data) => {
-            console.log(data);
-            return data;
-        }),
 
-        // Download(),
+        Download(),
     );
     spider.crawl(urls);
     spider.start();

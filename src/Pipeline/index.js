@@ -20,7 +20,8 @@ export class Pipeline {
         let uuidString = '';
         // ! 一次遍历实现取出 operator 和 导出 plugin init 函数的 promise 链，并延长 uuidString 用于创建 UUID
         const pipeline = this.Plugins.map((plugin, index) => {
-            uuidString += plugin.main.toString();
+            // main 属性和 operator 属性必须存在一个来保证能够生成 uuid
+            uuidString += (plugin?.main || plugin.operator).toString();
 
             if (plugin.init instanceof Function) {
                 this.#PluginQueue.enQueue(plugin.init);

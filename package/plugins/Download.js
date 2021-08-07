@@ -25,7 +25,7 @@ const aDownload = function (file) {
     console.log('%c 下载完成', 'color:green');
 };
 
-const download = (data, { DownloadFileName: name }, originData) => {
+const download = (data, { DownloadFileName: name } = {}, originData) => {
     const file = toFile(data, name || (typeof url === 'string' ? originData.url.replace(/[^\/]*?\//g, '') : ''));
     DownloadQueue.add(file);
     return null;

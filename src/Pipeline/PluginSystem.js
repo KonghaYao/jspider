@@ -56,7 +56,7 @@ class PLUGIN {
         });
     }
     initUUID(index) {
-        this.uuid = createUUID(this.main.toString() + index);
+        this.uuid = createUUID((this?.main || this.operator).toString() + index);
     }
     // 对 main 函数外包一层，直接启动 main 函数的执行，返回一条流
     TaskStarter(task) {
