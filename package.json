@@ -1,6 +1,6 @@
 {
     "name": "js-spider",
-    "version": "3.2.2",
+    "version": "3.2.3",
     "main": "dist/JSpider.esm.min.js",
     "unpkg": "dist/JSpider.esm.min.js",
     "author": "KonghaYao <dongzhongzhidong@qq.com>",
