@@ -1,4 +1,4 @@
-import('https://cdn.jsdelivr.net/npm/js-spider@3.2.2/dist/JSpider.esm.min.js').then(async (res) => {
+import('https://cdn.jsdelivr.net/npm/js-spider@3.2.3/dist/JSpider.esm.min.js').then(async (res) => {
     let JSpider = res.default;
     let {
         Plugin,
@@ -33,9 +33,9 @@ import('https://cdn.jsdelivr.net/npm/js-spider@3.2.2/dist/JSpider.esm.min.js').t
             Request({
                 buffer: 1,
             }),
-            Combine(50, 5000),
-            Plugin((data) => {
-                return data
+            Combine(50, 1000, (dataArray) => {
+                return dataArray
+                    .flat()
                     .map((i) => {
                         i.data.result.forEach((item) => {
                             ['hit_columns', 'new_rec_tags'].forEach((ii) => (item[ii] = ''));

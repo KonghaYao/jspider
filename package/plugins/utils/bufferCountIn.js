@@ -15,7 +15,10 @@ export function BufferCountIn(countNumber = 3, maxWaitTime = 1000) {
 
             // 发送所有的数据，并将定时器删除
             const sendAll = () => {
-                if (buffers.size) buffers.forEach((item) => subscriber.next(item));
+                if (buffers.size) {
+                    subscriber.next([...buffers]);
+                    buffers.clear();
+                }
             };
             // 删除定时器标记, 没有时忽略
             const deleteTimeout = () => {
@@ -24,27 +27,31 @@ export function BufferCountIn(countNumber = 3, maxWaitTime = 1000) {
                     TimeOut = 0;
                 }
             };
+            const UpdateTimeout = () => {
+                TimeOut = setTimeout(sendAll, maxWaitTime);
+            };
             const subscription = observable.subscribe(
                 (value) => {
+                    console.log(TimeOut);
                     // buffer.size 为 0 时，不设置定时，但是收集；
-                    // 1 时，收集并设置定时器；
+
                     // 2 时，发送并重置定时器
+                    // 其他 时，收集并设置定时器；
                     deleteTimeout();
                     switch (buffers.size) {
                         case 0:
                             return buffers.add(value);
-                        case countNumber - 2:
-                            setTimeout(sendAll, maxWaitTime);
-                            return buffers.add(value);
+                        case countNumber - 1:
+                            buffers.add(value);
+                            return sendAll();
                         default:
-                            sendAll();
-                            return subscriber.next(value);
+                            UpdateTimeout();
+                            return buffers.add(value);
                     }
                 },
                 noop,
                 () => {
                     sendAll();
-                    buffers.clear();
                     subscriber.complete();
                 },
             );

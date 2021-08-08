@@ -22,26 +22,32 @@ export async function main() {
     spider.pipeline(
         Request({ delay: 100, buffer: 2, retry: 3, handleError: null }),
 
-        Combine(3, 1000),
-        ExcelHelper(
-            (data) => {
-                return {
-                    [new Date().getTime()]: data
-                        .map((i) => i.data)
-                        .flat()
-                        .flat()
-                        .flat(),
-                };
-            },
-            {
-                XLSXOptions: {
-                    bookType: 'csv', // 可以指定为 csv 或者 xlsx
-                },
-            },
-        ),
+        Combine(3, 1000, (array) => {
+            return array.map((i) => i.data).flat();
+        }),
+        // Combine(3, 1000), 如果没有处理函数，则下一个 plugin 将会收到一个数组
+        Plugin((data) => {
+            console.log('this', data);
+        }),
+        // ExcelHelper(
+        //     (data) => {
+        //         return {
+        //             [new Date().getTime()]: data
+        //                 .map((i) => i.data)
+        //                 .flat()
+        //                 .flat()
+        //                 .flat(),
+        //         };
+        //     },
+        //     {
+        //         XLSXOptions: {
+        //             bookType: 'csv', // 可以指定为 csv 或者 xlsx
+        //         },
+        //     },
+        // ),
         // ZipFile({ chunk: 2 }),
 
-        Download(),
+        // Download(),
     );
     spider.crawl(urls);
     spider.start();

@@ -10,17 +10,23 @@ import { of } from 'rxjs';
 import { concatMap, filter } from 'rxjs/operators';
 import { TaskGroup } from '../../src/TaskSystem/TaskGroup';
 import { BufferCountIn } from './utils/bufferCountIn';
-export function Combine(number, waitTime = 1000, options = {}) {
+export function Combine(number, waitTime = 1000, combineFunction = undefined) {
     return Plugin({
         name: 'Combine', // 这个 name 是负责进行监控的标志符号
-        options, // 接收所有的参数，提供给所有函数使用
+        main: combineFunction,
         operator() {
             // 复写 operator
             return (source) =>
                 source.pipe(
                     BufferCountIn(number, waitTime),
                     filter((i) => i.length), // 必须要进行检测是否为空
-                    concatMap((tasks) => of(new TaskGroup(tasks))),
+                    concatMap((tasks) => {
+                        const cb = of(new TaskGroup(tasks));
+                        if (combineFunction instanceof Function) {
+                            return cb.pipe(concatMap((task) => this.TaskStarter(task)));
+                        }
+                        return cb;
+                    }),
                 );
         },
     });
