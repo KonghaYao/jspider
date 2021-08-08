@@ -7,9 +7,10 @@
 
 import { Plugin } from '@src/Pipeline/PluginSystem.js';
 import { of } from 'rxjs';
-import { bufferTime, concatMap, filter } from 'rxjs/operators';
+import { concatMap, filter } from 'rxjs/operators';
 import { TaskGroup } from '../../src/TaskSystem/TaskGroup';
-export function Combine(number, waitTime = 5000, options = {}) {
+import { BufferCountIn } from './utils/bufferCountIn';
+export function Combine(number, waitTime = 1000, options = {}) {
     return Plugin({
         name: 'Combine', // 这个 name 是负责进行监控的标志符号
         options, // 接收所有的参数，提供给所有函数使用
@@ -17,7 +18,7 @@ export function Combine(number, waitTime = 5000, options = {}) {
             // 复写 operator
             return (source) =>
                 source.pipe(
-                    bufferTime(waitTime, undefined, number),
+                    BufferCountIn(number, waitTime),
                     filter((i) => i.length), // 必须要进行检测是否为空
                     concatMap((tasks) => of(new TaskGroup(tasks))),
                 );

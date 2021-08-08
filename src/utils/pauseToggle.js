@@ -26,6 +26,7 @@ export function pauseToggle(openings, closings) {
                 noop,
                 () => {
                     buffers.forEach((item) => subscriber.next(item));
+                    buffers.clear();
                     subscriber.complete();
                 },
             );
