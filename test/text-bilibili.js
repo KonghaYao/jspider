@@ -31,6 +31,7 @@ import('https://cdn.jsdelivr.net/npm/js-spider@3.2.3/dist/JSpider.esm.min.js').t
     let spider = new JSpider()
         .pipeline(
             Request({
+                delay: 300,
                 buffer: 1,
             }),
             Combine(50, 1000, (dataArray) => {
