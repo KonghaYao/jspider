@@ -24,7 +24,7 @@
         "@rollup/plugin-multi-entry": "^4.0.0",
         "@rollup/plugin-node-resolve": "^13.0.2",
         "@rollup/plugin-replace": "^2.4.2",
-        "postcss": "^8.3.5",
+        "postcss": "^8.4.31",
         "rollup": "^2.53.2",
         "rollup-plugin-delete": "^2.0.0",
         "rollup-plugin-license": "^2.4.0",
